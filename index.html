@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>單字小故事</title>
+<style>
+@font-face{font-family:'AndikaEmbed';src:url(data:font/woff2;base64,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) format('woff2');font-display:block}
+:root{--bg:#FFF7E8;--card:#FFFFFF;--ink:#23201C;--soft:#7A7166;--line:#F0E2C8;--hl:#FF7A45;--blue:#2F6FDE;
+--oBg:#FFE3D6;--oIn:#B03A10;--gBg:#DCF0C8;--gIn:#2C6010;--bBg:#DCE8FB;--bIn:#1B4A9E}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'AndikaEmbed',"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;-webkit-text-size-adjust:100%;overflow-x:hidden}
+.app{max-width:640px;margin:0 auto;padding:14px}
+.wrap{position:relative}
+.side{position:absolute;top:50%;transform:translateY(-50%);z-index:5;font-size:30px;width:64px;height:98px;padding:0 2px;border-radius:18px;border:3px solid var(--line);background:rgba(255,255,255,.92);cursor:pointer;font-family:inherit;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.side:active{transform:translateY(-50%) scale(.94)}
+.side .ic{display:block;font-size:30px;line-height:1}
+.side .lb{display:block;font-size:13px;color:var(--soft);margin-top:2px;white-space:nowrap;transform:scale(.92)}
+.side[disabled]{opacity:.3}
+.b .ic{display:block;font-size:26px;line-height:1}
+.b .lb{display:block;font-size:13px;color:var(--soft);margin-top:2px;white-space:nowrap;transform:scale(.9)}
+.card.menu{cursor:default;min-height:auto;padding:18px 12px 22px;display:block}
+.mt{font-size:28px;font-weight:700;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gi{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 4px;border-radius:18px;border:3px solid var(--line);background:#fff;cursor:pointer;font-family:inherit;min-height:118px}
+.gi .ge{font-size:40px;line-height:1.1}
+.gi .gz{font-size:20px;font-weight:700}
+.gi .gw{font-family:'AndikaEmbed',sans-serif;font-size:17px;color:var(--soft);word-break:break-word}
+.tw{display:inline-block;width:1.05em;height:1.32em;vertical-align:-.3em;border-radius:4px;background:url("data:image/svg+xml;utf8,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20380'><rect%20x='0'%20y='0'%20width='300'%20height='380'%20rx='46'%20fill='%23BCE4F6'/><polygon%20points='197,30%20208,35%20216,46%20241,57%20232,64%20225,71%20224,85%20227,96%20217,122%20206,148%20198,176%20193,204%20186,223%20182,237%20171,254%20163,267%20150,289%20138,312%20134,331%20133,350%20126,350%20119,345%20118,334%20113,325%20103,314%2094,303%2086,292%2078,282%2068,263%2061,246%2059,226%2062,204%2065,182%2069,166%2081,150%2091,138%20103,124%20119,105%20132,86%20146,68%20159,56%20169,49%20185,41'%20fill='%232FA35A'%20stroke='%2314532D'%20stroke-width='10'%20stroke-linejoin='round'/></svg>") center/contain no-repeat;margin-right:4px}
+.gi .gr{font-size:15px;color:var(--soft);margin-top:2px}
+.gi.on{border-color:var(--hl);background:#FFF1E9}
+.mn{font-size:17px;color:var(--soft);margin:-8px 0 12px;line-height:1.5}
+
+
+/* ===== 挑戰結果獨立畫面 ===== */
+#RES{background:#fff;border:3px solid var(--line);border-radius:28px;padding:22px 14px 24px;text-align:center;margin-bottom:14px}
+#RES .vd2{font-size:26px;font-weight:700;min-height:34px}
+#RES.good .vd2{color:var(--ok)}#RES.bad .vd2{color:var(--no)}
+#RES .pickrow{display:inline-flex;align-items:center;gap:8px;background:#FDECEA;border:2px solid #F3C3BE;border-radius:14px;padding:6px 12px;margin-top:10px;font-size:18px;color:#8A3A33}
+#RES .pickrow .pi{font-size:26px;filter:grayscale(1);opacity:.7}
+#RES .pickrow b{font-family:'AndikaEmbed',sans-serif;font-weight:400}
+#RES .arrow{font-size:28px;color:var(--soft);margin:6px 0;animation:down .9s infinite}
+@keyframes down{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+#RES .bigic{font-size:clamp(80px,22vw,120px);line-height:1.1;display:inline-block;cursor:pointer;animation:tpop .6s cubic-bezier(.3,1.7,.5,1)}
+#RES .ben{font-family:'AndikaEmbed',sans-serif;font-size:clamp(32px,8vw,50px);line-height:1.3;cursor:pointer;word-break:break-word}
+#RES .bzh{font-size:26px;font-weight:700;color:var(--soft)}
+#RES .chip{display:inline-block;font-size:21px;font-weight:700;background:var(--oBg);color:var(--oIn);padding:6px 18px;border-radius:999px;margin-top:10px}
+#RES .tiny{font-size:13px;line-height:1.5;color:#B5A894;margin-top:12px}
+#RES .tiny a{color:#9CB0C8}
+
+
+/* ===== 進階開場兩題 ===== */
+/* 挑戰 3：霓虹刮刮卡 */
+.q3{background:#2A1240;border:3px solid #4B1F6E;border-radius:24px;padding:18px 12px 20px;text-align:center;margin-bottom:14px}
+.q3 .t3{font-size:22px;font-weight:700;color:#FF7BD5}
+.q3 .h3{font-size:clamp(32px,8.6vw,40px);font-weight:700;color:#fff;line-height:1.45;margin:12px 0 14px}
+.q3 .s3{font-size:16px;line-height:1.6;color:#C9A7E8;background:#3A1A57;border-radius:12px;padding:10px;margin-bottom:14px;text-align:left}
+.q3 .s3 b{color:#FFD24A}
+.q3 .tk{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#3A1A57;border:3px dashed #8A5CC0;border-radius:16px;padding:12px;margin-top:10px;color:#fff;font-family:inherit;cursor:pointer;min-height:80px}
+.q3 .tk .ie{font-size:34px}
+.q3 .tk .tx{font-size:21px;line-height:1.35}
+.q3 .tk .tx b{display:block;font-family:'AndikaEmbed',sans-serif;font-size:25px;color:#FFD24A;font-weight:400}
+.q3 .tk.ok{background:#1C5B34;border-color:#43C46F;border-style:solid;box-shadow:0 0 18px #43C46F}
+.q3 .tk.no{background:#5B1C1C;border-color:#E0483E;animation:shake .4s}
+.q3 .a3{font-size:20px;line-height:1.6;color:#FFE9A8;margin-top:12px}
+.q3 .a3 a{color:#FF7BD5}
+/* 挑戰 4：登機證 */
+.q4{background:#FBF3E2;border:3px dashed #C8A96A;border-radius:24px;padding:18px 12px 20px;text-align:center;margin-bottom:14px}
+.q4 .t4{font-size:22px;font-weight:700;color:#8A6A22}
+.q4 .h4{font-size:clamp(32px,8.6vw,40px);font-weight:700;color:#3A2B10;line-height:1.45;margin:12px 0 14px}
+.q4 .s4{font-size:16px;line-height:1.6;color:#7A6540;background:#fff;border-radius:12px;padding:10px;margin-bottom:14px;text-align:left;border:2px solid #E3D3AC}
+.q4 .s4 b{color:#8A6A22}
+.q4 .bp{display:flex;align-items:center;gap:10px;width:100%;background:#fff;border:2px solid #E3D3AC;border-radius:14px;padding:10px;margin-top:9px;font-family:inherit;cursor:pointer;min-height:76px;text-align:left}
+.q4 .bp .st{width:44px;height:44px;border-radius:50%;border:2px dashed #C8A96A;display:flex;align-items:center;justify-content:center;font-size:20px;color:#C8A96A;flex-shrink:0}
+.q4 .bp .ie{font-size:30px}
+.q4 .bp .tx{font-size:20px;line-height:1.3}
+.q4 .bp .tx b{display:block;font-family:'AndikaEmbed',sans-serif;font-size:23px;font-weight:400;color:#5A4718}
+.q4 .bp.ok{background:#E8F7EC;border-color:#2FA35A}
+.q4 .bp.ok .st{border-style:solid;border-color:#2FA35A;color:#2FA35A;transform:rotate(-12deg)}
+.q4 .bp.no{background:#FDE3E1;border-color:#E0483E;animation:shake .4s}
+.q4 .a4{font-size:20px;line-height:1.6;color:#5A4718;margin-top:12px}
+.q4 .a4 a{color:#1B4A9E}
+.bigfx{font-size:88px;animation:tpop .7s cubic-bezier(.3,1.7,.5,1)}
+
+.card.rev{cursor:default;min-height:auto;padding:18px 12px 22px;display:block;text-align:center}
+.vq{font-size:26px;font-weight:700;line-height:1.5;margin:10px 0}
+.vbig{font-size:clamp(70px,20vw,110px);line-height:1.1}
+.vopt{display:block;width:100%;font-family:'AndikaEmbed',sans-serif;font-size:28px;min-height:72px;border-radius:18px;border:3px solid var(--line);background:#fff;margin-top:10px;cursor:pointer;color:var(--ink);padding:8px}
+.vopt.ok{background:#DFF5E6;border-color:var(--ok);color:var(--ok)}
+.vopt.no{background:#FDE3E1;border-color:var(--no);animation:shake .4s}
+.vbar{font-size:19px;color:var(--soft)}
+.card.adv{cursor:default;min-height:auto;padding:18px 12px 22px;display:block;text-align:center}
+.tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.tb{font-size:17px;min-height:52px;padding:8px 12px;border-radius:14px;border:3px solid var(--line);background:#fff;font-family:inherit;cursor:pointer}
+.tb.on{border-color:var(--hl);background:#FFF1E9;color:var(--oIn)}
+.psrc{font-size:15px;line-height:1.6;color:var(--soft);background:var(--bg);border-radius:12px;padding:10px;margin-bottom:12px;text-align:left}
+.prow{display:flex;align-items:center;gap:10px;text-align:left;border:2px solid var(--line);border-radius:16px;padding:9px 10px;margin-bottom:8px}
+.prow .pn{font-size:20px;font-weight:700;color:var(--hl);min-width:30px;text-align:center}
+.prow .pe{font-size:30px}
+.prow .pt{font-size:19px;line-height:1.35}
+.prow .pt b{font-family:'AndikaEmbed',sans-serif;font-size:23px;display:block;font-weight:400}
+.prow .pb{font-size:13px;color:var(--soft);display:block;margin-top:2px}
+.mn .rule{font-size:14px;color:#C3B7A5}
+.gi .gn{position:absolute;top:6px;left:8px;font-size:15px;font-weight:700;color:var(--hl)}
+.gi{position:relative}
+.card.ev{cursor:default;min-height:auto;padding:18px 14px 22px;display:block;text-align:center}
+.er{display:flex;align-items:center;gap:12px;text-align:left;background:var(--bg);border-radius:16px;padding:12px 14px;margin-bottom:10px;opacity:0;transform:translateX(-24px)}
+.er.go{animation:slidein .5s cubic-bezier(.3,1.5,.5,1) forwards}
+#e2.go{animation-delay:.5s}#e3.go{animation-delay:1s}#e4.go{animation-delay:1.5s}
+@keyframes slidein{to{opacity:1;transform:translateX(0)}}
+.ee{font-size:38px;line-height:1}
+.et{font-size:20px;font-weight:700;line-height:1.5}
+.et b{color:var(--hl);font-family:'AndikaEmbed',sans-serif;font-size:1.15em}
+.et s{text-decoration:none;color:var(--soft);font-weight:400;font-size:.85em;display:block}
+#badge{display:inline-block;font-size:20px;font-weight:700;padding:6px 18px;border-radius:999px;margin-top:6px}
+#badge.k0{background:var(--gBg);color:var(--gIn)}
+#badge.k1{background:var(--bBg);color:var(--bIn)}
+#badge.k2{background:var(--oBg);color:var(--oIn)}
+#plus{font-size:16px;color:var(--soft);margin-top:8px;min-height:22px}
+.lk{display:block;margin:14px auto 0;font-size:18px;color:var(--blue);text-decoration:underline;min-height:44px;line-height:44px}
+.sl{left:-10px}.sr{right:-10px}
+@media(max-width:420px){.side{width:58px;height:92px;font-size:26px}.side .lb{font-size:12px}.sl{left:-10px}.sr{right:-10px}}
+.card{background:var(--card);border:3px solid var(--line);border-radius:28px;padding:18px 62px 20px;text-align:center;cursor:pointer;min-height:500px;display:flex;flex-direction:column;justify-content:center}
+.card.wm #cap{min-height:64px;margin-top:0}
+/* 母音頁 */
+.vw{cursor:pointer;font-family:'AndikaEmbed',sans-serif;font-size:clamp(34px,9vw,58px);line-height:1.35;word-break:break-word;margin:6px 0 14px}
+.syl{font-family:'AndikaEmbed',sans-serif;font-size:clamp(26px,6.6vw,42px);line-height:1.5;word-break:break-word}
+.syl .sy{display:inline-block;padding:2px 4px;border-radius:10px;background:transparent;transition:all .5s}
+.syl.go .sy{padding:2px 10px;margin:0 3px;background:#FFE9DF}
+.syl .sy:nth-child(4n+3){background:transparent}
+.syl.go .sy:nth-child(4n+3){background:#E3F0FB}
+.syl .sd{opacity:0;transition:opacity .5s;color:var(--hl)}
+.syl.go .sd{opacity:1}
+.sn{font-size:22px;font-weight:700;color:var(--hl);margin-top:8px}
+.tip{font-size:20px;line-height:1.6;color:var(--ink);background:var(--bg);border-radius:14px;padding:10px 12px;margin:12px auto 0;max-width:520px}
+.tip b{color:var(--hl);font-family:'AndikaEmbed',sans-serif;font-size:1.1em}
+.vl{display:flex;justify-content:center;gap:18px;font-size:19px;color:var(--soft)}
+.vl i.vd{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+#hd{font-size:16px;color:var(--soft);margin-bottom:6px}
+#hd b{color:var(--hl)}
+.steps{display:flex;justify-content:center;gap:7px;margin-bottom:12px}
+.s{width:30px;height:10px;border-radius:6px;background:var(--line)}
+.s.on{background:var(--hl)}
+#em{font-size:clamp(96px,25vw,150px);line-height:1.1;min-height:120px;cursor:pointer;display:inline-block}
+#em.pop{animation:pop .5s cubic-bezier(.3,1.7,.5,1)}
+@keyframes pop{0%{transform:scale(.4) rotate(-12deg)}100%{transform:scale(1) rotate(0)}}
+#cap{font-size:clamp(23px,5.9vw,30px);font-weight:700;line-height:1.45;margin-top:8px;min-height:130px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#cap b{color:var(--hl);font-family:'AndikaEmbed',sans-serif;font-size:1.1em}
+#cap i{font-style:normal;display:block}
+#cap .cur,#cap .pre{line-height:1.5}
+#cap .pre{font-size:.7em;color:var(--soft);margin-bottom:12px}
+#cap .pre b{color:var(--soft)}
+.cp{display:block;width:fit-content;margin:0 auto 6px;font-size:.72em;padding:2px 16px;border-radius:999px}
+.c0{background:var(--bBg);color:var(--bIn)}
+.c1{background:var(--oBg);color:var(--oIn)}
+#parts{display:flex;justify-content:center;align-items:flex-start;min-height:130px;flex-wrap:nowrap}
+.pc{display:flex;flex-direction:column;align-items:center;transition:margin .55s cubic-bezier(.3,1.5,.5,1)}
+.pw{font-family:'AndikaEmbed',sans-serif;font-size:clamp(22px,5.6vw,40px);line-height:1.3;padding:2px 2px;border-radius:12px;transition:padding .5s,background .5s}
+.pm{font-size:24px;font-weight:700;margin-top:4px;max-height:0;max-width:0;opacity:0;overflow:hidden;transition:opacity .4s,max-height .4s,max-width .5s;white-space:nowrap}
+.split .pc{margin:0 4px}
+.split .pw{padding:2px 6px}
+.split .pm{opacity:1;max-height:40px;max-width:240px}
+.o .pw{background:var(--oBg);color:var(--oIn)}.o .pm{color:var(--oIn)}
+.g .pw{background:var(--gBg);color:var(--gIn)}.g .pm{color:var(--gIn)}
+.bl .pw{background:var(--bBg);color:var(--bIn)}.bl .pm{color:var(--bIn)}
+.gp{width:0;transition:width .5s}
+.split .gp{width:18px}
+.join .gp{width:14px}
+.pc.now .pw{animation:beat .5s}
+@keyframes beat{0%{transform:scale(1)}45%{transform:scale(1.22)}100%{transform:scale(1)}}
+.join .pw{background:transparent;color:var(--ink);padding:2px 0}
+#zh{font-size:32px;font-weight:700;color:var(--soft);min-height:44px;margin-top:4px}
+#tap{display:none}
+#note{font-size:14px;line-height:1.5;color:#C3B7A5;border-top:1px solid var(--line);margin:14px 8px 0;padding-top:8px}
+.btns{display:flex;justify-content:center;gap:6px;margin-top:14px;flex-wrap:wrap}
+.b{font-size:32px;min-width:64px;min-height:78px;padding:6px 2px;border-radius:20px;border:3px solid var(--line);background:#fff;cursor:pointer;font-family:inherit}
+.b:active{transform:scale(.95)}
+.dots{display:flex;justify-content:center;gap:8px;margin-top:14px;flex-wrap:wrap}
+.dot{width:14px;height:14px;border-radius:50%;background:var(--line)}
+.dot.on{background:var(--hl)}
+.speed{display:flex;align-items:center;gap:10px;margin:14px auto 0;max-width:340px;font-size:30px}
+#rate{flex:1;height:44px;accent-color:var(--hl)}
+#rv{font-size:24px;font-weight:700;min-width:44px}
+.fx{position:fixed;top:-60px;font-size:40px;pointer-events:none;animation:fall 1.4s ease-in forwards;z-index:9}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+.hide{display:none!important}
+#parts.hide{display:none!important}
+button:focus-visible{outline:4px solid var(--blue);outline-offset:2px}
+
+
+/* ===== 開場兩題 ===== */
+body.intro .wrap,body.intro #P,body.intro #V,body.intro #Q3,body.intro #Q4,body.intro .btns,body.intro .dots,body.intro .speed{display:none!important}
+.quiz{border-radius:28px;padding:20px 14px 24px;text-align:center}
+/* 第一題：台灣擂台（深色舞台風） */
+.qa{background:#15233A;color:#fff;border:3px solid #0C1626}
+.qa .qt{font-size:24px;font-weight:700;color:#FFD24A;line-height:1.4}
+.qa .qs{font-size:clamp(32px,8.6vw,40px);font-weight:700;color:#fff;margin:12px 0 18px;line-height:1.45}
+.qa .opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#1F3355;border:3px solid #2E4A76;color:#fff;border-radius:18px;padding:10px 14px;margin-top:10px;cursor:pointer;font-family:inherit;min-height:76px}
+.qa .opt .rk{font-size:22px;font-weight:700;color:#FFD24A;min-width:30px}
+.qa .opt .ie{font-size:34px}
+.qa .opt .tx{font-size:22px;line-height:1.35}
+.qa .opt .tx b{font-family:'AndikaEmbed',sans-serif;font-size:26px;display:block;color:#FFE9A8}
+.qa .opt.ok{background:#1C5B34;border-color:#43C46F}
+.qa .opt.no{background:#5B1C1C;border-color:#E0483E;animation:shake .4s}
+/* 第二題：全球泡泡（淺藍圓卡風） */
+.qb{background:linear-gradient(180deg,#EAF4FF,#D7ECFF);border:3px solid #B4D8F5;color:#123}
+.qb .qt{font-size:24px;font-weight:700;color:#1B4A9E;line-height:1.4}
+.qb .qs{font-size:clamp(32px,8.6vw,40px);font-weight:700;color:#123;margin:12px 0 18px;line-height:1.45}
+.qb .bub{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.qb .opt{background:#fff;border:3px solid #B4D8F5;border-radius:24px;padding:14px 6px;cursor:pointer;font-family:inherit;min-height:132px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.qb .opt .ie{font-size:40px}
+.qb .opt .zh{font-size:20px;font-weight:700}
+.qb .opt .en{font-family:'AndikaEmbed',sans-serif;font-size:19px;color:#4A6A92;word-break:break-word}
+.qb .opt.wide{grid-column:1 / -1}
+.qb .opt.ok{background:#DFF5E6;border-color:#2FA35A}
+.qb .opt.no{background:#FDE3E1;border-color:#E0483E;animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-9px)}50%{transform:translateX(9px)}75%{transform:translateX(-5px)}}
+.src{font-size:16px;line-height:1.6;border-radius:14px;padding:10px 12px;margin-bottom:14px}
+.src.sa{background:#1F3355;color:#CFE0F7}
+.src.sa b{color:#FFD24A}
+.src.sb{background:#fff;color:#4A6A92;border:2px solid #B4D8F5}
+.src.sb b{color:#1B4A9E}
+.lk2{display:inline-block;font-size:17px;margin-top:6px;text-decoration:underline}
+.qa .lk2{color:#FFD24A}
+.qb .lk2{color:#1B4A9E}
+.ans{font-size:21px;line-height:1.6;margin-top:14px;min-height:40px}
+.qa .ans{color:#FFE9A8}
+.qb .ans{color:#1B4A9E}
+.gobtn{font-size:24px;min-height:64px;padding:10px 26px;border-radius:18px;border:3px solid var(--line);background:#fff;color:var(--ink);font-family:inherit;cursor:pointer;margin-top:16px}
+.trophy{font-size:96px;animation:tpop .7s cubic-bezier(.3,1.7,.5,1)}
+@keyframes tpop{0%{transform:scale(.2) rotate(-25deg)}100%{transform:scale(1) rotate(0)}}
+.globe{font-size:96px;animation:spin 1.2s linear}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media (prefers-reduced-motion:reduce){#em.pop{animation:none}.fx{display:none}.pc,.pw,.pm{transition:none}}
+</style>
+</head>
+<body>
+<main class="app">
+
+  <section class="quiz qa" id="Q1">
+    <div class="qt">🏆 挑戰 1</div>
+    <div class="qs"><i class="tw"></i> 台灣中小學生<br>最想做的工作是哪一個？</div>
+    <div class="src sa">📋 <b>國語日報社 2026 年「兒少大未來」職業探索問卷調查</b><br>2026 年 3 月 5～25 日線上調查<br>有效問卷 1,582 份（小學生 1,286、中學生 296）</div>
+    <div id="o1"></div>
+    <div class="ans" id="a1"></div>
+  </section>
+  <section class="quiz qb hide" id="Q2">
+    <div class="qt">🌍 挑戰 2</div>
+    <div class="qs">全球 41 國的中學生<br>最想做的工作是哪一個？</div>
+    <div class="src sb">📋 <b>OECD 經濟合作暨發展組織 PISA 2018 國際學生評量</b><br>41 個國家的 15 歲學生<br>2020 年 1 月發表《Dream Jobs?》報告</div>
+    <div class="bub" id="o2"></div>
+    <div class="ans" id="a2"></div>
+  </section>
+  <div class="wrap">
+  <button class="side sl" id="back" aria-label="上一步"><span class="ic">◀</span><span class="lb">上一步</span></button>
+  <button class="side sr" id="fwd" aria-label="下一步"><span class="ic">▶</span><span class="lb">下一步</span></button>
+  <section class="card" id="card" role="button" tabindex="0" aria-label="點一下看下一步">
+    <div id="hd"></div>
+    <div class="steps" id="steps"></div>
+    <div id="em" role="button" tabindex="0" aria-label="點圖聽單字"></div>
+    <div id="parts" class="hide"></div>
+    <div id="cap"></div>
+    <div id="zh"></div>
+    <div id="tap"></div>
+    <div id="note"></div>
+  </section>
+  </div>
+  <section class="card ev hide" id="E">
+    <div class="mt">🔎 怎麼知道的？</div>
+    <div class="er" id="e1"><span class="ee">📜</span><span class="et"></span></div>
+    <div class="er" id="e2"><span class="ee">📚</span><span class="et"></span></div>
+    <div class="er" id="e3"><span class="ee">✅</span><span class="et"></span></div>
+    <div class="er" id="e4"><span class="ee">🏆</span><span class="et"></span></div>
+    <div id="badge"></div>
+    <div id="plus"></div>
+    <a id="link" class="lk" href="#" target="_blank" rel="noopener">🔗 看原始資料</a>
+  </section>
+  <section id="RES" class="hide">
+    <div class="vd2" id="rv2"></div>
+    <div id="rpick"></div>
+    <div id="rarrow"></div>
+    <div class="bigic" id="ric" role="button" tabindex="0" aria-label="點圖聽單字"></div>
+    <div class="ben" id="ren" role="button" tabindex="0" aria-label="點單字聽發音"></div>
+    <div class="bzh" id="rzh"></div>
+    <div class="chip" id="rchip"></div>
+    <div class="tiny" id="rtiny"></div>
+    <button class="gobtn" id="rbtn"></button>
+  </section>
+  <section class="q3 hide" id="Q3">
+    <div class="t3">🎟️ 挑戰 3</div>
+    <div class="h3"><i class="tw"></i> 台灣的大人<br>最想做的工作是哪一個？</div>
+    <div class="s3">📋 <b>1111 人力銀行「上班族夢幻工作大調查」</b><br>2026 年 6 月發布｜對象：台灣上班族</div>
+    <div id="o3"></div>
+    <div class="a3" id="a3"></div>
+  </section>
+  <section class="q4 hide" id="Q4">
+    <div class="t4">🎫 挑戰 4</div>
+    <div class="h4">全球的大人<br>最想做的工作是哪一個？</div>
+    <div class="s4">📋 <b>Remitly「Dream Jobs Around the World」2026</b><br>分析 145 國 Google 搜尋量（2025/5～2026/5）</div>
+    <div id="o4"></div>
+    <div class="a4" id="a4"></div>
+  </section>
+  <section class="card rev hide" id="V">
+    <div class="mt" id="vt">📝 複習</div>
+    <div id="vbody"></div>
+  </section>
+  <section class="card adv hide" id="P">
+    <div class="mt">🚀 進階：大人最想做什麼？</div>
+    <div class="tabs"><button class="tb on" data-t="0">🧑‍💼 台灣成人</button><button class="tb" data-t="1">🌏 全球成人</button><button class="tb" data-t="2">🏅 四榜綜合</button></div>
+    <div id="pbody"></div>
+  </section>
+  <section class="card menu hide" id="M">
+    <div class="mt">選一個單字 👇</div>
+    <div class="mn"><i class="tw"></i> 台灣 ＋ 🌍 全球<br>最受歡迎的職業 21 個<br><span class="rule">排序：兩邊都上榜的排最前面<br>再看兩邊名次加起來誰小</span></div>
+    <div class="grid" id="grid"></div>
+  </section>
+  <div class="btns">
+    <button class="b" id="pw" aria-label="上一個單字"><span class="ic">⏪</span><span class="lb">上一個字</span></button>
+    <button class="b" id="menu" aria-label="全部單字"><span class="ic">☰</span><span class="lb">全部單字</span></button>
+    <button class="b" id="say" aria-label="聽整個字"><span class="ic">🔊</span><span class="lb">聽</span></button>
+    <button class="b" id="why" aria-label="怎麼知道"><span class="ic">🔎</span><span class="lb">怎麼知道</span></button>
+    <button class="b" id="pro" aria-label="進階"><span class="ic">🚀</span><span class="lb">進階</span></button>
+    <button class="b" id="rev" aria-label="複習"><span class="ic">📝</span><span class="lb">複習</span></button>
+    <button class="b" id="nw" aria-label="下一個單字"><span class="ic">⏩</span><span class="lb">下一個字</span></button>
+  </div>
+  <div class="dots" id="dots"></div>
+  <div class="speed">
+    <span aria-hidden="true">🐢</span>
+    <input type="range" id="rate" min="0.5" max="1" step="0.1" value="0.8" aria-label="語速">
+    <span aria-hidden="true">🐇</span>
+    <span id="rv">0.8</span>
+  </div>
+<div style="text-align:center;margin:14px auto 0"><a href="games.html" style="font-size:20px;color:#2F6FDE">🎮 10 種單字遊戲</a></div>
+</main>
+<script>
+const W=[
+{no:1,e:'doctor',z:'醫生',ic:'🩺',rk:'<i class="tw"></i>4 🌍1',why:'台灣第 4 名 ＋ 全球女生第1',
+ s:[['👩‍🏫','拉丁文 <b>doct</b> ＝ 教'],['🎓','<b>doctor</b> 變成　醫生']],
+ p:[['doct','教','o'],['or','的人','g','er',1]],
+ n:'<i class="tw"></i> 台灣小學生第 4 名（國語日報 2026） ｜ 🌍 全球 15 歲學生女生第1（PISA 2018，41 國）',
+ ev:{lang:'拉丁文',old:'docere',mean:'教、讓人懂',kind:'真字源',card:'doct ＝ 教',url:'https://www.etymonline.com/word/Doctor',plus:''}},
+{no:2,e:'professional athlete',z:'職業運動員',ic:'🏃',rk:'<i class="tw"></i>1 🌍5',why:'台灣第 1 名 ＋ 全球男生第5',
+ s:[['🏆','希臘文 <b>athlon</b> ＝ 獎品'],['🤼','<b>athlete</b> ＝ 比賽的人']],
+ p:[['professional','職業的','o'],['athlete','比賽的人','g']],sp:[1],
+ n:'<i class="tw"></i> 台灣小學生第 1 名（國語日報 2026） ｜ 🌍 全球 15 歲學生男生第5（PISA 2018，41 國）',
+ ev:{lang:'希臘文',old:'athlon',mean:'獎品',kind:'整個字記',card:'athlete ＝ 比賽的人',url:'https://www.etymonline.com/word/athlete',plus:'athlon 更早的來源不明'}},
+{no:3,e:'programmer',z:'程式設計師',ic:'💻',rk:'<i class="tw"></i>6 🌍4',why:'台灣第 6 名 ＋ 全球男生第4（資訊類）',
+ s:[['✍️','希臘文 <b>pro</b> 先 ＋ <b>graph</b> 寫'],['📜','<b>program</b> ＝ 電腦指令']],
+ p:[['programm','寫程式','o','program'],['er','的人','g','er',1]],
+ n:'<i class="tw"></i> 台灣小學生第 6 名（國語日報 2026） ｜ 🌍 全球 15 歲學生男生第4（資訊類）（PISA 2018，41 國）',
+ ev:{lang:'希臘文',old:'pro + graphein',mean:'向前 + 寫',kind:'真字源',card:'programm ＝ 寫程式',url:'https://www.etymonline.com/word/Program',plus:'中間的 m 要寫兩個'}},
+{no:4,e:'engineer',z:'工程師',ic:'👷',rk:'🌍1',why:'全球男生第1',
+ s:[['💡','拉丁文 <b>ingenium</b> ＝ 聰明的點子'],['⚙️','<b>engine</b> ＝ 機器']],
+ p:[['engin','機器','o'],['eer','的人','g']],
+ n:'🌍 全球 15 歲學生男生第1（PISA 2018，41 國） ｜ <i class="tw"></i> 台灣前 10 名沒有這個職業',
+ ev:{lang:'拉丁文',old:'ingenium',mean:'天生的聰明',kind:'拼字記憶',card:'engin ＝ 機器',url:'https://www.etymonline.com/word/engine',plus:''}},
+{no:5,e:'esports player',z:'電競選手',ic:'🎮',rk:'<i class="tw"></i>2',why:'台灣第 2 名',
+ s:[['🏅','<b>sport</b> ＝ 運動'],['🕹️','<b>esports</b> ＝ 電子競技']],
+ p:[['esports','電子競技','o'],['play','玩','bl'],['er','的人','g','er',1]],sp:[1],
+ n:'<i class="tw"></i> 台灣小學生第 2 名（國語日報 2026） ｜ 🌍 全球前 10 名沒有這個職業',
+ ev:{lang:'現代英語',old:'e + sports',mean:'電子的 + 運動',kind:'真字源',card:'esports ＝ 電子競技',url:'https://www.espn.com/gaming/story/_/id/19860473',plus:'美聯社寫作手冊定為 esports'}},
+{no:6,e:'teacher',z:'老師',ic:'🧑‍🏫',rk:'🌍2',why:'全球女生第2',
+ s:[['📚','<b>teach</b> ＝ 教'],['🧑‍🏫','<b>teacher</b> ＝ 教人的老師']],
+ p:[['teach','教','o'],['er','的人','g','er',1]],
+ n:'🌍 全球 15 歲學生女生第2（PISA 2018，41 國） ｜ <i class="tw"></i> 台灣前 10 名沒有這個職業',
+ ev:{lang:'古英語',old:'tæcan',mean:'指出、教',kind:'真字源',card:'teach ＝ 教',url:'https://www.etymonline.com/word/teach',plus:''}},
+{no:7,e:'business manager',z:'企業經理',ic:'💼',rk:'🌍2',why:'全球男生第2、女生第3',
+ s:[['✋','拉丁文 <b>manus</b> ＝ 手'],['🐴','<b>manage</b> 本來是「控制馬」']],
+ p:[['business','生意','o'],['manag','管理','bl'],['er','的人','g','er',1]],sp:[1],
+ n:'🌍 全球 15 歲學生男生第2、女生第3（PISA 2018，41 國） ｜ <i class="tw"></i> 台灣前 10 名沒有這個職業',
+ ev:{lang:'拉丁文',old:'manus',mean:'手',kind:'真字源',card:'manag ＝ 用手管理',url:'https://www.etymonline.com/word/manager',plus:'manager 本來是「管馬的人」'}},
+{no:8,e:'influencer',z:'網紅',ic:'📣',rk:'<i class="tw"></i>3',why:'台灣第 3 名',
+ s:[['💧','拉丁文 <b>fluere</b> ＝ 流'],['📣','<b>influence</b> ＝ 流進心裡的力量']],
+ p:[['in','進去','o'],['fluenc','流','bl'],['er','的人','g','er',1]],
+ n:'<i class="tw"></i> 台灣小學生第 3 名（國語日報 2026，類別名為「網紅」） ｜ 🌍 全球前 10 名沒有這個職業 ｜ 用字說明：網紅＝influencer；直播主＝streamer；內容創作者＝content creator（調查寫「自媒體經營」），三個字不一樣',
+ ev:{lang:'拉丁文',old:'in + fluere',mean:'進去 + 流',kind:'真字源',card:'in ＝ 進去、fluenc ＝ 流',url:'https://www.etymonline.com/word/influence',plus:'網紅用 influencer；直播主用 streamer；自媒體經營（內容創作者）用 content creator'}},
+{no:9,e:'lawyer',z:'律師',ic:'⚖️',rk:'🌍4',why:'全球女生第4、男生第9',
+ s:[['📜','中古英語 <b>lawe</b> ＝ 法律'],['⚖️','<b>lawyer</b> ＝ 懂法律的人']],
+ p:[['law','法律','o'],['yer','的人','g','yer',1]],
+ n:'🌍 全球 15 歲學生女生第4、男生第9（PISA 2018，41 國） ｜ <i class="tw"></i> 台灣前 10 名沒有這個職業',
+ ev:{lang:'中古英語',old:'lawe + -iere',mean:'法律 + 的人',kind:'真字源',card:'law ＝ 法律',url:'https://www.etymonline.com/word/lawyer',plus:'-yer 是 -ier 的另一種寫法'}},
+{no:10,e:'baker',z:'麵包糕點師',ic:'🍞',rk:'<i class="tw"></i>5',why:'台灣第 5 名',
+ s:[['🔥','<b>bake</b> ＝ 烤'],['🍞','<b>baker</b> ＝ 烤麵包的人']],
+ p:[['bak','烤','o','bake'],['er','的人','g','er',1]],
+ n:'<i class="tw"></i> 台灣小學生第 5 名（國語日報 2026） ｜ 🌍 全球前 10 名沒有這個職業',
+ ev:{lang:'古英語',old:'bæcere',mean:'烤東西的人',kind:'真字源',card:'bak ＝ 烤',url:'https://www.etymonline.com/word/baker',plus:'bake 的 e 不見了'}},
+{no:11,e:'psychologist',z:'心理師',ic:'🧠',rk:'🌍5',why:'全球女生第5',
+ s:[['🦋','希臘文 <b>psykhe</b> ＝ 心、靈魂'],['🧠','<b>psychology</b> ＝ 研究心的學問']],
+ p:[['psycho','心','o'],['log','學問','bl'],['ist','的人','g','ist',1]],
+ n:'🌍 全球 15 歲學生女生第5（PISA 2018，41 國） ｜ <i class="tw"></i> 台灣前 10 名沒有這個職業',
+ ev:{lang:'希臘文',old:'psykhē + logia',mean:'心、靈魂 + 學問',kind:'真字源',card:'psycho ＝ 心、log ＝ 學問',url:'https://www.etymonline.com/word/psychologist',plus:'古希臘人用蝴蝶代表 psykhe'}},
+{no:12,e:'nurse',z:'護理師',ic:'💉',rk:'🌍6',why:'全球女生第6',
+ s:[['🍼','拉丁文 <b>nutrire</b> ＝ 餵奶、養育'],['💉','<b>nurse</b> ＝ 照顧人的人']],
+ p:[['nurse','照顧的人','o']],
+ n:'🌍 全球 15 歲學生女生第6（PISA 2018，41 國） ｜ <i class="tw"></i> 台灣前 10 名沒有這個職業',
+ ev:{lang:'拉丁文',old:'nutrire',mean:'餵奶、養育',kind:'整個字記',card:'nurse ＝ 照顧的人',url:'https://www.etymonline.com/word/nurse',plus:'1580 年代才有「照顧病人」的意思'}},
+{no:13,e:'painter',z:'畫家',ic:'🎨',rk:'<i class="tw"></i>7',why:'台灣第 7 名',
+ s:[['🖌️','<b>paint</b> ＝ 畫'],['🎨','<b>painter</b> ＝ 畫畫的人']],
+ p:[['paint','畫','o'],['er','的人','g','er',1]],
+ n:'<i class="tw"></i> 台灣小學生第 7 名（國語日報 2026） ｜ 🌍 全球前 10 名沒有這個職業',
+ ev:{lang:'英語',old:'paint',mean:'畫',kind:'真字源',card:'paint ＝ 畫',url:'https://www.etymonline.com/word/painter',plus:''}},
+{no:14,e:'police officer',z:'警察',ic:'👮',rk:'🌍7',why:'全球男生第7',
+ s:[['🏙️','希臘文 <b>polis</b> ＝ 城市'],['📜','<b>police</b> ＝ 管秩序的警察']],
+ p:[['police','警察','o'],['offic','工作','bl'],['er','的人','g','er',1]],sp:[1],
+ n:'🌍 全球 15 歲學生男生第7（PISA 2018，41 國） ｜ <i class="tw"></i> 台灣前 10 名沒有這個職業',
+ ev:{lang:'希臘文',old:'polis',mean:'城市',kind:'真字源',card:'police ＝ 警察',url:'https://www.etymonline.com/word/police',plus:'officer 的拆法是拼字記憶'}},
+{no:15,e:'designer',z:'設計師',ic:'🖌️',rk:'🌍7',why:'全球女生第7',
+ s:[['✏️','拉丁文 <b>designare</b> ＝ 畫記號'],['🖌️','<b>design</b> ＝ 設計']],
+ p:[['de','畫出來','o'],['sign','記號','bl'],['er','的人','g','er',1]],
+ n:'🌍 全球 15 歲學生女生第7（PISA 2018，41 國） ｜ <i class="tw"></i> 台灣前 10 名沒有這個職業',
+ ev:{lang:'拉丁文',old:'de + signare',mean:'出來 + 做記號',kind:'真字源',card:'de ＝ 出來、sign ＝ 記號',url:'https://www.etymonline.com/word/design',plus:''}},
+{no:16,e:'singer',z:'歌手',ic:'🎤',rk:'<i class="tw"></i>8',why:'台灣第 8 名',
+ s:[['🎵','<b>sing</b> ＝ 唱歌'],['🎤','<b>singer</b> ＝ 唱歌的人']],
+ p:[['sing','唱歌','o'],['er','的人','g','er',1]],
+ n:'<i class="tw"></i> 台灣小學生第 8 名（國語日報 2026） ｜ 🌍 全球前 10 名沒有這個職業',
+ ev:{lang:'英語',old:'sing',mean:'唱歌',kind:'真字源',card:'sing ＝ 唱歌',url:'https://www.etymonline.com/word/singer',plus:''}},
+{no:17,e:'veterinarian',z:'獸醫',ic:'🐶',rk:'🌍8',why:'全球女生第8',
+ s:[['🐴','拉丁文 <b>veterinae</b> ＝ 牛和馬'],['💊','<b>vet</b> ＝ 幫動物看病']],
+ p:[['veterinari','牛和馬','o'],['an','的人','g','un',1]],
+ n:'🌍 全球 15 歲學生女生第8（PISA 2018，41 國） ｜ <i class="tw"></i> 台灣前 10 名沒有這個職業',
+ ev:{lang:'拉丁文',old:'veterinae',mean:'拉車的牛馬',kind:'真字源',card:'veterinari ＝ 牛和馬',url:'https://www.etymonline.com/word/veterinarian',plus:'平常都說短的 vet'}},
+{no:18,e:'mechanic',z:'汽車技師',ic:'🔧',rk:'🌍8',why:'全球男生第8',
+ s:[['⚙️','希臘文 <b>mekhane</b> ＝ 機器、工具'],['🔧','<b>mechanic</b> ＝ 修機器的人']],
+ p:[['mechan','機器','o'],['ic','的人','g','ick',1]],
+ n:'🌍 全球 15 歲學生男生第8（PISA 2018，41 國） ｜ <i class="tw"></i> 台灣前 10 名沒有這個職業',
+ ev:{lang:'希臘文',old:'mēkhanē',mean:'機器、工具',kind:'拼字記憶',card:'mechan ＝ 機器',url:'https://www.etymonline.com/word/mechanic',plus:'-ic 本來是形容詞字尾'}},
+{no:19,e:'computer engineer',z:'電腦工程師',ic:'🖥️',rk:'<i class="tw"></i>9',why:'台灣第 9 名',
+ s:[['🧮','<b>compute</b> ＝ 計算'],['🖥️','<b>computer</b> ＝ 電腦']],
+ p:[['computer','電腦','o'],['engin','機器','bl'],['eer','的人','g']],sp:[1],
+ n:'<i class="tw"></i> 台灣小學生第 9 名（國語日報 2026） ｜ 🌍 全球前 10 名沒有這個職業',
+ ev:{lang:'英語',old:'compute',mean:'計算',kind:'真字源',card:'computer ＝ 電腦',url:'https://www.etymonline.com/word/computer',plus:'engin／eer 是拼字記憶'}},
+{no:20,e:'hairstylist',z:'髮型師',ic:'✂️',rk:'<i class="tw"></i>10',why:'台灣第 10 名',
+ s:[['💇','<b>hair</b> ＝ 頭髮'],['✂️','<b>style</b> ＝ 造型']],
+ p:[['hair','頭髮','o'],['styl','造型','bl'],['ist','的人','g','ist',1]],
+ n:'<i class="tw"></i> 台灣小學生第 10 名（國語日報 2026） ｜ 🌍 全球前 10 名沒有這個職業',
+ ev:{lang:'英語',old:'hair + style',mean:'頭髮 + 造型',kind:'拼字記憶',card:'hair ＝ 頭髮、styl ＝ 造型',url:'https://dictionary.wordup.com.tw/zh-TW/dictionary/hairstylist',plus:'style 的 e 不見了'}},
+{no:21,e:'architect',z:'建築師',ic:'🏛️',rk:'🌍10',why:'全球男生、女生都第10',
+ s:[['👑','希臘文 <b>archi</b> ＝ 老大'],['🔨','<b>tect</b> ＝ 蓋房子']],
+ p:[['archi','老大','o','arky'],['tect','蓋房子','g']],
+ n:'🌍 全球 15 歲學生男生、女生都第10（PISA 2018，41 國） ｜ <i class="tw"></i> 台灣前 10 名沒有這個職業',
+ ev:{lang:'希臘文',old:'arkhi + tekton',mean:'首領 + 建造者',kind:'真字源',card:'archi ＝ 老大、tect ＝ 蓋房子',url:'https://www.etymonline.com/word/architect',plus:''}}
+];
+const $=id=>document.getElementById(id);
+let i=0,st=0;
+function rate(){return Math.round(parseFloat($('rate').value)*10)/10}
+function speak(t,weak){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=rate()*(weak?0.9:1);if(weak){u.pitch=0.82;u.volume=0.8}speechSynthesis.speak(u)}catch(e){}}
+function confetti(){const e=['⭐','🎉','✨','🌟'];for(let k=0;k<18;k++){const s=document.createElement('span');s.className='fx';s.textContent=e[k%4];s.style.left=Math.random()*100+'vw';s.style.animationDelay=(Math.random()*.4)+'s';document.body.appendChild(s);setTimeout(()=>s.remove(),2000)}}
+function partsHTML(d){return d.p.map((x,k)=>((d.sp&&d.sp.indexOf(k)>-1)?'<span class="gp"></span>':'')+'<span class="pc '+x[2]+'" data-k="'+k+'"><span class="pw">'+x[0]+'</span><span class="pm">'+x[1]+'</span></span>').join('')}
+let seq=null;
+function partSay(x){return x[3]||x[0]}
+function sayParts(d){if(seq){seq.forEach(clearTimeout)}seq=[];
+const gap=Math.round(1150/rate());
+d.p.forEach((x,k)=>{seq.push(setTimeout(()=>{
+  const el=document.querySelector('.pc[data-k="'+k+'"]');
+  if(el){document.querySelectorAll('.pc').forEach(n=>n.classList.remove('now'));el.classList.remove('now');void el.offsetWidth;el.classList.add('now')}
+  speak(partSay(x),x[4])},450+k*gap))})}
+function draw(){const d=W[i];
+$('steps').innerHTML=[0,1,2,3,4,5].map(k=>'<span class="s'+(k<=st?' on':'')+'"></span>').join('');
+$('dots').innerHTML=W.map((_,k)=>'<span class="dot'+(k===i?' on':'')+'"></span>').join('');
+$('hd').innerHTML='第 <b>'+d.no+'</b> 張／共 '+W.length+'　'+d.rk;
+$('note').innerHTML=d.n;
+
+if(st<2){const p=d.s[st];
+  $('em').classList.remove('hide');$('parts').classList.add('hide');$('card').classList.remove('wm');
+  $('em').textContent=p[0];$('em').classList.remove('pop');void $('em').offsetWidth;$('em').classList.add('pop');
+  $('cap').innerHTML=(st===1?'<div class="pre"><span class="cp c0">以前</span>'+d.s[0][1]+'</div>':'')+'<div class="cur"><span class="cp '+(st===0?'c0':'c1')+'">'+(st===0?'以前':'後來')+'</span>'+p[1]+'</div>';
+  $('zh').textContent='';$('tap').innerHTML='';return}
+$('em').classList.add('hide');$('parts').classList.remove('hide');$('card').classList.add('wm');
+if(st===2){$('parts').innerHTML=partsHTML(d);$('parts').className='';void $('parts').offsetWidth;$('parts').className='split';
+  $('cap').innerHTML=d.w||'';$('zh').textContent='';sayParts(d);$('tap').innerHTML='';return}
+if(st===5){$('em').classList.add('hide');$('parts').classList.add('hide');$('card').classList.add('wm');
+ const sy=(SYL[d.e]||d.e).split(' ');
+ let pos=0;const segs=sy.map(w=>{const parts=w.split('-').map(s=>{const html='<span class="sy">'+colorRange(d.e,pos,pos+s.length)+'</span>';pos+=s.length;return html});pos+=1;return '<span class="sw">'+parts.join('<span class="sd">•</span>')+'</span>'});
+ $('cap').innerHTML='<div class="syl" id="syl">'+segs.join('<span style="display:inline-block;width:.4em"></span>')
+  +'</div><div class="sn">'+sy.reduce((a,w)=>a+w.split('-').length,0)+' 個音節</div><div class="tip">💡 '+(TIP[d.e]||'')+'</div>';
+ $('zh').textContent=d.z;
+ setTimeout(()=>{const el=document.getElementById('syl');if(el)el.classList.add('go')},80);return}
+if(st===4){$('em').classList.add('hide');$('parts').classList.add('hide');$('card').classList.add('wm');
+ $('cap').innerHTML='<div class="vw" role="button" tabindex="0" aria-label="點單字聽發音">'+colorWord(d.e)+'</div>';
+ $('zh').textContent=d.z;return}
+$('parts').className='split';void $('parts').offsetWidth;$('parts').className='join';
+$('em').classList.remove('hide');$('em').textContent=d.ic;$('em').classList.remove('pop');void $('em').offsetWidth;$('em').classList.add('pop');
+$('cap').innerHTML=d.t||'';$('zh').textContent=d.z;$('tap').innerHTML='';
+speak(d.e);confetti()}
+function tap(){if(seq){seq.forEach(clearTimeout);seq=[]}
+if(st<5){st++;draw()}else{i=(i+1)%W.length;st=0;draw()}}
+$('parts').addEventListener('click',ev=>{if(st>=3){ev.stopPropagation();stop();speak(W[i].e);return}
+  const el=ev.target.closest('.pc');if(!el||st!==2)return;ev.stopPropagation();
+  const x=W[i].p[+el.dataset.k];if(seq){seq.forEach(clearTimeout);seq=[]}
+  document.querySelectorAll('.pc').forEach(n=>n.classList.remove('now'));void el.offsetWidth;el.classList.add('now');speak(partSay(x),x[4])});
+function sayWord(e){if(e)e.stopPropagation();stop();speak(W[i].e)}
+$('em').addEventListener('click',sayWord);
+$('cap').addEventListener('click',e=>{if(e.target.closest('.vw')||e.target.closest('.syl')){e.stopPropagation();stop();speak(W[i].e)}});
+$('cap').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.closest('.vw')){e.preventDefault();e.stopPropagation();stop();speak(W[i].e)}});
+$('em').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();sayWord()}});
+$('card').addEventListener('click',tap);
+$('card').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();tap()}});
+function stop(){if(seq){seq.forEach(clearTimeout);seq=[]}try{speechSynthesis.cancel()}catch(e){}}
+function goWord(n){stop();hideEv();hideP();hideRev();document.querySelector('.wrap').classList.remove('hide');i=(n+W.length)%W.length;st=0;draw()}
+$('back').addEventListener('click',e=>{e.stopPropagation();stop();
+ if(st>0){st--;draw()}
+ else{hideEv();hideP();document.querySelector('.wrap').classList.remove('hide');i=(i-1+W.length)%W.length;st=5;draw()}});
+$('fwd').addEventListener('click',e=>{e.stopPropagation();tap()});
+$('pw').addEventListener('click',()=>goWord(i-1));
+$('nw').addEventListener('click',()=>goWord(i+1));
+$('say').addEventListener('click',()=>{stop();speak(W[i].e)});
+$('rate').addEventListener('input',()=>{$('rv').textContent=rate().toFixed(1)});
+$('rate').addEventListener('change',()=>{stop();speak(W[i].e)});
+function showMenu(){stop();hideEv();hideP();hideRev();$('M').classList.remove('hide');document.querySelector('.wrap').classList.add('hide');
+$('grid').innerHTML=W.map((d,k)=>'<button class="gi'+(k===i?' on':'')+'" data-k="'+k+'"><span class="gn">'+d.no+'</span><span class="ge">'+(d.ic||d.s[0][0])+'</span><span class="gz">'+d.z+'</span><span class="gw">'+d.e+'</span><span class="gr">'+d.rk+'</span></button>').join('')}
+function hideMenu(){$('M').classList.add('hide');document.querySelector('.wrap').classList.remove('hide')}
+$('menu').addEventListener('click',()=>{hideEv();if($('M').classList.contains('hide'))showMenu();else hideMenu()});
+function hideEv(){$('E').classList.add('hide')}
+function showEv(){stop();hideMenu();hideP();hideRev();const v=W[i].ev;
+$('E').classList.remove('hide');document.querySelector('.wrap').classList.add('hide');
+$('e1').querySelector('.et').innerHTML='<s>古代的字</s>'+v.lang+' <b>'+v.old+'</b> ＝ '+v.mean;
+$('e2').querySelector('.et').innerHTML='<s>字典查得到</s>Etymonline 線上字源詞典';
+$('e3').querySelector('.et').innerHTML='<s>所以卡片寫</s>'+v.card;
+$('e4').querySelector('.et').innerHTML='<s>為什麼學這個字</s>'+W[i].why;
+const kn={'真字源':0,'拼字記憶':1,'整個字記':2}[v.kind];
+$('badge').className='k'+kn;$('badge').textContent=({0:'✅ 真的字源',1:'✏️ 拼字記憶（不是字源）',2:'🧩 整個字記，不能拆'})[kn];
+$('plus').textContent=v.plus||'';$('link').href=v.url;
+['e1','e2','e3','e4'].forEach(id=>{const el=$(id);el.classList.remove('go');void el.offsetWidth;el.classList.add('go')})}
+$('why').addEventListener('click',()=>{if($('E').classList.contains('hide'))showEv();else{hideEv();document.querySelector('.wrap').classList.remove('hide')}});
+$('grid').addEventListener('click',ev=>{const b=ev.target.closest('.gi');if(!b)return;hideMenu();goWord(+b.dataset.k)});
+
+
+/* ===== 母音／不發音 ===== */
+const SYL={"doctor": "doc-tor", "professional athlete": "pro-fes-sion-al ath-lete", "programmer": "pro-gram-mer", "engineer": "en-gi-neer", "esports player": "e-sports play-er", "teacher": "teach-er", "business manager": "busi-ness man-ag-er", "influencer": "in-flu-enc-er", "lawyer": "law-yer", "baker": "bak-er", "psychologist": "psy-chol-o-gist", "nurse": "nurse", "painter": "paint-er", "police officer": "po-lice of-fi-cer", "designer": "de-sign-er", "singer": "sing-er", "veterinarian": "vet-er-i-nar-i-an", "mechanic": "me-chan-ic", "computer engineer": "com-pu-ter en-gi-neer", "hairstylist": "hair-styl-ist", "architect": "ar-chi-tect"};
+const TIP={"doctor": "醫生名牌上的 <b>Dr.</b> 就是 doctor", "professional athlete": "職業的 professional ＋ 運動員 athlete", "programmer": "兩個 <b>m</b> 像兩根柱子撐住 program", "engineer": "修 <b>engine</b>（引擎）的人", "esports player": "<b>e</b> 就像 e-mail 的 e ＝ 電子", "teacher": "<b>teach</b> 教 ＋ er 的人", "business manager": "<b>busy</b> 很忙 → business 生意", "influencer": "<b>flu</b> 流感會傳染，影響力也會傳", "lawyer": "<b>law</b> 法律 ＋ yer（唸起來像「爺」）", "baker": "<b>bake</b> 烤；e 讓 a 唸長音 /eɪ/", "psychologist": "開頭 <b>p</b> 不發音，直接唸 sy", "nurse": "<b>nurse</b> 和「營養 nutrition」同一個家", "painter": "<b>paint</b> 畫畫 ＋ er 的人", "police officer": "警車上就寫著 <b>POLICE</b>", "designer": "<b>design</b> 的 g 不發音", "singer": "<b>sing</b> 唱歌 ＋ er 的人", "veterinarian": "太長？口語就說 <b>vet</b>（3 個字母）", "mechanic": "<b>machine</b> 機器 → 修機器的人", "computer engineer": "<b>compute</b> 計算 → computer 電腦", "hairstylist": "<b>hair</b> 頭髮 ＋ style 造型", "architect": "<b>arch</b> 是拱門，建築師蓋拱門"};
+const SILENT={'professional athlete':[19],'tour guide':[6,9],'fortune teller':[7],'firefighter':[6,7],'flight attendant':[3,4],'real estate agent':[10],'business manager':[1],'psychologist':[0],'nurse':[4],'police officer':[5],'designer':[4]};
+function isV(c,i){c=c.toLowerCase();return 'aeiou'.indexOf(c)>-1 || (c==='y'&&i>0)}
+function colorRange(w,a,b){const sil=SILENT[w]||[];let out='';
+ for(let i=a;i<b;i++){const c=w[i];if(c===' '){out+='<span style="display:inline-block;width:.35em"></span>';continue}
+  const s=sil.indexOf(i)>-1;const col=s?'#8C8378':(isV(c,i)?'#E0483E':'var(--ink)');
+  out+='<span style="color:'+col+(s?';background:#E6E0D6;border-radius:5px;padding:0 3px':'')+'">'+c+'</span>'}
+ return out}
+function colorWord(w,big){const sil=SILENT[w]||[];
+ return [...w].map((c,i)=>{if(c===' ')return '<span style="display:inline-block;width:.35em"></span>';
+  const s=sil.indexOf(i)>-1;const col=s?'#8C8378':(isV(c,i)?'#E0483E':'var(--ink)');
+  return '<span style="color:'+col+(s?';background:#E6E0D6;border-radius:5px;padding:0 3px':'')+'">'+c+'</span>'}).join('')}
+
+
+/* ===== 進階：成人調查 ===== */
+const ADV_TW=[[1,'🎥','content creator','內容創作者（調查類別名：自媒體經營）','30.3%'],[2,'🎮','game tester','遊戲試玩員','26.9%'],[3,'🧠','counselor','心理諮商師','15.7%'],[4,'🎭','entertainer','演藝人員','13.4%'],[5,'🧭','tour guide','導遊','11.2%（並列第5）'],[5,'🔮','fortune teller','占卜師／命理師','11.2%（並列第5）']];
+const ADV_G=[[1,'🎭','actor','演員','222,080 次搜尋'],[2,'✈️','pilot','機師','221,060'],[3,'🚒','firefighter','消防員','171,330'],[4,'⚖️','lawyer','律師','168,510'],[5,'📹','YouTuber','YouTuber','148,430'],[6,'🐶','veterinarian','獸醫','146,770'],[7,'🧳','flight attendant','空服員','126,480'],[8,'👮','police officer','警察','123,800'],[9,'🏠','real estate agent','房仲','100,410'],[10,'🎧','DJ','DJ','97,930']];
+const ADV_MIX=[
+ [1,'📣','influencer','網紅（直播主 streamer／內容創作者 content creator）','3 份榜單：台灣兒少 3（網紅）、台灣成人 1（自媒體經營＝內容創作者 content creator）、全球成人 5（YouTuber）'],
+ [2,'🎭','actor','演員／歌手／藝人','3 份榜單：台灣兒少 8、台灣成人 4、全球成人 1'],
+ [3,'🩺','doctor','醫師','2 份榜單：台灣兒少 4、全球青少年 1'],
+ [4,'🏃','professional athlete','職業運動員','2 份榜單：台灣兒少 1、全球青少年 5'],
+ [5,'⚖️','lawyer','律師','2 份榜單：全球青少年 4、全球成人 4'],
+ [6,'🧠','counselor','心理師／諮商師','2 份榜單：全球青少年 5、台灣成人 3'],
+ [7,'🐶','veterinarian','獸醫','2 份榜單：全球青少年 8、全球成人 6'],
+ [8,'👮','police officer','警察','2 份榜單：全球青少年 7、全球成人 8'],
+ [9,'👷','engineer','工程師','1 份榜單：全球青少年 男生第 1'],
+ [10,'🎮','esports player','電競選手','1 份榜單：台灣兒少 2'],
+ [11,'🧑‍🏫','teacher','老師','1 份榜單：全球青少年 女生第 2'],
+ [12,'✈️','pilot','機師','1 份榜單：全球成人 2']];
+const PSRC=[
+ '📋 <b>1111 人力銀行「上班族夢幻工作大調查」</b>（2026 年 6 月發布）<br>對象：台灣上班族｜只公布前 5 名（第 5 名並列兩項）<br>🔗 <a href="https://finance.technews.tw/2026/06/18/dream-employer" target="_blank" rel="noopener">科技新報報導</a>',
+ '📋 <b>Remitly「Dream Jobs Around the World」2026</b><br>分析 145 國 Google「how to be a…」搜尋量（2025/5～2026/5）<br>🔗 <a href="https://www.remitly.com/gb/en/insights/dream-jobs-around-the-world" target="_blank" rel="noopener">Remitly 研究原文</a>',
+ '📋 四份調查：①台灣兒少（國語日報 2026）②全球青少年（PISA 2018）③台灣成人（1111 人力銀行 2026）④全球成人（Remitly 2026）<br>排序規則：上榜份數多的排前面；份數相同看名次加起來誰小。'];
+function prow(x){return '<div class="prow"><span class="pn">'+x[0]+'</span><span class="pe">'+x[1]+'</span><span class="pt">'+x[3]+'<b>'+colorWord(x[2])+'</b><span class="pb">'+x[4]+'</span></span></div>'}
+function drawP(t){$('pbody').innerHTML='<div class="psrc">'+PSRC[t]+'</div>'+[ADV_TW,ADV_G,ADV_MIX][t].map(prow).join('')
+ +'<div class="vl" style="margin-top:10px"><span><i class="vd" style="background:#E0483E"></i>母音</span><span><i class="vd" style="background:#B9B2A6"></i>不發音</span></div>';
+ document.querySelectorAll('.tb').forEach(b=>b.classList.toggle('on',+b.dataset.t===t))}
+document.querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('.tb');if(b)drawP(+b.dataset.t)});
+$('pbody').addEventListener('click',e=>{const r=e.target.closest('.prow');if(!r)return;const w=r.querySelector('b').textContent;stop();speak(w)});
+
+
+
+/* ===== 複習測驗 ===== */
+function sh(a){a=a.slice();for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}return a}
+let vPool=[],vIdx=0,vSc=0,vCur=null;
+function revRange(){const n=Math.max(3,Math.floor((i+1)/3)*3);return Math.min(n,W.length)}
+function startRev(){const n=revRange();vPool=sh([...Array(n).keys()]).slice(0,Math.min(5,n));vIdx=0;vSc=0;
+ $('vt').innerHTML='📝 複習前 '+n+' 個單字';vRound()}
+function vRound(){if(vIdx>=vPool.length){
+  $('vbody').innerHTML='<div class="vbig">'+(vSc===vPool.length?'🏆':vSc>=vPool.length/2?'👍':'💪')+'</div><div class="vq">答對 '+vSc+' ／ '+vPool.length+'</div><button class="gobtn" id="vagain">再玩一次 ↻</button> <button class="gobtn" id="vback">回單字 ▶</button>';
+  $('vagain').onclick=startRev;$('vback').onclick=()=>{$('V').classList.add('hide');document.querySelector('.wrap').classList.remove('hide')};return}
+ const k=vPool[vIdx];const d=W[k];vCur=d;
+ const others=sh([...Array(W.length).keys()].filter(x=>x!==k)).slice(0,2).map(x=>W[x]);
+ $('vbody').innerHTML='<div class="vbar">第 '+(vIdx+1)+' ／ '+vPool.length+'　⭐ '+vSc+'</div><div class="vbig">'+d.ic+'</div><div class="vq">'+d.z+'</div><div id="vops"></div><div class="msg2" id="vmsg"></div>';
+ $('vops').innerHTML=sh([d,...others]).map(x=>'<button class="vopt" data-e="'+x.e+'">'+x.e+'</button>').join('');
+ $('vops').onclick=ev=>{const b=ev.target.closest('.vopt');if(!b)return;const x=W.find(y=>y.e===b.dataset.e);
+  if(x.e===d.e){b.classList.add('ok');vSc++;stop();speak(d.e);burst(['⭐','🎉','✨'],14);vIdx++;setTimeout(vRound,1300)}
+  else{b.classList.add('no');$('vmsg').innerHTML='<div style="font-size:20px;color:var(--no);margin-top:10px">'+x.e+' 是「'+x.z+'」</div>'}}}
+$('rev').addEventListener('click',()=>{
+ if($('V').classList.contains('hide')){stop();hideEv();hideMenu();hideP();document.querySelector('.wrap').classList.add('hide');$('V').classList.remove('hide');startRev()}
+ else{$('V').classList.add('hide');document.querySelector('.wrap').classList.remove('hide')}});
+function hideRev(){$('V').classList.add('hide')}
+/* ===== 挑戰結果獨立畫面 ===== */
+function showRes(o){
+ ['Q1','Q2','Q3','Q4'].forEach(id=>$(id).classList.add('hide'));
+ $('RES').classList.remove('hide');$('RES').className=o.ok?'good':'bad';
+ $('rv2').textContent=o.ok?'✅ 答對了！':'❌ 再想一想';
+ $('rpick').innerHTML=o.ok?'':'<div class="pickrow">你選的 <span class="pi">'+o.pick[0]+'</span> <b>'+o.pick[1]+'</b> '+o.pick[2]+'</div>';
+ $('rarrow').innerHTML=o.ok?'':'<div class="arrow">⬇︎</div>';
+ $('ric').textContent=o.ans[0];$('ren').innerHTML=colorWord(o.ans[1]);$('rzh').textContent=o.ans[2];
+ $('rchip').textContent=o.rank;$('rtiny').innerHTML=o.src;
+ $('rbtn').textContent=o.btn;$('rbtn').onclick=o.go;
+
+ speak(o.ans[1]);if(o.ok)burst(o.fx,22);
+ $('ric').onclick=()=>{stop();speak(o.ans[1])};$('ren').onclick=()=>{stop();speak(o.ans[1])};
+}
+/* ===== 進階開場兩題 ===== */
+const QA3=[['🎮','game tester','遊戲試玩員','第 2 名（26.9%）'],['🎥','content creator','內容創作者','第 1 名（30.3%）'],['🧠','counselor','心理諮商師','第 3 名（15.7%）']];
+const QA4=[['✈️','pilot','機師','第 2 名'],['🚒','firefighter','消防員','第 3 名'],['🎭','actor','演員','第 1 名'],['⚖️','lawyer','律師','第 4 名'],['📹','YouTuber','YouTuber','第 5 名']];
+let pq=0;
+$('o3').innerHTML=QA3.map((x,k)=>'<button class="tk" data-k="'+k+'"><span class="ie">'+x[0]+'</span><span class="tx">'+x[2]+'<b>'+x[1]+'</b></span></button>').join('');
+$('o4').innerHTML=QA4.map((x,k)=>'<button class="bp" data-k="'+k+'"><span class="st">✓</span><span class="ie">'+x[0]+'</span><span class="tx">'+x[2]+'<b>'+x[1]+'</b></span></button>').join('');
+function hideProQ(){$('Q3').classList.add('hide');$('Q4').classList.add('hide')}
+
+function hideP(){$('P').classList.add('hide');hideProQ()}
+$('pro').addEventListener('click',()=>{
+ const open=!$('P').classList.contains('hide')||!$('Q3').classList.contains('hide')||!$('Q4').classList.contains('hide');
+ if(!open){stop();hideEv();hideMenu();document.querySelector('.wrap').classList.add('hide');
+  if(pq<2){$('Q'+(pq===0?3:4)).classList.remove('hide')}else{$('P').classList.remove('hide');drawP(0)}}
+ else{hideP();document.querySelector('.wrap').classList.remove('hide')}});
+
+/* ===== 開場兩題 ===== */
+document.body.classList.add('intro');
+function burst(list,n){for(let k=0;k<n;k++){const s=document.createElement('span');s.className='fx';s.textContent=list[k%list.length];s.style.left=Math.random()*100+'vw';s.style.animationDelay=(Math.random()*.5)+'s';document.body.appendChild(s);setTimeout(()=>s.remove(),2100)}}
+const Q1=[['🩺','doctor','醫師',4],['🏃','professional athlete','職業運動員',1],['🧑‍🏫','teacher','老師',0],['🍞','baker','麵包糕點師',5],['📣','influencer','網紅',3]];
+const Q2=[['⚖️','lawyer','律師'],['🩺','doctor','醫師'],['👷','engineer','工程師'],['🏃','athlete','運動員'],['🧑‍🏫','teacher','老師']];
+function drawQ1(){$('o1').innerHTML=Q1.map((x,k)=>'<button class="opt" data-k="'+k+'"><span class="rk">'+String.fromCharCode(65+k)+'</span><span class="ie">'+x[0]+'</span><span class="tx">'+x[2]+'<b>'+x[1]+'</b></span></button>').join('')}
+function drawQ2(){$('o2').innerHTML=Q2.map((x,k)=>'<button class="opt'+(k===4?' wide':'')+'" data-k="'+k+'"><span class="ie">'+x[0]+'</span><span class="zh">'+x[2]+'</span><span class="en">'+x[1]+'</span></button>').join('')}
+drawQ1();drawQ2();
+let q1done=false,q2done=false;
+$('o1').addEventListener('click',ev=>{const b=ev.target.closest('.opt');if(!b||q1done)return;const k=+b.dataset.k;const x=Q1[k];
+ const src='國語日報社 2026「兒少大未來」調查（1,582 份問卷）<br><a href="https://money.udn.com/money/story/7307/9422051" target="_blank" rel="noopener">🔗 經濟日報／中央社</a>';
+ if(k===1){q1done=true;showRes({ok:1,ans:['🏃','professional athlete','職業運動員'],rank:'🥇 台灣第 1 名',src:src,fx:['🏆','🥇','⭐','🎉'],btn:'下一題 ▶',go:()=>{$('RES').classList.add('hide');$('Q2').classList.remove('hide')}})}
+ else{showRes({ok:0,pick:[x[0],x[1],x[2]],ans:['🏃','professional athlete','職業運動員'],rank:'🥇 台灣第 1 名（你選的是第 '+(x[3]||'—')+' 名）',src:src,btn:'再選一次 ↻',go:()=>{$('RES').classList.add('hide');$('Q1').classList.remove('hide');document.querySelectorAll('#o1 .opt').forEach(o=>o.classList.remove('no'))}})}});
+$('o2').addEventListener('click',ev=>{const b=ev.target.closest('.opt');if(!b||q2done)return;const k=+b.dataset.k;const x=Q2[k];
+ const src='OECD PISA 2018，41 國 15 歲學生《Dream Jobs?》<br><a href="https://www.oecd.org/education/dream-jobs-teenagers-career-aspirations-and-the-future-of-work.htm" target="_blank" rel="noopener">🔗 OECD 報告</a>';
+ if(k===1){q2done=true;showRes({ok:1,ans:['🩺','doctor','醫師'],rank:'🥇 全球女生第 1 名',src:src,fx:['🌍','🚀','✨','🌟'],btn:'開始學單字 ▶',go:()=>{$('RES').classList.add('hide');document.body.classList.remove('intro');st=0;draw()}})}
+ else{showRes({ok:0,pick:[x[0],x[1],x[2]],ans:['🩺','doctor','醫師'],rank:'🥇 全球第 1 名（男生第 1 是 engineer）',src:src,btn:'再選一次 ↻',go:()=>{$('RES').classList.add('hide');$('Q2').classList.remove('hide');document.querySelectorAll('#o2 .opt').forEach(o=>o.classList.remove('no'))}})}});
+$('o3').addEventListener('click',ev=>{const b=ev.target.closest('.tk');if(!b||pq>0)return;const k=+b.dataset.k;const x=QA3[k];
+ const src='1111 人力銀行 2026「上班族夢幻工作大調查」<br><a href="https://finance.technews.tw/2026/06/18/dream-employer" target="_blank" rel="noopener">🔗 科技新報</a>';
+ if(k===1){pq=1;showRes({ok:1,ans:['🎥','content creator','內容創作者'],rank:'🥇 台灣大人第 1 名（30.3%）',src:src,fx:['🎟️','💰','🎊','✨'],btn:'下一題 ▶',go:()=>{$('RES').classList.add('hide');$('Q4').classList.remove('hide')}})}
+ else{showRes({ok:0,pick:[x[0],x[1],x[2]],ans:['🎥','content creator','內容創作者'],rank:'🥇 第 1 名（你選的是'+x[3]+'）',src:src,btn:'再選一次 ↻',go:()=>{$('RES').classList.add('hide');$('Q3').classList.remove('hide');document.querySelectorAll('#o3 .tk').forEach(o=>o.classList.remove('no'))}})}});
+$('o4').addEventListener('click',ev=>{const b=ev.target.closest('.bp');if(!b||pq>1)return;const k=+b.dataset.k;const x=QA4[k];
+ const src='Remitly 2026，145 國 Google 搜尋量<br><a href="https://www.remitly.com/gb/en/insights/dream-jobs-around-the-world" target="_blank" rel="noopener">🔗 Remitly 研究</a>';
+ if(k===2){pq=2;showRes({ok:1,ans:['🎭','actor','演員'],rank:'🥇 全球大人第 1 名',src:src,fx:['✈️','🎬','🌏','⭐'],btn:'看完整榜單 ▶',go:()=>{$('RES').classList.add('hide');$('P').classList.remove('hide');drawP(0)}})}
+ else{showRes({ok:0,pick:[x[0],x[1],x[2]],ans:['🎭','actor','演員'],rank:'🥇 第 1 名（你選的是'+x[3]+'）',src:src,btn:'再選一次 ↻',go:()=>{$('RES').classList.add('hide');$('Q4').classList.remove('hide');document.querySelectorAll('#o4 .bp').forEach(o=>o.classList.remove('no'))}})}});
+function hideProQ(){$('Q3').classList.add('hide');$('Q4').classList.add('hide');$('RES').classList.add('hide')}
+draw();
+</script>
+</body>
+</html>
