@@ -43,7 +43,7 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     if (href === 'rank-tw.html') ok(await p.$$eval('.row', r => r.length) === 20, `${href}：排行榜不是 20 列`);
     else if (/^c[1-4]$/.test(hash)) ok(await vis('Q' + hash[1]), `${href}：沒有出現挑戰 ${hash[1]}`);
     else if (href === 'rank-mix.html') ok(await p.$$eval('tbody tr', r => r.length) === 36, `${href}：排序頁不是 36 列`);
-    else if (href === 'word-check.html') ok(await p.$$eval('tbody tr', r => r.length) === 37, `${href}：考證表不是 37 列`);
+    else if (href === 'word-check.html') ok(await p.$$eval('#words-table tbody tr', r => r.length) === 37, `${href}：考證表不是 37 列`);
     else if ((m = hash.match(/^w(\d+)$/))) {
       const hd = await p.$eval('#hd', e => e.textContent);
       ok(await vis('card') && hd.includes('第 ' + m[1] + ' 張'), `${href}：沒有出現第 ${m[1]} 張單字卡（${hd}）`);
@@ -117,7 +117,7 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
   {
     const q = await browser.newPage();
     await q.goto(url('word-check.html'));
-    const pairs = await q.$$eval('tbody tr', rs => rs.filter(r => r.querySelector('.go')).map(r => [r.querySelector('td.w b').textContent, r.querySelector('.go').getAttribute('href')]));
+    const pairs = await q.$$eval('#words-table tbody tr', rs => rs.filter(r => r.querySelector('.go')).map(r => [r.querySelector('td.w b').textContent, r.querySelector('.go').getAttribute('href')]));
     ok(pairs.length === 36, `考證頁單字卡連結 ${pairs.length} 個`);
     await q.goto(url('story.html'));
     const words = await q.evaluate(() => W.map(d => d.e));
@@ -161,6 +161,14 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     ok(pairs.length === 36, `排序頁 ${pairs.length} 列`);
     for (const [e, href] of pairs) ok(words[+href.split('#w')[1] - 1] === e, `排序頁 ${e} 連到的單字卡不是 ${e}`);
     await q.close();
+  }
+  // 查證結果：evidence/audit.json 每一條說法、每一個音節都要找到證據（python3 _audit.py 重抓原文）
+  {
+    const aud = JSON.parse(require('fs').readFileSync(path.join(__dirname, 'evidence', 'audit.json'), 'utf8'));
+    for (const c of aud.claims) ok(c.ok, `查證失敗：${c.card}「${c.claim}」 ${c.url}`);
+    for (const s of aud.syllables) ok(s.ok, `音節和字典不一樣：${s.word} ${s.site} /${s.ipa}/`);
+    const st = require('fs').readFileSync(path.join(__dirname, 'story.html'), 'utf8') + require('fs').readFileSync(path.join(__dirname, 'games.html'), 'utf8');
+    for (const bad of ['veterinae', '管馬的人', '畫出來', '像「爺」', '拱門', 'pro</b> 先']) ok(!st.includes(bad), `還有改正前的寫法：${bad}`);
   }
   // 沒有 # 的舊入口照常從挑戰 1 開始
   await p.goto(url('story.html')); ok(await vis('Q1'), 'story.html：沒有從挑戰 1 開始');

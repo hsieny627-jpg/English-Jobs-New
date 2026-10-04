@@ -11,6 +11,7 @@
 | `story.html` | 單字小故事（原本的首頁） |
 | `games.html` | 10 種遊戲 |
 | `word-check.html` | 英文用字考證：每個字的字典、美國官方職稱（O*NET）、Google Books Ngram 語料庫；`python3 _build_check.py` 產生，證據在 `evidence/`（`_ngram.py`、`_ngram_us_gb.py`、`_dict_check.py`、`_onet_check.py` 重抓） |
+| `_audit.py` | 全站英文說法查證：每一條字源、年代、拆字、記憶技巧、遊戲是非題都對應出處原文（Etymonline／Cambridge／Merriam-Webster），音節數對 Cambridge 美式音標；結果 `evidence/audit.json`，列在 word-check.html。改了卡片文字就加一條再跑 |
 | `rank-mix.html` | 四榜綜合排序＋每一張卡的證據；`python3 _build_mix.py` 算順序（➜ `evidence/mix.json`）並重排 story.html 的單字卡，再跑 `node _build_home.js` |
 | `notebooklm/` | 2026 台灣小學生最喜歡的職業前 10 名英文單字（給 NotebookLM 做簡報） |
 | `rank-tw.html` | 2026 台灣中小學生最想做的工作前 10 名（國語日報原始統計圖＋四家媒體交叉比對）；`node _build_rank.js` 產生 |

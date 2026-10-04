@@ -2,7 +2,7 @@
 # 證據檔在 evidence/：ngram.json、ngram_us_gb.json（_ngram.py、_ngram_us_gb.py）、dict.json（_dict_check.py）、onet.json（_onet_check.py）
 import json, re, html
 E = lambda f: json.load(open('evidence/' + f, encoding='utf8'))
-NG, NGC, DICT, ONET = E('ngram.json'), E('ngram_us_gb.json'), E('dict.json'), E('onet.json')
+NG, NGC, DICT, ONET, AUD = E('ngram.json'), E('ngram_us_gb.json'), E('dict.json'), E('onet.json'), E('audit.json')
 story = open('story.html', encoding='utf8').read()
 font = re.search(r'@font-face\{[^}]*\}', story).group(0)
 CARDS = {m[1]: (int(m[0]), m[2], m[3]) for m in re.findall(r"\{no:(\d+),e:'([^']+)',z:'([^']+)',ic:'([^']+)'", story)}
@@ -101,6 +101,28 @@ def line(name, rr, link):
 r_all, r_us, r_gb = ratio(pe), ratio(pa['en-US']), ratio(pa['en-GB'])
 proc = DICT['pro']['cambridge']['url']; promw = DICT['pro']['mw']['url']
 
+FIXES = [
+ ('2026/10/4', 'psychologist', 'PISA 女生第 5 名', 'PISA 女生第 6 名', 'OECD 報告 Table 1.1'),
+ ('2026/10/4', 'nurse', 'PISA 女生第 6 名', 'PISA 女生第 5 名', 'OECD 報告 Table 1.1'),
+ ('2026/10/4', 'counselor', '四榜綜合：全球青少年第 5 名', 'PISA 前 10 名沒有 counselor（第 6 名是 psychologists）', 'OECD 報告 Table 1.1'),
+ ('2026/10/4', 'business manager', 'manager 本來是「管馬的人」', 'manage 本來是「訓練、控制馬」；manager（1580 年代）＝ 指揮、管理的人', 'Etymonline manage、manager'),
+ ('2026/10/4', 'veterinarian', '拉丁文 veterinae ＝ 牛和馬；以前獸醫只幫拉車的牛馬看病', '拉丁文 veterinarius ＝ 照顧拉車牲口的（也當「牛醫」）', 'Etymonline veterinarian'),
+ ('2026/10/4', 'programmer', '希臘文 pro ＝ 先', '希臘文 pro ＝ 向前（prographein ＝ 公開寫出來）', 'Etymonline program'),
+ ('2026/10/4', 'engineer', '修 engine 的人', '本來是「製造（打仗用）機器」的人', 'Etymonline engineer'),
+ ('2026/10/4', 'architect', 'arch 是拱門，建築師蓋拱門', 'archi 老大 ＋ tect 建造者（arch 拱門是另一個字，沒有關係）', 'Etymonline architect'),
+ ('2026/10/4', 'lawyer', 'yer 唸起來像「爺」', '刪除：用國字標英文發音不準確（美式 /ˈlɔɪ.jɚ/）', 'Cambridge lawyer'),
+ ('2026/10/4', 'designer', 'de ＝ 畫出來', 'de ＝ 出來（de "out"）', 'Etymonline design'),
+ ('2026/10/4', 'business manager', '不發音的字母標在 u', '不發音的是 i（u 和 busy 一樣唸 /ɪ/）', 'Cambridge busy、business'),
+]
+fix_rows = ''.join(f'<tr><td>{html.escape(w)}</td><td class="old">{html.escape(o)}</td><td class="new">{html.escape(n)}</td><td>{html.escape(s)}</td></tr>' for d, w, o, n, s in FIXES)
+aud_rows = ''.join(
+    f'<tr><td class="mk">{"✅" if c["ok"] else "❌"}</td><td><b>{html.escape(c["card"])}</b></td><td>{html.escape(c["claim"])}</td>'
+    f'<td class="q">{"<br>".join("「…" + html.escape(q) + "…」" for q in c["quote"])}</td><td>{a(c["url"], "出處")}</td></tr>' for c in AUD['claims'])
+syl_rows = ''.join(
+    f'<tr><td class="mk">{"✅" if s["ok"] else "❌"}</td><td><b>{html.escape(s["word"])}</b></td><td>{html.escape(s["site"].replace("-", "·"))}（{s["site_n"]}）</td>'
+    f'<td>/{html.escape(s["ipa"] or "")}/（{s["ipa_n"]}）</td><td>{a(s["url"], "Cambridge")}</td></tr>' for s in AUD['syllables'])
+n_ok = sum(c['ok'] for c in AUD['claims']); s_ok = sum(s['ok'] for s in AUD['syllables'])
+
 page = f'''<!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
@@ -146,6 +168,8 @@ td.ng{{min-width:280px}}
 .bar.me .bt i{{background:#2FA35A}}.bar.me .bw{{font-weight:700}}
 .bn{{text-align:right;font-variant-numeric:tabular-nums}}
 .mk{{font-size:22px;margin-right:4px}}
+td.q{{font-size:15px;color:var(--soft);min-width:260px}}
+td.old{{color:#B03A10;text-decoration:line-through}} td.new{{color:#2C6010;font-weight:700}}
 .cmp{{margin:12px 0;padding:10px 12px;background:var(--bg);border-radius:16px}}
 .cn{{font-size:20px;font-weight:700;margin-bottom:6px}}.cn .mu{{font-weight:400}}
 .cr{{display:grid;grid-template-columns:minmax(0,190px) 1fr auto;align-items:center;gap:8px;margin:4px 0;font-size:18px}}
@@ -153,7 +177,8 @@ td.ng{{min-width:280px}}
 .b{{display:inline-block;width:22px;height:22px;border-radius:5px}}
 .b.g{{background:#2FA35A}}.b.o{{background:#FF7A45}}
 .cx{{font-weight:700;white-space:nowrap}}
-:target td{{background:#FFF6C8}}
+tr:target td{{background:#FFF6C8}}
+td:last-child{{white-space:nowrap}}
 td.vd{{min-width:200px}}
 </style>
 </head>
@@ -187,11 +212,38 @@ td.vd{{min-width:200px}}
 <section>
  <h2>📋 網站上每一個職業英文</h2>
  <div class="key"><span>✅ 正確，也是最常用的說法</span><span>🆗 正確，另有一樣常見的說法</span><span>⚠️ 正確，但有更常用的說法</span></div>
- <div class="tw"><table>
+ <div class="tw"><table id="words-table">
   <thead><tr><th>單字</th><th>📖 字典</th><th>🏛️ 美國官方職稱（O*NET）</th><th>📚 書裡誰最常用（綠色＝網站用的字）</th><th>結論</th></tr></thead>
   <tbody>
   {chr(10).join(rows)}
   </tbody>
+ </table></div>
+</section>
+
+<section id="audit">
+ <h2>🔬 卡片上每一句跟英文有關的話</h2>
+ <p class="ans">字源、年代、拆字、記憶技巧、遊戲的是非題……一共 <b>{len(AUD['claims'])}</b> 條，每一條都在出處原文找到證據：<b>{n_ok} 條 ✅</b></p>
+ <div class="tw"><table>
+  <thead><tr><th></th><th>卡片</th><th>網站上寫的話</th><th>出處原文（英文）</th><th>連結</th></tr></thead>
+  <tbody>{aud_rows}</tbody>
+ </table></div>
+</section>
+
+<section id="syllables">
+ <h2>✂️ 音節：卡片寫的 ＝ 字典音標</h2>
+ <p class="ans">Cambridge 字典的美式音標用「.」分開音節。<b>{len(AUD['syllables'])}</b> 個字，<b>{s_ok} 個完全一樣 ✅</b></p>
+ <div class="tw"><table>
+  <thead><tr><th></th><th>單字</th><th>卡片上的音節</th><th>Cambridge 美式音標</th><th>連結</th></tr></thead>
+  <tbody>{syl_rows}</tbody>
+ </table></div>
+</section>
+
+<section id="fixes">
+ <h2>🛠️ 查證後改正的地方</h2>
+ <p class="ans">用原始資料重新核對後，發現下面這些寫錯或說太滿的地方，都已經改正。</p>
+ <div class="tw"><table>
+  <thead><tr><th>卡片</th><th>原本寫</th><th>改成</th><th>根據</th></tr></thead>
+  <tbody>{fix_rows}</tbody>
  </table></div>
 </section>
 
@@ -201,6 +253,7 @@ td.vd{{min-width:200px}}
   <li>📖 <b>字典</b>：{a('https://dictionary.cambridge.org/', 'Cambridge Dictionary')}（劍橋大學出版社）、{a('https://www.merriam-webster.com/', 'Merriam-Webster')}（美國最老牌的字典）。</li>
   <li>🏛️ <b>美國官方職稱</b>：{a('https://www.onetonline.org/', 'O*NET OnLine')}，美國勞工部的職業資料庫，和勞工統計局用同一套「標準職業分類」，每個職業都列出真實工作上使用的職稱。</li>
   <li>📚 <b>語料庫</b>：{a('https://books.google.com/ngrams/', 'Google Books Ngram')}，統計幾百萬本書裡每個詞出現幾次。研究論文：Michel 等人（2011），刊在《Science》期刊，{a('https://doi.org/10.1126/science.1199644', 'doi:10.1126/science.1199644')}。本頁取 2018～2022 年、單複數合計、大小寫不分。</li>
+  <li>🔬 <b>Etymonline</b>（{a('https://www.etymonline.com/', '線上字源詞典')}）：每一條字源都附原文句子；查證程式 <code>_audit.py</code> 會重新抓原文比對，找不到就算失敗。</li>
   <li>👀 <b>看清楚</b>：Ngram 統計的是「書」，不是說話；一個字有兩個意思時（例如 vet 也是退伍軍人、cook 也是動詞），次數不能直接比，表格裡都有寫。</li>
  </ol>
 </section>
