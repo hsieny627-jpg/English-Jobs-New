@@ -23,9 +23,10 @@ const challenges = [
   { h: 'c4', n: 4, ic: '🌏', who: '全球的大人', src: 'Remitly 2026' },
 ];
 const boards = [
-  { h: 'adv0', ic: '🧑‍💼', t: '台灣大人榜', d: '前 5 名' },
-  { h: 'adv1', ic: '🌏', t: '全球大人榜', d: '前 10 名' },
-  { h: 'adv2', ic: '🏅', t: '四榜綜合', d: '四份調查合起來' },
+  { href: 'rank-tw.html', ic: '<i class="tw"></i>', t: '台灣中小學生 Top 10', d: '2026 最新＋證據出處' },
+  { href: 'story.html#adv0', ic: '🧑‍💼', t: '台灣大人榜', d: '前 5 名' },
+  { href: 'story.html#adv1', ic: '🌏', t: '全球大人榜', d: '前 10 名' },
+  { href: 'story.html#adv2', ic: '🏅', t: '四榜綜合', d: '四份調查合起來' },
 ];
 
 const wordTiles = list => list.map(w => '  ' + tile('story.html#w' + w.no, '',
@@ -91,7 +92,7 @@ h3{margin:18px 0 12px;font-size:24px;display:flex;align-items:baseline;gap:10px;
 <h1>💼 職業英文單字</h1>
 <div class="sub">選一個主題，點下去就開始上課 👇</div>
 <nav aria-label="主題">
- <a class="n1" href="#challenge">🏆 挑戰</a><a class="n2" href="#words">🔤 單字</a><a class="n3" href="#games">🎮 遊戲</a><a class="n4" href="#boards">📊 大人榜單</a>
+ <a class="n1" href="#challenge">🏆 挑戰</a><a class="n2" href="#words">🔤 單字</a><a class="n3" href="#games">🎮 遊戲</a><a class="n4" href="#boards">📊 排行榜</a>
 </nav>
 
 <section class="s1" id="challenge">
@@ -121,9 +122,9 @@ ${gameList.map(g => '  ' + tile('games.html#g' + (g.id + 1), '',
 </section>
 
 <section class="s4" id="boards">
- <h2>📊 大人榜單<small>進階：大人最想做什麼？</small></h2>
+ <h2>📊 排行榜<small>學生和大人最想做什麼？</small></h2>
  <div class="g">
-${boards.map(b => '  ' + tile('story.html#' + b.h, '',
+${boards.map(b => '  ' + tile(b.href, '',
   `<span class="ic">${b.ic}</span><span class="tt">${b.t}</span><span class="dd">${b.d}</span>`, b.t)).join('\n')}
  </div>
  <h3>🔤 大人榜單的單字卡<small>${adults.length} 個職業</small></h3>

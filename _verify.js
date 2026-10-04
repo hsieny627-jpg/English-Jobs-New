@@ -25,7 +25,7 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     ok(!r.small.length, `${name}：按鈕太小 ${r.small.join('、')}`);
     ok(!r.tiny.length, `${name}：字太小 ${r.tiny.join('、')}`);
     ok(!r.clip.length, `${name}：字超出卡片 ${r.clip.join('、')}`);
-    ok(r.links === 4 + 22 + 10 + 3 + 13, `${name}：首頁連結數 ${r.links}`);
+    ok(r.links === 4 + 22 + 10 + 4 + 13, `${name}：首頁連結數 ${r.links}`);
     ok(!errs.length, `${name}：首頁錯誤 ${errs.join(' ')}`);
     await p.close();
   }
@@ -38,9 +38,10 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
   const vis = id => p.evaluate(id => { const e = document.getElementById(id); return !!e && e.offsetParent !== null; }, id);
   for (const href of hrefs) {
     await p.goto(url(href)); await p.waitForTimeout(150);
-    const hash = href.split('#')[1];
+    const hash = href.split('#')[1] || '';
     let m;
-    if (/^c[1-4]$/.test(hash)) ok(await vis('Q' + hash[1]), `${href}：沒有出現挑戰 ${hash[1]}`);
+    if (href === 'rank-tw.html') ok(await p.$$eval('.row', r => r.length) === 20, `${href}：排行榜不是 20 列`);
+    else if (/^c[1-4]$/.test(hash)) ok(await vis('Q' + hash[1]), `${href}：沒有出現挑戰 ${hash[1]}`);
     else if ((m = hash.match(/^w(\d+)$/))) {
       const hd = await p.$eval('#hd', e => e.textContent);
       ok(await vis('card') && hd.includes('第 ' + m[1] + ' 張'), `${href}：沒有出現第 ${m[1]} 張單字卡（${hd}）`);
@@ -77,6 +78,31 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     await q.click('#menu');
     ok(await q.$$eval('#grid .gi', b => b.length) === 34 && await q.$('#grid .gh') !== null, '全部單字沒有 34 個／沒有大人分組');
     ok(!qe.length, `${w}px 單字卡錯誤 ${qe.join(' ')}`);
+    await q.close();
+  }
+  // 排行榜頁：四種尺寸不橫向捲動；名次照國語日報原始統計圖；單字卡連結指到同一個字
+  for (const [w, hh, name] of sizes) {
+    const q = await browser.newPage({ viewport: { width: w, height: hh } });
+    await q.goto(url('rank-tw.html'));
+    const r = await q.evaluate(() => ({ over: document.documentElement.scrollWidth > document.documentElement.clientWidth,
+      small: [...document.querySelectorAll('.go,.homeln')].filter(a => a.getBoundingClientRect().height < 44).length,
+      rows: [...document.querySelectorAll('.list')].map(l => [...l.querySelectorAll('.row')].map(x => x.querySelector('.rk').firstChild.textContent + x.querySelector('.zh').textContent).join('|')) }));
+    ok(!r.over, `${name}：排行榜頁會橫向捲動`);
+    ok(!r.small, `${name}：排行榜頁按鈕太小`);
+    ok(r.rows[0] === '1職業運動員|2電競選手|3直播主／網紅／Podcaster／YouTuber|4醫師|5麵包糕點師|6程式設計師（如App、線上遊戲）|7畫家／插畫家／漫畫家／電腦動畫|8歌手／樂團／演員|9電腦工程師|10髮型師／造型師／美甲師', `${name}：小學生名次和原始統計圖不一樣`);
+    ok(r.rows[1] === '1職業運動員|2機械工程師|3醫師|4畫家／插畫家／漫畫家／電腦動畫|4廚師|6程式設計師（如App、線上遊戲）|7心理輔導師|7麵包糕點師|9獸醫|9電腦工程師', `${name}：中學生名次和原始統計圖不一樣`);
+    await q.close();
+  }
+  {
+    const q = await browser.newPage();
+    await q.goto(url('rank-tw.html'));
+    const pairs = await q.$$eval('.row', rs => rs.filter(r => r.querySelector('.go')).map(r => [r.querySelector('.en').dataset.e, r.querySelector('.go').getAttribute('href')]));
+    for (const [e, href] of pairs) {
+      await q.goto(url(href)); await q.waitForTimeout(80);
+      const n = +href.split('#w')[1];
+      ok(await q.evaluate(n => W[n - 1].e, n) === e, `排行榜 ${e} 連到的單字卡不是 ${e}`);
+      await q.goto(url('rank-tw.html'));
+    }
     await q.close();
   }
   // 沒有 # 的舊入口照常從挑戰 1 開始

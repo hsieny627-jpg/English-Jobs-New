@@ -3,142 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>職業英文單字</title>
+<title>台灣中小學生夢幻職業</title>
 <style>
 @font-face{font-family:'AndikaEmbed';src:url(data:font/woff2;base64,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) format('woff2');font-display:block}
-:root{--bg:#FFF7E8;--card:#fff;--ink:#23201C;--soft:#7A7166;--line:#F0E2C8;
---c1:#15233A;--c1t:#FFD24A;--c2:#FF7A45;--c2bg:#FFE3D6;--c3:#2F6FDE;--c3bg:#DCE8FB;--c4:#2FA35A;--c4bg:#DCF0C8}
+:root{--bg:#FFF7E8;--card:#fff;--ink:#23201C;--soft:#7A7166;--line:#F0E2C8;--blue:#2F6FDE;--navy:#15233A;--gold:#FFD24A}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'AndikaEmbed',"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;-webkit-text-size-adjust:100%;overflow-x:hidden}
 .tw{display:inline-block;width:1.05em;height:1.32em;vertical-align:-.3em;border-radius:4px;background:url("data:image/svg+xml;utf8,<svg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20300%20380'><rect%20x='0'%20y='0'%20width='300'%20height='380'%20rx='46'%20fill='%23BCE4F6'/><polygon%20points='197,30%20208,35%20216,46%20241,57%20232,64%20225,71%20224,85%20227,96%20217,122%20206,148%20198,176%20193,204%20186,223%20182,237%20171,254%20163,267%20150,289%20138,312%20134,331%20133,350%20126,350%20119,345%20118,334%20113,325%20103,314%2094,303%2086,292%2078,282%2068,263%2061,246%2059,226%2062,204%2065,182%2069,166%2081,150%2091,138%20103,124%20119,105%20132,86%20146,68%20159,56%20169,49%20185,41'%20fill='%232FA35A'%20stroke='%2314532D'%20stroke-width='10'%20stroke-linejoin='round'/></svg>") center/contain no-repeat;margin-right:4px}
 .app{max-width:1100px;margin:0 auto;padding:16px 16px 40px}
-h1{margin:6px 0 2px;font-size:34px;text-align:center}
-.sub{text-align:center;font-size:20px;color:var(--soft);margin-bottom:12px}
-nav{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:8px 0;background:var(--bg)}
-nav a{display:flex;align-items:center;justify-content:center;gap:6px;min-height:56px;border-radius:16px;font-size:20px;font-weight:700;text-decoration:none;color:#fff}
-nav .n1{background:var(--c1);color:var(--c1t)}nav .n2{background:var(--c2)}nav .n3{background:var(--c3)}nav .n4{background:var(--c4)}
-section{margin-top:18px;border-radius:24px;padding:16px;scroll-margin-top:80px}
-h2{margin:0 0 12px;font-size:26px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.homeln{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;border-radius:14px;border:3px solid var(--line);background:#fff;color:var(--ink);font-size:20px;font-weight:700;text-decoration:none}
+.hero{margin-top:12px;background:var(--navy);color:#fff;border-radius:24px;padding:18px 16px;text-align:center}
+.hero h1{margin:0;font-size:30px;color:var(--gold);line-height:1.35}
+.hero .who{font-size:19px;margin-top:8px;color:#DCE4F0;line-height:1.6}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:14px;margin-top:14px}
+.list{background:var(--card);border:3px solid var(--line);border-radius:24px;padding:14px}
+h2{margin:0 0 10px;font-size:26px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 h2 small{font-size:17px;font-weight:400;color:var(--soft)}
-.s1{background:var(--c1);color:#fff}.s1 h2{color:var(--c1t)}.s1 h2 small{color:#C9D3E3}
-.s2{background:var(--c2bg)}.s2 h2{color:#B03A10}
-.s3{background:var(--c3bg)}.s3 h2{color:#1B4A9E}
-.s4{background:var(--c4bg)}.s4 h2,.s4 h3{color:#2C6010}
-h3{margin:18px 0 12px;font-size:24px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}h3 small{font-size:17px;font-weight:400;color:var(--soft)}
-.g{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
-.g4{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
-.t{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:124px;padding:10px 6px;border-radius:18px;background:var(--card);border:3px solid var(--line);color:var(--ink);text-decoration:none;text-align:center;-webkit-tap-highlight-color:transparent;transition:transform .12s}
-.t:active{transform:scale(.96)}
-.t .no{position:absolute;top:6px;left:8px;min-width:28px;height:28px;border-radius:14px;background:var(--bg);color:var(--soft);font-size:16px;font-weight:700;line-height:28px}
-.t .ic{font-size:40px;line-height:1.15}
-.t .en{font-size:22px;font-weight:700;line-height:1.15}
-.t .zh{font-size:18px;color:var(--soft)}
-.t .tt{font-size:22px;font-weight:700}
-.t .dd{font-size:17px;color:var(--soft)}
-.ch{background:#1F3150;border-color:#2E4670;color:#fff}
-.ch .no{background:var(--c1t);color:var(--c1)}
-.ch .tt{font-size:24px}.ch .q{font-size:19px;color:#FFE9A8}.ch .dd{color:#AEBBD0;font-size:16px}
-.s2 .t{border-color:#FFC9AE}.s3 .t{border-color:#B9D0F4}.s4 .t{border-color:#B8DE9C}
-.t.all{background:#FFF1E9;border-style:dashed}
-.foot{margin-top:22px;text-align:center;font-size:16px;color:var(--soft);line-height:1.6}
+.row{display:grid;grid-template-columns:52px 46px 1fr auto;align-items:center;gap:8px;padding:8px 4px;border-top:2px dashed var(--line)}
+.row .rk{display:flex;flex-direction:column;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:var(--bg);font-size:24px;font-weight:700;line-height:1}
+.row.top .rk{background:var(--gold)}
+.tie{font-size:12px;font-weight:400;margin-top:2px}
+.row .ic{font-size:36px;text-align:center}
+.tx{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0}
+.zh{font-size:21px;font-weight:700;line-height:1.35}
+.en{font:inherit;font-size:18px;color:var(--blue);background:none;border:0;padding:6px 0;min-height:40px;cursor:pointer;text-align:left}
+.go{display:inline-flex;align-items:center;min-height:48px;padding:0 12px;border-radius:14px;background:#FFE3D6;color:#B03A10;font-size:17px;font-weight:700;text-decoration:none;white-space:nowrap}
+.nocard{font-size:15px;color:var(--soft);white-space:nowrap}
+.lf{margin-top:10px;font-size:17px;line-height:1.8}
+.lf a,.ev a{color:var(--blue)}
+.ev{margin-top:14px;background:#DCF0C8;border-radius:24px;padding:16px}
+.ev h2{color:#2C6010}
+.ev ol{margin:0;padding-left:1.4em;font-size:19px;line-height:1.7}
+.ev li{margin-bottom:10px}
+.ev .k{font-weight:700}
+.ev .src{display:block;font-size:16px;color:var(--soft)}
 @media (max-width:520px){
- h1{font-size:28px}.sub{font-size:18px}
- nav{grid-template-columns:repeat(2,1fr)}nav a{min-height:50px;font-size:19px}
- .g{grid-template-columns:repeat(2,1fr)}.g4{grid-template-columns:1fr 1fr}
- .t .en{font-size:20px}
+ .hero h1{font-size:25px}
+ .row{grid-template-columns:44px 38px 1fr;}
+ .row .rk{width:42px;height:42px;font-size:21px}
+ .row .ic{font-size:30px}
+ .row .go,.row .nocard{grid-column:3;justify-self:start}
+ .zh{font-size:19px}
 }
 </style>
 </head>
 <body>
 <main class="app">
-<h1>💼 職業英文單字</h1>
-<div class="sub">選一個主題，點下去就開始上課 👇</div>
-<nav aria-label="主題">
- <a class="n1" href="#challenge">🏆 挑戰</a><a class="n2" href="#words">🔤 單字</a><a class="n3" href="#games">🎮 遊戲</a><a class="n4" href="#boards">📊 排行榜</a>
-</nav>
-
-<section class="s1" id="challenge">
- <h2>🏆 挑戰：最想做的工作是哪一個？<small>4 題猜猜看</small></h2>
- <div class="g g4">
-  <a class="t ch" href="story.html#c1" aria-label="挑戰 1：台灣小學生最想做什麼"><span class="no">1</span><span class="ic"><i class="tw"></i></span><span class="tt">台灣小學生</span><span class="q">最想做什麼？</span><span class="dd">國語日報 2026</span></a>
-  <a class="t ch" href="story.html#c2" aria-label="挑戰 2：全球中學生最想做什麼"><span class="no">2</span><span class="ic">🌍</span><span class="tt">全球中學生</span><span class="q">最想做什麼？</span><span class="dd">OECD PISA 2018</span></a>
-  <a class="t ch" href="story.html#c3" aria-label="挑戰 3：台灣的大人最想做什麼"><span class="no">3</span><span class="ic"><i class="tw"></i></span><span class="tt">台灣的大人</span><span class="q">最想做什麼？</span><span class="dd">1111 人力銀行 2026</span></a>
-  <a class="t ch" href="story.html#c4" aria-label="挑戰 4：全球的大人最想做什麼"><span class="no">4</span><span class="ic">🌏</span><span class="tt">全球的大人</span><span class="q">最想做什麼？</span><span class="dd">Remitly 2026</span></a>
- </div>
+<a class="homeln" href="index.html">🏠 首頁</a>
+<div class="hero">
+ <h1><i class="tw"></i> 2026 台灣中小學生<br>最想做的工作 前 10 名</h1>
+ <div class="who">國語日報社「兒少大未來」職業探索問卷調查<br>2026 年 4 月 4 日（兒童節）公布</div>
+</div>
+<div class="cols">
+<section class="list">
+ <h2>🎒 小學生<small>1,286 人填答</small></h2>
+ <div class="row top"><span class="rk">1</span><span class="ic">🏃</span><span class="tx"><span class="zh">職業運動員</span><button class="en" data-e="professional athlete" aria-label="聽 professional athlete">🔊 professional athlete</button></span><a class="go" href="story.html#w2" aria-label="professional athlete 單字卡">單字卡 ▶</a></div>
+ <div class="row top"><span class="rk">2</span><span class="ic">🎮</span><span class="tx"><span class="zh">電競選手</span><button class="en" data-e="esports player" aria-label="聽 esports player">🔊 esports player</button></span><a class="go" href="story.html#w5" aria-label="esports player 單字卡">單字卡 ▶</a></div>
+ <div class="row top"><span class="rk">3</span><span class="ic">📣</span><span class="tx"><span class="zh">直播主／網紅／Podcaster／YouTuber</span><button class="en" data-e="influencer" aria-label="聽 influencer">🔊 influencer</button></span><a class="go" href="story.html#w8" aria-label="influencer 單字卡">單字卡 ▶</a></div>
+ <div class="row"><span class="rk">4</span><span class="ic">🩺</span><span class="tx"><span class="zh">醫師</span><button class="en" data-e="doctor" aria-label="聽 doctor">🔊 doctor</button></span><a class="go" href="story.html#w1" aria-label="doctor 單字卡">單字卡 ▶</a></div>
+ <div class="row"><span class="rk">5</span><span class="ic">🍞</span><span class="tx"><span class="zh">麵包糕點師</span><button class="en" data-e="baker" aria-label="聽 baker">🔊 baker</button></span><a class="go" href="story.html#w10" aria-label="baker 單字卡">單字卡 ▶</a></div>
+ <div class="row"><span class="rk">6</span><span class="ic">💻</span><span class="tx"><span class="zh">程式設計師（如App、線上遊戲）</span><button class="en" data-e="programmer" aria-label="聽 programmer">🔊 programmer</button></span><a class="go" href="story.html#w3" aria-label="programmer 單字卡">單字卡 ▶</a></div>
+ <div class="row"><span class="rk">7</span><span class="ic">🎨</span><span class="tx"><span class="zh">畫家／插畫家／漫畫家／電腦動畫</span><button class="en" data-e="painter" aria-label="聽 painter">🔊 painter</button></span><a class="go" href="story.html#w13" aria-label="painter 單字卡">單字卡 ▶</a></div>
+ <div class="row"><span class="rk">8</span><span class="ic">🎤</span><span class="tx"><span class="zh">歌手／樂團／演員</span><button class="en" data-e="singer" aria-label="聽 singer">🔊 singer</button></span><a class="go" href="story.html#w16" aria-label="singer 單字卡">單字卡 ▶</a></div>
+ <div class="row"><span class="rk">9</span><span class="ic">🖥️</span><span class="tx"><span class="zh">電腦工程師</span><button class="en" data-e="computer engineer" aria-label="聽 computer engineer">🔊 computer engineer</button></span><a class="go" href="story.html#w19" aria-label="computer engineer 單字卡">單字卡 ▶</a></div>
+ <div class="row"><span class="rk">10</span><span class="ic">✂️</span><span class="tx"><span class="zh">髮型師／造型師／美甲師</span><button class="en" data-e="hairstylist" aria-label="聽 hairstylist">🔊 hairstylist</button></span><a class="go" href="story.html#w20" aria-label="hairstylist 單字卡">單字卡 ▶</a></div>
+ <div class="lf">📋 <a href="https://www.mdnkids.com/upload/images/20260404-16-01.jpg" target="_blank" rel="noopener">看國語日報的原始統計圖</a>　📰 <a href="https://www.mdnkids.com/content.asp?Link_String_=244400000BLIDTX" target="_blank" rel="noopener">看原始報導</a></div>
 </section>
-
-<section class="s2" id="words">
- <h2>🔤 單字卡<small>學生最想做的 21 個職業，點一個直接開始</small></h2>
- <div class="g">
-  <a class="t " href="story.html#w1" aria-label="單字 1：doctor 醫生"><span class="no">1</span><span class="ic">🩺</span><span class="en">doctor</span><span class="zh">醫生</span></a>
-  <a class="t " href="story.html#w2" aria-label="單字 2：professional athlete 職業運動員"><span class="no">2</span><span class="ic">🏃</span><span class="en">professional athlete</span><span class="zh">職業運動員</span></a>
-  <a class="t " href="story.html#w3" aria-label="單字 3：programmer 程式設計師"><span class="no">3</span><span class="ic">💻</span><span class="en">programmer</span><span class="zh">程式設計師</span></a>
-  <a class="t " href="story.html#w4" aria-label="單字 4：engineer 工程師"><span class="no">4</span><span class="ic">👷</span><span class="en">engineer</span><span class="zh">工程師</span></a>
-  <a class="t " href="story.html#w5" aria-label="單字 5：esports player 電競選手"><span class="no">5</span><span class="ic">🎮</span><span class="en">esports player</span><span class="zh">電競選手</span></a>
-  <a class="t " href="story.html#w6" aria-label="單字 6：teacher 老師"><span class="no">6</span><span class="ic">🧑‍🏫</span><span class="en">teacher</span><span class="zh">老師</span></a>
-  <a class="t " href="story.html#w7" aria-label="單字 7：business manager 企業經理"><span class="no">7</span><span class="ic">💼</span><span class="en">business manager</span><span class="zh">企業經理</span></a>
-  <a class="t " href="story.html#w8" aria-label="單字 8：influencer 網紅"><span class="no">8</span><span class="ic">📣</span><span class="en">influencer</span><span class="zh">網紅</span></a>
-  <a class="t " href="story.html#w9" aria-label="單字 9：lawyer 律師"><span class="no">9</span><span class="ic">⚖️</span><span class="en">lawyer</span><span class="zh">律師</span></a>
-  <a class="t " href="story.html#w10" aria-label="單字 10：baker 麵包糕點師"><span class="no">10</span><span class="ic">🍞</span><span class="en">baker</span><span class="zh">麵包糕點師</span></a>
-  <a class="t " href="story.html#w11" aria-label="單字 11：psychologist 心理師"><span class="no">11</span><span class="ic">🧠</span><span class="en">psychologist</span><span class="zh">心理師</span></a>
-  <a class="t " href="story.html#w12" aria-label="單字 12：nurse 護理師"><span class="no">12</span><span class="ic">💉</span><span class="en">nurse</span><span class="zh">護理師</span></a>
-  <a class="t " href="story.html#w13" aria-label="單字 13：painter 畫家"><span class="no">13</span><span class="ic">🎨</span><span class="en">painter</span><span class="zh">畫家</span></a>
-  <a class="t " href="story.html#w14" aria-label="單字 14：police officer 警察"><span class="no">14</span><span class="ic">👮</span><span class="en">police officer</span><span class="zh">警察</span></a>
-  <a class="t " href="story.html#w15" aria-label="單字 15：designer 設計師"><span class="no">15</span><span class="ic">🖌️</span><span class="en">designer</span><span class="zh">設計師</span></a>
-  <a class="t " href="story.html#w16" aria-label="單字 16：singer 歌手"><span class="no">16</span><span class="ic">🎤</span><span class="en">singer</span><span class="zh">歌手</span></a>
-  <a class="t " href="story.html#w17" aria-label="單字 17：veterinarian 獸醫"><span class="no">17</span><span class="ic">🐶</span><span class="en">veterinarian</span><span class="zh">獸醫</span></a>
-  <a class="t " href="story.html#w18" aria-label="單字 18：mechanic 汽車技師"><span class="no">18</span><span class="ic">🔧</span><span class="en">mechanic</span><span class="zh">汽車技師</span></a>
-  <a class="t " href="story.html#w19" aria-label="單字 19：computer engineer 電腦工程師"><span class="no">19</span><span class="ic">🖥️</span><span class="en">computer engineer</span><span class="zh">電腦工程師</span></a>
-  <a class="t " href="story.html#w20" aria-label="單字 20：hairstylist 髮型師"><span class="no">20</span><span class="ic">✂️</span><span class="en">hairstylist</span><span class="zh">髮型師</span></a>
-  <a class="t " href="story.html#w21" aria-label="單字 21：architect 建築師"><span class="no">21</span><span class="ic">🏛️</span><span class="en">architect</span><span class="zh">建築師</span></a>
-  <a class="t all" href="story.html#rev" aria-label="複習全部 34 個單字"><span class="ic">📝</span><span class="tt">複習</span><span class="dd">全部 34 個字抽 5 題</span></a>
- </div>
+<section class="list">
+ <h2>🏫 中學生<small>296 人填答</small></h2>
+ <div class="row top"><span class="rk">1</span><span class="ic">🏃</span><span class="tx"><span class="zh">職業運動員</span><button class="en" data-e="professional athlete" aria-label="聽 professional athlete">🔊 professional athlete</button></span><a class="go" href="story.html#w2" aria-label="professional athlete 單字卡">單字卡 ▶</a></div>
+ <div class="row top"><span class="rk">2</span><span class="ic">⚙️</span><span class="tx"><span class="zh">機械工程師</span><button class="en" data-e="mechanical engineer" aria-label="聽 mechanical engineer">🔊 mechanical engineer</button></span><span class="nocard">還沒有單字卡</span></div>
+ <div class="row top"><span class="rk">3</span><span class="ic">🩺</span><span class="tx"><span class="zh">醫師</span><button class="en" data-e="doctor" aria-label="聽 doctor">🔊 doctor</button></span><a class="go" href="story.html#w1" aria-label="doctor 單字卡">單字卡 ▶</a></div>
+ <div class="row"><span class="rk">4<span class="tie">並列</span></span><span class="ic">🎨</span><span class="tx"><span class="zh">畫家／插畫家／漫畫家／電腦動畫</span><button class="en" data-e="painter" aria-label="聽 painter">🔊 painter</button></span><a class="go" href="story.html#w13" aria-label="painter 單字卡">單字卡 ▶</a></div>
+ <div class="row"><span class="rk">4<span class="tie">並列</span></span><span class="ic">🧑‍🍳</span><span class="tx"><span class="zh">廚師</span><button class="en" data-e="chef" aria-label="聽 chef">🔊 chef</button></span><span class="nocard">還沒有單字卡</span></div>
+ <div class="row"><span class="rk">6</span><span class="ic">💻</span><span class="tx"><span class="zh">程式設計師（如App、線上遊戲）</span><button class="en" data-e="programmer" aria-label="聽 programmer">🔊 programmer</button></span><a class="go" href="story.html#w3" aria-label="programmer 單字卡">單字卡 ▶</a></div>
+ <div class="row"><span class="rk">7<span class="tie">並列</span></span><span class="ic">🧠</span><span class="tx"><span class="zh">心理輔導師</span><button class="en" data-e="counselor" aria-label="聽 counselor">🔊 counselor</button></span><a class="go" href="story.html#w24" aria-label="counselor 單字卡">單字卡 ▶</a></div>
+ <div class="row"><span class="rk">7<span class="tie">並列</span></span><span class="ic">🍞</span><span class="tx"><span class="zh">麵包糕點師</span><button class="en" data-e="baker" aria-label="聽 baker">🔊 baker</button></span><a class="go" href="story.html#w10" aria-label="baker 單字卡">單字卡 ▶</a></div>
+ <div class="row"><span class="rk">9<span class="tie">並列</span></span><span class="ic">🐶</span><span class="tx"><span class="zh">獸醫</span><button class="en" data-e="veterinarian" aria-label="聽 veterinarian">🔊 veterinarian</button></span><a class="go" href="story.html#w17" aria-label="veterinarian 單字卡">單字卡 ▶</a></div>
+ <div class="row"><span class="rk">9<span class="tie">並列</span></span><span class="ic">🖥️</span><span class="tx"><span class="zh">電腦工程師</span><button class="en" data-e="computer engineer" aria-label="聽 computer engineer">🔊 computer engineer</button></span><a class="go" href="story.html#w19" aria-label="computer engineer 單字卡">單字卡 ▶</a></div>
+ <div class="lf">📋 <a href="https://www.mdnkids.com/upload/images/20260404-15-01.jpg" target="_blank" rel="noopener">看國語日報的原始統計圖</a>　📰 <a href="https://www.mdnkids.com/content.asp?Link_String_=244400000UZWLSC" target="_blank" rel="noopener">看原始報導</a></div>
 </section>
-
-<section class="s3" id="games">
- <h2>🎮 遊戲<small>10 種，點一個直接開始</small></h2>
- <div class="g">
-  <a class="t " href="games.html#g1" aria-label="遊戲 1：聽力拼字"><span class="no">1</span><span class="ic">🎧</span><span class="tt">聽力拼字</span><span class="dd">一步一步拼出單字</span></a>
-  <a class="t " href="games.html#g2" aria-label="遊戲 2：拆字積木"><span class="no">2</span><span class="ic">🧩</span><span class="tt">拆字積木</span><span class="dd">把零件依序組成單字</span></a>
-  <a class="t " href="games.html#g3" aria-label="遊戲 3：字源偵探"><span class="no">3</span><span class="ic">🕵️</span><span class="tt">字源偵探</span><span class="dd">看古代的字，猜職業</span></a>
-  <a class="t " href="games.html#g4" aria-label="遊戲 4：找「人」字尾"><span class="no">4</span><span class="ic">👤</span><span class="tt">找「人」字尾</span><span class="dd">點出會動的「人」字尾</span></a>
-  <a class="t " href="games.html#g5" aria-label="遊戲 5：時光機"><span class="no">5</span><span class="ic">⏳</span><span class="tt">時光機</span><span class="dd">把以前、後來排順序</span></a>
-  <a class="t " href="games.html#g6" aria-label="遊戲 6：排行榜挑戰"><span class="no">6</span><span class="ic">🏆</span><span class="tt">排行榜挑戰</span><span class="dd">依台灣名次排順序</span></a>
-  <a class="t " href="games.html#g7" aria-label="遊戲 7：真假字源"><span class="no">7</span><span class="ic">⭕</span><span class="tt">真假字源</span><span class="dd">判斷說法對不對</span></a>
-  <a class="t " href="games.html#g8" aria-label="遊戲 8：快問快答"><span class="no">8</span><span class="ic">⚡</span><span class="tt">快問快答</span><span class="dd">限時看圖選英文</span></a>
-  <a class="t " href="games.html#g9" aria-label="遊戲 9：中翻英打字"><span class="no">9</span><span class="ic">⌨️</span><span class="tt">中翻英打字</span><span class="dd">看中文打出英文</span></a>
-  <a class="t " href="games.html#g10" aria-label="遊戲 10：翻牌配對"><span class="no">10</span><span class="ic">🃏</span><span class="tt">翻牌配對</span><span class="dd">圖和英文配成一對</span></a>
- </div>
+</div>
+<section class="ev">
+ <h2>🔎 怎麼知道是真的？</h2>
+ <ol>
+  <li><span class="k">📋 原始出處：</span>國語日報社自己公布的統計圖（上面兩個「原始統計圖」連結），名次和職業名稱一字不差照抄。
+   <span class="src">小學生組、中學生組各一張，2026/4/4 刊在國語日報網站</span></li>
+  <li><span class="k">🗓️ 怎麼調查：</span>2026 年 3 月 5～25 日網路線上問卷，有效 1,582 份（小學生 1,286、中學生 296），名次不分男女。
+   <span class="src">出處：<a href="https://www.mdnkids.com/content.asp?Link_String_=244400000BLIDTX" target="_blank" rel="noopener">國語日報</a>、<a href="https://www.cna.com.tw/news/ahel/202604040056.aspx" target="_blank" rel="noopener">中央社</a></span></li>
+  <li><span class="k">📰 四家媒體都這樣報：</span>同一天報導，名次都一樣。
+   <span class="src"><a href="https://www.cna.com.tw/news/ahel/202604040056.aspx" target="_blank" rel="noopener">中央社</a>｜<a href="https://money.udn.com/money/story/7307/9422051" target="_blank" rel="noopener">經濟日報</a>｜<a href="https://news.ltn.com.tw/news/life/breakingnews/5392947" target="_blank" rel="noopener">自由時報</a>｜<a href="https://news.pts.org.tw/article/802174" target="_blank" rel="noopener">公視新聞</a></span></li>
+  <li><span class="k">🤝 「並列」：</span>國語日報的統計圖上，中學生第 4、7、9 名各有兩個職業並列，所以名次跳過第 5、8、10 名。</li>
+  <li><span class="k">✂️ 名稱照原文：</span>新聞只寫「網紅」「造型師」，國語日報原始統計圖寫的是「直播主／網紅／Podcaster／YouTuber」「髮型師／造型師／美甲師」，本頁照原始統計圖。</li>
+  <li><span class="k">🔢 沒有百分比：</span>國語日報只公布名次，沒有公布每個職業幾 %，所以本頁不寫百分比。</li>
+  <li><span class="k">👀 看清楚：</span>這是 1,582 位上網填問卷的同學的答案，不是全臺灣每一個學生。</li>
+ </ol>
 </section>
-
-<section class="s4" id="boards">
- <h2>📊 排行榜<small>學生和大人最想做什麼？</small></h2>
- <div class="g">
-  <a class="t " href="rank-tw.html" aria-label="台灣中小學生 Top 10"><span class="ic"><i class="tw"></i></span><span class="tt">台灣中小學生 Top 10</span><span class="dd">2026 最新＋證據出處</span></a>
-  <a class="t " href="story.html#adv0" aria-label="台灣大人榜"><span class="ic">🧑‍💼</span><span class="tt">台灣大人榜</span><span class="dd">前 5 名</span></a>
-  <a class="t " href="story.html#adv1" aria-label="全球大人榜"><span class="ic">🌏</span><span class="tt">全球大人榜</span><span class="dd">前 10 名</span></a>
-  <a class="t " href="story.html#adv2" aria-label="四榜綜合"><span class="ic">🏅</span><span class="tt">四榜綜合</span><span class="dd">四份調查合起來</span></a>
- </div>
- <h3>🔤 大人榜單的單字卡<small>13 個職業</small></h3>
- <div class="g">
-  <a class="t " href="story.html#w22" aria-label="單字 22：content creator 內容創作者"><span class="no">22</span><span class="ic">🎥</span><span class="en">content creator</span><span class="zh">內容創作者</span></a>
-  <a class="t " href="story.html#w23" aria-label="單字 23：game tester 遊戲試玩員"><span class="no">23</span><span class="ic">🎮</span><span class="en">game tester</span><span class="zh">遊戲試玩員</span></a>
-  <a class="t " href="story.html#w24" aria-label="單字 24：counselor 心理諮商師"><span class="no">24</span><span class="ic">🧠</span><span class="en">counselor</span><span class="zh">心理諮商師</span></a>
-  <a class="t " href="story.html#w25" aria-label="單字 25：entertainer 演藝人員"><span class="no">25</span><span class="ic">🎭</span><span class="en">entertainer</span><span class="zh">演藝人員</span></a>
-  <a class="t " href="story.html#w26" aria-label="單字 26：tour guide 導遊"><span class="no">26</span><span class="ic">🧭</span><span class="en">tour guide</span><span class="zh">導遊</span></a>
-  <a class="t " href="story.html#w27" aria-label="單字 27：fortune teller 占卜師"><span class="no">27</span><span class="ic">🔮</span><span class="en">fortune teller</span><span class="zh">占卜師</span></a>
-  <a class="t " href="story.html#w28" aria-label="單字 28：actor 演員"><span class="no">28</span><span class="ic">🎭</span><span class="en">actor</span><span class="zh">演員</span></a>
-  <a class="t " href="story.html#w29" aria-label="單字 29：pilot 機師"><span class="no">29</span><span class="ic">✈️</span><span class="en">pilot</span><span class="zh">機師</span></a>
-  <a class="t " href="story.html#w30" aria-label="單字 30：firefighter 消防員"><span class="no">30</span><span class="ic">🚒</span><span class="en">firefighter</span><span class="zh">消防員</span></a>
-  <a class="t " href="story.html#w31" aria-label="單字 31：YouTuber YouTube 創作者"><span class="no">31</span><span class="ic">📹</span><span class="en">YouTuber</span><span class="zh">YouTube 創作者</span></a>
-  <a class="t " href="story.html#w32" aria-label="單字 32：flight attendant 空服員"><span class="no">32</span><span class="ic">🧳</span><span class="en">flight attendant</span><span class="zh">空服員</span></a>
-  <a class="t " href="story.html#w33" aria-label="單字 33：real estate agent 房仲"><span class="no">33</span><span class="ic">🏠</span><span class="en">real estate agent</span><span class="zh">房仲</span></a>
-  <a class="t " href="story.html#w34" aria-label="單字 34：DJ DJ（放音樂的人）"><span class="no">34</span><span class="ic">🎧</span><span class="en">DJ</span><span class="zh">DJ（放音樂的人）</span></a>
- </div>
-</section>
-
-<div class="foot">資料：國語日報 2026｜OECD PISA 2018｜1111 人力銀行 2026｜Remitly 2026<br>字源：Online Etymology Dictionary、Merriam-Webster、Cambridge Dictionary</div>
 </main>
+<script>
+document.addEventListener('click',e=>{const b=e.target.closest('.en');if(!b)return;
+ try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(b.dataset.e);u.lang='en-US';u.rate=.8;speechSynthesis.speak(u)}catch(x){}});
+</script>
 </body>
 </html>
