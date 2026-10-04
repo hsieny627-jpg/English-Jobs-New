@@ -12,7 +12,8 @@ const words = [...story.matchAll(/\{no:(\d+),e:'([^']+)',z:'([^']+)',ic:'([^']+)
   .map(m => ({ no: +m[1], e: m[2], z: m[3], ic: m[4] }));
 const gameList = [...games.matchAll(/\{id:(\d+),ic:'([^']+)',t:'([^']+)',d:'([^']+)'/g)]
   .map(m => ({ id: +m[1], ic: m[2], t: m[3], d: m[4] }));
-if (words.length !== 21) throw new Error('單字應該是 21 個，讀到 ' + words.length);
+const kids = words.filter(w => w.no <= 21), adults = words.filter(w => w.no > 21);
+if (kids.length !== 21 || adults.length !== 13) throw new Error('單字應該是 21＋13 個，讀到 ' + kids.length + '＋' + adults.length);
 if (gameList.length !== 10) throw new Error('遊戲應該是 10 個，讀到 ' + gameList.length);
 
 const challenges = [
@@ -27,6 +28,9 @@ const boards = [
   { h: 'adv2', ic: '🏅', t: '四榜綜合', d: '四份調查合起來' },
 ];
 
+const wordTiles = list => list.map(w => '  ' + tile('story.html#w' + w.no, '',
+  `<span class="no">${w.no}</span><span class="ic">${w.ic}</span><span class="en">${w.e}</span><span class="zh">${w.z}</span>`,
+  `單字 ${w.no}：${w.e} ${w.z}`)).join('\n');
 const tile = (href, cls, inner, label) =>
   `<a class="t ${cls}" href="${href}" aria-label="${label}">${inner}</a>`;
 
@@ -56,7 +60,8 @@ h2 small{font-size:17px;font-weight:400;color:var(--soft)}
 .s1{background:var(--c1);color:#fff}.s1 h2{color:var(--c1t)}.s1 h2 small{color:#C9D3E3}
 .s2{background:var(--c2bg)}.s2 h2{color:#B03A10}
 .s3{background:var(--c3bg)}.s3 h2{color:#1B4A9E}
-.s4{background:var(--c4bg)}.s4 h2{color:#2C6010}
+.s4{background:var(--c4bg)}.s4 h2,.s4 h3{color:#2C6010}
+h3{margin:18px 0 12px;font-size:24px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}h3 small{font-size:17px;font-weight:400;color:var(--soft)}
 .g{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
 .g4{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
 .t{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:124px;padding:10px 6px;border-radius:18px;background:var(--card);border:3px solid var(--line);color:var(--ink);text-decoration:none;text-align:center;-webkit-tap-highlight-color:transparent;transition:transform .12s}
@@ -99,12 +104,10 @@ ${challenges.map(c => '  ' + tile('story.html#' + c.h, 'ch',
 </section>
 
 <section class="s2" id="words">
- <h2>🔤 單字卡<small>21 個職業，點一個直接開始</small></h2>
+ <h2>🔤 單字卡<small>學生最想做的 21 個職業，點一個直接開始</small></h2>
  <div class="g">
-${words.map(w => '  ' + tile('story.html#w' + w.no, '',
-  `<span class="no">${w.no}</span><span class="ic">${w.ic}</span><span class="en">${w.e}</span><span class="zh">${w.z}</span>`,
-  `單字 ${w.no}：${w.e} ${w.z}`)).join('\n')}
-  ${tile('story.html#rev', 'all', '<span class="ic">📝</span><span class="tt">複習</span><span class="dd">21 個字抽 5 題</span>', '複習 21 個單字')}
+${wordTiles(kids)}
+  ${tile('story.html#rev', 'all', `<span class="ic">📝</span><span class="tt">複習</span><span class="dd">全部 ${words.length} 個字抽 5 題</span>`, `複習全部 ${words.length} 個單字`)}
  </div>
 </section>
 
@@ -123,6 +126,10 @@ ${gameList.map(g => '  ' + tile('games.html#g' + (g.id + 1), '',
 ${boards.map(b => '  ' + tile('story.html#' + b.h, '',
   `<span class="ic">${b.ic}</span><span class="tt">${b.t}</span><span class="dd">${b.d}</span>`, b.t)).join('\n')}
  </div>
+ <h3>🔤 大人榜單的單字卡<small>${adults.length} 個職業</small></h3>
+ <div class="g">
+${wordTiles(adults)}
+ </div>
 </section>
 
 <div class="foot">資料：國語日報 2026｜OECD PISA 2018｜1111 人力銀行 2026｜Remitly 2026<br>字源：Online Etymology Dictionary、Merriam-Webster、Cambridge Dictionary</div>
@@ -131,4 +138,4 @@ ${boards.map(b => '  ' + tile('story.html#' + b.h, '',
 </html>
 `;
 fs.writeFileSync(path.join(dir, 'index.html'), html);
-console.log('index.html 完成：' + words.length + ' 個單字、' + gameList.length + ' 個遊戲');
+console.log('index.html 完成：' + kids.length + '＋' + adults.length + ' 個單字、' + gameList.length + ' 個遊戲');

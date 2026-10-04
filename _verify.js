@@ -25,7 +25,7 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     ok(!r.small.length, `${name}：按鈕太小 ${r.small.join('、')}`);
     ok(!r.tiny.length, `${name}：字太小 ${r.tiny.join('、')}`);
     ok(!r.clip.length, `${name}：字超出卡片 ${r.clip.join('、')}`);
-    ok(r.links === 4 + 22 + 10 + 3, `${name}：首頁連結數 ${r.links}`);
+    ok(r.links === 4 + 22 + 10 + 3 + 13, `${name}：首頁連結數 ${r.links}`);
     ok(!errs.length, `${name}：首頁錯誤 ${errs.join(' ')}`);
     await p.close();
   }
@@ -44,11 +44,40 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     else if ((m = hash.match(/^w(\d+)$/))) {
       const hd = await p.$eval('#hd', e => e.textContent);
       ok(await vis('card') && hd.includes('第 ' + m[1] + ' 張'), `${href}：沒有出現第 ${m[1]} 張單字卡（${hd}）`);
-    } else if (hash === 'rev') ok(await vis('V') && (await p.$eval('#vt', e => e.textContent)).includes('21'), `${href}：沒有出現複習 21 個字`);
+    } else if (hash === 'rev') ok(await vis('V') && (await p.$eval('#vt', e => e.textContent)).includes('34'), `${href}：沒有出現複習全部 34 個字`);
     else if ((m = hash.match(/^adv(\d)$/))) ok(await vis('P') && await p.$eval('.tb.on', e => e.dataset.t) === m[1], `${href}：沒有出現大人榜單 ${m[1]}`);
     else if ((m = hash.match(/^g(\d+)$/))) ok(await vis('play') && await p.evaluate(() => G && G.id) === +m[1] - 1, `${href}：沒有開始遊戲 ${m[1]}`);
     else bad(href + '：不認得的連結');
     ok(await p.$('a.homeln[href="index.html"]').then(e => e && e.isVisible()), `${href}：看不到 🏠 首頁`);
+  }
+  // 34 張單字卡：六個步驟都點一遍，不能出錯、不能超出畫面；音節拼回來要等於單字
+  for (const [w, hh] of [[375, 667], [1024, 768]]) {
+    const q = await browser.newPage({ viewport: { width: w, height: hh } });
+    const qe = []; q.on('pageerror', e => qe.push(e.message));
+    await q.goto(url('story.html#w1'));
+    const total = await q.evaluate(() => W.length);
+    ok(total === 34, `單字卡數量 ${total}`);
+    for (let k = 0; k < total; k++) {
+      await q.evaluate(k => { location.hash = 'w' + (k + 1); }, k);
+      for (let s = 0; s < 6; s++) {
+        if (s) await q.click('#fwd');
+        const r = await q.evaluate(() => ({ over: document.documentElement.scrollWidth > document.documentElement.clientWidth,
+          card: [...document.querySelectorAll('#card *')].some(e => e.getBoundingClientRect().right > document.getElementById('card').getBoundingClientRect().right + 2) }));
+        ok(!r.over && !r.card, `${w}px 第 ${k + 1} 張第 ${s + 1} 步超出畫面`);
+      }
+      const d = await q.evaluate(k => { const d = W[k]; const syl = (SYL[d.e] || '').replace(/-/g, '');
+        const parts = d.p.map((x, i) => ((d.sp || []).includes(i) ? ' ' : '') + x[0]).join('');
+        return { e: d.e, syl, parts, tip: !!TIP[d.e], ev: !!(d.ev && d.ev.url) }; }, k);
+      ok(d.syl === d.e, `${d.e}：音節拼回來是 ${d.syl}`);
+      ok(d.parts === d.e, `${d.e}：拆字拼回來是 ${d.parts}`);
+      ok(d.tip && d.ev, `${d.e}：缺記憶技巧或出處`);
+    }
+    await q.evaluate(() => { location.hash = 'w22'; }); await q.click('#why');
+    ok((await q.$eval('#link', e => e.href)).includes('content'), '第 22 張出處連結不對');
+    await q.click('#menu');
+    ok(await q.$$eval('#grid .gi', b => b.length) === 34 && await q.$('#grid .gh') !== null, '全部單字沒有 34 個／沒有大人分組');
+    ok(!qe.length, `${w}px 單字卡錯誤 ${qe.join(' ')}`);
+    await q.close();
   }
   // 沒有 # 的舊入口照常從挑戰 1 開始
   await p.goto(url('story.html')); ok(await vis('Q1'), 'story.html：沒有從挑戰 1 開始');

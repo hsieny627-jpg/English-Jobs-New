@@ -234,6 +234,7 @@ body.intro .wrap,body.intro #P,body.intro #V,body.intro #Q3,body.intro #Q4,body.
 
 @media (prefers-reduced-motion:reduce){#em.pop{animation:none}.fx{display:none}.pc,.pw,.pm{transition:none}}
 .homeln{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;margin-bottom:10px;border-radius:14px;border:3px solid var(--line);background:#fff;color:var(--ink);font-size:20px;font-weight:700;text-decoration:none}
+.gh{grid-column:1/-1;margin:14px 0 2px;font-size:22px;font-weight:700;text-align:center}
 </style>
 </head>
 <body>
@@ -314,7 +315,7 @@ body.intro .wrap,body.intro #P,body.intro #V,body.intro #Q3,body.intro #Q4,body.
   </section>
   <section class="card menu hide" id="M">
     <div class="mt">選一個單字 👇</div>
-    <div class="mn"><i class="tw"></i> 台灣 ＋ 🌍 全球<br>最受歡迎的職業 21 個<br><span class="rule">排序：兩邊都上榜的排最前面<br>再看兩邊名次加起來誰小</span></div>
+    <div class="mn"><i class="tw"></i> 台灣 ＋ 🌍 全球<br>學生最想做的工作 21 個<br><span class="rule">排序：兩邊都上榜的排最前面<br>再看兩邊名次加起來誰小</span></div>
     <div class="grid" id="grid"></div>
   </section>
   <div class="btns">
@@ -441,7 +442,72 @@ const W=[
  s:[['👑','希臘文 <b>archi</b> ＝ 老大'],['🔨','<b>tect</b> ＝ 蓋房子']],
  p:[['archi','老大','o','arky'],['tect','蓋房子','g']],
  n:'🌍 全球 15 歲學生男生、女生都第10（PISA 2018，41 國） ｜ <i class="tw"></i> 台灣前 10 名沒有這個職業',
- ev:{lang:'希臘文',old:'arkhi + tekton',mean:'首領 + 建造者',kind:'真字源',card:'archi ＝ 老大、tect ＝ 蓋房子',url:'https://www.etymonline.com/word/architect',plus:''}}
+ ev:{lang:'希臘文',old:'arkhi + tekton',mean:'首領 + 建造者',kind:'真字源',card:'archi ＝ 老大、tect ＝ 蓋房子',url:'https://www.etymonline.com/word/architect',plus:''}},
+{no:22,e:'content creator',z:'內容創作者',ic:'🎥',rk:'大人 <i class="tw"></i>1',why:'台灣大人第 1 名（30.3%）',
+ s:[['📦','拉丁文 <b>contentum</b> ＝ 裝在裡面的東西'],['🎬','<b>content</b> ＝ 影片、文章這些內容']],
+ p:[['content','內容','o'],['creat','創造','bl','create'],['or','的人','g','er',1]],sp:[1],
+ n:'🧑‍💼 <i class="tw"></i> 台灣上班族第 1 名（30.3%）｜1111 人力銀行 2026',
+ ev:{lang:'拉丁文',old:'contentum + creare',mean:'裝在裡面的東西 + 做出來',kind:'真字源',card:'content ＝ 內容、creat ＝ 創造',url:'https://www.etymonline.com/word/content',plus:'調查的類別名是「自媒體經營」'}},
+{no:23,e:'game tester',z:'遊戲試玩員',ic:'🎮',rk:'大人 <i class="tw"></i>2',why:'台灣大人第 2 名（26.9%）',
+ s:[['🏺','拉丁文 <b>testum</b> ＝ 陶土小鍋'],['🔥','用小鍋試煉金子 → <b>test</b> ＝ 測試']],
+ p:[['game','遊戲','o'],['test','測試','bl'],['er','的人','g','er',1]],sp:[1],
+ n:'🧑‍💼 <i class="tw"></i> 台灣上班族第 2 名（26.9%）｜1111 人力銀行 2026',
+ ev:{lang:'拉丁文',old:'testum',mean:'陶土小鍋（用來試煉金屬）',kind:'真字源',card:'test ＝ 測試',url:'https://www.etymonline.com/word/test',plus:'game 來自古英語 gamen ＝ 快樂、好玩'}},
+{no:24,e:'counselor',z:'心理諮商師',ic:'🧠',rk:'大人 <i class="tw"></i>3',why:'台灣大人第 3 名（15.7%）',
+ s:[['🤝','拉丁文 <b>consilium</b> ＝ 意見、計畫'],['💬','<b>counsel</b> ＝ 給人建議']],
+ p:[['counsel','給建議','o'],['or','的人','g','er',1]],
+ n:'🧑‍💼 <i class="tw"></i> 台灣上班族第 3 名（15.7%）｜1111 人力銀行 2026',
+ ev:{lang:'拉丁文',old:'consilium',mean:'意見、計畫',kind:'真字源',card:'counsel ＝ 給建議',url:'https://www.etymonline.com/word/counselor',plus:'英國拼成 counsellor（兩個 l）'}},
+{no:25,e:'entertainer',z:'演藝人員',ic:'🎭',rk:'大人 <i class="tw"></i>4',why:'台灣大人第 4 名（13.4%）',
+ s:[['🤲','古法文 <b>entre</b> 之間 ＋ <b>tenir</b> 抓住'],['😄','<b>entertain</b> ＝ 讓大家開心']],
+ p:[['enter','之間','o'],['tain','抓住','bl','tain'],['er','的人','g','er',1]],
+ n:'🧑‍💼 <i class="tw"></i> 台灣上班族第 4 名（13.4%）｜1111 人力銀行 2026',
+ ev:{lang:'古法文',old:'entre + tenir',mean:'之間 + 抓住',kind:'真字源',card:'enter ＝ 之間、tain ＝ 抓住',url:'https://www.etymonline.com/word/entertain',plus:'這裡的 enter 是「之間」，不是「進入」'}},
+{no:26,e:'tour guide',z:'導遊',ic:'🧭',rk:'大人 <i class="tw"></i>5',why:'台灣大人第 5 名（11.2%，並列）',
+ s:[['🔄','古法文 <b>tour</b> ＝ 繞一圈'],['🗺️','<b>guide</b> ＝ 帶路']],
+ p:[['tour','繞一圈','o'],['guide','帶路的人','g']],sp:[1],
+ n:'🧑‍💼 <i class="tw"></i> 台灣上班族第 5 名（11.2%，並列）｜1111 人力銀行 2026',
+ ev:{lang:'古法文',old:'tour + guider',mean:'繞一圈 + 帶路',kind:'真字源',card:'tour ＝ 繞一圈、guide ＝ 帶路',url:'https://www.etymonline.com/word/tour',plus:'guide 的 u 不發音'}},
+{no:27,e:'fortune teller',z:'占卜師',ic:'🔮',rk:'大人 <i class="tw"></i>5',why:'台灣大人第 5 名（11.2%，並列）',
+ s:[['🎡','拉丁文 <b>fortuna</b> ＝ 運氣'],['🗣️','古英語 <b>tellan</b> ＝ 數、說']],
+ p:[['fortune','運氣','o'],['tell','說','bl'],['er','的人','g','er',1]],sp:[1],
+ n:'🧑‍💼 <i class="tw"></i> 台灣上班族第 5 名（11.2%，並列）｜1111 人力銀行 2026',
+ ev:{lang:'拉丁文',old:'fortuna',mean:'運氣、命運',kind:'真字源',card:'fortune ＝ 運氣、tell ＝ 說',url:'https://www.etymonline.com/word/fortune',plus:'羅馬人把幸運當成一位女神 Fortuna'}},
+{no:28,e:'actor',z:'演員',ic:'🎭',rk:'大人 🌏1',why:'全球大人第 1 名',
+ s:[['🏃','拉丁文 <b>agere</b> ＝ 做、推動'],['🎬','<b>act</b> ＝ 演戲']],
+ p:[['act','做、演','o'],['or','的人','g','er',1]],
+ n:'🌏 全球大人第 1 名（Remitly 2026，145 國 Google 搜尋量）',
+ ev:{lang:'拉丁文',old:'actor（來自 agere）',mean:'做事的人',kind:'真字源',card:'act ＝ 做、演',url:'https://www.etymonline.com/word/actor',plus:'1580 年代才有「演戲的人」的意思'}},
+{no:29,e:'pilot',z:'機師',ic:'✈️',rk:'大人 🌏2',why:'全球大人第 2 名',
+ s:[['🚣','希臘文 <b>pedon</b> ＝ 掌方向的槳'],['✈️','1907 年起 <b>pilot</b> ＝ 開飛機的人']],
+ p:[['pilot','掌舵的人','o']],
+ n:'🌏 全球大人第 2 名（Remitly 2026，145 國 Google 搜尋量）',
+ ev:{lang:'希臘文',old:'pedon',mean:'掌方向的槳（一般認為）',kind:'整個字記',card:'pilot ＝ 掌舵的人',url:'https://www.etymonline.com/word/pilot',plus:'本來是開船的人；1907 年才指開飛機'}},
+{no:30,e:'firefighter',z:'消防員',ic:'🚒',rk:'大人 🌏3',why:'全球大人第 3 名',
+ s:[['🔥','古英語 <b>fyr</b> ＝ 火'],['🧯','<b>fight</b> ＝ 打 → 跟火打仗']],
+ p:[['fire','火','o'],['fight','打','bl'],['er','的人','g','er',1]],
+ n:'🌏 全球大人第 3 名（Remitly 2026，145 國 Google 搜尋量）',
+ ev:{lang:'古英語',old:'fyr + feohtere',mean:'火 + 打仗的人',kind:'真字源',card:'fire ＝ 火、fight ＝ 打',url:'https://www.etymonline.com/word/firefighter',plus:'1895 年開始有這個字'}},
+{no:31,e:'YouTuber',z:'YouTube 創作者',ic:'📹',rk:'大人 🌏5',why:'全球大人第 5 名',
+ s:[['📺','<b>tube</b> ＝ 電視的俗稱'],['▶️','<b>YouTube</b> 網站（2005 年）']],
+ p:[['YouTub','YouTube','o','YouTube'],['er','的人','g','er',1]],
+ n:'🌏 全球大人第 5 名（Remitly 2026，145 國 Google 搜尋量）',
+ ev:{lang:'現代英語',old:'YouTube + -er',mean:'YouTube 網站 + 的人',kind:'真字源',card:'YouTub ＝ YouTube',url:'https://www.merriam-webster.com/dictionary/YouTuber',dict:'Merriam-Webster 字典',plus:'tube 當「電視」是 1959 年起的說法'}},
+{no:32,e:'flight attendant',z:'空服員',ic:'🧳',rk:'大人 🌏7',why:'全球大人第 7 名',
+ s:[['🕊️','古英語 <b>flyht</b> ＝ 飛'],['🙋','拉丁文 <b>attendere</b> ＝ 把心伸向你、照顧']],
+ p:[['flight','飛行','o'],['attend','照顧','bl'],['ant','的人','g']],sp:[1],
+ n:'🌏 全球大人第 7 名（Remitly 2026，145 國 Google 搜尋量）',
+ ev:{lang:'拉丁文',old:'ad + tendere',mean:'向著 + 伸出',kind:'真字源',card:'attend ＝ 照顧',url:'https://www.etymonline.com/word/attendant',plus:'flight 的 gh 不發音'}},
+{no:33,e:'real estate agent',z:'房仲',ic:'🏠',rk:'大人 🌏9',why:'全球大人第 9 名',
+ s:[['💰','拉丁文 <b>res</b> ＝ 東西、財產'],['🏡','<b>real estate</b> ＝ 房子和土地']],
+ p:[['real estate','房地產','o'],['agent','代辦的人','g']],sp:[1],
+ n:'🌏 全球大人第 9 名（Remitly 2026，145 國 Google 搜尋量）',
+ ev:{lang:'拉丁文',old:'res + agere',mean:'東西、財產 + 做事',kind:'真字源',card:'real estate ＝ 房地產、agent ＝ 代辦的人',url:'https://www.etymonline.com/word/real',plus:'agent 和 actor 都來自拉丁文 agere（做）'}},
+{no:34,e:'DJ',z:'DJ（放音樂的人）',ic:'🎧',rk:'大人 🌏10',why:'全球大人第 10 名',
+ s:[['💿','<b>disk</b> ＝ 唱片'],['🏇','<b>jockey</b> ＝ 騎師 → 「騎」唱片的人']],
+ p:[['D','disk 唱片','o','D'],['J','jockey 騎師','g','J']],
+ n:'🌏 全球大人第 10 名（Remitly 2026，145 國 Google 搜尋量）',
+ ev:{lang:'美國英語',old:'disk jockey',mean:'唱片 + 騎師',kind:'真字源',card:'D ＝ disk、J ＝ jockey',url:'https://www.etymonline.com/word/DJ',plus:'disk jockey 1941 年出現，DJ 1961 年'}}
 ];
 const $=id=>document.getElementById(id);
 let i=0,st=0;
@@ -510,14 +576,14 @@ $('say').addEventListener('click',()=>{stop();speak(W[i].e)});
 $('rate').addEventListener('input',()=>{$('rv').textContent=rate().toFixed(1)});
 $('rate').addEventListener('change',()=>{stop();speak(W[i].e)});
 function showMenu(){stop();hideEv();hideP();hideRev();$('M').classList.remove('hide');document.querySelector('.wrap').classList.add('hide');
-$('grid').innerHTML=W.map((d,k)=>'<button class="gi'+(k===i?' on':'')+'" data-k="'+k+'"><span class="gn">'+d.no+'</span><span class="ge">'+(d.ic||d.s[0][0])+'</span><span class="gz">'+d.z+'</span><span class="gw">'+d.e+'</span><span class="gr">'+d.rk+'</span></button>').join('')}
+$('grid').innerHTML=W.map((d,k)=>(k===21?'<div class="gh">🧑‍💼 大人最想做的工作 '+(W.length-21)+' 個</div>':'')+'<button class="gi'+(k===i?' on':'')+'" data-k="'+k+'"><span class="gn">'+d.no+'</span><span class="ge">'+(d.ic||d.s[0][0])+'</span><span class="gz">'+d.z+'</span><span class="gw">'+d.e+'</span><span class="gr">'+d.rk+'</span></button>').join('')}
 function hideMenu(){$('M').classList.add('hide');document.querySelector('.wrap').classList.remove('hide')}
 $('menu').addEventListener('click',()=>{hideEv();if($('M').classList.contains('hide'))showMenu();else hideMenu()});
 function hideEv(){$('E').classList.add('hide')}
 function showEv(){stop();hideMenu();hideP();hideRev();const v=W[i].ev;
 $('E').classList.remove('hide');document.querySelector('.wrap').classList.add('hide');
 $('e1').querySelector('.et').innerHTML='<s>古代的字</s>'+v.lang+' <b>'+v.old+'</b> ＝ '+v.mean;
-$('e2').querySelector('.et').innerHTML='<s>字典查得到</s>Etymonline 線上字源詞典';
+$('e2').querySelector('.et').innerHTML='<s>字典查得到</s>'+(v.dict||'Etymonline 線上字源詞典');
 $('e3').querySelector('.et').innerHTML='<s>所以卡片寫</s>'+v.card;
 $('e4').querySelector('.et').innerHTML='<s>為什麼學這個字</s>'+W[i].why;
 const kn={'真字源':0,'拼字記憶':1,'整個字記':2}[v.kind];
@@ -529,9 +595,9 @@ $('grid').addEventListener('click',ev=>{const b=ev.target.closest('.gi');if(!b)r
 
 
 /* ===== 母音／不發音 ===== */
-const SYL={"doctor": "doc-tor", "professional athlete": "pro-fes-sion-al ath-lete", "programmer": "pro-gram-mer", "engineer": "en-gi-neer", "esports player": "e-sports play-er", "teacher": "teach-er", "business manager": "busi-ness man-ag-er", "influencer": "in-flu-enc-er", "lawyer": "law-yer", "baker": "bak-er", "psychologist": "psy-chol-o-gist", "nurse": "nurse", "painter": "paint-er", "police officer": "po-lice of-fi-cer", "designer": "de-sign-er", "singer": "sing-er", "veterinarian": "vet-er-i-nar-i-an", "mechanic": "me-chan-ic", "computer engineer": "com-pu-ter en-gi-neer", "hairstylist": "hair-styl-ist", "architect": "ar-chi-tect"};
-const TIP={"doctor": "醫生名牌上的 <b>Dr.</b> 就是 doctor", "professional athlete": "職業的 professional ＋ 運動員 athlete", "programmer": "兩個 <b>m</b> 像兩根柱子撐住 program", "engineer": "修 <b>engine</b>（引擎）的人", "esports player": "<b>e</b> 就像 e-mail 的 e ＝ 電子", "teacher": "<b>teach</b> 教 ＋ er 的人", "business manager": "<b>busy</b> 很忙 → business 生意", "influencer": "<b>flu</b> 流感會傳染，影響力也會傳", "lawyer": "<b>law</b> 法律 ＋ yer（唸起來像「爺」）", "baker": "<b>bake</b> 烤；e 讓 a 唸長音 /eɪ/", "psychologist": "開頭 <b>p</b> 不發音，直接唸 sy", "nurse": "<b>nurse</b> 和「營養 nutrition」同一個家", "painter": "<b>paint</b> 畫畫 ＋ er 的人", "police officer": "警車上就寫著 <b>POLICE</b>", "designer": "<b>design</b> 的 g 不發音", "singer": "<b>sing</b> 唱歌 ＋ er 的人", "veterinarian": "太長？口語就說 <b>vet</b>（3 個字母）", "mechanic": "<b>machine</b> 機器 → 修機器的人", "computer engineer": "<b>compute</b> 計算 → computer 電腦", "hairstylist": "<b>hair</b> 頭髮 ＋ style 造型", "architect": "<b>arch</b> 是拱門，建築師蓋拱門"};
-const SILENT={'professional athlete':[19],'tour guide':[6,9],'fortune teller':[7],'firefighter':[6,7],'flight attendant':[3,4],'real estate agent':[10],'business manager':[1],'psychologist':[0],'nurse':[4],'police officer':[5],'designer':[4]};
+const SYL={"doctor": "doc-tor", "professional athlete": "pro-fes-sion-al ath-lete", "programmer": "pro-gram-mer", "engineer": "en-gi-neer", "esports player": "e-sports play-er", "teacher": "teach-er", "business manager": "busi-ness man-ag-er", "influencer": "in-flu-enc-er", "lawyer": "law-yer", "baker": "bak-er", "psychologist": "psy-chol-o-gist", "nurse": "nurse", "painter": "paint-er", "police officer": "po-lice of-fi-cer", "designer": "de-sign-er", "singer": "sing-er", "veterinarian": "vet-er-i-nar-i-an", "mechanic": "me-chan-ic", "computer engineer": "com-pu-ter en-gi-neer", "hairstylist": "hair-styl-ist", "architect": "ar-chi-tect", "content creator": "con-tent cre-a-tor", "game tester": "game test-er", "counselor": "coun-se-lor", "entertainer": "en-ter-tain-er", "tour guide": "tour guide", "fortune teller": "for-tune tell-er", "actor": "ac-tor", "pilot": "pi-lot", "firefighter": "fire-fight-er", "YouTuber": "You-Tu-ber", "flight attendant": "flight at-ten-dant", "real estate agent": "re-al es-tate a-gent", "DJ": "D-J"};
+const TIP={"doctor": "醫生名牌上的 <b>Dr.</b> 就是 doctor", "professional athlete": "職業的 professional ＋ 運動員 athlete", "programmer": "兩個 <b>m</b> 像兩根柱子撐住 program", "engineer": "修 <b>engine</b>（引擎）的人", "esports player": "<b>e</b> 就像 e-mail 的 e ＝ 電子", "teacher": "<b>teach</b> 教 ＋ er 的人", "business manager": "<b>busy</b> 很忙 → business 生意", "influencer": "<b>flu</b> 流感會傳染，影響力也會傳", "lawyer": "<b>law</b> 法律 ＋ yer（唸起來像「爺」）", "baker": "<b>bake</b> 烤；e 讓 a 唸長音 /eɪ/", "psychologist": "開頭 <b>p</b> 不發音，直接唸 sy", "nurse": "<b>nurse</b> 和「營養 nutrition」同一個家", "painter": "<b>paint</b> 畫畫 ＋ er 的人", "police officer": "警車上就寫著 <b>POLICE</b>", "designer": "<b>design</b> 的 g 不發音", "singer": "<b>sing</b> 唱歌 ＋ er 的人", "veterinarian": "太長？口語就說 <b>vet</b>（3 個字母）", "mechanic": "<b>machine</b> 機器 → 修機器的人", "computer engineer": "<b>compute</b> 計算 → computer 電腦", "hairstylist": "<b>hair</b> 頭髮 ＋ style 造型", "architect": "<b>arch</b> 是拱門，建築師蓋拱門", "content creator": "<b>create</b> 的 e 不見了，加上 or ＝ 創造的人", "game tester": "<b>test</b> 測試 ＋ er 的人", "counselor": "<b>counsel</b> 給建議 ＋ or 的人", "entertainer": "<b>entertain</b> 讓人開心 ＋ er 的人", "tour guide": "<b>guide</b> 的 u 和最後的 e 都不發音", "fortune teller": "說出你的 <b>fortune</b>（運氣）的人", "actor": "<b>act</b> 演 ＋ or 的人", "pilot": "本來是開「船」的人，後來才開飛機", "firefighter": "跟 <b>fire</b> 火 <b>fight</b> 打仗的人；gh 不發音", "YouTuber": "<b>YouTube</b> 的 e 不見了，加上 er", "flight attendant": "<b>-ant</b> 也是「人」，像 assistant 助手", "real estate agent": "<b>agent</b> 和 actor 是親戚：都是「做事的人」", "DJ": "<b>D</b> ＝ disk 唱片、<b>J</b> ＝ jockey 騎師"};
+const SILENT={'game tester':[3],'professional athlete':[19],'tour guide':[6,9],'fortune teller':[6],'firefighter':[3,6,7],'flight attendant':[3,4],'real estate agent':[10],'business manager':[1],'psychologist':[0],'nurse':[4],'police officer':[5],'designer':[4]};
 function isV(c,i){c=c.toLowerCase();return 'aeiou'.indexOf(c)>-1 || (c==='y'&&i>0)}
 function colorRange(w,a,b){const sil=SILENT[w]||[];let out='';
  for(let i=a;i<b;i++){const c=w[i];if(c===' '){out+='<span style="display:inline-block;width:.35em"></span>';continue}
