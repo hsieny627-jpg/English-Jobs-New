@@ -235,6 +235,12 @@ body.intro .wrap,body.intro #P,body.intro #V,body.intro #Q3,body.intro #Q4,body.
 @media (prefers-reduced-motion:reduce){#em.pop{animation:none}.fx{display:none}.pc,.pw,.pm{transition:none}}
 .homeln{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;margin-bottom:10px;border-radius:14px;border:3px solid var(--line);background:#fff;color:var(--ink);font-size:20px;font-weight:700;text-decoration:none}
 .gh{grid-column:1/-1;margin:14px 0 2px;font-size:22px;font-weight:700;text-align:center}
+.aka{margin:12px auto 0;max-width:540px;background:#EAF4FF;border:2px solid #B4D8F5;border-radius:14px;padding:10px 12px;font-weight:400;cursor:default;text-align:left}
+.akt{font-size:21px;font-weight:700;color:#1B4A9E}
+.akw{font:inherit;font-weight:700;color:#2F6FDE;background:#fff;border:2px solid #B4D8F5;border-radius:12px;min-height:44px;padding:0 10px;cursor:pointer}
+.akwhy{font-size:18px;line-height:1.55;margin-top:6px;color:var(--ink)}
+.akev{font-size:16px;line-height:1.9;margin-top:4px}
+.akev a{color:#2F6FDE}
 </style>
 </head>
 <body>
@@ -551,7 +557,7 @@ if(st===5){$('em').classList.add('hide');$('parts').classList.add('hide');$('car
  const sy=(SYL[d.e]||d.e).split(' ');
  let pos=0;const segs=sy.map(w=>{const parts=w.split('-').map(s=>{const html='<span class="sy">'+colorRange(d.e,pos,pos+s.length)+'</span>';pos+=s.length;return html});pos+=1;return '<span class="sw">'+parts.join('<span class="sd">•</span>')+'</span>'});
  $('cap').innerHTML='<div class="syl" id="syl">'+segs.join('<span style="display:inline-block;width:.4em"></span>')
-  +'</div><div class="sn">'+sy.reduce((a,w)=>a+w.split('-').length,0)+' 個音節</div><div class="tip">💡 '+(TIP[d.e]||'')+'</div>';
+  +'</div><div class="sn">'+sy.reduce((a,w)=>a+w.split('-').length,0)+' 個音節</div><div class="tip">💡 '+(TIP[d.e]||'')+'</div>'+akaHTML(d);
  $('zh').textContent=d.z;
  setTimeout(()=>{const el=document.getElementById('syl');if(el)el.classList.add('go')},80);return}
 if(st===4){$('em').classList.add('hide');$('parts').classList.add('hide');$('card').classList.add('wm');
@@ -569,7 +575,8 @@ $('parts').addEventListener('click',ev=>{if(st>=3){ev.stopPropagation();stop();s
   document.querySelectorAll('.pc').forEach(n=>n.classList.remove('now'));void el.offsetWidth;el.classList.add('now');speak(partSay(x),x[4])});
 function sayWord(e){if(e)e.stopPropagation();stop();speak(W[i].e)}
 $('em').addEventListener('click',sayWord);
-$('cap').addEventListener('click',e=>{if(e.target.closest('.vw')||e.target.closest('.syl')){e.stopPropagation();stop();speak(W[i].e)}});
+$('cap').addEventListener('click',e=>{const ak=e.target.closest('.aka');if(ak){e.stopPropagation();if(e.target.closest('.akw')){stop();speak(AKA[W[i].e].w)}return}
+ if(e.target.closest('.vw')||e.target.closest('.syl')){e.stopPropagation();stop();speak(W[i].e)}});
 $('cap').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.closest('.vw')){e.preventDefault();e.stopPropagation();stop();speak(W[i].e)}});
 $('em').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();sayWord()}});
 $('card').addEventListener('click',tap);
@@ -607,6 +614,12 @@ $('grid').addEventListener('click',ev=>{const b=ev.target.closest('.gi');if(!b)r
 /* ===== 母音／不發音 ===== */
 const SYL={"doctor": "doc-tor", "professional athlete": "pro-fes-sion-al ath-lete", "programmer": "pro-gram-mer", "engineer": "en-gi-neer", "esports player": "e-sports play-er", "teacher": "teach-er", "business manager": "busi-ness man-ag-er", "influencer": "in-flu-enc-er", "lawyer": "law-yer", "baker": "bak-er", "psychologist": "psy-chol-o-gist", "nurse": "nurse", "painter": "paint-er", "police officer": "po-lice of-fi-cer", "designer": "de-sign-er", "singer": "sing-er", "veterinarian": "vet-er-i-nar-i-an", "mechanic": "me-chan-ic", "computer engineer": "com-pu-ter en-gi-neer", "hairstylist": "hair-styl-ist", "architect": "ar-chi-tect", "content creator": "con-tent cre-a-tor", "game tester": "game test-er", "counselor": "coun-se-lor", "entertainer": "en-ter-tain-er", "tour guide": "tour guide", "fortune teller": "for-tune tell-er", "actor": "ac-tor", "pilot": "pi-lot", "firefighter": "fire-fight-er", "YouTuber": "You-Tu-ber", "flight attendant": "flight at-ten-dant", "real estate agent": "re-al es-tate a-gent", "DJ": "D-J", "mechanical engineer": "me-chan-i-cal en-gi-neer", "chef": "chef"};
 const TIP={"doctor": "醫生名牌上的 <b>Dr.</b> 就是 doctor", "professional athlete": "職業的 professional ＋ 運動員 athlete", "programmer": "兩個 <b>m</b> 像兩根柱子撐住 program", "engineer": "修 <b>engine</b>（引擎）的人", "esports player": "<b>e</b> 就像 e-mail 的 e ＝ 電子", "teacher": "<b>teach</b> 教 ＋ er 的人", "business manager": "<b>busy</b> 很忙 → business 生意", "influencer": "<b>flu</b> 流感會傳染，影響力也會傳", "lawyer": "<b>law</b> 法律 ＋ yer（唸起來像「爺」）", "baker": "<b>bake</b> 烤；e 讓 a 唸長音 /eɪ/", "psychologist": "開頭 <b>p</b> 不發音，直接唸 sy", "nurse": "<b>nurse</b> 和「營養 nutrition」同一個家", "painter": "<b>paint</b> 畫畫 ＋ er 的人", "police officer": "警車上就寫著 <b>POLICE</b>", "designer": "<b>design</b> 的 g 不發音", "singer": "<b>sing</b> 唱歌 ＋ er 的人", "veterinarian": "太長？口語就說 <b>vet</b>（3 個字母）", "mechanic": "<b>machine</b> 機器 → 修機器的人", "computer engineer": "<b>compute</b> 計算 → computer 電腦", "hairstylist": "<b>hair</b> 頭髮 ＋ style 造型", "architect": "<b>arch</b> 是拱門，建築師蓋拱門", "content creator": "<b>create</b> 的 e 不見了，加上 or ＝ 創造的人", "game tester": "<b>test</b> 測試 ＋ er 的人", "counselor": "<b>counsel</b> 給建議 ＋ or 的人", "entertainer": "<b>entertain</b> 讓人開心 ＋ er 的人", "tour guide": "<b>guide</b> 的 u 和最後的 e 都不發音", "fortune teller": "說出你的 <b>fortune</b>（運氣）的人", "actor": "<b>act</b> 演 ＋ or 的人", "pilot": "本來是開「船」的人，後來才開飛機", "firefighter": "跟 <b>fire</b> 火 <b>fight</b> 打仗的人；gh 不發音", "YouTuber": "<b>YouTube</b> 的 e 不見了，加上 er", "flight attendant": "<b>-ant</b> 也是「人」，像 assistant 助手", "real estate agent": "<b>agent</b> 和 actor 是親戚：都是「做事的人」", "DJ": "<b>D</b> ＝ disk 唱片、<b>J</b> ＝ jockey 騎師", "mechanical engineer": "<b>machine</b> 機器 → mechanical 機械的", "chef": "ch 唸 /ʃ/ 像 <b>she</b>，因為它是法文字"};
+/* ===== 也可以說（證據見 word-check.html） ===== */
+const AKA={"professional athlete": {"w": "pro athlete", "how": "聊天時", "why": "pro 是 professional 的縮寫，字典標成「口語」。美國的書裡，pro athlete 出現 1 次，professional athlete 就出現約 8.5 次，所以卡片學完整的說法。", "ev": [["📖 Cambridge 字典", "https://dictionary.cambridge.org/dictionary/english/pro"], ["📚 書裡出現幾次", "https://books.google.com/ngrams/graph?content=%28professional+athlete+%2B+professional+athletes%29%2C%28pro+athlete+%2B+pro+athletes%29&year_start=2018&year_end=2022&corpus=en-US&smoothing=0&case_insensitive=on"]], "id": "professional-athlete"}, "hairstylist": {"w": "hairdresser", "how": "", "why": "字典說兩個字意思一樣，美國政府的職稱也兩個都有。美國的書裡，hairstylist 出現 1 次，hairdresser 就出現約 4.8 次。", "ev": [["📖 Cambridge 字典", "https://dictionary.cambridge.org/dictionary/english/hairstylist"], ["🏛️ 美國官方職稱", "https://www.onetonline.org/link/summary/39-5012.00"], ["📚 書裡出現幾次", "https://books.google.com/ngrams/graph?content=%28hairstylist+%2B+hairstylists%29%2C%28hairdresser+%2B+hairdressers%29%2C%28hair+stylist+%2B+hair+stylists%29&year_start=2018&year_end=2022&corpus=en-US&smoothing=0&case_insensitive=on"]], "id": "hairstylist"}, "computer engineer": {"w": "software engineer", "how": "寫程式、做 App 的", "why": "computer engineer 比較偏電腦「硬體」（美國政府的職業分類叫 Computer Hardware Engineers）。美國的書裡，computer engineer 出現 1 次，software engineer 就出現約 6 次。", "ev": [["🏛️ 美國官方職稱", "https://www.onetonline.org/link/summary/17-2061.00"], ["📖 Cambridge 字典", "https://dictionary.cambridge.org/dictionary/english/software-engineer"], ["📚 書裡出現幾次", "https://books.google.com/ngrams/graph?content=%28computer+engineer+%2B+computer+engineers%29%2C%28software+engineer+%2B+software+engineers%29&year_start=2018&year_end=2022&corpus=en-US&smoothing=0&case_insensitive=on"]], "id": "computer-engineer"}};
+function akaHTML(d){const a=AKA[d.e];if(!a)return '';
+ return '<div class="aka"><div class="akt">💬 '+(a.how?a.how+'，':'')+'也可以說 <button class="akw" type="button">🔊 '+a.w+'</button></div>'
+  +'<div class="akwhy"><b>為什麼？</b>'+a.why+'</div><div class="akev">'+a.ev.map(x=>'<a href="'+x[1]+'" target="_blank" rel="noopener">'+x[0]+'</a>').join('｜')
+  +'｜<a href="word-check.html#'+a.id+'">🔎 完整考證</a></div></div>'}
 const SILENT={'game tester':[3],'professional athlete':[19],'tour guide':[6,9],'fortune teller':[6],'firefighter':[3,6,7],'flight attendant':[3,4],'real estate agent':[10],'business manager':[1],'psychologist':[0],'nurse':[4],'police officer':[5],'designer':[4]};
 function isV(c,i){c=c.toLowerCase();return 'aeiou'.indexOf(c)>-1 || (c==='y'&&i>0)}
 function colorRange(w,a,b){const sil=SILENT[w]||[];let out='';

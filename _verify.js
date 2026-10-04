@@ -123,6 +123,26 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     for (const [e, href] of pairs) ok(words[+href.split('#w')[1] - 1] === e, `考證頁 ${e} 連到的單字卡不是 ${e}`);
     await q.close();
   }
+  // 也可以說：三張卡最後一步要出現，點 🔊 不換頁，證據連結要對
+  for (const [w, hh] of [[375, 667], [1024, 768]]) {
+    const q = await browser.newPage({ viewport: { width: w, height: hh } });
+    for (const [e, alt] of [['professional athlete', 'pro athlete'], ['hairstylist', 'hairdresser'], ['computer engineer', 'software engineer']]) {
+      await q.goto(url('story.html#w1'));
+      const n = await q.evaluate(e => W.findIndex(d => d.e === e) + 1, e);
+      await q.evaluate(n => { location.hash = 'w' + n; }, n);
+      for (let s = 0; s < 5; s++) await q.click('#fwd');
+      const t = await q.$eval('.aka', x => x.textContent).catch(() => '');
+      ok(t.includes(alt), `${w}px ${e}：沒有出現「也可以說 ${alt}」`);
+      await q.click('.akw');
+      ok((await q.$eval('#hd', x => x.textContent)).includes('第 ' + n + ' 張') && await q.$('.aka') !== null, `${w}px ${e}：點 🔊 換頁了`);
+      const id = await q.$eval('.aka a[href^="word-check.html#"]', a => a.getAttribute('href').split('#')[1]);
+      const c = await browser.newPage(); await c.goto(url('word-check.html'));
+      ok(await c.$('#' + id) !== null, `${e}：完整考證連結找不到 #${id}`); await c.close();
+      const over = await q.evaluate(() => [...document.querySelectorAll('.aka *')].some(x => x.getBoundingClientRect().right > document.getElementById('card').getBoundingClientRect().right + 2));
+      ok(!over, `${w}px ${e}：也可以說超出卡片`);
+    }
+    await q.close();
+  }
   // 沒有 # 的舊入口照常從挑戰 1 開始
   await p.goto(url('story.html')); ok(await vis('Q1'), 'story.html：沒有從挑戰 1 開始');
   await p.goto(url('games.html')); ok(await vis('home'), 'games.html：沒有出現遊戲選單');

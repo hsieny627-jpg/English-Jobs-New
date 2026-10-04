@@ -24,8 +24,8 @@ def ng_us(word):
 
 # 結論：✅ 正確且最常用／🆗 正確、常用，另有同樣常見的說法／⚠️ 正確，但有更常用的說法（等老師決定）
 NOTE = {
- 'doctor': ('✅', 'doctor 比 physician 常見約 2.6 倍'),
- 'professional athlete': ('✅', '完整正式說法；pro athlete 是口語縮寫，書裡少很多'),
+ 'doctor': ('✅', 'physician 出現 1 次，doctor 就出現約 2.6 次'),
+ 'professional athlete': ('✅', '完整正式的說法。美國的書裡，pro athlete 出現 1 次，professional athlete 就出現約 8.5 次。卡片上有「也可以說 pro athlete」'),
  'programmer': ('✅', '比 coder、software developer 都常見'),
  'engineer': ('✅', ''),
  'esports player': ('🆗', '新職業，書裡還很少；和 professional gamer 差不多常見'),
@@ -38,8 +38,8 @@ NOTE = {
  'designer': ('✅', ''), 'singer': ('✅', ''),
  'veterinarian': ('✅', '正式說法；口語常說 vet（vet 也是「退伍軍人」，不能直接比次數）'),
  'mechanic': ('✅', 'mechanic 也是「力學」，不能直接比次數；O*NET 職稱有 Auto Mechanic'),
- 'computer engineer': ('⚠️', '正確（偏電腦硬體），但寫軟體的 software engineer 常見約 6 倍'),
- 'hairstylist': ('⚠️', '正確（美國官方職稱有），但 hairdresser 在美國書裡也常見約 4.8 倍'),
+ 'computer engineer': ('⚠️', '正確（偏電腦硬體）。美國的書裡，computer engineer 出現 1 次，寫軟體的 software engineer 就出現約 6 次。卡片上有「也可以說 software engineer」'),
+ 'hairstylist': ('⚠️', '正確（美國官方職稱有）。美國的書裡，hairstylist 出現 1 次，hairdresser 就出現約 4.8 次。卡片上有「也可以說 hairdresser」'),
  'architect': ('✅', ''), 'content creator': ('✅', ''),
  'game tester': ('✅', '比 video game tester 常見'),
  'counselor': ('✅', '美式拼法；英國寫 counsellor'),
@@ -79,11 +79,11 @@ for w in ORDER:
         mx = max(v for _, v in vals) or 1
         bars = ''.join(f'<div class="bar{" me" if k.lower() == w.lower() else ""}"><span class="bw">{html.escape(k)}</span>'
                        f'<span class="bt"><i style="width:{max(2, v / mx * 100):.0f}%"></i></span><span class="bn">{v:,.0f}</span></div>' for k, v in vals)
-        ngc = f'{bars}<div class="mu">{a(url, corp + " Ngram 圖表")}（每十億字出現幾次）</div>'
+        ngc = f'{bars}<div class="mu">{a(url, corp + " Ngram 圖表")}（每 10 億個英文字裡出現幾次）</div>'
     else:
         ngc = '<span class="mu">—</span>'
     card = f'<a class="go" href="story.html#w{no}">單字卡 ▶</a>' if no else '<span class="mu">遊戲用字</span>'
-    rows.append(f'<tr><td class="w"><span class="ic">{ic}</span><b>{html.escape(w)}</b><span class="zh">{zh}</span>{card}</td>'
+    rows.append(f'<tr id="{re.sub(r"[^a-z0-9]+", "-", w.lower())}"><td class="w"><span class="ic">{ic}</span><b>{html.escape(w)}</b><span class="zh">{zh}</span>{card}</td>'
                 f'<td>{" ｜ ".join(dic)}</td><td>{off}</td><td class="ng">{ngc}</td><td class="vd"><span class="mk">{mark}</span>{note}</td></tr>')
 
 # 專題：professional athlete 還是 pro athlete？
@@ -91,6 +91,13 @@ pa = {c: next(o for o in NGC[c] if o['set'][0] == 'professional athlete') for c 
 pe = next(o for o in NG if o['set'][0] == 'professional athlete')
 def ratio(o):
     v = list(o['raw'].values()); return v[0], v[1], v[0] / v[1]
+def blocks(r):
+    full = int(r); part = r - full
+    return '<i class="b g"></i>' * full + (f'<i class="b g" style="width:{part * 22:.0f}px"></i>' if part >= 0.05 else '')
+def line(name, rr, link):
+    return (f'<div class="cmp"><div class="cn">{name}<span class="mu">（每 10 億個字裡：professional athlete {rr[0]:.0f} 次、pro athlete {rr[1]:.0f} 次）{link}</span></div>'
+            f'<div class="cr"><span class="cl">pro athlete</span><span class="bk"><i class="b o"></i></span><span class="cx">1 次</span></div>'
+            f'<div class="cr"><span class="cl">professional athlete</span><span class="bk">{blocks(rr[2])}</span><span class="cx">{rr[2]:.1f} 次</span></div></div>')
 r_all, r_us, r_gb = ratio(pe), ratio(pa['en-US']), ratio(pa['en-GB'])
 proc = DICT['pro']['cambridge']['url']; promw = DICT['pro']['mw']['url']
 
@@ -139,6 +146,14 @@ td.ng{{min-width:280px}}
 .bar.me .bt i{{background:#2FA35A}}.bar.me .bw{{font-weight:700}}
 .bn{{text-align:right;font-variant-numeric:tabular-nums}}
 .mk{{font-size:22px;margin-right:4px}}
+.cmp{{margin:12px 0;padding:10px 12px;background:var(--bg);border-radius:16px}}
+.cn{{font-size:20px;font-weight:700;margin-bottom:6px}}.cn .mu{{font-weight:400}}
+.cr{{display:grid;grid-template-columns:minmax(0,190px) 1fr auto;align-items:center;gap:8px;margin:4px 0;font-size:18px}}
+.bk{{display:flex;flex-wrap:wrap;gap:3px}}
+.b{{display:inline-block;width:22px;height:22px;border-radius:5px}}
+.b.g{{background:#2FA35A}}.b.o{{background:#FF7A45}}
+.cx{{font-weight:700;white-space:nowrap}}
+:target td{{background:#FFF6C8}}
 td.vd{{min-width:200px}}
 </style>
 </head>
@@ -153,17 +168,19 @@ td.vd{{min-width:200px}}
 <section>
  <h2>🏃 professional athlete 還是 pro athlete？</h2>
  <div class="big">
-  <div class="vs v1"><b>professional athlete</b><span class="n">{r_us[2]:.1f} 倍</span><div class="u">美國英語書裡，比 pro athlete 多</div></div>
+  <div class="vs v1"><b>professional athlete</b><span class="n">正式</span><div class="u">完整的說法，最常用</div></div>
   <div class="vs v2"><b>pro athlete</b><span class="n">口語</span><div class="u">pro ＝ professional 的縮寫</div></div>
  </div>
+ <p class="ans">📚 書裡每出現 <b>1 次 pro athlete</b>，就出現幾次 <b>professional athlete</b>？</p>
+ {line('美國英語的書', r_us, ' ' + a(pa['en-US']['url'], '看圖表'))}
+ {line('英國英語的書', r_gb, ' ' + a(pa['en-GB']['url'], '看圖表'))}
+ {line('全部英文的書', r_all, ' ' + a(pe['url'], '看圖表'))}
  <p class="ans">兩個都對。<b>professional athlete</b> 是完整、正式、最常用的說法；<b>pro athlete</b> 是聊天時的口語縮寫。</p>
  <ol>
   <li>📖 <b>Cambridge 字典</b>把 pro（＝職業的）標成 <b>informal（口語）</b>。{a(proc, '看字典')}</li>
   <li>📖 <b>Merriam-Webster 字典</b>：pro 是 professional 的<b>縮短說法</b>（a shortened form of professional）。{a(promw, '看字典')}</li>
   <li>🏛️ <b>美國勞工部 O*NET</b>「運動員」這個職業，實際使用的職稱寫 <b>Professional Athlete</b>，沒有 pro athlete。{a(ONET['professional athlete']['url'], '看 O*NET')}</li>
-  <li>📚 <b>Google Books Ngram 語料庫</b>（2018～2022 年出版的書，單複數一起算）：
-   美國英語 {r_us[0]:.0f} 比 {r_us[1]:.0f}（{r_us[2]:.1f} 倍）｜英國英語 {r_gb[0]:.0f} 比 {r_gb[1]:.0f}（{r_gb[2]:.1f} 倍）｜全部英文 {r_all[0]:.0f} 比 {r_all[1]:.0f}（{r_all[2]:.1f} 倍）。
-   {a(pa['en-US']['url'], '看美國英語圖表')}　{a(pa['en-GB']['url'], '看英國英語圖表')}</li>
+  <li>📚 <b>Google Books Ngram 語料庫</b>：上面的方塊。查的是 2018～2022 年出版的書，單數和複數（athletes）一起算。</li>
  </ol>
 </section>
 
