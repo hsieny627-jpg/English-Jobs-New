@@ -11,10 +11,12 @@
 | `story.html` | 單字小故事（原本的首頁） |
 | `games.html` | 10 種遊戲 |
 | `word-check.html` | 英文用字考證：每個字的字典、美國官方職稱（O*NET）、Google Books Ngram 語料庫；`python3 _build_check.py` 產生，證據在 `evidence/`（`_ngram.py`、`_ngram_us_gb.py`、`_dict_check.py`、`_onet_check.py` 重抓） |
+| `rank-mix.html` | 四榜綜合排序＋每一張卡的證據；`python3 _build_mix.py` 算順序（➜ `evidence/mix.json`）並重排 story.html 的單字卡，再跑 `node _build_home.js` |
+| `notebooklm/` | 2026 台灣小學生最喜歡的職業前 10 名英文單字（給 NotebookLM 做簡報） |
 | `rank-tw.html` | 2026 台灣中小學生最想做的工作前 10 名（國語日報原始統計圖＋四家媒體交叉比對）；`node _build_rank.js` 產生 |
 
 每一頁左上角都有 🏠 首頁。也可以直接打開某一頁：
-`story.html#c1`～`#c4`（挑戰）、`#w1`～`#w36`（第幾張單字卡；22～34 是大人榜單、35～36 是中學生榜）、`#rev`（複習全部 36 個字）、`#adv0`～`#adv2`（大人榜單）、`games.html#g1`～`#g10`（第幾個遊戲）。
+`story.html#c1`～`#c4`（挑戰）、`#w1`～`#w36`（第幾張單字卡，照四榜綜合排序）、`#rev`（複習全部 36 個字）、`#adv0`～`#adv2`（大人榜單）、`games.html#g1`～`#g10`（第幾個遊戲）。
 
 下載後用瀏覽器打開 `index.html` 也能用，不需要網路。
 

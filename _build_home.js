@@ -12,8 +12,10 @@ const words = [...story.matchAll(/\{no:(\d+),e:'([^']+)',z:'([^']+)',ic:'([^']+)
   .map(m => ({ no: +m[1], e: m[2], z: m[3], ic: m[4] }));
 const gameList = [...games.matchAll(/\{id:(\d+),ic:'([^']+)',t:'([^']+)',d:'([^']+)'/g)]
   .map(m => ({ id: +m[1], ic: m[2], t: m[3], d: m[4] }));
-const kids = words.filter(w => w.no <= 21), adults = words.filter(w => w.no > 21 && w.no <= 34), ms = words.filter(w => w.no > 34);
-if (kids.length !== 21 || adults.length !== 13 || ms.length !== 2) throw new Error('單字應該是 21＋13＋2 個，讀到 ' + kids.length + '＋' + adults.length + '＋' + ms.length);
+// 分組照四榜綜合（_build_mix.py ➜ evidence/mix.json）
+const mix = JSON.parse(fs.readFileSync(path.join(dir, 'evidence', 'mix.json'), 'utf8'));
+if (words.length !== 36 || words.some((w, i) => w.e !== mix.order[i])) throw new Error('單字卡順序和 evidence/mix.json 不一樣，先跑 python3 _build_mix.py');
+const groups = mix.groups.map((g, k) => ({ h: g.h, list: words.slice(g.at, (mix.groups[k + 1] || { at: words.length }).at) }));
 if (gameList.length !== 10) throw new Error('遊戲應該是 10 個，讀到 ' + gameList.length);
 
 const challenges = [
@@ -26,7 +28,7 @@ const boards = [
   { href: 'rank-tw.html', ic: '<i class="tw"></i>', t: '台灣中小學生 Top 10', d: '2026 最新＋證據出處' },
   { href: 'story.html#adv0', ic: '🧑‍💼', t: '台灣大人榜', d: '前 5 名' },
   { href: 'story.html#adv1', ic: '🌏', t: '全球大人榜', d: '前 10 名' },
-  { href: 'story.html#adv2', ic: '🏅', t: '四榜綜合', d: '四份調查合起來' },
+  { href: 'rank-mix.html', ic: '🏅', t: '四榜綜合', d: '四份調查合起來＋證據' },
 ];
 
 const wordTiles = list => list.map(w => '  ' + tile('story.html#w' + w.no, '',
@@ -105,13 +107,8 @@ ${challenges.map(c => '  ' + tile('story.html#' + c.h, 'ch',
 </section>
 
 <section class="s2" id="words">
- <h2>🔤 單字卡<small>學生最想做的 21 個職業，點一個直接開始</small></h2>
- <div class="g">
-${wordTiles(kids)}
- </div>
- <h3>🏫 中學生榜還有<small>${ms.length} 個職業</small></h3>
- <div class="g">
-${wordTiles(ms)}
+ <h2>🔤 單字卡<small>照四榜綜合排序，點一個直接開始</small></h2>
+${groups.map((g, k) => (k ? ' </div>\n' : '') + ` <h3>${g.h}</h3>\n <div class="g">\n` + wordTiles(g.list)).join('\n').replace(/^ <\/div>\n/, '')}
   ${tile('word-check.html', 'all', '<span class="ic">🔎</span><span class="tt">英文用字考證</span><span class="dd">字典＋官方職稱＋語料庫</span>', '英文用字考證')}
   ${tile('story.html#rev', 'all', `<span class="ic">📝</span><span class="tt">複習</span><span class="dd">全部 ${words.length} 個字抽 5 題</span>`, `複習全部 ${words.length} 個單字`)}
  </div>
@@ -132,10 +129,6 @@ ${gameList.map(g => '  ' + tile('games.html#g' + (g.id + 1), '',
 ${boards.map(b => '  ' + tile(b.href, '',
   `<span class="ic">${b.ic}</span><span class="tt">${b.t}</span><span class="dd">${b.d}</span>`, b.t)).join('\n')}
  </div>
- <h3>🔤 大人榜單的單字卡<small>${adults.length} 個職業</small></h3>
- <div class="g">
-${wordTiles(adults)}
- </div>
 </section>
 
 <div class="foot">資料：國語日報 2026｜OECD PISA 2018｜1111 人力銀行 2026｜Remitly 2026<br>字源：Online Etymology Dictionary、Merriam-Webster、Cambridge Dictionary</div>
@@ -144,4 +137,4 @@ ${wordTiles(adults)}
 </html>
 `;
 fs.writeFileSync(path.join(dir, 'index.html'), html);
-console.log('index.html 完成：' + kids.length + '＋' + adults.length + '＋' + ms.length + ' 個單字、' + gameList.length + ' 個遊戲');
+console.log('index.html 完成：' + groups.map(g => g.list.length).join('＋') + ' 個單字、' + gameList.length + ' 個遊戲');

@@ -1,0 +1,306 @@
+{
+ "order": [
+  "doctor",
+  "professional athlete",
+  "YouTuber",
+  "lawyer",
+  "actor",
+  "programmer",
+  "veterinarian",
+  "police officer",
+  "engineer",
+  "content creator",
+  "esports player",
+  "teacher",
+  "business manager",
+  "game tester",
+  "pilot",
+  "influencer",
+  "counselor",
+  "firefighter",
+  "entertainer",
+  "baker",
+  "nurse",
+  "tour guide",
+  "fortune teller",
+  "psychologist",
+  "painter",
+  "designer",
+  "flight attendant",
+  "singer",
+  "mechanic",
+  "computer engineer",
+  "real estate agent",
+  "hairstylist",
+  "architect",
+  "DJ",
+  "mechanical engineer",
+  "chef"
+ ],
+ "groups": [
+  {
+   "at": 0,
+   "h": "🏅 上 2 份榜單（8 個）"
+  },
+  {
+   "at": 8,
+   "h": "⭐ 上 1 份榜單（26 個）"
+  },
+  {
+   "at": 34,
+   "h": "🏫 國語日報中學生榜（2 個）"
+  }
+ ],
+ "map": {
+  "doctor": {
+   "A": [
+    4,
+    "醫師"
+   ],
+   "B": [
+    1,
+    "Doctors（女生第 1 名 15.6%、男生第 3 名 6.0%）",
+    15.6
+   ]
+  },
+  "professional athlete": {
+   "A": [
+    1,
+    "職業運動員"
+   ],
+   "B": [
+    5,
+    "Sportspeople（男生第 5 名 4.9%）",
+    4.9
+   ]
+  },
+  "YouTuber": {
+   "A": [
+    3,
+    "直播主／網紅／Podcaster／YouTuber"
+   ],
+   "D": [
+    5,
+    "YouTuber"
+   ]
+  },
+  "lawyer": {
+   "B": [
+    4,
+    "Lawyers（女生第 4 名 4.6%、男生第 9 名 2.4%）",
+    4.6
+   ],
+   "D": [
+    4,
+    "Lawyer"
+   ]
+  },
+  "actor": {
+   "A": [
+    8,
+    "歌手／樂團／演員"
+   ],
+   "D": [
+    1,
+    "Actor"
+   ]
+  },
+  "programmer": {
+   "A": [
+    6,
+    "程式設計師（如App、線上遊戲）"
+   ],
+   "B": [
+    4,
+    "ICT professionals（男生第 4 名 5.5%）",
+    5.5
+   ]
+  },
+  "veterinarian": {
+   "B": [
+    8,
+    "Veterinarians（女生第 8 名 2.8%）",
+    2.8
+   ],
+   "D": [
+    6,
+    "Veterinarian"
+   ]
+  },
+  "police officer": {
+   "B": [
+    7,
+    "Police officers（男生第 7 名 4.0%、女生第 9 名 2.3%）",
+    4.0
+   ],
+   "D": [
+    8,
+    "Police officer"
+   ]
+  },
+  "engineer": {
+   "B": [
+    1,
+    "Engineers（男生第 1 名 7.7%）",
+    7.7
+   ]
+  },
+  "content creator": {
+   "C": [
+    1,
+    "自媒體經營（30.3%）"
+   ]
+  },
+  "esports player": {
+   "A": [
+    2,
+    "電競選手"
+   ]
+  },
+  "teacher": {
+   "B": [
+    2,
+    "Teachers（女生第 2 名 9.4%、男生第 6 名 4.6%）",
+    9.4
+   ]
+  },
+  "business manager": {
+   "B": [
+    2,
+    "Business managers（男生第 2 名 6.7%、女生第 3 名 5.0%）",
+    6.7
+   ]
+  },
+  "game tester": {
+   "C": [
+    2,
+    "遊戲試玩員（26.9%）"
+   ]
+  },
+  "pilot": {
+   "D": [
+    2,
+    "Pilot"
+   ]
+  },
+  "influencer": {
+   "A": [
+    3,
+    "直播主／網紅／Podcaster／YouTuber"
+   ]
+  },
+  "counselor": {
+   "C": [
+    3,
+    "心理諮商師（15.7%）"
+   ]
+  },
+  "firefighter": {
+   "D": [
+    3,
+    "Firefighter"
+   ]
+  },
+  "entertainer": {
+   "C": [
+    4,
+    "演藝人員（13.4%）"
+   ]
+  },
+  "baker": {
+   "A": [
+    5,
+    "麵包糕點師"
+   ]
+  },
+  "nurse": {
+   "B": [
+    5,
+    "Nursing and midwives（女生第 5 名 4.5%）",
+    4.5
+   ]
+  },
+  "tour guide": {
+   "C": [
+    5,
+    "導遊（11.2%，並列）"
+   ]
+  },
+  "fortune teller": {
+   "C": [
+    5,
+    "各類占卜師／命理師（11.2%，並列）"
+   ]
+  },
+  "psychologist": {
+   "B": [
+    6,
+    "Psychologists（女生第 6 名 3.7%）",
+    3.7
+   ]
+  },
+  "painter": {
+   "A": [
+    7,
+    "畫家／插畫家／漫畫家／電腦動畫"
+   ]
+  },
+  "designer": {
+   "B": [
+    7,
+    "Designers（女生第 7 名 3.0%）",
+    3.0
+   ]
+  },
+  "flight attendant": {
+   "D": [
+    7,
+    "Flight attendant"
+   ]
+  },
+  "singer": {
+   "A": [
+    8,
+    "歌手／樂團／演員"
+   ]
+  },
+  "mechanic": {
+   "B": [
+    8,
+    "Motor vehicle mechanics（男生第 8 名 2.8%）",
+    2.8
+   ]
+  },
+  "computer engineer": {
+   "A": [
+    9,
+    "電腦工程師"
+   ]
+  },
+  "real estate agent": {
+   "D": [
+    9,
+    "(Real) Estate agent"
+   ]
+  },
+  "hairstylist": {
+   "A": [
+    10,
+    "髮型師／造型師／美甲師"
+   ]
+  },
+  "architect": {
+   "B": [
+    10,
+    "Architects（女生第 10 名 2.1%、男生第 10 名 2.2%）",
+    2.2
+   ]
+  },
+  "DJ": {
+   "D": [
+    10,
+    "DJ"
+   ]
+  }
+ }
+}

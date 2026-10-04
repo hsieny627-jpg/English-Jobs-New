@@ -25,7 +25,7 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     ok(!r.small.length, `${name}：按鈕太小 ${r.small.join('、')}`);
     ok(!r.tiny.length, `${name}：字太小 ${r.tiny.join('、')}`);
     ok(!r.clip.length, `${name}：字超出卡片 ${r.clip.join('、')}`);
-    ok(r.links === 4 + 23 + 2 + 10 + 4 + 13, `${name}：首頁連結數 ${r.links}`);
+    ok(r.links === 4 + 36 + 2 + 10 + 4, `${name}：首頁連結數 ${r.links}`);
     ok(!errs.length, `${name}：首頁錯誤 ${errs.join(' ')}`);
     await p.close();
   }
@@ -42,6 +42,7 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     let m;
     if (href === 'rank-tw.html') ok(await p.$$eval('.row', r => r.length) === 20, `${href}：排行榜不是 20 列`);
     else if (/^c[1-4]$/.test(hash)) ok(await vis('Q' + hash[1]), `${href}：沒有出現挑戰 ${hash[1]}`);
+    else if (href === 'rank-mix.html') ok(await p.$$eval('tbody tr', r => r.length) === 36, `${href}：排序頁不是 36 列`);
     else if (href === 'word-check.html') ok(await p.$$eval('tbody tr', r => r.length) === 37, `${href}：考證表不是 37 列`);
     else if ((m = hash.match(/^w(\d+)$/))) {
       const hd = await p.$eval('#hd', e => e.textContent);
@@ -74,10 +75,10 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
       ok(d.parts === d.e, `${d.e}：拆字拼回來是 ${d.parts}`);
       ok(d.tip && d.ev, `${d.e}：缺記憶技巧或出處`);
     }
-    await q.evaluate(() => { location.hash = 'w22'; }); await q.click('#why');
+    await q.evaluate(() => { location.hash = 'w' + (W.findIndex(d => d.e === 'content creator') + 1); }); await q.click('#why');
     ok((await q.$eval('#link', e => e.href)).includes('content'), '第 22 張出處連結不對');
     await q.click('#menu');
-    ok(await q.$$eval('#grid .gi', b => b.length) === 36 && await q.$$eval('#grid .gh', g => g.length) === 2 && await q.$('#grid .gh') !== null, '全部單字沒有 36 個／分組不對');
+    ok(await q.$$eval('#grid .gi', b => b.length) === 36 && await q.$$eval('#grid .gh', g => g.length) === 3 && await q.$('#grid .gh') !== null, '全部單字沒有 36 個／分組不對');
     ok(!qe.length, `${w}px 單字卡錯誤 ${qe.join(' ')}`);
     await q.close();
   }
@@ -141,6 +142,24 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
       const over = await q.evaluate(() => [...document.querySelectorAll('.aka *')].some(x => x.getBoundingClientRect().right > document.getElementById('card').getBoundingClientRect().right + 2));
       ok(!over, `${w}px ${e}：也可以說超出卡片`);
     }
+    await q.close();
+  }
+  // 四榜綜合：單字卡順序要和 evidence/mix.json 一樣；排序頁 36 列、每個「單字卡 ▶」指到同一個字
+  {
+    const mix = JSON.parse(require('fs').readFileSync(path.join(__dirname, 'evidence', 'mix.json'), 'utf8'));
+    const q = await browser.newPage();
+    await q.goto(url('story.html'));
+    const words = await q.evaluate(() => W.map(d => d.e));
+    ok(JSON.stringify(words) === JSON.stringify(mix.order), '單字卡順序和四榜綜合不一樣');
+    ok(await q.evaluate(() => W.every((d, i) => d.no === i + 1)), '單字卡編號不連續');
+    for (const [w, hh, name] of sizes) {
+      await q.setViewportSize({ width: w, height: hh });
+      await q.goto(url('rank-mix.html'));
+      ok(!(await q.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)), `${name}：排序頁會橫向捲動`);
+    }
+    const pairs = await q.$$eval('tbody tr', rs => rs.map(r => [r.querySelector('td.w b').textContent, r.querySelector('.go').getAttribute('href')]));
+    ok(pairs.length === 36, `排序頁 ${pairs.length} 列`);
+    for (const [e, href] of pairs) ok(words[+href.split('#w')[1] - 1] === e, `排序頁 ${e} 連到的單字卡不是 ${e}`);
     await q.close();
   }
   // 沒有 # 的舊入口照常從挑戰 1 開始
