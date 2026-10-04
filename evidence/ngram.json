@@ -1,0 +1,391 @@
+[
+ {
+  "set": [
+   "doctor",
+   "physician"
+  ],
+  "raw": {
+   "(doctor + doctors)": 52136.96094870102,
+   "(physician + physicians)": 20090.662292204797
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28doctor+%2B+doctors%29%2C%28physician+%2B+physicians%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "professional athlete",
+   "pro athlete"
+  ],
+  "raw": {
+   "(professional athlete + professional athletes)": 268.50796217559036,
+   "(pro athlete + pro athletes)": 30.579774268346682
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28professional+athlete+%2B+professional+athletes%29%2C%28pro+athlete+%2B+pro+athletes%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "programmer",
+   "coder",
+   "software developer"
+  ],
+  "raw": {
+   "(programmer + programmers)": 2086.339304696594,
+   "(coder + coders)": 609.8278618082986,
+   "(software developer + software developers)": 344.09245870392624
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28programmer+%2B+programmers%29%2C%28coder+%2B+coders%29%2C%28software+developer+%2B+software+developers%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "engineer"
+  ],
+  "raw": {
+   "(engineer + engineers)": 15558.443283225643
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28engineer+%2B+engineers%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "esports player",
+   "pro gamer",
+   "professional gamer",
+   "esports athlete"
+  ],
+  "raw": {
+   "(esports player + esports players)": 8.420281311094513,
+   "(pro gamer + pro gamers)": 5.023510118995489,
+   "(professional gamer + professional gamers)": 9.95654665381096,
+   "(esports athlete + esports athletes)": 5.05676007178657
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28esports+player+%2B+esports+players%29%2C%28pro+gamer+%2B+pro+gamers%29%2C%28professional+gamer+%2B+professional+gamers%29%2C%28esports+athlete+%2B+esports+athletes%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "teacher"
+  ],
+  "raw": {
+   "(teacher + teachers)": 101694.97836614028
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28teacher+%2B+teachers%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "business manager"
+  ],
+  "raw": {
+   "(business manager + business managers)": 330.425802985701
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28business+manager+%2B+business+managers%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "influencer",
+   "social media influencer"
+  ],
+  "raw": {
+   "(influencer + influencers)": 1709.0614619519329,
+   "(social media influencer + social media influencers)": 110.36292804078585
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28influencer+%2B+influencers%29%2C%28social+media+influencer+%2B+social+media+influencers%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "lawyer",
+   "attorney"
+  ],
+  "raw": {
+   "(lawyer + lawyers)": 22579.298274649773,
+   "(attorney + attorneys)": 13321.734832061338
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28lawyer+%2B+lawyers%29%2C%28attorney+%2B+attorneys%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "baker",
+   "pastry chef"
+  ],
+  "raw": {
+   "(baker + bakers)": 1482.7867744315881,
+   "(pastry chef + pastry chefs)": 126.5273365191888
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28baker+%2B+bakers%29%2C%28pastry+chef+%2B+pastry+chefs%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "psychologist"
+  ],
+  "raw": {
+   "(psychologist + psychologists)": 7647.995880688541
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28psychologist+%2B+psychologists%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "nurse"
+  ],
+  "raw": {
+   "(nurse + nurses)": 32500.03410357749
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28nurse+%2B+nurses%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "painter",
+   "illustrator"
+  ],
+  "raw": {
+   "(painter + painters)": 6329.626671686128,
+   "(illustrator + illustrators)": 1025.1726166643493
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28painter+%2B+painters%29%2C%28illustrator+%2B+illustrators%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "police officer",
+   "policeman"
+  ],
+  "raw": {
+   "(police officer + police officers)": 7281.095440703211,
+   "(policeman + policemen)": 5489.730119734304
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28police+officer+%2B+police+officers%29%2C%28policeman+%2B+policemen%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "designer"
+  ],
+  "raw": {
+   "(designer + designers)": 12503.071866376558
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28designer+%2B+designers%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "singer"
+  ],
+  "raw": {
+   "(singer + singers)": 7489.9871378875105
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28singer+%2B+singers%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "veterinarian",
+   "vet"
+  ],
+  "raw": {
+   "(veterinarian + veterinarians)": 1194.5134929192136,
+   "(vet + vets)": 2253.990692224761
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28veterinarian+%2B+veterinarians%29%2C%28vet+%2B+vets%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "mechanic",
+   "auto mechanic",
+   "car mechanic"
+  ],
+  "raw": {
+   "(mechanic + mechanics)": 9199.634382639488,
+   "(auto mechanic + auto mechanics)": 73.70248766846998,
+   "(car mechanic + car mechanics)": 54.979182984027375
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28mechanic+%2B+mechanics%29%2C%28auto+mechanic+%2B+auto+mechanics%29%2C%28car+mechanic+%2B+car+mechanics%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "computer engineer",
+   "software engineer"
+  ],
+  "raw": {
+   "(computer engineer + computer engineers)": 51.578489390635696,
+   "(software engineer + software engineers)": 294.4805459037525
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28computer+engineer+%2B+computer+engineers%29%2C%28software+engineer+%2B+software+engineers%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "hairstylist",
+   "hairdresser",
+   "hair stylist"
+  ],
+  "raw": {
+   "(hairstylist + hairstylists)": 86.91311439434912,
+   "(hairdresser + hairdressers)": 630.0322837660133,
+   "(hair stylist + hair stylists)": 68.58681391719301
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28hairstylist+%2B+hairstylists%29%2C%28hairdresser+%2B+hairdressers%29%2C%28hair+stylist+%2B+hair+stylists%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "architect"
+  ],
+  "raw": {
+   "(architect + architects)": 8746.779758439516
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28architect+%2B+architects%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "content creator"
+  ],
+  "raw": {
+   "(content creator + content creators)": 157.2053466958323
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28content+creator+%2B+content+creators%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "game tester",
+   "video game tester"
+  ],
+  "raw": {
+   "(game tester + game testers)": 4.551783905348827,
+   "(video game tester + video game testers)": 1.12914035899081
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28game+tester+%2B+game+testers%29%2C%28video+game+tester+%2B+video+game+testers%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "counselor",
+   "counsellor"
+  ],
+  "raw": {
+   "(counselor + counselors)": 5161.8865654745605,
+   "(counsellor + counsellors)": 1704.463807072898
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28counselor+%2B+counselors%29%2C%28counsellor+%2B+counsellors%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "entertainer"
+  ],
+  "raw": {
+   "(entertainer + entertainers)": 857.4925686843926
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28entertainer+%2B+entertainers%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "tour guide"
+  ],
+  "raw": {
+   "(tour guide + tour guides)": 750.8290650548588
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28tour+guide+%2B+tour+guides%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "fortune teller",
+   "fortune-teller",
+   "fortuneteller"
+  ],
+  "raw": {
+   "(fortune teller + fortune tellers)": 175.37495082819987,
+   "(fortune - teller + fortune - tellers)": 21396.232534698356,
+   "(fortuneteller + fortunetellers)": 34.95766662808819
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28fortune+teller+%2B+fortune+tellers%29%2C%28fortune-teller+%2B+fortune-tellers%29%2C%28fortuneteller+%2B+fortunetellers%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "actor"
+  ],
+  "raw": {
+   "(actor + actors)": 38444.02090180665
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28actor+%2B+actors%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "pilot"
+  ],
+  "raw": {
+   "(pilot + pilots)": 17866.86107152491
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28pilot+%2B+pilots%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "firefighter",
+   "fireman"
+  ],
+  "raw": {
+   "(firefighter + firefighters)": 1806.9520251629,
+   "(fireman + firemen)": 994.844270962858
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28firefighter+%2B+firefighters%29%2C%28fireman+%2B+firemen%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "YouTuber"
+  ],
+  "raw": {
+   "(YouTuber + YouTubers)": 160.09599335120583
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28YouTuber+%2B+YouTubers%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "flight attendant",
+   "stewardess"
+  ],
+  "raw": {
+   "(flight attendant + flight attendants)": 695.5496644422965,
+   "(stewardess + stewardesses)": 335.0930555257037
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28flight+attendant+%2B+flight+attendants%29%2C%28stewardess+%2B+stewardesses%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "real estate agent",
+   "realtor",
+   "estate agent"
+  ],
+  "raw": {
+   "(real estate agent + real estate agents)": 544.2149358714232,
+   "(realtor + realtors)": 433.0429689503035,
+   "(estate agent + estate agents)": 836.5481903638283
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28real+estate+agent+%2B+real+estate+agents%29%2C%28realtor+%2B+realtors%29%2C%28estate+agent+%2B+estate+agents%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "DJ",
+   "disc jockey"
+  ],
+  "raw": {
+   "(DJ + DJs)": 5153.803891744246,
+   "(disc jockey + disc jockeys)": 104.61118442606221
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28DJ+%2B+DJs%29%2C%28disc+jockey+%2B+disc+jockeys%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "streamer"
+  ],
+  "raw": {
+   "(streamer + streamers)": 719.7697328820141
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28streamer+%2B+streamers%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "mechanical engineer"
+  ],
+  "raw": {
+   "(mechanical engineer + mechanical engineers)": 161.61549609705617
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28mechanical+engineer+%2B+mechanical+engineers%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ },
+ {
+  "set": [
+   "chef",
+   "cook"
+  ],
+  "raw": {
+   "(chef + chefs)": 4450.758160601254,
+   "(cook + cooks)": 19843.7029894194
+  },
+  "url": "https://books.google.com/ngrams/graph?content=%28chef+%2B+chefs%29%2C%28cook+%2B+cooks%29&year_start=2018&year_end=2022&corpus=en&smoothing=0&case_insensitive=on"
+ }
+]

@@ -1,0 +1,917 @@
+{
+ "doctor": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/doctor",
+   "final": "https://dictionary.cambridge.org/dictionary/english/doctor",
+   "headwords": [
+    "doctor"
+   ],
+   "labels": [
+    "abbreviation",
+    "informal",
+    "uk",
+    "us",
+    "written abbreviation"
+   ],
+   "def": "a person with a medical degree whose job is to treat people who are ill or hurt:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/doctor",
+   "final": "https://www.merriam-webster.com/dictionary/doctor",
+   "desc": "The meaning of DOCTOR is a person skilled or specializing in healing arts; especially : someone (such as a physician, dentist, or veterinarian) who holds an advanced degree and is licensed to practice. How to use doctor in a sentence. Usage of Doctor: Usage Guide",
+   "notfound": false
+  }
+ },
+ "professional athlete": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/professional-athlete",
+   "final": "https://dictionary.cambridge.org/dictionary/english/",
+   "headwords": [],
+   "labels": [],
+   "def": ""
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/professional%20athlete",
+   "error": "HTTP Error 404: Not Found"
+  }
+ },
+ "pro athlete": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/pro-athlete",
+   "final": "https://dictionary.cambridge.org/dictionary/english/",
+   "headwords": [],
+   "labels": [],
+   "def": ""
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/pro%20athlete",
+   "error": "HTTP Error 404: Not Found"
+  }
+ },
+ "athlete": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/athlete",
+   "final": "https://dictionary.cambridge.org/dictionary/english/athlete",
+   "headwords": [
+    "athlete"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "a person who is very good at sports or physical exercise, especially one who competes in organized events:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/athlete",
+   "final": "https://www.merriam-webster.com/dictionary/athlete",
+   "desc": "The meaning of ATHLETE is a person who is trained or skilled in exercises, sports, or games requiring physical strength, agility, or stamina. How to use athlete in a sentence.",
+   "notfound": false
+  }
+ },
+ "pro": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/pro",
+   "final": "https://dictionary.cambridge.org/dictionary/english/pro",
+   "headwords": [
+    "PRO",
+    "pro",
+    "pro-"
+   ],
+   "labels": [
+    "abbreviation ",
+    "infml",
+    "informal",
+    "plural",
+    "uk",
+    "us"
+   ],
+   "def": "an advantage to or a reason for doing something:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/pro",
+   "final": "https://www.merriam-webster.com/dictionary/pro",
+   "desc": "The meaning of PRO is an argument or evidence in affirmation. How to use pro in a sentence.",
+   "notfound": false
+  }
+ },
+ "programmer": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/programmer",
+   "final": "https://dictionary.cambridge.org/dictionary/english/programmer",
+   "headwords": [
+    "programmer"
+   ],
+   "labels": [
+    "also",
+    "uk",
+    "us"
+   ],
+   "def": "a person whose job is to produce computer programs"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/programmer",
+   "final": "https://www.merriam-webster.com/dictionary/programmer",
+   "desc": "The meaning of PROGRAMMER is one that programs. How to use programmer in a sentence.",
+   "notfound": false
+  }
+ },
+ "engineer": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/engineer",
+   "final": "https://dictionary.cambridge.org/dictionary/english/engineer",
+   "headwords": [
+    "engineer"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "a person whose job is to design or build machines, engines, or electrical equipment, or things such as roads, railways, or bridges, using scientific principles:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/engineer",
+   "final": "https://www.merriam-webster.com/dictionary/engineer",
+   "desc": "The meaning of ENGINEER is a member of a military group devoted to engineering work. How to use engineer in a sentence. Synonym Discussion of Engineer.",
+   "notfound": false
+  }
+ },
+ "esports": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/esports",
+   "final": "https://dictionary.cambridge.org/dictionary/english/e-sports?q=esports",
+   "headwords": [
+    "e-sports"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "the activity of playing computer games against other people on the internet, often for money, and often watched by other people using the internet, sometimes at special organized events:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/esports",
+   "final": "https://www.merriam-webster.com/dictionary/esports",
+   "desc": "The meaning of ESPORT is a multiplayer video game used as the basis for an organized competition —often used before another noun; also : the activity of engaging in esports. How to use esport in a sentence.",
+   "notfound": false
+  }
+ },
+ "esports player": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/esports-player",
+   "final": "https://dictionary.cambridge.org/dictionary/english/",
+   "headwords": [],
+   "labels": [],
+   "def": ""
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/esports%20player",
+   "error": "HTTP Error 404: Not Found"
+  }
+ },
+ "teacher": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/teacher",
+   "final": "https://dictionary.cambridge.org/dictionary/english/teacher",
+   "headwords": [
+    "teacher"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "someone whose job is to teach in a school or college"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/teacher",
+   "final": "https://www.merriam-webster.com/dictionary/teacher",
+   "desc": "The meaning of TEACHER is one that teaches; especially : one whose occupation is to instruct.",
+   "notfound": false
+  }
+ },
+ "business manager": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/business-manager",
+   "final": "https://dictionary.cambridge.org/dictionary/english/business-manager",
+   "headwords": [
+    "business manager"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "a person in a company whose job is to manage one of its departments or areas of activity:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/business%20manager",
+   "error": "HTTP Error 404: Not Found"
+  }
+ },
+ "influencer": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/influencer",
+   "final": "https://dictionary.cambridge.org/dictionary/english/influencer",
+   "headwords": [
+    "influencer"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "a person active on social media who is able to influence people's opinions or to persuade them to follow a particular lifestyle or buy a particular product :"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/influencer",
+   "final": "https://www.merriam-webster.com/dictionary/influencer",
+   "desc": "The meaning of INFLUENCER is one who exerts influence : a person who inspires or guides the actions of others; often, specifically : a person who is able to generate interest in something (such as a consumer product) by posting about it on social media. How to use influencer in a sentence.",
+   "notfound": false
+  }
+ },
+ "lawyer": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/lawyer",
+   "final": "https://dictionary.cambridge.org/dictionary/english/lawyer",
+   "headwords": [
+    "lawyer"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "someone whose job is to give advice to people about the law and speak for them in court:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/lawyer",
+   "final": "https://www.merriam-webster.com/dictionary/lawyer",
+   "desc": "The meaning of LAWYER is one whose profession is to conduct lawsuits for clients or to advise as to legal rights and obligations in other matters.",
+   "notfound": false
+  }
+ },
+ "baker": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/baker",
+   "final": "https://dictionary.cambridge.org/dictionary/english/baker",
+   "headwords": [
+    "baker"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "a person who makes bread and cakes, or who sells bread and cakes as a job:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/baker",
+   "final": "https://www.merriam-webster.com/dictionary/baker",
+   "desc": "The meaning of BAKER is a person who makes breads, cakes, pastries, etc.; specifically : someone who engages in baking as an occupation. How to use baker in a sentence.",
+   "notfound": false
+  }
+ },
+ "psychologist": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/psychologist",
+   "final": "https://dictionary.cambridge.org/dictionary/english/psychologist",
+   "headwords": [
+    "psychologist"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "someone who studies the human mind and human emotions and behaviour, and how different situations have an effect on people:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/psychologist",
+   "final": "https://www.merriam-webster.com/dictionary/psychologist",
+   "desc": "The meaning of PSYCHOLOGIST is a person who specializes in the study of mind and behavior or in the treatment of mental, emotional, and behavioral disorders : a specialist in psychology.",
+   "notfound": false
+  }
+ },
+ "nurse": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/nurse",
+   "final": "https://dictionary.cambridge.org/dictionary/english/nurse",
+   "headwords": [
+    "nurse"
+   ],
+   "labels": [
+    "old-fashioned",
+    "uk",
+    "us"
+   ],
+   "def": "(the title given to) a person whose job is to care for people who are ill or injured, especially in a hospital:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/nurse",
+   "final": "https://www.merriam-webster.com/dictionary/nurse",
+   "desc": "The meaning of NURSE is a person who cares for the sick or infirm; specifically : a licensed health care professional who practices independently or is supervised by a physician, surgeon, or dentist and who is skilled in promoting and maintaining health. How to use nurse in a sentence.",
+   "notfound": false
+  }
+ },
+ "painter": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/painter",
+   "final": "https://dictionary.cambridge.org/dictionary/english/painter",
+   "headwords": [
+    "painter"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "someone who paints pictures"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/painter",
+   "final": "https://www.merriam-webster.com/dictionary/painter",
+   "desc": "The meaning of PAINTER is one that paints.",
+   "notfound": false
+  }
+ },
+ "police officer": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/police-officer",
+   "final": "https://dictionary.cambridge.org/dictionary/english/police-officer",
+   "headwords": [
+    "police officer"
+   ],
+   "labels": [
+    "female",
+    "male",
+    "plural",
+    "uk",
+    "us"
+   ],
+   "def": "a male or female member of the police force"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/police%20officer",
+   "final": "https://www.merriam-webster.com/dictionary/police%20officer",
+   "desc": "The meaning of POLICE OFFICER is a member of a police force.",
+   "notfound": false
+  }
+ },
+ "designer": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/designer",
+   "final": "https://dictionary.cambridge.org/dictionary/english/designer",
+   "headwords": [
+    "designer"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "a person who imagines how something could be made and draws plans for it:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/designer",
+   "final": "https://www.merriam-webster.com/dictionary/designer",
+   "desc": "The meaning of DESIGNER is one that designs. How to use designer in a sentence.",
+   "notfound": false
+  }
+ },
+ "singer": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/singer",
+   "final": "https://dictionary.cambridge.org/dictionary/english/singer",
+   "headwords": [
+    "singer"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "a person who sings:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/singer",
+   "final": "https://www.merriam-webster.com/dictionary/singer",
+   "desc": "The meaning of SINGER is one that sings.",
+   "notfound": false
+  }
+ },
+ "veterinarian": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/veterinarian",
+   "final": "https://dictionary.cambridge.org/dictionary/english/veterinarian",
+   "headwords": [
+    "veterinarian"
+   ],
+   "labels": [
+    "formal",
+    "short form",
+    "uk",
+    "us"
+   ],
+   "def": "formal for\n        \n         vet"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/veterinarian",
+   "final": "https://www.merriam-webster.com/dictionary/veterinarian",
+   "desc": "The meaning of VETERINARIAN is a person qualified and authorized to practice veterinary medicine. How to use veterinarian in a sentence.",
+   "notfound": false
+  }
+ },
+ "mechanic": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/mechanic",
+   "final": "https://dictionary.cambridge.org/dictionary/english/mechanic",
+   "headwords": [
+    "mechanic"
+   ],
+   "labels": [
+    "also",
+    "informal",
+    "uk",
+    "us"
+   ],
+   "def": "someone whose job is repairing the engines of vehicles and other machines:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/mechanic",
+   "final": "https://www.merriam-webster.com/dictionary/mechanic",
+   "desc": "The meaning of MECHANIC is of or relating to manual work or skill. How to use mechanic in a sentence.",
+   "notfound": false
+  }
+ },
+ "computer engineer": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/computer-engineer",
+   "final": "https://dictionary.cambridge.org/dictionary/english/",
+   "headwords": [],
+   "labels": [],
+   "def": ""
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/computer%20engineer",
+   "error": "HTTP Error 404: Not Found"
+  }
+ },
+ "hairstylist": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/hairstylist",
+   "final": "https://dictionary.cambridge.org/dictionary/english/hairstylist",
+   "headwords": [
+    "hairstylist"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "someone whose job is to cut and arrange people's hair:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/hairstylist",
+   "final": "https://www.merriam-webster.com/dictionary/hairstylist",
+   "desc": "The meaning of HAIRSTYLIST is a person whose occupation is the cutting and arranging of hair : hairdresser; especially : a person who does creative cutting and styling of hair.",
+   "notfound": false
+  }
+ },
+ "hairdresser": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/hairdresser",
+   "final": "https://dictionary.cambridge.org/dictionary/english/hairdresser",
+   "headwords": [
+    "hairdresser"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "a person who cuts people's hair and puts it into a style, usually working in a special shop, called a hairdresser's:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/hairdresser",
+   "final": "https://www.merriam-webster.com/dictionary/hairdresser",
+   "desc": "The meaning of HAIRDRESSER is a person whose occupation is the dressing or cutting of hair.",
+   "notfound": false
+  }
+ },
+ "architect": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/architect",
+   "final": "https://dictionary.cambridge.org/dictionary/english/architect",
+   "headwords": [
+    "architect"
+   ],
+   "labels": [
+    "fig.",
+    "uk",
+    "us"
+   ],
+   "def": "a person whose job is to design new buildings and make certain that they are built correctly"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/architect",
+   "final": "https://www.merriam-webster.com/dictionary/architect",
+   "desc": "The meaning of ARCHITECT is a person who designs buildings and advises in their construction. How to use architect in a sentence.",
+   "notfound": false
+  }
+ },
+ "content creator": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/content-creator",
+   "final": "https://dictionary.cambridge.org/dictionary/english/content-creator",
+   "headwords": [
+    "content creator"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "someone who creates content (= video, images, writing, etc.) for the internet, especially for a social media website:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/content%20creator",
+   "error": "HTTP Error 404: Not Found"
+  }
+ },
+ "game tester": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/game-tester",
+   "final": "https://dictionary.cambridge.org/dictionary/english/",
+   "headwords": [],
+   "labels": [],
+   "def": ""
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/game%20tester",
+   "error": "HTTP Error 404: Not Found"
+  }
+ },
+ "counselor": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/counselor",
+   "final": "https://dictionary.cambridge.org/dictionary/english/counselor",
+   "headwords": [
+    "counselor"
+   ],
+   "labels": [
+    "also",
+    "uk",
+    "us"
+   ],
+   "def": "US spelling of \n        \n         counsellor"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/counselor",
+   "final": "https://www.merriam-webster.com/dictionary/counselor",
+   "desc": "The meaning of COUNSELOR is a person who gives advice or counseling. How to use counselor in a sentence.",
+   "notfound": false
+  }
+ },
+ "entertainer": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/entertainer",
+   "final": "https://dictionary.cambridge.org/dictionary/english/entertainer",
+   "headwords": [
+    "entertainer"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "someone whose job is to entertain people by singing, telling jokes, etc."
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/entertainer",
+   "final": "https://www.merriam-webster.com/dictionary/entertainer",
+   "desc": "The meaning of ENTERTAINER is one that entertains; specifically : one who entertains professionally. How to use entertainer in a sentence.",
+   "notfound": false
+  }
+ },
+ "tour guide": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/tour-guide",
+   "final": "https://dictionary.cambridge.org/dictionary/english/tour-guide",
+   "headwords": [
+    "tour guide"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "a person whose job is showing a place to visitors or travelling with visitors on a journey from place to place :"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/tour%20guide",
+   "final": "https://www.merriam-webster.com/dictionary/tour%20guide",
+   "desc": "The meaning of TOUR GUIDE is a person who takes people on trips through an area and explains the interesting details about it.",
+   "notfound": false
+  }
+ },
+ "fortune teller": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/fortune-teller",
+   "final": "https://dictionary.cambridge.org/dictionary/english/fortune-teller",
+   "headwords": [
+    "fortune teller"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "a person who tells you what they think will happen to you in the future"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/fortune%20teller",
+   "final": "https://www.merriam-webster.com/dictionary/fortune%20teller",
+   "desc": "The meaning of FORTUNE TELLER is someone or something with the supposed ability to foretell future events and especially the details of a person's future; sometimes, specifically : a child's toy that consists of paper folded into four pyramid-shaped parts which are manipulated by the fingers to open and close with each part having a flap that can be unfolded to reveal an answer to one's question about the future : cootie catcher. How to use fortune teller in a sentence.",
+   "notfound": false
+  }
+ },
+ "actor": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/actor",
+   "final": "https://dictionary.cambridge.org/dictionary/english/actor",
+   "headwords": [
+    "actor"
+   ],
+   "labels": [
+    "female",
+    "uk",
+    "us"
+   ],
+   "def": "someone who pretends to be someone else while performing in a film, play, or television or radio programme:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/actor",
+   "final": "https://www.merriam-webster.com/dictionary/actor",
+   "desc": "The meaning of ACTOR is one that acts : doer. How to use actor in a sentence.",
+   "notfound": false
+  }
+ },
+ "pilot": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/pilot",
+   "final": "https://dictionary.cambridge.org/dictionary/english/pilot",
+   "headwords": [
+    "pilot"
+   ],
+   "labels": [
+    "also",
+    "uk",
+    "us"
+   ],
+   "def": "a person who flies an aircraft:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/pilot",
+   "final": "https://www.merriam-webster.com/dictionary/pilot",
+   "desc": "The meaning of PILOT is one employed to steer a ship : helmsman. How to use pilot in a sentence. Synonym Discussion of Pilot.",
+   "notfound": false
+  }
+ },
+ "firefighter": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/firefighter",
+   "final": "https://dictionary.cambridge.org/dictionary/english/firefighter",
+   "headwords": [
+    "firefighter"
+   ],
+   "labels": [
+    "also",
+    "plural",
+    "uk",
+    "us"
+   ],
+   "def": "a person whose job is to stop fires from burning"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/firefighter",
+   "final": "https://www.merriam-webster.com/dictionary/firefighter",
+   "desc": "The meaning of FIREFIGHTER is a person who fights fires : fireman.",
+   "notfound": false
+  }
+ },
+ "YouTuber": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/youtuber",
+   "final": "https://dictionary.cambridge.org/dictionary/english/youtuber",
+   "headwords": [
+    "YouTuber"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "a person who often uses the website YouTube, especially someone who makes and appears in videos on the website:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/YouTuber",
+   "final": "https://www.merriam-webster.com/dictionary/YouTuber",
+   "desc": "The meaning of YOUTUBER is a person who creates and uploads videos on the YouTube online video sharing service. How to use YouTuber in a sentence.",
+   "notfound": false
+  }
+ },
+ "flight attendant": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/flight-attendant",
+   "final": "https://dictionary.cambridge.org/dictionary/english/flight-attendant",
+   "headwords": [
+    "flight attendant"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "someone who serves passengers on an aircraft"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/flight%20attendant",
+   "final": "https://www.merriam-webster.com/dictionary/flight%20attendant",
+   "desc": "The meaning of FLIGHT ATTENDANT is a person who attends passengers on an airplane.",
+   "notfound": false
+  }
+ },
+ "real estate agent": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/real-estate-agent",
+   "final": "https://dictionary.cambridge.org/dictionary/english/real-estate-agent",
+   "headwords": [
+    "real estate agent"
+   ],
+   "labels": [
+    "also",
+    "uk",
+    "us"
+   ],
+   "def": "someone who arranges the selling, renting or management of homes, land and buildings for the owners"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/real%20estate%20agent",
+   "final": "https://www.merriam-webster.com/dictionary/real%20estate%20agent",
+   "desc": "The meaning of REAL ESTATE AGENT is a person in the business of selling land and buildings.",
+   "notfound": false
+  }
+ },
+ "realtor": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/realtor",
+   "final": "https://dictionary.cambridge.org/dictionary/english/realtor",
+   "headwords": [
+    "Realtor"
+   ],
+   "labels": [
+    "also",
+    "trademark",
+    "uk",
+    "us"
+   ],
+   "def": "a person whose job is to arrange the sale, renting or management of homes, land and buildings for the owners, and who is a member of the National Association of Realtors"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/realtor",
+   "final": "https://www.merriam-webster.com/dictionary/realtor",
+   "desc": "The meaning of REALTOR is —used for a real estate agent who is a member of the National Association of Realtors.",
+   "notfound": false
+  }
+ },
+ "DJ": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/dj",
+   "final": "https://dictionary.cambridge.org/dictionary/english/dj",
+   "headwords": [
+    "DJ"
+   ],
+   "labels": [
+    "abbreviation",
+    "abbreviation for",
+    "also",
+    "past tense and past participle",
+    "present participle",
+    "uk",
+    "us"
+   ],
+   "def": "abbreviation for\n        \n         disc jockey"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/DJ",
+   "final": "https://www.merriam-webster.com/dictionary/DJ",
+   "desc": "The meaning of DJ is disc jockey —sometimes used as a title in the stage names of disc jockeys. How to use DJ in a sentence.",
+   "notfound": false
+  }
+ },
+ "disc jockey": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/disc-jockey",
+   "final": "https://dictionary.cambridge.org/dictionary/english/disc-jockey",
+   "headwords": [
+    "disc jockey"
+   ],
+   "labels": [
+    "abbreviation",
+    "uk",
+    "us"
+   ],
+   "def": "someone who plays records and talks on the radio or at an event where people dance to recorded popular music, such as a nightclub"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/disc%20jockey",
+   "final": "https://www.merriam-webster.com/dictionary/disc%20jockey",
+   "desc": "The meaning of DISC JOCKEY is a person who introduces and plays recorded music (especially popular music) on a show (such as a radio program) —called also deejay, DJ. How to use disc jockey in a sentence.",
+   "notfound": false
+  }
+ },
+ "streamer": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/streamer",
+   "final": "https://dictionary.cambridge.org/dictionary/english/streamer",
+   "headwords": [
+    "streamer"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "a person or company that streams information, music, video, etc. (= sends it over the internet) so that people can receive it as it is being sent:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/streamer",
+   "final": "https://www.merriam-webster.com/dictionary/streamer",
+   "desc": "The meaning of STREAMER is a flag that streams in the wind; especially : pennant. How to use streamer in a sentence.",
+   "notfound": false
+  }
+ },
+ "mechanical engineer": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/mechanical-engineer",
+   "final": "https://dictionary.cambridge.org/dictionary/english/mechanical-engineer",
+   "headwords": [
+    "mechanical engineer"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "a person who studies the design and production of machines:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/mechanical%20engineer",
+   "final": "https://www.merriam-webster.com/dictionary/mechanical%20engineer",
+   "desc": "The meaning of MECHANICAL ENGINEER is an engineer whose training or occupation is in mechanical engineering —abbreviation M.E..",
+   "notfound": false
+  }
+ },
+ "chef": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/chef",
+   "final": "https://dictionary.cambridge.org/dictionary/english/chef",
+   "headwords": [
+    "chef"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "a skilled and trained cook who works in a hotel or restaurant, especially the most important cook:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/chef",
+   "final": "https://www.merriam-webster.com/dictionary/chef",
+   "desc": "The meaning of CHEF is a skilled professional cook; specifically : one who is in charge of a professional kitchen. How to use chef in a sentence.",
+   "notfound": false
+  }
+ },
+ "cook": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/cook",
+   "final": "https://dictionary.cambridge.org/dictionary/english/cook",
+   "headwords": [
+    "cook"
+   ],
+   "labels": [
+    "informal",
+    "uk",
+    "us"
+   ],
+   "def": "When you cook food, you prepare it to be eaten by heating it in a particular way, such as baking or boiling, and when food cooks, it is heated until it is ready to eat:"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/cook",
+   "final": "https://www.merriam-webster.com/dictionary/cook",
+   "desc": "The meaning of COOK is a person who prepares food for eating. How to use cook in a sentence.",
+   "notfound": false
+  }
+ },
+ "software engineer": {
+  "cambridge": {
+   "url": "https://dictionary.cambridge.org/dictionary/english/software-engineer",
+   "final": "https://dictionary.cambridge.org/dictionary/english/software-engineer",
+   "headwords": [
+    "software engineer"
+   ],
+   "labels": [
+    "uk",
+    "us"
+   ],
+   "def": "someone whose job is to create computer programs"
+  },
+  "mw": {
+   "url": "https://www.merriam-webster.com/dictionary/software%20engineer",
+   "final": "https://www.merriam-webster.com/dictionary/software%20engineer",
+   "desc": "The meaning of SOFTWARE ENGINEERING is a branch of computer science that deals with the design, implementation, and maintenance of complex computer programs.",
+   "notfound": false
+  }
+ }
+}

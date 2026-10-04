@@ -1,0 +1,195 @@
+# 產生 word-check.html（網站每一個職業英文的考證）：python3 _build_check.py
+# 證據檔在 evidence/：ngram.json、ngram_us_gb.json（_ngram.py、_ngram_us_gb.py）、dict.json（_dict_check.py）、onet.json（_onet_check.py）
+import json, re, html
+E = lambda f: json.load(open('evidence/' + f, encoding='utf8'))
+NG, NGC, DICT, ONET = E('ngram.json'), E('ngram_us_gb.json'), E('dict.json'), E('onet.json')
+story = open('story.html', encoding='utf8').read()
+font = re.search(r'@font-face\{[^}]*\}', story).group(0)
+CARDS = {m[1]: (int(m[0]), m[2], m[3]) for m in re.findall(r"\{no:(\d+),e:'([^']+)',z:'([^']+)',ic:'([^']+)'", story)}
+CARDS['streamer'] = (0, '直播主', '📹')  # 只出現在遊戲頁
+
+def ng_us(word):
+    """美國英語 en-US 的比較（有查的話），否則用全部英文 en。回傳 [(字, 每十億字次數)], 連結, 語料庫名"""
+    for o in NGC['en-US']:
+        if o['set'][0] == word:
+            vals = [(k.split(' + ')[0].strip('('), v) for k, v in o['raw'].items()]
+            if word == 'real estate agent':  # 「estate agent」的次數包含 real estate agent，要扣掉
+                ra = dict(vals)['real estate agent']
+                vals = [(k + '（不含 real）', v - ra) if k == 'estate agent' else (k, v) for k, v in vals]
+            return vals, o['url'], '美國英語'
+    for o in NG:
+        if o['set'][0] == word:
+            return [(k.split(' + ')[0].strip('('), v) for k, v in o['raw'].items()], o['url'], '英文'
+    return [], '', ''
+
+# 結論：✅ 正確且最常用／🆗 正確、常用，另有同樣常見的說法／⚠️ 正確，但有更常用的說法（等老師決定）
+NOTE = {
+ 'doctor': ('✅', 'doctor 比 physician 常見約 2.6 倍'),
+ 'professional athlete': ('✅', '完整正式說法；pro athlete 是口語縮寫，書裡少很多'),
+ 'programmer': ('✅', '比 coder、software developer 都常見'),
+ 'engineer': ('✅', ''),
+ 'esports player': ('🆗', '新職業，書裡還很少；和 professional gamer 差不多常見'),
+ 'teacher': ('✅', ''), 'business manager': ('✅', 'O*NET 實際使用的職稱'),
+ 'influencer': ('✅', '比 social media influencer 常見'),
+ 'lawyer': ('✅', '美國也常說 attorney'),
+ 'baker': ('✅', ''), 'psychologist': ('✅', ''), 'nurse': ('✅', ''),
+ 'painter': ('✅', '畫畫的人；artist 是更大的「藝術家」'),
+ 'police officer': ('✅', '比 policeman 常見，男女都能用'),
+ 'designer': ('✅', ''), 'singer': ('✅', ''),
+ 'veterinarian': ('✅', '正式說法；口語常說 vet（vet 也是「退伍軍人」，不能直接比次數）'),
+ 'mechanic': ('✅', 'mechanic 也是「力學」，不能直接比次數；O*NET 職稱有 Auto Mechanic'),
+ 'computer engineer': ('⚠️', '正確（偏電腦硬體），但寫軟體的 software engineer 常見約 6 倍'),
+ 'hairstylist': ('⚠️', '正確（美國官方職稱有），但 hairdresser 在美國書裡也常見約 4.8 倍'),
+ 'architect': ('✅', ''), 'content creator': ('✅', ''),
+ 'game tester': ('✅', '比 video game tester 常見'),
+ 'counselor': ('✅', '美式拼法；英國寫 counsellor'),
+ 'entertainer': ('✅', ''), 'tour guide': ('✅', ''),
+ 'fortune teller': ('✅', '比 fortuneteller 常見；兩本字典都寫 fortune teller'),
+ 'actor': ('✅', ''), 'pilot': ('✅', ''),
+ 'firefighter': ('✅', '比 fireman 常見，男女都能用'),
+ 'YouTuber': ('✅', '字典已收錄'),
+ 'flight attendant': ('✅', '比 stewardess 常見，男女都能用'),
+ 'real estate agent': ('✅', '美式說法；英國說 estate agent；Realtor 是註冊商標'),
+ 'DJ': ('✅', '比 disc jockey 常見很多'),
+ 'streamer': ('✅', ''),
+ 'mechanical engineer': ('✅', ''),
+ 'chef': ('✅', '受過訓練、在餐廳工作的廚師；cook 也是動詞「煮」，不能直接比次數'),
+}
+ORDER = sorted(CARDS, key=lambda w: (CARDS[w][0] or 99))
+missing = [w for w in ORDER if w not in NOTE]
+assert not missing, missing
+
+def a(u, t):
+    return f'<a href="{html.escape(u)}" target="_blank" rel="noopener">{t}</a>'
+
+rows = []
+for w in ORDER:
+    no, zh, ic = CARDS[w]
+    mark, note = NOTE[w]
+    d = DICT.get(w, {})
+    c, m = d.get('cambridge', {}), d.get('mw', {})
+    dic = []
+    if c.get('headwords'): dic.append(a(c['url'], 'Cambridge'))
+    if m and not m.get('notfound') and not m.get('error'): dic.append(a(m['url'], 'Merriam-Webster'))
+    if not dic: dic.append('<span class="mu">兩個常見字組成，字典不另外收</span>')
+    o = ONET.get(w)
+    off = a(o['url'], html.escape(o['title'].split(' Occupation')[0])) if o else '<span class="mu">—</span>'
+    vals, url, corp = ng_us(w)
+    if vals:
+        mx = max(v for _, v in vals) or 1
+        bars = ''.join(f'<div class="bar{" me" if k.lower() == w.lower() else ""}"><span class="bw">{html.escape(k)}</span>'
+                       f'<span class="bt"><i style="width:{max(2, v / mx * 100):.0f}%"></i></span><span class="bn">{v:,.0f}</span></div>' for k, v in vals)
+        ngc = f'{bars}<div class="mu">{a(url, corp + " Ngram 圖表")}（每十億字出現幾次）</div>'
+    else:
+        ngc = '<span class="mu">—</span>'
+    card = f'<a class="go" href="story.html#w{no}">單字卡 ▶</a>' if no else '<span class="mu">遊戲用字</span>'
+    rows.append(f'<tr><td class="w"><span class="ic">{ic}</span><b>{html.escape(w)}</b><span class="zh">{zh}</span>{card}</td>'
+                f'<td>{" ｜ ".join(dic)}</td><td>{off}</td><td class="ng">{ngc}</td><td class="vd"><span class="mk">{mark}</span>{note}</td></tr>')
+
+# 專題：professional athlete 還是 pro athlete？
+pa = {c: next(o for o in NGC[c] if o['set'][0] == 'professional athlete') for c in ('en-US', 'en-GB')}
+pe = next(o for o in NG if o['set'][0] == 'professional athlete')
+def ratio(o):
+    v = list(o['raw'].values()); return v[0], v[1], v[0] / v[1]
+r_all, r_us, r_gb = ratio(pe), ratio(pa['en-US']), ratio(pa['en-GB'])
+proc = DICT['pro']['cambridge']['url']; promw = DICT['pro']['mw']['url']
+
+page = f'''<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>英文用字考證</title>
+<style>
+{font}
+:root{{--bg:#FFF7E8;--card:#fff;--ink:#23201C;--soft:#7A7166;--line:#F0E2C8;--blue:#2F6FDE;--navy:#15233A;--gold:#FFD24A}}
+*{{box-sizing:border-box}}
+body{{margin:0;background:var(--bg);color:var(--ink);font-family:'AndikaEmbed',"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;-webkit-text-size-adjust:100%;overflow-x:hidden}}
+.app{{max-width:1180px;margin:0 auto;padding:16px 16px 40px}}
+.homeln{{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;border-radius:14px;border:3px solid var(--line);background:#fff;color:var(--ink);font-size:20px;font-weight:700;text-decoration:none}}
+.hero{{margin-top:12px;background:var(--navy);color:#fff;border-radius:24px;padding:18px 16px;text-align:center}}
+.hero h1{{margin:0;font-size:30px;color:var(--gold)}}
+.hero p{{margin:8px 0 0;font-size:19px;color:#DCE4F0;line-height:1.6}}
+section{{margin-top:14px;background:var(--card);border:3px solid var(--line);border-radius:24px;padding:16px}}
+h2{{margin:0 0 10px;font-size:26px}}
+.big{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}}
+.vs{{border-radius:18px;padding:14px;text-align:center}}
+.vs b{{display:block;font-size:26px}}.vs .n{{font-size:40px;font-weight:700}}.vs .u{{font-size:16px;color:var(--soft)}}
+.v1{{background:#DCF0C8}}.v2{{background:#FFE3D6}}
+.ans{{font-size:22px;line-height:1.6;margin:12px 0 4px;text-align:center}}
+ol{{font-size:19px;line-height:1.7;padding-left:1.4em;margin:10px 0 0}}
+li{{margin-bottom:8px}}
+a{{color:var(--blue)}}
+.mu{{color:var(--soft);font-size:15px}}
+.key{{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:18px;margin-bottom:10px}}
+.tw{{overflow-x:auto;-webkit-overflow-scrolling:touch}}
+table{{border-collapse:collapse;width:100%;min-width:900px;font-size:17px}}
+th{{position:sticky;top:0;background:#FFF1DC;text-align:left;padding:10px 8px;font-size:17px}}
+td{{border-top:2px dashed var(--line);padding:10px 8px;vertical-align:top}}
+td.w{{min-width:180px}}
+td.w b{{display:block;font-size:21px}}
+.ic{{font-size:28px;display:block}}
+.zh{{display:block;color:var(--soft)}}
+.go{{display:inline-flex;align-items:center;min-height:44px;margin-top:4px;padding:0 10px;border-radius:12px;background:#FFE3D6;color:#B03A10;font-weight:700;text-decoration:none}}
+td.ng{{min-width:280px}}
+.bar{{display:grid;grid-template-columns:118px 1fr 58px;align-items:center;gap:6px;font-size:15px;margin:2px 0}}
+.bw{{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+.bt{{background:#F3ECE0;border-radius:6px;height:14px;overflow:hidden}}
+.bt i{{display:block;height:100%;background:#B9B2A6}}
+.bar.me .bt i{{background:#2FA35A}}.bar.me .bw{{font-weight:700}}
+.bn{{text-align:right;font-variant-numeric:tabular-nums}}
+.mk{{font-size:22px;margin-right:4px}}
+td.vd{{min-width:200px}}
+</style>
+</head>
+<body>
+<main class="app">
+<a class="homeln" href="index.html">🏠 首頁</a>
+<div class="hero">
+ <h1>🔎 英文用字考證</h1>
+ <p>網站上每一個職業英文，都用三種證據檢查：<br>📖 字典有沒有收 ＋ 🏛️ 美國政府的正式職稱 ＋ 📚 書裡最常用哪一個</p>
+</div>
+
+<section>
+ <h2>🏃 professional athlete 還是 pro athlete？</h2>
+ <div class="big">
+  <div class="vs v1"><b>professional athlete</b><span class="n">{r_us[2]:.1f} 倍</span><div class="u">美國英語書裡，比 pro athlete 多</div></div>
+  <div class="vs v2"><b>pro athlete</b><span class="n">口語</span><div class="u">pro ＝ professional 的縮寫</div></div>
+ </div>
+ <p class="ans">兩個都對。<b>professional athlete</b> 是完整、正式、最常用的說法；<b>pro athlete</b> 是聊天時的口語縮寫。</p>
+ <ol>
+  <li>📖 <b>Cambridge 字典</b>把 pro（＝職業的）標成 <b>informal（口語）</b>。{a(proc, '看字典')}</li>
+  <li>📖 <b>Merriam-Webster 字典</b>：pro 是 professional 的<b>縮短說法</b>（a shortened form of professional）。{a(promw, '看字典')}</li>
+  <li>🏛️ <b>美國勞工部 O*NET</b>「運動員」這個職業，實際使用的職稱寫 <b>Professional Athlete</b>，沒有 pro athlete。{a(ONET['professional athlete']['url'], '看 O*NET')}</li>
+  <li>📚 <b>Google Books Ngram 語料庫</b>（2018～2022 年出版的書，單複數一起算）：
+   美國英語 {r_us[0]:.0f} 比 {r_us[1]:.0f}（{r_us[2]:.1f} 倍）｜英國英語 {r_gb[0]:.0f} 比 {r_gb[1]:.0f}（{r_gb[2]:.1f} 倍）｜全部英文 {r_all[0]:.0f} 比 {r_all[1]:.0f}（{r_all[2]:.1f} 倍）。
+   {a(pa['en-US']['url'], '看美國英語圖表')}　{a(pa['en-GB']['url'], '看英國英語圖表')}</li>
+ </ol>
+</section>
+
+<section>
+ <h2>📋 網站上每一個職業英文</h2>
+ <div class="key"><span>✅ 正確，也是最常用的說法</span><span>🆗 正確，另有一樣常見的說法</span><span>⚠️ 正確，但有更常用的說法</span></div>
+ <div class="tw"><table>
+  <thead><tr><th>單字</th><th>📖 字典</th><th>🏛️ 美國官方職稱（O*NET）</th><th>📚 書裡誰最常用（綠色＝網站用的字）</th><th>結論</th></tr></thead>
+  <tbody>
+  {chr(10).join(rows)}
+  </tbody>
+ </table></div>
+</section>
+
+<section>
+ <h2>🧪 證據從哪裡來？</h2>
+ <ol>
+  <li>📖 <b>字典</b>：{a('https://dictionary.cambridge.org/', 'Cambridge Dictionary')}（劍橋大學出版社）、{a('https://www.merriam-webster.com/', 'Merriam-Webster')}（美國最老牌的字典）。</li>
+  <li>🏛️ <b>美國官方職稱</b>：{a('https://www.onetonline.org/', 'O*NET OnLine')}，美國勞工部的職業資料庫，和勞工統計局用同一套「標準職業分類」，每個職業都列出真實工作上使用的職稱。</li>
+  <li>📚 <b>語料庫</b>：{a('https://books.google.com/ngrams/', 'Google Books Ngram')}，統計幾百萬本書裡每個詞出現幾次。研究論文：Michel 等人（2011），刊在《Science》期刊，{a('https://doi.org/10.1126/science.1199644', 'doi:10.1126/science.1199644')}。本頁取 2018～2022 年、單複數合計、大小寫不分。</li>
+  <li>👀 <b>看清楚</b>：Ngram 統計的是「書」，不是說話；一個字有兩個意思時（例如 vet 也是退伍軍人、cook 也是動詞），次數不能直接比，表格裡都有寫。</li>
+ </ol>
+</section>
+</main>
+</body>
+</html>
+'''
+open('word-check.html', 'w', encoding='utf8').write(page)
+print('word-check.html 完成：', len(rows), '個字')

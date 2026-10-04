@@ -12,8 +12,8 @@ const words = [...story.matchAll(/\{no:(\d+),e:'([^']+)',z:'([^']+)',ic:'([^']+)
   .map(m => ({ no: +m[1], e: m[2], z: m[3], ic: m[4] }));
 const gameList = [...games.matchAll(/\{id:(\d+),ic:'([^']+)',t:'([^']+)',d:'([^']+)'/g)]
   .map(m => ({ id: +m[1], ic: m[2], t: m[3], d: m[4] }));
-const kids = words.filter(w => w.no <= 21), adults = words.filter(w => w.no > 21);
-if (kids.length !== 21 || adults.length !== 13) throw new Error('單字應該是 21＋13 個，讀到 ' + kids.length + '＋' + adults.length);
+const kids = words.filter(w => w.no <= 21), adults = words.filter(w => w.no > 21 && w.no <= 34), ms = words.filter(w => w.no > 34);
+if (kids.length !== 21 || adults.length !== 13 || ms.length !== 2) throw new Error('單字應該是 21＋13＋2 個，讀到 ' + kids.length + '＋' + adults.length + '＋' + ms.length);
 if (gameList.length !== 10) throw new Error('遊戲應該是 10 個，讀到 ' + gameList.length);
 
 const challenges = [
@@ -59,7 +59,7 @@ section{margin-top:18px;border-radius:24px;padding:16px;scroll-margin-top:80px}
 h2{margin:0 0 12px;font-size:26px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 h2 small{font-size:17px;font-weight:400;color:var(--soft)}
 .s1{background:var(--c1);color:#fff}.s1 h2{color:var(--c1t)}.s1 h2 small{color:#C9D3E3}
-.s2{background:var(--c2bg)}.s2 h2{color:#B03A10}
+.s2{background:var(--c2bg)}.s2 h2,.s2 h3{color:#B03A10}
 .s3{background:var(--c3bg)}.s3 h2{color:#1B4A9E}
 .s4{background:var(--c4bg)}.s4 h2,.s4 h3{color:#2C6010}
 h3{margin:18px 0 12px;font-size:24px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}h3 small{font-size:17px;font-weight:400;color:var(--soft)}
@@ -108,6 +108,11 @@ ${challenges.map(c => '  ' + tile('story.html#' + c.h, 'ch',
  <h2>🔤 單字卡<small>學生最想做的 21 個職業，點一個直接開始</small></h2>
  <div class="g">
 ${wordTiles(kids)}
+ </div>
+ <h3>🏫 中學生榜還有<small>${ms.length} 個職業</small></h3>
+ <div class="g">
+${wordTiles(ms)}
+  ${tile('word-check.html', 'all', '<span class="ic">🔎</span><span class="tt">英文用字考證</span><span class="dd">字典＋官方職稱＋語料庫</span>', '英文用字考證')}
   ${tile('story.html#rev', 'all', `<span class="ic">📝</span><span class="tt">複習</span><span class="dd">全部 ${words.length} 個字抽 5 題</span>`, `複習全部 ${words.length} 個單字`)}
  </div>
 </section>
@@ -139,4 +144,4 @@ ${wordTiles(adults)}
 </html>
 `;
 fs.writeFileSync(path.join(dir, 'index.html'), html);
-console.log('index.html 完成：' + kids.length + '＋' + adults.length + ' 個單字、' + gameList.length + ' 個遊戲');
+console.log('index.html 完成：' + kids.length + '＋' + adults.length + '＋' + ms.length + ' 個單字、' + gameList.length + ' 個遊戲');

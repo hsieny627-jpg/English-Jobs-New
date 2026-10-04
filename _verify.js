@@ -25,7 +25,7 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     ok(!r.small.length, `${name}：按鈕太小 ${r.small.join('、')}`);
     ok(!r.tiny.length, `${name}：字太小 ${r.tiny.join('、')}`);
     ok(!r.clip.length, `${name}：字超出卡片 ${r.clip.join('、')}`);
-    ok(r.links === 4 + 22 + 10 + 4 + 13, `${name}：首頁連結數 ${r.links}`);
+    ok(r.links === 4 + 23 + 2 + 10 + 4 + 13, `${name}：首頁連結數 ${r.links}`);
     ok(!errs.length, `${name}：首頁錯誤 ${errs.join(' ')}`);
     await p.close();
   }
@@ -42,10 +42,11 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     let m;
     if (href === 'rank-tw.html') ok(await p.$$eval('.row', r => r.length) === 20, `${href}：排行榜不是 20 列`);
     else if (/^c[1-4]$/.test(hash)) ok(await vis('Q' + hash[1]), `${href}：沒有出現挑戰 ${hash[1]}`);
+    else if (href === 'word-check.html') ok(await p.$$eval('tbody tr', r => r.length) === 37, `${href}：考證表不是 37 列`);
     else if ((m = hash.match(/^w(\d+)$/))) {
       const hd = await p.$eval('#hd', e => e.textContent);
       ok(await vis('card') && hd.includes('第 ' + m[1] + ' 張'), `${href}：沒有出現第 ${m[1]} 張單字卡（${hd}）`);
-    } else if (hash === 'rev') ok(await vis('V') && (await p.$eval('#vt', e => e.textContent)).includes('34'), `${href}：沒有出現複習全部 34 個字`);
+    } else if (hash === 'rev') ok(await vis('V') && (await p.$eval('#vt', e => e.textContent)).includes('36'), `${href}：沒有出現複習全部 36 個字`);
     else if ((m = hash.match(/^adv(\d)$/))) ok(await vis('P') && await p.$eval('.tb.on', e => e.dataset.t) === m[1], `${href}：沒有出現大人榜單 ${m[1]}`);
     else if ((m = hash.match(/^g(\d+)$/))) ok(await vis('play') && await p.evaluate(() => G && G.id) === +m[1] - 1, `${href}：沒有開始遊戲 ${m[1]}`);
     else bad(href + '：不認得的連結');
@@ -57,7 +58,7 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     const qe = []; q.on('pageerror', e => qe.push(e.message));
     await q.goto(url('story.html#w1'));
     const total = await q.evaluate(() => W.length);
-    ok(total === 34, `單字卡數量 ${total}`);
+    ok(total === 36, `單字卡數量 ${total}`);
     for (let k = 0; k < total; k++) {
       await q.evaluate(k => { location.hash = 'w' + (k + 1); }, k);
       for (let s = 0; s < 6; s++) {
@@ -76,7 +77,7 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     await q.evaluate(() => { location.hash = 'w22'; }); await q.click('#why');
     ok((await q.$eval('#link', e => e.href)).includes('content'), '第 22 張出處連結不對');
     await q.click('#menu');
-    ok(await q.$$eval('#grid .gi', b => b.length) === 34 && await q.$('#grid .gh') !== null, '全部單字沒有 34 個／沒有大人分組');
+    ok(await q.$$eval('#grid .gi', b => b.length) === 36 && await q.$$eval('#grid .gh', g => g.length) === 2 && await q.$('#grid .gh') !== null, '全部單字沒有 36 個／分組不對');
     ok(!qe.length, `${w}px 單字卡錯誤 ${qe.join(' ')}`);
     await q.close();
   }
@@ -103,6 +104,23 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
       ok(await q.evaluate(n => W[n - 1].e, n) === e, `排行榜 ${e} 連到的單字卡不是 ${e}`);
       await q.goto(url('rank-tw.html'));
     }
+    await q.close();
+  }
+  // 考證頁：四種尺寸不橫向捲動（表格自己左右滑）；每個「單字卡 ▶」指到同一個字
+  for (const [w, hh, name] of sizes) {
+    const q = await browser.newPage({ viewport: { width: w, height: hh } });
+    await q.goto(url('word-check.html'));
+    ok(!(await q.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)), `${name}：考證頁會橫向捲動`);
+    await q.close();
+  }
+  {
+    const q = await browser.newPage();
+    await q.goto(url('word-check.html'));
+    const pairs = await q.$$eval('tbody tr', rs => rs.filter(r => r.querySelector('.go')).map(r => [r.querySelector('td.w b').textContent, r.querySelector('.go').getAttribute('href')]));
+    ok(pairs.length === 36, `考證頁單字卡連結 ${pairs.length} 個`);
+    await q.goto(url('story.html'));
+    const words = await q.evaluate(() => W.map(d => d.e));
+    for (const [e, href] of pairs) ok(words[+href.split('#w')[1] - 1] === e, `考證頁 ${e} 連到的單字卡不是 ${e}`);
     await q.close();
   }
   // 沒有 # 的舊入口照常從挑戰 1 開始

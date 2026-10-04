@@ -1,0 +1,307 @@
+{
+ "en-US": [
+  {
+   "set": [
+    "professional athlete",
+    "pro athlete"
+   ],
+   "raw": {
+    "(professional athlete + professional athletes)": 389.37563147101173,
+    "(pro athlete + pro athletes)": 45.62867843560525
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28professional+athlete+%2B+professional+athletes%29%2C%28pro+athlete+%2B+pro+athletes%29&year_start=2018&year_end=2022&corpus=en-US&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "hairstylist",
+    "hairdresser",
+    "hair stylist"
+   ],
+   "raw": {
+    "(hairstylist + hairstylists)": 119.77432343712735,
+    "(hairdresser + hairdressers)": 571.6562668567349,
+    "(hair stylist + hair stylists)": 80.20425354970939
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28hairstylist+%2B+hairstylists%29%2C%28hairdresser+%2B+hairdressers%29%2C%28hair+stylist+%2B+hair+stylists%29&year_start=2018&year_end=2022&corpus=en-US&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "counselor",
+    "counsellor"
+   ],
+   "raw": {
+    "(counselor + counselors)": 9548.092566546984,
+    "(counsellor + counsellors)": 600.7357541193414
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28counselor+%2B+counselors%29%2C%28counsellor+%2B+counsellors%29&year_start=2018&year_end=2022&corpus=en-US&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "real estate agent",
+    "realtor",
+    "estate agent"
+   ],
+   "raw": {
+    "(real estate agent + real estate agents)": 747.1692043736766,
+    "(realtor + realtors)": 572.0915567053453,
+    "(estate agent + estate agents)": 913.798913870778
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28real+estate+agent+%2B+real+estate+agents%29%2C%28realtor+%2B+realtors%29%2C%28estate+agent+%2B+estate+agents%29&year_start=2018&year_end=2022&corpus=en-US&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "flight attendant",
+    "stewardess"
+   ],
+   "raw": {
+    "(flight attendant + flight attendants)": 865.6436193632544,
+    "(stewardess + stewardesses)": 340.9051188896228
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28flight+attendant+%2B+flight+attendants%29%2C%28stewardess+%2B+stewardesses%29&year_start=2018&year_end=2022&corpus=en-US&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "police officer",
+    "policeman"
+   ],
+   "raw": {
+    "(police officer + police officers)": 8767.505960349808,
+    "(policeman + policemen)": 4948.138212057529
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28police+officer+%2B+police+officers%29%2C%28policeman+%2B+policemen%29&year_start=2018&year_end=2022&corpus=en-US&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "firefighter",
+    "fireman"
+   ],
+   "raw": {
+    "(firefighter + firefighters)": 2328.313689758943,
+    "(fireman + firemen)": 1099.9373444064986
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28firefighter+%2B+firefighters%29%2C%28fireman+%2B+firemen%29&year_start=2018&year_end=2022&corpus=en-US&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "computer engineer",
+    "software engineer"
+   ],
+   "raw": {
+    "(computer engineer + computer engineers)": 59.63472773373724,
+    "(software engineer + software engineers)": 358.33079152780556
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28computer+engineer+%2B+computer+engineers%29%2C%28software+engineer+%2B+software+engineers%29&year_start=2018&year_end=2022&corpus=en-US&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "esports player",
+    "professional gamer",
+    "pro gamer"
+   ],
+   "raw": {
+    "(esports player + esports players)": 12.875743404805462,
+    "(professional gamer + professional gamers)": 11.177781189530833,
+    "(pro gamer + pro gamers)": 8.321167044300637
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28esports+player+%2B+esports+players%29%2C%28professional+gamer+%2B+professional+gamers%29%2C%28pro+gamer+%2B+pro+gamers%29&year_start=2018&year_end=2022&corpus=en-US&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "lawyer",
+    "attorney"
+   ],
+   "raw": {
+    "(lawyer + lawyers)": 29130.285838618875,
+    "(attorney + attorneys)": 24067.026788543444
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28lawyer+%2B+lawyers%29%2C%28attorney+%2B+attorneys%29&year_start=2018&year_end=2022&corpus=en-US&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "programmer",
+    "coder",
+    "software developer"
+   ],
+   "raw": {
+    "(programmer + programmers)": 2709.1662559541874,
+    "(coder + coders)": 760.5479311223462,
+    "(software developer + software developers)": 407.7122838452851
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28programmer+%2B+programmers%29%2C%28coder+%2B+coders%29%2C%28software+developer+%2B+software+developers%29&year_start=2018&year_end=2022&corpus=en-US&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "game tester",
+    "video game tester"
+   ],
+   "raw": {
+    "(game tester + game testers)": 8.584183630588882,
+    "(video game tester + video game testers)": 1.6664297719515275
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28game+tester+%2B+game+testers%29%2C%28video+game+tester+%2B+video+game+testers%29&year_start=2018&year_end=2022&corpus=en-US&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "fortune teller",
+    "fortuneteller"
+   ],
+   "raw": {
+    "(fortune teller + fortune tellers)": 150.21459489616973,
+    "(fortuneteller + fortunetellers)": 37.68674101678471
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28fortune+teller+%2B+fortune+tellers%29%2C%28fortuneteller+%2B+fortunetellers%29&year_start=2018&year_end=2022&corpus=en-US&smoothing=0&case_insensitive=on"
+  }
+ ],
+ "en-GB": [
+  {
+   "set": [
+    "professional athlete",
+    "pro athlete"
+   ],
+   "raw": {
+    "(professional athlete + professional athletes)": 209.08465714342128,
+    "(pro athlete + pro athletes)": 12.512574132372833
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28professional+athlete+%2B+professional+athletes%29%2C%28pro+athlete+%2B+pro+athletes%29&year_start=2018&year_end=2022&corpus=en-GB&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "hairstylist",
+    "hairdresser",
+    "hair stylist"
+   ],
+   "raw": {
+    "(hairstylist + hairstylists)": 61.487186009401285,
+    "(hairdresser + hairdressers)": 1067.5701958007267,
+    "(hair stylist + hair stylists)": 55.177526370187024
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28hairstylist+%2B+hairstylists%29%2C%28hairdresser+%2B+hairdressers%29%2C%28hair+stylist+%2B+hair+stylists%29&year_start=2018&year_end=2022&corpus=en-GB&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "counselor",
+    "counsellor"
+   ],
+   "raw": {
+    "(counselor + counselors)": 1627.3252299470187,
+    "(counsellor + counsellors)": 3077.329904499493
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28counselor+%2B+counselors%29%2C%28counsellor+%2B+counsellors%29&year_start=2018&year_end=2022&corpus=en-GB&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "real estate agent",
+    "realtor",
+    "estate agent"
+   ],
+   "raw": {
+    "(real estate agent + real estate agents)": 296.28821351934675,
+    "(realtor + realtors)": 221.97938776002957,
+    "(estate agent + estate agents)": 1238.1073418055166
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28real+estate+agent+%2B+real+estate+agents%29%2C%28realtor+%2B+realtors%29%2C%28estate+agent+%2B+estate+agents%29&year_start=2018&year_end=2022&corpus=en-GB&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "flight attendant",
+    "stewardess"
+   ],
+   "raw": {
+    "(flight attendant + flight attendants)": 481.52791407574114,
+    "(stewardess + stewardesses)": 340.7785278852771
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28flight+attendant+%2B+flight+attendants%29%2C%28stewardess+%2B+stewardesses%29&year_start=2018&year_end=2022&corpus=en-GB&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "police officer",
+    "policeman"
+   ],
+   "raw": {
+    "(police officer + police officers)": 7625.81134949869,
+    "(policeman + policemen)": 6993.0089921399485
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28police+officer+%2B+police+officers%29%2C%28policeman+%2B+policemen%29&year_start=2018&year_end=2022&corpus=en-GB&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "firefighter",
+    "fireman"
+   ],
+   "raw": {
+    "(firefighter + firefighters)": 1115.4050923778414,
+    "(fireman + firemen)": 891.6933722957765
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28firefighter+%2B+firefighters%29%2C%28fireman+%2B+firemen%29&year_start=2018&year_end=2022&corpus=en-GB&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "computer engineer",
+    "software engineer"
+   ],
+   "raw": {
+    "(computer engineer + computer engineers)": 46.07686037161329,
+    "(software engineer + software engineers)": 204.13242651784458
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28computer+engineer+%2B+computer+engineers%29%2C%28software+engineer+%2B+software+engineers%29&year_start=2018&year_end=2022&corpus=en-GB&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "esports player",
+    "professional gamer",
+    "pro gamer"
+   ],
+   "raw": {
+    "(esports player + esports players)": 6.233516658404881,
+    "(professional gamer + professional gamers)": 9.645710880024083,
+    "(pro gamer + pro gamers)": 3.731263964468212
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28esports+player+%2B+esports+players%29%2C%28professional+gamer+%2B+professional+gamers%29%2C%28pro+gamer+%2B+pro+gamers%29&year_start=2018&year_end=2022&corpus=en-GB&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "lawyer",
+    "attorney"
+   ],
+   "raw": {
+    "(lawyer + lawyers)": 25981.27884994028,
+    "(attorney + attorneys)": 5688.419582838833
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28lawyer+%2B+lawyers%29%2C%28attorney+%2B+attorneys%29&year_start=2018&year_end=2022&corpus=en-GB&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "programmer",
+    "coder",
+    "software developer"
+   ],
+   "raw": {
+    "(programmer + programmers)": 1739.338517836586,
+    "(coder + coders)": 576.0212673067144,
+    "(software developer + software developers)": 261.37072097753844
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28programmer+%2B+programmers%29%2C%28coder+%2B+coders%29%2C%28software+developer+%2B+software+developers%29&year_start=2018&year_end=2022&corpus=en-GB&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "game tester",
+    "video game tester"
+   ],
+   "raw": {
+    "(game tester + game testers)": 2.5701158923308043
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28game+tester+%2B+game+testers%29%2C%28video+game+tester+%2B+video+game+testers%29&year_start=2018&year_end=2022&corpus=en-GB&smoothing=0&case_insensitive=on"
+  },
+  {
+   "set": [
+    "fortune teller",
+    "fortuneteller"
+   ],
+   "raw": {
+    "(fortune teller + fortune tellers)": 204.59003664541342,
+    "(fortuneteller + fortunetellers)": 20.878978190808084
+   },
+   "url": "https://books.google.com/ngrams/graph?content=%28fortune+teller+%2B+fortune+tellers%29%2C%28fortuneteller+%2B+fortunetellers%29&year_start=2018&year_end=2022&corpus=en-GB&smoothing=0&case_insensitive=on"
+  }
+ ]
+}
