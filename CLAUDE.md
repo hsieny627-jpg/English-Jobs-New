@@ -20,18 +20,20 @@
 | `index.html` | 首頁（主題式） | **產生出來的**，改 `_build_home.js` 再 `node _build_home.js` |
 | `story.html` | 36 張單字卡（每張 6 步）＋挑戰 1～4＋複習＋進階 | 資料在檔案裡的 `const W=[…]`、`SYL`、`TIP`、`AKA`、`SILENT`；**卡片順序由 `_build_mix.py` 決定**，不要手動排 |
 | `games.html` | 10 種遊戲（只有 21 個學生職業，大人 13＋中學生 2 還沒進遊戲） | 資料在 `const DATA=` |
+| `quiz.html` | 🧭 職業興趣探險（30 題，何倫六型）＋📚 給老師看的證據 | 題目改 `_quiz_check.py` 的 `ITEMS` → `python3 _quiz_check.py`（抓 O*NET 原文核對 → `evidence/quiz.json`）→ `node _build_quiz.js` |
 | `rank-tw.html` | 2026 台灣中小學生前 10 名＋證據 | `node _build_rank.js` |
 | `rank-mix.html` | 四榜綜合排序＋證據 | `python3 _build_mix.py`（會重排 story.html），再 `node _build_home.js` |
 | `word-check.html` | 英文用字考證（字典、O*NET、Ngram、每句話的原文、音節、改正紀錄） | `python3 _build_check.py` |
 | `evidence/*.json` | 所有查證的原始結果 | `_ngram.py`、`_ngram_us_gb.py`、`_dict_check.py`、`_onet_check.py`、`_audit.py` 重抓 |
 | `notebooklm/` | 給 NotebookLM 的前 10 名英文單字 | 手寫 Markdown |
 
-網址直接進入：`story.html#c1～#c4`（挑戰）、`#w1～#w36`（第幾張卡）、`#rev`、`#adv0～#adv2`；`games.html#g1～#g10`。每頁左上角都有 🏠 首頁。
+網址直接進入：`story.html#c1～#c4`（挑戰）、`#w1～#w36`（第幾張卡）、`#rev`、`#adv0～#adv2`；`games.html#g1～#g10`；`quiz.html`、`quiz.html#ev`（證據）。每頁左上角都有 🏠 首頁。
 
 ## 三、指令
 
 ```
-node _build_home.js && node _build_rank.js && python3 _build_check.py   # 重建
+node _build_home.js && node _build_rank.js && python3 _build_check.py && node _build_quiz.js   # 重建
+python3 _quiz_check.py         # 測驗：30 題、29 個職業興趣分數、7 項研究說法重抓原文核對
 python3 _audit.py              # 每一句英文說法對原文（新增卡片文字就在 C 清單加一條）
 NODE_PATH=$(npm root -g) node _verify.js   # 量測，只印失敗項＋一行總結；必須 0 失敗
 ```
@@ -54,6 +56,14 @@ NODE_PATH=$(npm root -g) node _verify.js   # 量測，只印失敗項＋一行�
 - hairstylist、computer engineer、professional athlete 保留；卡片最後一步有「也可以說」（hairdresser／software engineer／pro athlete）＋原因＋證據。
 - 國語日報沒有公布百分比 → 網站不寫百分比。
 - 2026/10/4 查證後改正 11 處（列在 word-check.html「查證後改正的地方」）。
+- **職業興趣探險（quiz.html，2026/10/8 使用者同意）**：
+  - 架構照 O*NET 迷你興趣量表（Mini-IP）：六型 × 5 題 = 30 題、六型輪流出；5 個表情作答（😍5～😖1）。每 6 題一關，中場有徽章。
+  - 每一題 = 36 個職業之一的 O*NET 工作內容逐字原文改寫，且該職業 O*NET 興趣分數前 3 名有這一型。改寫後**不是正式量表**，頁面要說是探索活動、僅供參考（開場、結果頁、首頁各一次）。
+  - 結果：六型全部顯示（六角形＋長條）；說「你**今天**最常按喜歡的是…」，不說「你是…型」；最高型同分並列，只有一型時加第二高（第二高 ≥3 型同分就不加）；職業寫「可以去認識」。不問性別、名字，不存資料。
+  - 結果頁職業＝O*NET 興趣前 3 名有這一型；📋 事務型只列前 2 名。
+  - O*NET 沒有直接資料的 7 個字（YouTuber、content creator、influencer、entertainer、esports player、engineer、fortune teller）不放進六型；前 6 個列在「這些職業也可以認識」，**fortune teller 不列**。
+  - 只測興趣，不測能力（四年級太累；能力不是短測驗測得出來）。
+  - 根據：O*NET IP/Mini-IP/Emoji 報告、Tracey & Ward 1998、Tracey 2002（小孩興趣結構還在變）、教育部議題融入說明手冊（涯E4、E8、E9、性E3）、大考中心六型中文名稱。網址都在 `_quiz_check.py` 的 `CLAIMS`。
 
 ## 六、還沒做／等使用者決定
 

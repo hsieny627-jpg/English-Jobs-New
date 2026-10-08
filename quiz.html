@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>職業興趣探險</title>
+<style>
+@font-face{font-family:'AndikaEmbed';src:url(data:font/woff2;base64,d09GMgABAAAAACt8ABEAAAAAUpAAACsbAAYZ2wAAAAAAAAAAAAAAAAAAAAAAAAAAGi4bglwcgQAGYAA8CIIwCZwMEQgK9EDnAgE2AiQDgzALgVoABCAFgi4HIAyBbxvSSVVGhY0DGNjug5P9/+mAyuFa0sHdElKNBkshSJPCLdnporY/RWUtCr0+iqIgUdp2ZdanzIk7s984u7g99CtM/bsea5+2wT78LszFL0wLeu1RzG+XpuI6lbGMLTNCktmffzf9c25uSAgRzF6XFtZRd2pO1elclJk/Uf/a11MleBx7vZ+8pCkAOlQVhgdyU60aokejZxygkROWjClbvM7PmdndJzJ84APiLgSyD9CVrO/82DoHuD4u2jYDsE1RGbrQ/TORpdWUSoqCATpQxAJjBiJWY2OgDmzEiEAdTlk4oxYu+p+L7MM2v59gmglWKB4SqD3VrH6Xw+W061aqpuRQVCHBYeFz1pAO6QOdIFL6GHCOwIuvov6iRlct+BkktnbLDWhF/FVNM5tNSNGS5f3gaSpGW5HT3gPqoSlpnx4eo4fOVIJ+RzVrxi2rAJdagFsk/xZ7TK3l6zZlyVabeZPK3DAbefEWa38JeFlQagX1nSeTFcz+XtWyfQ8gR9yULwbpziHXIZcuPS7dNB8PAIH/PwGBIEiRoKSTyI3cvWFQGEraRK68Q+liqBxi0HKTVnsh5cohxM5F6XHlcRU6F53bMuTSRVt4W6oVIEZIr2A8lmLECI9f/49Na4dARTnN9rV0GUPGlB/CmXQBBCAi5AjWdO2DhgzzMXEZGrcMTUC8IQCCaJmY/Ss1zWC+N2/6RDji+cDMyaNQAAAkpMJa4MHgSBQj8Yeug2wAduJ+PIqn8SJewzv4CJ/HV/Ft/BA/x2/xCX6Hvzh/Lc0rYJ86sgzZnspI0eIkSlekWIlSZSpUqVEroEGjFq06DQnC5GCewFgbIZjfup2f3AvKDWVuKhbTxQo0P/+zIE6r5cpwKsUgqXtXI+VMpG5Xxi/IxfLYSe3Hx7vLr6/5/MmYgVUUyPRzjiX2H84tgs8wRrkqY9CJtcYhfEgvqxJkj2UIr5nG/E41FrAfSwoALjSdmN+C6USG6E2Zrv/DrE3Xa1R4mrpi1D5/dg8s6azSTwQ6xL6xVsWZjgw3C4m3yygfajhWSotXjP//5aTm4/Hyz5cK9fwBwpGCvwD0KsQnly9PDbidbs1bfjfC0TZxAzBn/GfFVJQ3Lp9SfTIGgeQT0S9Gs3HLaIYanq11CKnRoUq6lrqfL4swti6VX1xNDzsTFv9c0gymfRfL1J4rLnJez1NXg9Jg3VYKwO9MRYN1Umqkdo0w0N8YQKZYEFp8o8DyBcjXy9Tc/vJM3afvOUyRWp5IIl7ywsvQRA6MtYQOQrHUHaAUB1cQQbVNCxKIFVuQAdpjZuNWzw1pIkJwmWwMXR45ThLuHIGik3AYW9Kro46MjTE4hv88sJjqTt7snzzAWSWuM+k6vzchBPyhdlYdEwa0ikla6BXrB6tJvLMGLfj0FWn51fl0kc2koaZ6SyZ067dvrDap3Ri4+uR+7zPzbUvmsyKjwdjSJ80BqymJIpELnq7AFGl9PEHg4SFUvBDelHRI94KGuQxJUOSE0OgJ1YzcUttIJaw27DRe6GVCvZYLVgZV26jEVNUe9GGkleK0IAs0II3Yghw3PDl35N0Za5XYCmpczRRkKXMjBwKZmjCq009Zcs0Nkh3awp0nkvof6mdOnAzSsunDholb6kWtgv5br4TxianGvgpyoJaDDkiIga/UuhMQ3s8WSUZT4hdr8YYF+oCmlTInF1QGHQcV+puSU6E+HUxAp12S4sa9tkkDusYkSogr5DCFGyCNQM5Ong6to31wBaNMdZ9+Z2XJRDVRL39upKlJegcQdtmCTMZUHEsLwtTC7NaI1de2oIJMxiqDPYMF9XA2IFS4NFnbS+6U+gE2Sn2swMAO3SGz4oLKUPJ0NDAg9dvGiiCzGrG84zP9rvUppR85eoBp7aZf3r5PGutUU2czMhiHu7ZxqSV2joYstxqScFl5QH09cUtAJjZayHUe6WeY1kPkoH5o5Zv4e8LQgGhJf9qoVDi2TGhMk0BNJnyHzQA3pCaSkN+h6uNDZkEvA6k7nkZ3aCi7o+TkmkM4t+/0xdC70XPOWQ/mmYldNs8kNwz2n6issCKDZbCBTUGwKwQcCgNOhYJLYcGtaOAphYMwhYcRirY/BuL7ttS05R0vKInvlcJsayyhwxr5feG4jsjI30dMRY9K2riW2J3eE2qwDcNRxQg09KChFw1HomEkGo5CQx8aRqFhNFoxHqiSFRKqA+0NQ7mLYTipAEV8vnqJqNjp7OHxEUkCMEYkCxJnZFOfPFUYyyHZuCtkeapm296YNMysbjb+rVropLhm0vRiKvBJ67409NA5VHlXIaYejbgCWE+gH1d/k5mcqpt2fkTSgQpj3bOEYvNTVDAD5Z2qYCabR2S11vosZCLWZyh1SPBUysbFtH7ssRThDwzg3gh3Xabq5s3XBbNBsNJmkzQmnWX2LEoRdRwcpngHqpT582JyApRrrafGHWcI9sNJvf/aH1O7bmYplet76kB2s0AkD3dWRsFMy1IVAeiMHWkPlKEVsozty6YrN5cIINeUPxcFnYcoMoozRihwRBKrLuESA1ohiAsrQiBybMTUlCEkLQoowZnFBNGd5KzXgrl+4GDSbEFZqWbyHXkpCjR7BCSQIujm43VDDC+zx7M0+xKVWGPdC+jkUGJSE2TK4rHFCOAuM92MlPB0by3QwmWoRLi6aWpuPLxZP6SHPMjS7Db6DbOlHpWWOVE3BpUXLXz1LbNxzkXzJs39HheD2SnMLinW5GRSrcqvS5ky2aqoYcnEbllqLuVmong9Gym+DLPp2Zb2dShlZu3aMmRhIhza3en8ZzHOYLKHIOwdK5kxNlfSVnWE8n7IHniEVxDm01Y60xLLfKxMWEre76C67RtcLH340lRtrEYGvCWZoeyaOs9aofZAYG0EJUbJ03nKr0Mys4J2VtWjAxhpDCgIDfNRsFFR0UTHsdJMCFrmo2CrotVtOAboDRHbVYSOBSjYqaro4lH6SreiSo+CSq+iok8eNko/nWBgPgoOKiqG6LigBAnB8HwUHK2oJLU6Ya06rFWPtRqwViPWasJazVirBetyRZYFT7ZBkspGOtSid7jeoLGHrAMdxijqFAXmHmlFXCLhGkluSGeF3YEIRxQ4o8DVI9bCOwKfCHwj8DMR/NH8EVZEka+EjgJcFSnA1ZECXBMpwLUmgnVRhPVRLG7YuKY71N72kMZ1jRKm9NAT7grv6CiKCfHDnxhvYO6Fuk0cILz8a6ifP1HsY2NPAnTvgOH/Bd4Y+EPzPCBO8JkpgoXTkjfrBhlJBsYPSFoYmsVBTSvTqCgpxuIx9WxYaQpym3MbZVtvlibysk8yp6gaNpHnKRwZx1PxxhfwihJNqZ6KVDboPCk6xhurV0Uxnn/o9RylnFssHpEZnVunuvUWU4RdtLFUULSiQDlBb3YoI/QOnRBvdkq8RrPuAMcLesX57x6CEZLbpXhcVFWi9aJZFCkVomP0YrjiVpxxTuq1mVkffZe+iDpNWWXR6zDESmKCGCnRMWMHml/3sP35QHHpDgmJJfscQNMZrOPpeSxgAb08USU+eXkkONZSi0IS6QY/dZ7Jz6rSHWapwG4GtrGLlht/hpawwM5pUkK1xCStGClFnhsPV4T0Ni5MQ2EfLJmdOoE+H4sFf/fkUEtqpFSdRg8ZBt03pnU/Z7t5BtH8mquiCPLG4I0V259V1opyVQh1VL/YpnW8+IXqnrvuYxpyHd/xnecrX82yr3H7NIQWTPJYzk85Siva1/CDyCEestx3upk8xEE/RwZYjPalb0MhzK1FPHsOHrrD2RiWPougxFuBLKPuLJW9swSQKyvg0SLt1ObVB/ra3Pn1JUCggR7woWuzcHbaH7JjH12Jp126beA2FzUjKvxOx1iSLO7i31wVDQfKoRUFz3rF4Zs81v5/Pzx5vvH0bLEHs19QQ9CnHAbakC6jzhppSQOuO8oRnmsF/zp5781xzeKSI1alLkUfj1UHJl6ygtMaKOaNZOq/mf3if8PfiDsr+V4qtO6nC6WK+Fcu/SNwG8Pu6wpK2/VpTbreC39yAlNwXvAj/4hfdKJz3TKt8XbAPbaEZYPGoDdYGuwnzdfeublm2luamJElEcO6z/G+ceF1c62M0t9KUWtItgKnBGJ/icSjJ9N3+gqek3I5OA90LdFVQMgCw1fZCywqCDkpjAUj78gktcFNtyGu5Vcbxe2t7nECMzC47wsaoYmnURiSIGTgIAs4ukAoX9qTX87/ZJmtI8ttv56JvXkJVTn5ImOoTzskQlFAlSGcxancC5m9T14jCB7BWCg4CWtxphsFaOnHkJxAreUzNjblrol6stk/FP+ugyPDR/HSYGO2ai3ow5iarH3u5HvKiel2xDRb0qpluwSsQBcOc0W92wemu6PzISnkNFirc3tIbpr9bJr8Xbb7V+ocK8ZExvq30WvDm24cS8o+5qpSeF4Q44YoPJl9N5yTlTRUpdNw68tKO5XN4XV03takAoOC4Cg9jqZRXel5k++CgOAhWPHIZ1BiCRWueBwJuE8wOQ5TqPEE4UT4tXBR1tqGpEKELuxp0HNRSLeBC18TELE9ODLQcNS1k9WILE+VOo/ZMbxKwEPAabIgKSCfw0egBQP1gi38o1Kvakp185CRFQ7JP1qo/0B/Koy64K4xTfAoZORLS6VY1AUriZlqgSak2mDkIuEepJkCl8/nTzxplqaYrrVcwF5mcDnDfAPIWajSrRkywARMcHUQvfcINW0U+k9SYHimJiu0iXfEGh/y8f4LUZ3eV5V9KmRXdlbGSWucRkdUz5B4WJPhriJkdks801AppZ73NGGaypdXLQdTEYaBUHr2kvgaL/7xX2N16nUNXvRT5iGTpoWaGkf5cluSHc8PPQ54mPSczKP0bq7lvQaN3PEmdM3yNKDKCbHxeP4LAIBg+GRJ0fdaZuhoP1QFDNZJGM8vzzNsvCHSm+k4tEJhZCybYikMLonqrm+lv65q4go02cfKg60osjIFcVGdOMMitgY6S/GxO+y/6vr21QcTLiFVkpM1h7j3Bq65zhfS+4iV+wXet4vF3lbWv/sRrzpAPaFKwBJ6skdd+gRq9pJMfqiRvP+ZqD64JKGR0/kHor4rp23iFBcyhrHG670sgn2IPumabsEMYClIlabhzhU0zJCBruJgUjpexY7e5HWaY+kFlzBdffr5dEYUDBloW9lJz1HnJPePlSEanzjaT62bXgZjeeFNsn7uhvVbrqmUY4GfcVoENaqzCx0mvZRX+MK1S5jrXmqfSZ9yLnWWIR578+a10ckP9uz/n2YzA1fvY317GtXOnkq1t6PScFYaDQtmaOYqclW/a81saM64i9C4g0Mj9qbJJFrFryTsdAlRQuDzlxTo4zf/J4TG9ekaTIXaii0D4sszD8JMPQqJhUbTiMUj9dk5xy5y8koeObsgTU8wqStukRS+rSeXYmPJEHlWmVWaNcTallAx0AJOYo9LSnS/kc/3QjsFVnnhmIJ7KVFzvd9m5f6gWm+tBJ9EcnSIPyzBpRAdHRN7JbcHjxYVtU9fuTp4srCoQ65/pJP8p9Me+wEdJTjLb5XWngmJTBiLDpclJldcbKzgZ9ZPEInBB7FothcJH9nSdOJg4srevwbfs681aZcxAL+g7pMlvZY2z0yIKGi2pXmUOfnmscJn3pem85Pjurzt4dwIoptTO72xIK3aXOuqA++wpd7RKEqztEk8vQMoviGdD67euHZNCXorrngFAdrms8EPFIcuI8jALeg1pTerPJmD8y0y4O+WZZA+iLA1XEUAhJQ4TyreOYdpysNVjufBgwwoOV7oBNckRcftJXK4SCV8a6kSGu9NxdXBZGVVe/7vLFQi+ZACYZdANRy+/2qrJF+SlC7JkpjNQiPavRDmWIa/B8tX5kcPNz6HDzSLhjvRzCQnJHtn4zLivx11hIAggT9FSv61f3D2tguofAa7plcZtukGKp8ZXt2nska+TTOqGDtBiau+X8YnQXSF1Bd1NTX3qwtc9mkNOZmP6BzxvzIM2LIXM4wYdiUWyGTzw56o453Tx8RLASe9g+lJfLhb4BLHydNiqFToNwRjZJ6LzDnOZzPOC9d6p3uaHO3+in8CTcA9kS4RAy7sBDyJ5pNugksZJzJ89YYwxOus3JyL9LzmGFZEZR3TRc0tH5YcSK6I8PdraUhfdootucOiuulc92JdTSw92ICN4AXSY7OOO6e7OLl4Cedip6oWk4/dc/+JZA/cH3hAXRxVNpzLTlF24CeH+YLsqp+llJ8TtIrufsxoS520CkLtuRTh2YPkSk72NLATs/rtPGmVu7GE+hTzRQdCuYVbupzP1fuU5/yguiK+uK03s1jUKEg9FojzIFAYKbebqoSnY2Pnchv5t59kNj9TyHQ7jIEcfv26eipAZIA4J8ddKQiptOkBH6oSVEwrC+/e6bxtbSvU99MpeM6umy/luIszIj+wAylEHitbMHjJLyVl3S97MJtFSGdSomLSoryaOKV188/YKojo+Ma4mBjTKT6tMSsm5o88KCxX2iEoHe/ILRoXlwqkYsw8wXyR4FBm6ZYxUxCl9zEP+1BUyStua8osbqvKSF1IsWW40K1plcWj1EPCtcSYE8mNohuPk0ta7kxm4C4dRkMOv35VPeVfYYjYXmfNl+mShuewh3wuxjJwLIPIH5LhHKuH055l0FAoKOOuZF6CVQg2b0xVLtbhf6NBZuQ1kFWUcIbgTUlEWtCZ8Vi+7WGLqb1SfPDUqe7ywLBqR3cMMnXX4L3rov8awVyrt0XFUOD/E9h1O6Oun8u1XL2QZ3vrApjTet15fBZzvT/qaRfPH8dkIERAb0unaO8gJsaCWEDxbkqfofDw7J7IbNzgAQI4uA9bb6Hne9ChLaO/ZKdy1wvZ94MnpZGf6m8MofcOjbkIjZVSlCUbgrTs4dEIU1eGVhy6xJ9nq8fwpufjS50/b4zimmBCMNDrhvx7BD3s0NKyUVrAsWn+c/XnVXOta3vXlrrEhVGJBYkNaIGi6sOAA3VKv0YcgV+A+XffNy3nVTazjTzUa+khDbm8mMUXSfPsGcVi2nVB6cvJsgMTxUoM30brkLQonQAXSijNeLG+323K0OOM4ZF28v2FOL25hfeHimOeYKJpmCNBjDUCS3iTn60wf4QHulpZmvw0wnJ8VdYXYncPUIZEwhTkpFdvJxu0PMUC7LtwInzZzN+mWrGaOaQIGCFftn98kqqXBHJln8Q2lQTcaL5XDXiXqqHliuZaVw6iO9EqKuJXgfIbiSNKD8RUsd84Qu8rsc63IZI6Se/ESg+HN2+A/HXxdCSyr0mfNvWc2hTz2bXwpMHogMfbd7M+qKOnsm7DC/0IRxKYK+iIxjvCjD/S2aRtl6qqAuqMmba04D68Zydgo+diz8b6GzaSLiYNZjigsiLrqflc+7lm+e16V/tOX/+zbOPphacX4z4tRfOt07RjYXYWs2ARzjle2Db6thb4Rx91TfYu60IUkB+VIMixqgv8bLQiA2yRrf0D2MT23hM/BMpvhIr7ktxn57kBQTwdoL/SRawt6ZLWGK+G70shfxSB03cDtq+qbt9hsg2i8hRY3uoskyssT+/7IwV2SzFqbDWk2qbljpJqYRQ6zVMYDoCQ3WgBPhArYLfcd9x48mCutWfl0VvntuTnLZTH/R47Gr19vrow+5Qg7tfiaRkXMrV8j5PJ2wwdPRmuIZNxdWUrDzi8jP9DR+iEfbGIQjHwYbOrBTKyX2OAbOAiMPrDvs1bm7p/vmakAG2ekR+zlexFTXRsmaenQ1kjvcTFXxHuvfhoOZ9RFBqEklHDd9REk7gQMMsw3j7O3sdQk6rD6tIcHfZ4K8ruJm/JkPuiiopvKjE2cU6Dv6+Pt0oPvmQUH6nJCOyrjuy2cv4zoDp3TirKKegsm0WEKrYcaaIAigNjxbnDGV0BqQp/UUpSjBej0V2wQ548HDHUzs7Su4JcYbqKurzYLSg98yCxvOaruwfa4lyYz3VqgpcI45fkhYSymvxarFqsetIw1T4EpCgxa8ojJ3XazEzxmqxIfiIVRHoXKAY9OPvkLOiBOPAlMQ10IsKxT7bRArzV8ucTMd65C2j86U+QZyguxM9JOEX8Os72BBVCSGmyG6O4NliNjobrfZ0IV3g1ql10QzfiPSSwALCVb/aBbeZA20xq1DVc90zLtFdg6vx4XQG2bdZCyv6O0E6DyTVaoVsv0+iD9fK5PQ+scSW8OxoNMl/2dYik87D07y8tSBFOUR4pCPJNC7hRVH9R3pMfCHf3VAfObRF5aD3NXz7GMbxy8GwjjDP4ASosccY74cmeOvAW32bX3T0mT9De9ALnFEPHswNz57XXPT+rnrOmrBAqqxDUPdwqv2uQe97yWob4GOjEXUR+0yxA+f9ZyV9AHf9fr3ufjwDpg02f6yVv9ZAGtZJd2vF/mxLvseEDBMkPiREARHgSNNYJVjEirMd/f9QDdmadyMpjt+T73a8dyfh9UyjmXcMG7zbtvHjv2oiNG+AK2ycqndpK3hutTSgZ2RgaSJ2PDZI1w+1rgOrj7vYtiCTBrZzCJx0Ned+fizsiqq3YekecoKXQgyXTK5NdQ6s1zHqcJSGSYHXSDLDPWza0l7PqEjETG591JCP0/9rJXKXrlQJCJbxaJ3Pb9JcK4pCQbJys5+FRxPQayhjPkBXi0j1CefG4S4+fiZB8UWlckVi+JpcdEYYes2DaqvdybVcsUvP/Tyt5Otyf+vG6QJzT6c0SGg4yVOH4ncDab47e6+aFOVt0eGKCqV4JBftr5TOVu2tUVXdSb4gQxl+71yxrqmr8cA9XRif4/52NSAg56UhDEppdYNUOFEQuglWYunEwdIbtHdjlFzHfkYK5kTu6HFHOOmUdyThyP1XTKk6QhJWGZEOFPva2HjMZDmQiSc77958PR8y7lD5J19MUnjSpkjnrXG7n0MXzlpKpKYqc2NFWaJhrXuaPILoV+YQVGm/7+Ovlsn/KCcCj/FjLhtvigmstUGVPnb0z1c6eTLW3I9Ps7Zxp+8Devx4eY90cZCWbFR84r9erkqFn5hmeJzbvfFNbqeqkW9+OosTC97JvFzHxh8HbFjA4Ki6w7rOJdjqBTQBO82OtG9GG6hNgzC6xWI7OAee9tCdXJBsHiOWcugMbH2XjO/2ILG4HyTcsi63jGBTR50RrTFuUi+VGfHDpfXtyeXyArhzgW9ZYapprXuaHIBlzFzSJJDkgoHKgA123f0NJNlONrOpuHJy0EBHtgBsEaxltPOQV/G20+M1mdtHhi9lpb0avG/nyFq+4/BIv7eXsiLRzkc8bXJROdK5uv69W94Hq/pENaoaASC6Bx1MTkof5wQ/rRrJ+bJTneRZgXKAvM7e3vHUZsHbi7m2ZzfGdoHUOhmQdAKeoW7lm+bn3JA3wVmJ9J+tDoJMv0g8yK8gugbOhWWfC2PaotacuIHb69uOztZBlRqrq+12aj9WK6g+e4yzmOtk6V8djGXKOKf+tuXFm4kmMiGCLBv8OPXe7ZIxZND2oQJPojIDP643vbnAMimcwLPUBbNMobaa62DUgI4gZWT3GiOWdI41BjxCx82SafwIdYTSXbp+gm7kn38cyGq+vH84Iq3dMjmuHmX293kkyz9VHUvNh7gUpBr13/6qXF+j/c9qIoxuTbklPXlmtWfV2Gr68PzaDGbeQzCWMK/vG+SqHbBFIARvmw5TmEEyxfwK/VcdJIVQlWLSBrjmw6Ywo+nV5FiOAZX29jKl3n6et6/nM7ffyWHSfwzVv/QbnoQWzl9XVERDzpV+Sf4iGqvqGci13veQ9nO2ze+d29hgme+4Y0KRZd2S4vPKX8YCh1ms1WxeiD9LxCeQ1FO6E90K6HOA4XdGpu2/rSvCBEm9RBYRLu8T3YU6OPjCX30ahGMY9jY94CJE8hEpdbwx720iaKz5bSfEh8Sw4mI7vHBuoJQPGbERK0nXJOw2iwiFcCwv+OjyFOGikkvILEmIIVx6PZSqd6XOLx38VWNCVjsUj+GrGQlyeCdcaqa6VptbJj7KNHNuv7RUZ6r5jh/uSfd3qR9mTcYxntT+U6rZcqzxTrLFwG8uAYtiWvTUMWEFaGBENJsdu6b+irS3tB8a5AUOURKSFVmjDstsohix90D9PCBKA8qrk37UmYyGEqT/tlwlxiwP2P1ZWPnV6SywZGPwlyzTQ7f0g2DxTrpWtYotbX7/Kq7aHEcm1zjMB5aRzcTZxoSRywknEEjwdj3B05BJgSRxXz5RLiFNwfzSJuQldzi5wi1nWQ9C1J5WdrVFV20kFf3z42qW7IVl7Q3lXdAT037ebw61JUyDSa9Zr+iKvTrGTHBL3qMiL4OBmAMx4ZPw+PCIEicuNl27WbIYv+LVygx65T3pXI2trYaynUSRvvaeQmzd252qGw72iI2e5otARHXf1Syf1AZuH80so290LxQLsNV6qjxiD5AYG17p1m1XRI7wfqqjjzj66gq/d66rU+lTChAHBkm0b68mofd5wEEhJu5L/AIIuRqurwxGk5ryBKDxyjwGvLQURDzmHHFG3zr8J0R4Z3p3HscVfRufUtFlEKkSDJbxBvo+vmgL9ajXy1HMQrnHLfGthQv/gBh7ycpJQ6qSa+FuRuwfb7pnbXC7Jkli3LUnYBxZ1qrbqz+oCXsf72HFYekTB4br/n0ZnrMAGwE9bz86RzUVpEfkhFs9/XX98xwP/qgwANiD3RyBZC7POxodUAgREzDEzTL5MIxNqVHu7MSzCUOzAGArw+zo/4UsmsckSD8XCxPTNp65t0vgJUTDksYByGmXzRGCKcZ67Dwf9Xl7lVVl45tkaUq/a3Sl/i0jYJJTqH9/5j16pDtzM/0CQ8ScMkOE1JLYgW44P/fAubOloLzE+tQOqAa+9VB/v6uQ/5a6zY7HnVnV4py7B4Mm8Q4GUFYnt5qINAosRZBnbnGTH8c2TqRdcdThWvxA6jxC4yoP0pNbsuY+h9tdhfHmz3wmzOuRT30froE1RaAVaidb+pMdq1c7uYw7eXJC3UJ1IPnb1eoVRv8ySDUDWCgXKnDYTgAtwIUv1assPnQHCR/EoJTO9DPO2U6fJHrn7XjVp9nDWVSl+71QZqAcyXOgjqOZORjqDDyfKQ+UQw1N6tQ1yTXzhl5o92mCrQCX8DZ1/erSrpCKAihX53yr9BLULt81BqoXUaXxWCp5Ypa8mmn43+sd3Z4F/FQNgOjJMpKaQWqFkyzWOyIkRdhnzq5haWSeQ6nCjiwsoLUZg5roJaDF+ILeYx7HnsJN6BHd+lThLPM4Q86gBhCO6iRn30tnLzZPtwgche8ufR1R025Lo/FHha81Mugg65jCbjvKzGS7NJi+ZOtMaMkR6N251ijlD2yCPLWLuNYRwKaLrPmWKhpwRkp/hvHGnhIatTKuscTCIps4IaGU4Gvwo986DSZaB6G3HUspJ2MBU909h7ZLqxhVuVo46KhiMeE1ttRhBBNqU9nMTdy9OjrbLNGKMY+SYnZXF0zzTMtY3WXCEQWbqwL6N6zWqi/E5KbURVf6AWrvNyj4d5Bgq8Lcxsd7ONUveKSlrtnEitGcdUuUYVYMyUZvBhxMVhJpDwSExja/+R6+53h/elQstdTI3Cw5gI2aoVIGCirfOM9/x0igxw4ECS6UoArDM9Yar45jUwLECKZ2xN8kE+xmzWJRO78SGbhkPs3q5I7l/9WWlR04isxpEcqauYBiVhTpkQIYD5PnUumU+fvyLmOXEMFj4FoVxDeugI//5QhenI40BtQfBXsESpim1fCleaUdp3+Y0MbcayHjXN0/sOqbQ3qRzM+Dc6XyyX3iXUCiRnXBKfvwWibhGTFFGs5IjZibRFs+KeQrfCUtDZBQlM5N33qTtw2HIrl6u/v+zgAt7h7ozwjhxjghv4M4dWKPPutWCndZNd8+UcifpKNmqHqTo27b3McUVEjpKZOynnxhwC5/r2xbACTiRSCG5PXN8Cw7COU8Ny53rV7FA6T0m6/PCBhWk3kQ1IYUeT42GQxeclcUWHixKkKrHJCQLb8LFmNJpi10Eew17WYoBHF0bhFiXbcCpH/Pb7GSpwrbwBaallJn8Lm+6iHOWxe4qz8JeseFtMIYOY3issdXm2A+W/z5MpqNxV1SVe7URjwh7XorNNJ8MlK84P8ul6qQCD2RwhCgG3YEvDjL2bpgwl9P5xT+pdRzBbIhnZKS66T70ASQnJH0PyuBTXurbUA/bSxh0U0XROCKbmhHcnumsnId0k7wSHukndq80z9Imu7kBV/YlL/u6gh3Y/iZ1LmP+XFzLqFuWBxqi2XtNHFChSzSlsWu5EU/L4u30jFLzK42YHrOLZzqX4zKIh0nUzQs20jSpvfYzLyxGR1hlKA9KXTTIc2BjHY8o8mj9CKRO/4iqROavBSHzeXbgI20agusBvePiASpUmybHiZ2TJGRjyRU3sjRV7HpPCWWDJKggYfUWbORhpDGuH/I32VlNiy6lwUbOYYC93JNDw8MK0R+2j0DwI+DA4HQXs+nmV1AW+8j36aevVK5VQQn6SM6UzEes4OMr4uSvXSyO5scVGp342UnfWWa+kcYGMRUeJ7GMWDytaPdjYFxryS3QNIfEF1mmT4simSnYIq7Da8fCjZHg4WiRSTABCYL19cUyic0RuqZs6UddC071RI/nEIO5KOCc6FvYgz0pUlstuI8ZhNuxhYmwXx3oe/GU5b40njhcpSyssm0gf5Kc3NPHe0Ei0aglbvRLLVo6CLvRWf8hVeCTMLNe5vPjmhceCnaLxWLNx03s0A9AtxM96uEFqZzUrSu4e1m8oi0A3XdwIM7ue3Kq4RMmIHxnJ51CorHN54u5RPh360jphw9nVk29pzdF2rkXYjvEmgompc4S2QY4Wq9yWId1wbBTFBgr7yx5/gj4TdG9m1gu7eYHeMIMB1Cg2Dw211aEVkJCww3CK0ml5PZVsjZc/gTLDLlfwpAI4BvovmzrJso/nUwiTftGpzq6+3JMEch6KT+B1ne2i7VQCwGtQLtYizmR4NSwrpAGJS6Si1bk3Tp1W5cwt3MSP/fJwTCPNSIsu9fp2j17EN0pODCgJpyZrdMuqXQ6+8xRLsXhuC0lxiO15kbiuHIhszlGRemhOtyBxsCFeejgEByaeYC2c3cZeg7zhMSJIJvgwI2fwSCeH7jUvVD8IiPTl10DfmPjXkUFD5SGrkqkpgI6P1YWNnp5GNqS0MSK4AX8ld0WT7WTr2hYSp64R3zZo3IIDQEzUnKDGfahQOYjusqETXMfALZ8XXlKcQDqWeUXk+hs4W5ZahNfBvahUxTzsFHcYBmb17hnvHSzZZwSOfSPwZUHSQ04KO4JkfmmeqfRMMyWZEnl1BcBQ6G8GogNbrLd0f944jjdFJZZLnYSdODP//BucG9JAU1cvjnA6FAnJ4THnQZAePA3DS/GKevr5Y8nyj3J2UR5ZkD+Dl7FhB4zmFMmzCYgy1KLlA4e5obXZ+S6VUY18xAKIs5qMdydicoAV/eL5OPQFzlswiZf3Gpn93kNxAxZzzIA4aDTLxmybq7fPJpwqGv/Usft6BpHT0VDmu/CBqIivm8AnIJTKaY8YxN61dGd8jeJac+S227Tmuf8hd13mGmqYiBKhm1WHSOi5HKg4HSv9bMbQhsUrpph5zDrsRhkhVk6GPRj/T6D6xGZmmpYWkqzkbGltWw4dQIxbUDifJr1KiaHzhm+/Pzx/vL8sIdLsesi+YSY+hn9JdCO/kXC6pYtRa1eeiz6pAozx4BVtT+yQ2ZqerFgkLFcg5aJifD0RL/yowkBmoaEQzX23uXJMVyFqwdNN7pvZdy84EmC/BIR0b5zmVcEc3TJj4KFpsy00bhmCFsaKo0TB10juRHAUez4MEthYpiMQTfJ4wykuwUEkHbr1mfGqePOWwr218bxAADw5VI7d263unDcX/WnxSMveLlcKYTUi+D/1Eiaxl+wSc+N/ZM9sWQKJiMAcuZPIPxAQxwRsi9+cz9WZaQeL2cXzMgQOOUUFsWEA1rvrnULpIKt+gkhQjoTvotznclDZ/m7E0RiKi/NM7+Vc5tD68LGdFpfSeErLByN6uuEFkd9bdIXU9wIS3uwt2y0F3hKGAeZyYzh+efJvlGLxQiraz0ATvoeuum9zXJUjm3haSr4Slxq5wNPvKk6a8HL+mrbndltjYCeQPYBfW9cFFlu/7gV/dezu+pLb/hi2G7g9qI0OKCmSxPbUfX5tMui6OJ5ai/W2tEimbNS9YrJmShM3pg1Hg/mKkNc5EFyeP9/RfW16mfeTdc68jbyqHcxx+MTyTbf0/XfJvL7whJNfveBEbvZHsNuJg6xFB/bBMAtWQSWcm2cTgwMLQA0gvdTkajxVELWeyqjzsRWSj+V5XRPanB3ttgUU80z3ThjjDWTymdIFFWyxJhPFffGk6Fa1aRSzfbslSabadh0PiBWjDMlN1Eh8CDlEzRvrObGmMXwga7Xc95Vs6lzp1FviWbpIVsbZ8bMalW6eEl8MQmjf53/1wrYd/UvePnm4VXEzUch/EfDh399FbjdbW3dhwltxUnAiR5eu341P70FN0qz56LZMMoJY+FWzcLf6R9aHQuU8RJ0I+XdHe2Bp+uni6fZ05G/Z77raRydQctFAf7vCIm7GrYr+ezFtTfaQ/617UMIKr7wDg8dEQtHrqujbivu8Uth9GSGmkepv0N+/Vp+ZjvUPBqai2VVysnRd/D/kk+x6XOStV/ZYAWU7AMAAAA=) format('woff2');font-display:block}
+:root{--bg:#FFF7E8;--card:#fff;--ink:#23201C;--soft:#6F665B;--line:#F0E2C8;--sea:#2F8FD8;--gold:#FFC93C}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'AndikaEmbed',"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;-webkit-text-size-adjust:100%;overflow-x:hidden}
+button{font-family:inherit;color:inherit}
+.app{max-width:1100px;margin:0 auto;padding:12px 16px 40px}
+.homeln{display:inline-flex;align-items:center;min-height:48px;padding:0 16px;border-radius:14px;border:3px solid var(--line);background:#fff;color:var(--ink);font-size:20px;font-weight:700;text-decoration:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.evln{font-size:18px;color:var(--soft);min-height:48px;display:inline-flex;align-items:center;padding:0 12px}
+.scr{display:none}.scr.on{display:block;animation:fadein .35s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.big{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:72px;padding:10px 34px;border-radius:22px;border:0;background:var(--sea);color:#fff;font-size:28px;font-weight:700;cursor:pointer;box-shadow:0 6px 0 #1C6AA8;-webkit-tap-highlight-color:transparent;text-decoration:none}
+.big:active{transform:translateY(4px);box-shadow:0 2px 0 #1C6AA8}
+.ghost{min-height:56px;padding:8px 20px;border-radius:16px;border:3px solid var(--line);background:#fff;font-size:21px;font-weight:700;cursor:pointer}
+.ghost:disabled{opacity:.35;cursor:default}
+/* 開場 */
+#start{text-align:center}
+h1{font-size:clamp(34px,5vw,54px);margin:14px 0 4px}
+.lead{font-size:clamp(21px,2.6vw,28px);color:var(--soft);margin:0 0 10px}
+.sea{position:relative;margin:10px auto 18px;max-width:820px;height:clamp(150px,22vw,220px);border-radius:30px;background:linear-gradient(#BFE6FF,#7CC4F2 60%,#3F9EE0);overflow:hidden}
+.isl{position:absolute;bottom:14%;display:flex;flex-direction:column;align-items:center;animation:bob 3s ease-in-out infinite}
+.isl b{font-size:clamp(34px,5vw,54px);line-height:1}
+.isl i{font-style:normal;margin-top:4px;padding:2px 10px;border-radius:12px;background:#fff;font-size:clamp(16px,1.9vw,20px);font-weight:700}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:900px;margin:0 auto 20px}
+.rules div{background:#fff;border:3px solid var(--line);border-radius:20px;padding:14px 10px;font-size:clamp(19px,2.2vw,24px);font-weight:700;line-height:1.4}
+.rules span{display:block;font-size:40px}
+.note{max-width:900px;margin:18px auto 0;background:#FFF0C2;border:3px solid #F2D27A;border-radius:18px;padding:12px 16px;font-size:clamp(18px,2vw,22px);line-height:1.6;text-align:left}
+.note b{color:#9A5B00}
+/* 題目 */
+.prog{display:flex;align-items:center;gap:12px;margin:8px 0}
+.track{position:relative;flex:1;height:22px;border-radius:11px;background:#DCEBF7}
+.fill{position:absolute;left:0;top:0;bottom:0;border-radius:11px;background:linear-gradient(90deg,#7CC4F2,var(--sea));transition:width .4s}
+.boat{position:absolute;top:50%;font-size:34px;transform:translate(-50%,-62%);transition:left .4s}
+.pn{font-size:21px;font-weight:700;white-space:nowrap}
+.qc{background:#fff;border:4px solid var(--line);border-radius:30px;padding:clamp(10px,2vh,26px) clamp(12px,3vw,30px);text-align:center;box-shadow:0 8px 0 var(--line)}
+.qc.in{animation:slidein .4s cubic-bezier(.2,1.2,.4,1)}
+@keyframes slidein{from{opacity:0;transform:translateX(60px) rotate(2deg)}to{opacity:1;transform:none}}
+.qlv{display:inline-block;font-size:19px;font-weight:700;color:var(--soft);background:var(--bg);border-radius:12px;padding:4px 12px}
+.qi{font-size:clamp(56px,min(12vw,12vh),130px);line-height:1.1;margin:2px 0}
+.qz{font-size:clamp(26px,min(4vw,5vh),48px);font-weight:700;line-height:1.3;min-height:2.6em;display:flex;align-items:center;justify-content:center}
+.qa{font-size:clamp(19px,min(2.4vw,3vh),28px);color:var(--soft);margin:2px 0 10px}
+.faces{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(6px,1.2vw,14px)}
+.fc{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:clamp(84px,min(13vw,14vh),150px);border-radius:22px;border:4px solid var(--line);background:#FFFDF8;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .12s,border-color .12s,background .12s;padding:6px 2px}
+.fc b{font-size:clamp(38px,min(6vw,7vh),72px);line-height:1.1}
+.fc span{font-size:clamp(16px,2vw,22px);font-weight:700;white-space:nowrap}
+.fc:active{transform:scale(.94)}
+.fc.sel{border-color:var(--sea);background:#E4F2FD;animation:pop .35s}
+@keyframes pop{40%{transform:scale(1.12)}100%{transform:scale(1)}}
+.rev{display:none;margin-top:12px;border-radius:22px;padding:8px 14px;background:#EAF4FF;border:3px solid #B4D8F5;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.rev.on{display:flex;animation:flip .45s ease}
+@keyframes flip{from{opacity:0;transform:rotateX(80deg)}to{opacity:1;transform:none}}
+.ri{font-size:clamp(38px,6vh,56px)}
+.rt{text-align:left;font-size:clamp(19px,2.2vw,24px);line-height:1.35}
+.rt .re{display:block;font-size:clamp(30px,4vw,42px);font-weight:700;color:#1B4A9E}
+.say{min-width:64px;min-height:64px;border-radius:50%;border:3px solid #B4D8F5;background:#fff;font-size:30px;cursor:pointer}
+.nav{display:flex;justify-content:space-between;gap:12px;margin-top:12px}
+/* 中場 */
+#mid{text-align:center}
+.badge{font-size:clamp(100px,16vw,160px);line-height:1.1;animation:tpop .8s cubic-bezier(.3,1.7,.5,1)}
+@keyframes tpop{0%{transform:scale(.2) rotate(-30deg)}100%{transform:scale(1) rotate(0)}}
+.mt{font-size:clamp(30px,4vw,44px);font-weight:700;margin:8px 0}
+.ms{font-size:clamp(21px,2.4vw,26px);color:var(--soft);margin-bottom:18px}
+.shelf{display:flex;justify-content:center;gap:10px;margin:0 0 20px;font-size:44px}
+.shelf span{opacity:.18}.shelf span.got{opacity:1}
+.fx{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:9}
+.fx i{position:absolute;top:-30px;width:14px;height:20px;border-radius:3px;animation:fall 1.8s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+/* 結果 */
+.warn{background:#FFF0C2;border:4px solid #F2D27A;border-radius:22px;padding:14px 18px;font-size:clamp(20px,2.3vw,25px);line-height:1.55;margin:12px 0}
+.warn b{color:#9A5B00}
+.rh{font-size:clamp(30px,4vw,44px);text-align:center;margin:14px 0 4px}
+.map{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:center;background:#fff;border:4px solid var(--line);border-radius:28px;padding:16px}
+.hex{width:100%;max-width:440px;margin:0 auto;display:block}
+.hex .shape{transform-origin:200px 200px;transform:scale(0);transition:transform 1.2s cubic-bezier(.2,1.3,.4,1)}
+.hex.go .shape{transform:scale(1)}
+.bars{display:flex;flex-direction:column;gap:10px}
+.bar{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:center;font-size:clamp(19px,2.1vw,23px);font-weight:700}
+.bar small{font-size:16px;color:var(--soft);font-weight:400}
+.bt{height:22px;border-radius:11px;background:#F2EEE6;overflow:hidden;grid-column:1/-1}
+.bt i{display:block;height:100%;width:0;border-radius:11px;transition:width 1.2s ease}
+.say1{text-align:center;font-size:clamp(23px,2.8vw,32px);font-weight:700;line-height:1.5;margin:18px 0 6px}
+.sub{text-align:center;font-size:clamp(19px,2.2vw,23px);color:var(--soft);margin:0 0 10px;line-height:1.5}
+.tg{border-radius:26px;padding:16px;margin-top:16px}
+.tg h3{margin:0 0 4px;font-size:clamp(26px,3.2vw,34px)}
+.tg h3 small{font-size:clamp(17px,1.9vw,20px);font-weight:400;color:var(--soft)}
+.tg p{margin:0 0 12px;font-size:clamp(19px,2.2vw,23px);line-height:1.5}
+.jg{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.jt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:150px;padding:10px 6px;border-radius:20px;background:#fff;border:3px solid rgba(0,0,0,.08);color:var(--ink);text-decoration:none;text-align:center;opacity:0;transform:scale(.6);transition:transform .35s cubic-bezier(.3,1.6,.5,1),opacity .35s}
+.jt.on{opacity:1;transform:none}
+.jt:active{transform:scale(.95)}
+.ji{font-size:46px;line-height:1.15}.je{font-size:23px;font-weight:700;line-height:1.15}.jz{font-size:18px;color:var(--soft)}
+.jgo{font-size:16px;font-weight:700;color:var(--sea);margin-top:2px}
+details.tg summary{cursor:pointer;list-style:none;min-height:56px;display:flex;align-items:center;gap:10px;font-size:clamp(24px,2.8vw,30px);font-weight:700}
+details.tg summary::-webkit-details-marker{display:none}
+details.tg summary::after{content:'▼';font-size:18px;margin-left:auto}
+details.tg[open] summary::after{content:'▲'}
+details.tg summary small{font-size:17px;font-weight:400;color:var(--soft)}
+details.tg[open] .jt{opacity:1;transform:none}
+.think{background:#fff;border:4px dashed #C8B99A;border-radius:24px;padding:14px 18px;margin-top:18px;font-size:clamp(20px,2.3vw,25px);line-height:1.7}
+.think h3{margin:0 0 6px;font-size:clamp(25px,3vw,32px)}
+.again{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:22px 0 6px}
+body[data-s=quiz] #ev,body[data-s=mid] #ev,body[data-s=quiz] .evln,body[data-s=mid] .evln{display:none}
+/* 給老師看的證據 */
+#ev{margin-top:30px;background:#fff;border:3px solid var(--line);border-radius:22px;padding:4px 14px 14px}
+#ev>summary{cursor:pointer;min-height:56px;display:flex;align-items:center;font-size:22px;font-weight:700}
+#ev h4{font-size:21px;margin:18px 0 8px}
+#ev p,#ev li{font-size:17px;line-height:1.65}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+#ev table{border-collapse:collapse;font-size:16px;line-height:1.5;min-width:640px;width:100%}
+#ev th,#ev td{border:1px solid #E6D9BF;padding:6px 8px;vertical-align:top;text-align:left}
+#ev th{background:#FFF3DA}
+#ev a{color:#2F6FDE}
+@media (max-width:640px){
+ .rules{grid-template-columns:1fr}.rules div{display:flex;align-items:center;gap:10px;text-align:left}.rules span{font-size:34px}
+ .map{grid-template-columns:1fr}
+ .jg{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .je{font-size:20px}
+ .qc{padding:12px 8px;border-radius:24px}
+ .faces{gap:4px}
+ .fc{border-width:3px;border-radius:16px;padding:6px 0}
+ .fc span{white-space:normal;font-size:16px;line-height:1.15;text-align:center}
+ .qi{font-size:52px}
+ .qz{font-size:23px}
+ .qa{font-size:18px;margin-bottom:6px}
+ .fc{min-height:74px}.fc b{font-size:34px}
+ .rev{gap:8px;padding:6px 10px;margin-top:8px}.rev .ri{font-size:34px}
+ .rt{font-size:17px}.rt .re{font-size:25px}
+ .say{min-width:52px;min-height:52px;font-size:24px}
+ #quiz .big{min-height:56px;font-size:22px;padding:6px 18px}
+ #quiz .ghost{min-height:56px;font-size:19px;padding:6px 14px}
+ .homeln{min-height:48px;font-size:18px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.fx{display:none}.hex .shape{transform:scale(1)}.jt{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<main class="app">
+<div class="top"><a class="homeln" href="index.html">🏠 首頁</a><a class="evln" href="#ev" id="evgo">📚 給老師看的證據</a></div>
+
+<section class="scr on" id="start">
+ <h1>🧭 職業興趣探險</h1>
+ <p class="lead">30 件工作上會做的事，你喜歡哪些？</p>
+ <div class="sea" aria-hidden="true">
+  <div class="isl" style="left:3%;animation-delay:0s"><b>🔧</b><i style="color:#E8743B">動手做</i></div>
+  <div class="isl" style="left:19%;animation-delay:0.4s"><b>🔬</b><i style="color:#2F6FDE">愛探索</i></div>
+  <div class="isl" style="left:35%;animation-delay:0.8s"><b>🎨</b><i style="color:#B24FD0">愛創作</i></div>
+  <div class="isl" style="left:51%;animation-delay:1.2000000000000002s"><b>🤝</b><i style="color:#2FA35A">愛幫助</i></div>
+  <div class="isl" style="left:67%;animation-delay:1.6s"><b>📣</b><i style="color:#D4452E">愛帶領</i></div>
+  <div class="isl" style="left:83%;animation-delay:2s"><b>📋</b><i style="color:#1E8C8C">愛整理</i></div>
+ </div>
+ <div class="rules">
+  <div><span>✅</span>沒有對錯</div>
+  <div><span>📝</span>不是考試，不打分數</div>
+  <div><span>💗</span>照你「現在」的感覺選</div>
+ </div>
+ <button class="big" id="go">開始探險 ▶</button>
+ <div class="note">⚠️ <b>僅供參考</b>：這個活動只是幫你<b>認識自己現在的興趣</b>、認識更多職業。結果<b>不是</b>告訴你以後一定要做什麼工作。興趣會隨著長大改變，每一種工作男生女生都可以做。</div>
+</section>
+
+<section class="scr" id="quiz" aria-live="polite">
+ <div class="prog"><div class="track"><div class="fill" id="fill"></div><span class="boat" id="boat">⛵</span></div><span class="pn" id="pn"></span></div>
+ <div class="qc" id="qc">
+  <span class="qlv" id="lv"></span>
+  <div class="qi" id="qi"></div>
+  <div class="qz" id="qz"></div>
+  <div class="qa">你喜歡做這件事嗎？</div>
+  <div class="faces" id="faces">
+   <button class="fc" data-v="5" aria-label="好喜歡"><b>😍</b><span>好喜歡</span></button>
+   <button class="fc" data-v="4" aria-label="喜歡"><b>🙂</b><span>喜歡</span></button>
+   <button class="fc" data-v="3" aria-label="不確定"><b>😐</b><span>不確定</span></button>
+   <button class="fc" data-v="2" aria-label="不喜歡"><b>🙁</b><span>不喜歡</span></button>
+   <button class="fc" data-v="1" aria-label="很不喜歡"><b>😖</b><span>很不喜歡</span></button>
+  </div>
+  <div class="rev" id="rev"><span class="ri" id="ri"></span><span class="rt"><span class="re" id="re"></span><span id="rz"></span></span><button class="say" id="say" aria-label="聽英文">🔊</button></div>
+ </div>
+ <div class="nav"><button class="ghost" id="back">◀ 上一題</button><button class="big" id="next" disabled>下一題 ▶</button></div>
+</section>
+
+<section class="scr" id="mid">
+ <div class="badge" id="mb"></div>
+ <div class="mt" id="mt"></div>
+ <div class="ms" id="ms"></div>
+ <div class="shelf" id="shelf"><span>🏅</span><span>🏅</span><span>🏅</span><span>🏅</span><span>🏅</span></div>
+ <button class="big" id="cont">繼續探險 ▶</button>
+</section>
+
+<section class="scr" id="res">
+ <div class="warn">⚠️ <b>僅供參考</b>：這是你<b>今天</b>的興趣，不是你以後一定要做的工作。研究發現，小學生的興趣還會一直改變；喜歡做的事也不等於能力，能力可以慢慢練出來。</div>
+ <h2 class="rh">🗺️ 我的興趣地圖</h2>
+ <p class="sub">每個人六種興趣都有，只是多少不一樣</p>
+ <div class="map">
+  <svg class="hex" id="hex" viewBox="0 0 400 400" role="img" aria-label="六種興趣的地圖"></svg>
+  <div class="bars" id="bars"></div>
+ </div>
+ <div class="say1" id="top"></div>
+ <p class="sub" id="topsub"></p>
+ <div id="tops"></div>
+ <h2 class="rh" style="margin-top:26px">🏝️ 其他小島也可以去看看</h2>
+ <div id="others"></div>
+ <details class="tg" style="background:#FFF3DA" id="extra">
+  <summary>🌟 這些職業也可以認識 <small>（還沒有正式的興趣研究資料）</small></summary>
+  <div class="jg"><a class="jt" href="story.html#w3" data-e="YouTuber"><span class="ji">📹</span><span class="je">YouTuber</span><span class="jz">YouTube 創作者</span><span class="jgo">學這個字 ▶</span></a><a class="jt" href="story.html#w9" data-e="engineer"><span class="ji">👷</span><span class="je">engineer</span><span class="jz">工程師</span><span class="jgo">學這個字 ▶</span></a><a class="jt" href="story.html#w10" data-e="content creator"><span class="ji">🎥</span><span class="je">content creator</span><span class="jz">內容創作者</span><span class="jgo">學這個字 ▶</span></a><a class="jt" href="story.html#w11" data-e="esports player"><span class="ji">🎮</span><span class="je">esports player</span><span class="jz">電競選手</span><span class="jgo">學這個字 ▶</span></a><a class="jt" href="story.html#w16" data-e="influencer"><span class="ji">📣</span><span class="je">influencer</span><span class="jz">網紅</span><span class="jgo">學這個字 ▶</span></a><a class="jt" href="story.html#w19" data-e="entertainer"><span class="ji">🎭</span><span class="je">entertainer</span><span class="jz">演藝人員</span><span class="jgo">學這個字 ▶</span></a></div>
+ </details>
+ <div class="think">
+  <h3>💬 想一想、說一說</h3>
+  1️⃣ 哪一題你最喜歡？為什麼？<br>
+  2️⃣ 和老師、家人聊聊你的發現。<br>
+  3️⃣ 點職業卡，去學這個職業的英文單字！
+ </div>
+ <div class="again"><button class="big" id="again">🔄 再玩一次</button><a class="ghost" style="display:inline-flex;align-items:center;text-decoration:none;color:var(--ink)" href="index.html">🏠 回首頁</a></div>
+</section>
+
+<details id="ev">
+ <summary>📚 給老師看的證據（研究、課綱、每一題的出處）</summary>
+ <h4>這是什麼</h4>
+ <p>參考美國勞動部 <b>O*NET 興趣量表 30 題迷你版</b>的架構（何倫 Holland 六種興趣，每型 5 題、輪流出題），把題目改寫成四年級看得懂的句子。每一題都是網站上 36 個職業之一的真實工作內容（O*NET 逐字原文），而且那個職業的 O*NET 興趣分數前幾名一定有這一型。
+ <b>改寫以後不是經過驗證的正式量表，是「探索活動」，僅供職涯發展參考。</b></p>
+ <h4>怎麼計分、怎麼呈現</h4>
+ <ul>
+  <li>作答：5 個表情（O*NET 用表情符號作答的研究）。😍 5 分、🙂 4、😐 3、🙁 2、😖 1；每型 5 題，最少 5 分、最多 25 分。</li>
+  <li>六型全部顯示（六角形＋長條），不只給一個答案；說法是「你<b>今天</b>最常按喜歡的是…」，不說「你是…型的人」。</li>
+  <li>列出最高分的型（同分並列）；只有一型最高時，再加上第二高的型（第二高有 3 型以上同分就不加）。六型一樣高，或最高分不到 11 分（平均是「不喜歡」），會出現另外的鼓勵說法。</li>
+  <li>職業清單寫「可以去認識」，不寫「適合你」；不問性別、不問名字、不存任何資料。</li>
+  <li>結果頁每一型列出的職業：O*NET 興趣分數前 3 名有這一型（📋 事務型只列前 2 名）。</li>
+ </ul>
+ <h4>研究和課綱（每一句都用 <code>_quiz_check.py</code> 抓原文自動核對）</h4>
+ <div class="tw"><table><thead><tr><th>說法</th><th>原文</th><th>出處</th></tr></thead><tbody>
+<tr><td>O*NET 興趣量表可以改編，創用 CC 授權</td><td>“The O*NET Interest Profiler may be redistributed or used to develop other assessments”<br>“Develop customized versions”</td><td><a href="https://www.onetcenter.org/IP.html" target="_blank" rel="noopener">原文</a></td></tr>
+<tr><td>30 題迷你版：每型 5 題，可信度 .74～.81</td><td>“The five-item interest scales had alpha coefficients ranging from .74 to .81”<br>“the 30-item version meets satisfactory reliability standards”</td><td><a href="https://www.onetcenter.org/dl_files/Mini-IP.pdf" target="_blank" rel="noopener">原文</a></td></tr>
+<tr><td>用表情符號作答</td><td>“An emoji-anchored scale uses ideograms symbolizing facial expressions for each point on the response scale”</td><td><a href="https://www.onetcenter.org/reports/IP_Emoji.html" target="_blank" rel="noopener">原文</a></td></tr>
+<tr><td>Tracey &amp; Ward 1998：年紀越大，六型結構越清楚</td><td>“the fit of the circular model was positively related to age”<br>“elementary and middle school students evaluated their interests and competencies using different dimensions than did college students”</td><td><a href="https://api.openalex.org/works/doi:10.1037/0022-0167.45.3.290" target="_blank" rel="noopener">原文</a></td></tr>
+<tr><td>Tracey 2002：五到八年級興趣還在改變</td><td>“there were changes both in the structure and level of interest and competence ratings over time”<br>“especially by 8th grade”</td><td><a href="https://api.openalex.org/works/doi:10.1037/0022-0167.49.2.148" target="_blank" rel="noopener">原文</a></td></tr>
+<tr><td>教育部議題融入說明手冊：生涯規劃教育（國小）、性別平等 性E3</td><td>“國小教育階段的生涯發展著重自我概念的發展以及覺察能力的培養”<br>“涯E4認識自己的特質與興趣”<br>“涯E8對工作/教育環境的好奇心”<br>“涯E9認識不同類型工作/教育環境”<br>“性E3覺察性別角色的刻板印象，了解家庭、學校與職業的分工，不應受性別的限制”</td><td><a href="https://stv.naer.edu.tw/data/course_manual/A/%E8%AD%B0%E9%A1%8C%E8%9E%8D%E5%85%A5%E8%AA%AA%E6%98%8E%E6%89%8B%E5%86%8A(%E5%AE%9A%E7%A8%BF%E7%89%88).pdf" target="_blank" rel="noopener">原文</a></td></tr>
+<tr><td>台灣六型中文名稱（大考中心興趣量表）</td><td>“實用型(R)、研究型(I)、藝術型(A)、社會型”<br>“(S)、企業型(E)、事務型(C)”</td><td><a href="https://www.yphs.tp.edu.tw/wp-content/uploads/doc/yp1255/%E8%88%88%E8%B6%A3%E9%87%8F%E8%A1%A8%E8%A7%A3%E9%87%8B%E8%88%87%E6%87%89%E7%94%A8.pdf" target="_blank" rel="noopener">原文</a></td></tr>
+ </tbody></table></div>
+ <h4>六種興趣：學生看的說法 ↔ O*NET 定義</h4>
+ <div class="tw"><table><thead><tr><th>型</th><th>學生看的說法</th><th>O*NET 原文</th></tr></thead><tbody>
+<tr><td>🔧 動手做（實用型）</td><td>用工具做東西、修東西，活動身體，在戶外工作</td><td>“Work involves designing, building, or repairing of equipment, materials, or structures, engaging in physical activity, or working outdoors. Realistic occupations are often associated with engineering, mechanics and electronics, construction, woodworking, transportation, machine operation, agriculture, animal services, physical or manual labor, athletics, or protective services.”</td></tr>
+<tr><td>🔬 愛探索（研究型）</td><td>研究東西、動物和植物、生病的原因，或人為什麼會這樣做</td><td>“Work involves studying and researching non-living objects, living organisms, disease or other forms of impairment, or human behavior. Investigative occupations are often associated with physical, life, medical, or social sciences, and can be found in the fields of humanities, mathematics/statistics, information technology, or health care service.”</td></tr>
+<tr><td>🎨 愛創作（藝術型）</td><td>畫畫、表演、寫作、做料理、做音樂、設計東西</td><td>“Work involves creating original visual artwork, performances, written works, food, or music for a variety of media, or applying artistic principles to the design of various objects and materials. Artistic occupations are often associated with visual arts, applied arts and design, performing arts, music, creative writing, media, or culinary art.”</td></tr>
+<tr><td>🤝 愛幫助（社會型）</td><td>幫助、教導、照顧別人，為別人服務</td><td>“Work involves helping, teaching, advising, assisting, or providing service to others. Social occupations are often associated with social, health care, personal service, teaching/education, or religious activities.”</td></tr>
+<tr><td>📣 愛帶領（企業型）</td><td>帶領大家、和別人談條件、推銷東西、說服別人</td><td>“Work involves managing, negotiating, marketing, or selling, typically in a business setting, or leading or advising people in political and legal situations. Enterprising occupations are often associated with business initiatives, sales, marketing/advertising, finance, management/administration, professional advising, public speaking, politics, or law.”</td></tr>
+<tr><td>📋 愛整理（事務型）</td><td>照著步驟和規則，把資料整理得清清楚楚</td><td>“Work involves following procedures and regulations to organize information or data, typically in a business setting. Conventional occupations are often associated with office work, accounting, mathematics/statistics, information technology, finance, or human resources.”</td></tr>
+ </tbody></table></div>
+ <h4>30 題：題目 ↔ O*NET 工作內容原文</h4>
+ <div class="tw"><table><thead><tr><th>#</th><th>型</th><th>題目</th><th>職業</th><th>O*NET 工作內容（原文）</th><th>這一型的興趣分數</th></tr></thead><tbody>
+<tr><td>1</td><td>🔧 實用型</td><td>🔧 修理汽車的煞車</td><td><b>mechanic</b></td>
+<td>“Repair, reline, replace, and adjust brakes.”</td><td>實用 100（第 1 高）<br><a href="https://www.onetonline.org/link/details/49-3023.00" target="_blank" rel="noopener">O*NET 49-3023.00</a></td></tr>
+<tr><td>2</td><td>🔬 研究型</td><td>🐶 幫生病的小動物檢查，找出牠哪裡不舒服</td><td><b>veterinarian</b></td>
+<td>“Examine animals to detect and determine the nature of diseases or injuries.”</td><td>研究 83（第 1 高）<br><a href="https://www.onetonline.org/link/details/29-1131.00" target="_blank" rel="noopener">O*NET 29-1131.00</a></td></tr>
+<tr><td>3</td><td>🎨 藝術型</td><td>🎨 用水彩、蠟筆或電腦畫畫</td><td><b>painter</b></td>
+<td>“Use materials such as pens and ink, watercolors, charcoal, oil, or computer software to create artwork.”</td><td>藝術 100（第 1 高）<br><a href="https://www.onetonline.org/link/details/27-1013.00" target="_blank" rel="noopener">O*NET 27-1013.00</a></td></tr>
+<tr><td>4</td><td>🤝 社會型</td><td>🧑‍🏫 教學生學會新東西</td><td><b>teacher</b></td>
+<td>“Instruct students individually and in groups, using teaching methods such as lectures, discussions, and demonstrations.”</td><td>社會 100（第 1 高）<br><a href="https://www.onetonline.org/link/details/25-2021.00" target="_blank" rel="noopener">O*NET 25-2021.00</a></td></tr>
+<tr><td>5</td><td>📣 企業型</td><td>💼 安排大家的工作，決定誰做什麼</td><td><b>business manager</b></td>
+<td>“Prepare staff work schedules and assign specific duties.”</td><td>企業 100（第 1 高）<br><a href="https://www.onetonline.org/link/details/11-1021.00" target="_blank" rel="noopener">O*NET 11-1021.00</a></td></tr>
+<tr><td>6</td><td>📋 事務型</td><td>✈️ 照著檢查表，一項一項檢查飛機</td><td><b>pilot</b></td>
+<td>“Inspect aircraft for defects and malfunctions, according to pre-flight checklists.”</td><td>事務 62（第 1 高）<br><a href="https://www.onetonline.org/link/details/53-2011.00" target="_blank" rel="noopener">O*NET 53-2011.00</a></td></tr>
+<tr><td>7</td><td>🔧 實用型</td><td>🍞 量好麵粉，準備做麵包的麵團</td><td><b>baker</b></td>
+<td>“Measure or weigh flour or other ingredients to prepare batters, doughs, fillings, or icings, using scales or graduated containers.”</td><td>實用 88（第 1 高）<br><a href="https://www.onetonline.org/link/details/51-3011.00" target="_blank" rel="noopener">O*NET 51-3011.00</a></td></tr>
+<tr><td>8</td><td>🔬 研究型</td><td>🎮 試玩遊戲，找出錯誤並記錄下來</td><td><b>game tester</b></td>
+<td>“Identify, analyze, and document problems with program function, output, online screen, or content.”</td><td>研究 79（第 1 高）<br><a href="https://www.onetonline.org/link/details/15-1253.00" target="_blank" rel="noopener">O*NET 15-1253.00</a></td></tr>
+<tr><td>9</td><td>🎨 藝術型</td><td>🖌️ 幫公司設計商標（logo）和網頁</td><td><b>designer</b></td>
+<td>“Develop graphics and layouts for product illustrations, company logos, and Web sites.”</td><td>藝術 100（第 1 高）<br><a href="https://www.onetonline.org/link/details/27-1024.00" target="_blank" rel="noopener">O*NET 27-1024.00</a></td></tr>
+<tr><td>10</td><td>🤝 社會型</td><td>💉 幫受傷的人急救、擦藥、包紮</td><td><b>nurse</b></td>
+<td>“Provide health care, first aid, immunizations, or assistance in convalescence or rehabilitation in locations such as schools, hospitals, or industry.”</td><td>社會 76（第 1 高）<br><a href="https://www.onetonline.org/link/details/29-1141.00" target="_blank" rel="noopener">O*NET 29-1141.00</a></td></tr>
+<tr><td>11</td><td>📣 企業型</td><td>⚖️ 找證據，在法院幫別人說話</td><td><b>lawyer</b></td>
+<td>“Gather evidence to formulate defense or to initiate legal actions by such means as interviewing clients and witnesses to ascertain the facts of a case.”<br>“Represent clients in court or before government agencies.”</td><td>企業 75（第 1 高）<br><a href="https://www.onetonline.org/link/details/23-1011.00" target="_blank" rel="noopener">O*NET 23-1011.00</a></td></tr>
+<tr><td>12</td><td>📋 事務型</td><td>🧳 檢查急救箱和安全設備有沒有準備好</td><td><b>flight attendant</b></td>
+<td>“Verify that first aid kits and other emergency equipment, including fire extinguishers and oxygen bottles, are in working order.”</td><td>事務 57（第 1 高）<br><a href="https://www.onetonline.org/link/details/53-2031.00" target="_blank" rel="noopener">O*NET 53-2031.00</a></td></tr>
+<tr><td>13</td><td>🔧 實用型</td><td>🚒 開消防車，去火災現場救人</td><td><b>firefighter</b></td>
+<td>“Drive and operate fire fighting vehicles and equipment.”<br>“Rescue survivors from burning buildings, accident sites, and water hazards.”</td><td>實用 92（第 1 高）<br><a href="https://www.onetonline.org/link/details/33-2011.00" target="_blank" rel="noopener">O*NET 33-2011.00</a></td></tr>
+<tr><td>14</td><td>🔬 研究型</td><td>🩺 看檢查報告，找出病人生了什麼病</td><td><b>doctor</b></td>
+<td>“Order, perform, and interpret tests and analyze records, reports, and examination information to diagnose patients' condition.”</td><td>研究 85（第 2 高）<br><a href="https://www.onetonline.org/link/details/29-1215.00" target="_blank" rel="noopener">O*NET 29-1215.00</a></td></tr>
+<tr><td>15</td><td>🎨 藝術型</td><td>🎤 站上舞台，唱歌給大家聽</td><td><b>singer</b></td>
+<td>“Perform before live audiences in concerts, recitals, educational presentations, and other social gatherings.”</td><td>藝術 94（第 1 高）<br><a href="https://www.onetonline.org/link/details/27-2042.00" target="_blank" rel="noopener">O*NET 27-2042.00</a></td></tr>
+<tr><td>16</td><td>🤝 社會型</td><td>🧠 聽別人說出心裡的感受，陪他想一想</td><td><b>counselor</b></td>
+<td>“Encourage clients to express their feelings and discuss what is happening in their lives, helping them to develop insight into themselves or their relationships.”</td><td>社會 97（第 1 高）<br><a href="https://www.onetonline.org/link/details/21-1014.00" target="_blank" rel="noopener">O*NET 21-1014.00</a></td></tr>
+<tr><td>17</td><td>📣 企業型</td><td>🏠 幫買房子和賣房子的人談好條件</td><td><b>real estate agent</b></td>
+<td>“Act as an intermediary in negotiations between buyers and sellers, generally representing one or the other.”</td><td>企業 91（第 1 高）<br><a href="https://www.onetonline.org/link/details/41-9022.00" target="_blank" rel="noopener">O*NET 41-9022.00</a></td></tr>
+<tr><td>18</td><td>📋 事務型</td><td>👮 把發生的事情詳細寫成紀錄</td><td><b>police officer</b></td>
+<td>“Record facts to prepare reports that document incidents and activities.”</td><td>事務 56（第 2 高）<br><a href="https://www.onetonline.org/link/details/33-3051.00" target="_blank" rel="noopener">O*NET 33-3051.00</a></td></tr>
+<tr><td>19</td><td>🔧 實用型</td><td>🏃 每天練習運動，參加比賽</td><td><b>professional athlete</b></td>
+<td>“Attend scheduled practice or training sessions.”<br>“Participate in athletic events or competitive sports, according to established rules and regulations.”</td><td>實用 70（第 1 高）<br><a href="https://www.onetonline.org/link/details/27-2021.00" target="_blank" rel="noopener">O*NET 27-2021.00</a></td></tr>
+<tr><td>20</td><td>🔬 研究型</td><td>⚙️ 研究機器為什麼故障，想辦法改好</td><td><b>mechanical engineer</b></td>
+<td>“Investigate equipment failures or difficulties to diagnose faulty operation and recommend remedial actions.”</td><td>研究 69（第 2 高）<br><a href="https://www.onetonline.org/link/details/17-2141.00" target="_blank" rel="noopener">O*NET 17-2141.00</a></td></tr>
+<tr><td>21</td><td>🎨 藝術型</td><td>🎭 背台詞、練習演戲</td><td><b>actor</b></td>
+<td>“Study and rehearse roles from scripts to interpret, learn and memorize lines, stunts, and cues as directed.”</td><td>藝術 100（第 1 高）<br><a href="https://www.onetonline.org/link/details/27-2011.00" target="_blank" rel="noopener">O*NET 27-2011.00</a></td></tr>
+<tr><td>22</td><td>🤝 社會型</td><td>🧭 帶大家參觀，介紹景點、回答問題</td><td><b>tour guide</b></td>
+<td>“Describe tour points of interest to group members, and respond to questions.”</td><td>社會 73（第 1 高）<br><a href="https://www.onetonline.org/link/details/39-7011.00" target="_blank" rel="noopener">O*NET 39-7011.00</a></td></tr>
+<tr><td>23</td><td>📣 企業型</td><td>🧑‍🍳 教廚房裡的人怎麼做菜，帶領大家</td><td><b>chef</b></td>
+<td>“Instruct cooks or other workers in the preparation, cooking, garnishing, or presentation of food.”</td><td>企業 69（第 1 高）<br><a href="https://www.onetonline.org/link/details/35-1011.00" target="_blank" rel="noopener">O*NET 35-1011.00</a></td></tr>
+<tr><td>24</td><td>📋 事務型</td><td>💻 把一步一步的指令排好，寫成電腦程式</td><td><b>programmer</b></td>
+<td>“Prepare detailed workflow charts and diagrams that describe input, output, and logical operation, and convert them into a series of instructions coded in a computer language.”</td><td>事務 82（第 1 高）<br><a href="https://www.onetonline.org/link/details/15-1251.00" target="_blank" rel="noopener">O*NET 15-1251.00</a></td></tr>
+<tr><td>25</td><td>🔧 實用型</td><td>✂️ 幫人剪頭髮、修出好看的髮型</td><td><b>hairstylist</b></td>
+<td>“Cut, trim and shape hair or hairpieces, based on customers' instructions, hair type, and facial features, using clippers, scissors, trimmers and razors.”</td><td>實用 73（第 1 高）<br><a href="https://www.onetonline.org/link/details/39-5012.00" target="_blank" rel="noopener">O*NET 39-5012.00</a></td></tr>
+<tr><td>26</td><td>🔬 研究型</td><td>🧠 了解別人心情和行為上的困擾</td><td><b>psychologist</b></td>
+<td>“Identify psychological, emotional, or behavioral issues and diagnose disorders, using information obtained from interviews, tests, records, or reference materials.”</td><td>研究 76（第 2 高）<br><a href="https://www.onetonline.org/link/details/19-3033.00" target="_blank" rel="noopener">O*NET 19-3033.00</a></td></tr>
+<tr><td>27</td><td>🎨 藝術型</td><td>🎧 用 DJ 機器播放音樂</td><td><b>DJ</b></td>
+<td>“Operate disc jockey controller and other equipment, such as microphones.”</td><td>藝術 64（第 1 高）<br><a href="https://www.onetonline.org/link/details/27-2091.00" target="_blank" rel="noopener">O*NET 27-2091.00</a></td></tr>
+<tr><td>28</td><td>🤝 社會型</td><td>🩺 告訴大家怎麼吃、怎麼運動，才不會生病</td><td><b>doctor</b></td>
+<td>“Advise patients and community members concerning diet, activity, hygiene, and disease prevention.”</td><td>社會 87（第 1 高）<br><a href="https://www.onetonline.org/link/details/29-1215.00" target="_blank" rel="noopener">O*NET 29-1215.00</a></td></tr>
+<tr><td>29</td><td>📣 企業型</td><td>💼 計畫特價活動，讓更多人來買東西</td><td><b>business manager</b></td>
+<td>“Plan or direct activities, such as sales promotions, that require coordination with other department managers.”</td><td>企業 100（第 1 高）<br><a href="https://www.onetonline.org/link/details/11-1021.00" target="_blank" rel="noopener">O*NET 11-1021.00</a></td></tr>
+<tr><td>30</td><td>📋 事務型</td><td>✂️ 幫客人排好預約的時間</td><td><b>hairstylist</b></td>
+<td>“Schedule client appointments.”</td><td>事務 49（第 2 高）<br><a href="https://www.onetonline.org/link/details/39-5012.00" target="_blank" rel="noopener">O*NET 39-5012.00</a></td></tr>
+ </tbody></table></div>
+ <h4>29 個職業的 O*NET 興趣分數（粗體＝前 3 名）</h4>
+ <div class="tw"><table><thead><tr><th>職業</th><th>六型分數</th><th>O*NET</th></tr></thead><tbody>
+<tr><td>🩺 <b>doctor</b> 醫生</td><td>實用 46、<b>研究 85</b>、藝術 8、<b>社會 87</b>、企業 22、<b>事務 49</b></td><td><a href="https://www.onetonline.org/link/details/29-1215.00" target="_blank" rel="noopener">29-1215.00</a></td></tr>
+<tr><td>🏃 <b>professional athlete</b> 職業運動員</td><td><b>實用 70</b>、研究 7、藝術 19、<b>社會 55</b>、<b>企業 59</b>、事務 34</td><td><a href="https://www.onetonline.org/link/details/27-2021.00" target="_blank" rel="noopener">27-2021.00</a></td></tr>
+<tr><td>⚖️ <b>lawyer</b> 律師</td><td>實用 2、<b>研究 56</b>、藝術 23、社會 41、<b>企業 75</b>、<b>事務 60</b></td><td><a href="https://www.onetonline.org/link/details/23-1011.00" target="_blank" rel="noopener">23-1011.00</a></td></tr>
+<tr><td>🎭 <b>actor</b> 演員</td><td>實用 22、研究 19、<b>藝術 100</b>、<b>社會 51</b>、<b>企業 50</b>、事務 14</td><td><a href="https://www.onetonline.org/link/details/27-2011.00" target="_blank" rel="noopener">27-2011.00</a></td></tr>
+<tr><td>💻 <b>programmer</b> 程式設計師</td><td><b>實用 40</b>、<b>研究 68</b>、藝術 25、社會 16、企業 18、<b>事務 82</b></td><td><a href="https://www.onetonline.org/link/details/15-1251.00" target="_blank" rel="noopener">15-1251.00</a></td></tr>
+<tr><td>🐶 <b>veterinarian</b> 獸醫</td><td><b>實用 83</b>、<b>研究 83</b>、藝術 0、<b>社會 41</b>、企業 12、事務 41</td><td><a href="https://www.onetonline.org/link/details/29-1131.00" target="_blank" rel="noopener">29-1131.00</a></td></tr>
+<tr><td>👮 <b>police officer</b> 警察</td><td><b>實用 73</b>、研究 29、藝術 1、社會 41、<b>企業 51</b>、<b>事務 56</b></td><td><a href="https://www.onetonline.org/link/details/33-3051.00" target="_blank" rel="noopener">33-3051.00</a></td></tr>
+<tr><td>🧑‍🏫 <b>teacher</b> 老師</td><td>實用 27、研究 39、<b>藝術 48</b>、<b>社會 100</b>、企業 26、<b>事務 46</b></td><td><a href="https://www.onetonline.org/link/details/25-2021.00" target="_blank" rel="noopener">25-2021.00</a></td></tr>
+<tr><td>💼 <b>business manager</b> 企業經理</td><td>實用 20、研究 23、藝術 5、<b>社會 40</b>、<b>企業 100</b>、<b>事務 72</b></td><td><a href="https://www.onetonline.org/link/details/11-1021.00" target="_blank" rel="noopener">11-1021.00</a></td></tr>
+<tr><td>🎮 <b>game tester</b> 遊戲試玩員</td><td><b>實用 47</b>、<b>研究 79</b>、藝術 12、社會 9、企業 10、<b>事務 78</b></td><td><a href="https://www.onetonline.org/link/details/15-1253.00" target="_blank" rel="noopener">15-1253.00</a></td></tr>
+<tr><td>✈️ <b>pilot</b> 機師</td><td><b>實用 62</b>、研究 36、藝術 7、社會 25、<b>企業 47</b>、<b>事務 62</b></td><td><a href="https://www.onetonline.org/link/details/53-2011.00" target="_blank" rel="noopener">53-2011.00</a></td></tr>
+<tr><td>🧠 <b>counselor</b> 心理諮商師</td><td>實用 5、<b>研究 57</b>、藝術 34、<b>社會 97</b>、企業 33、<b>事務 41</b></td><td><a href="https://www.onetonline.org/link/details/21-1014.00" target="_blank" rel="noopener">21-1014.00</a></td></tr>
+<tr><td>🚒 <b>firefighter</b> 消防員</td><td><b>實用 92</b>、研究 32、藝術 5、<b>社會 40</b>、企業 34、<b>事務 41</b></td><td><a href="https://www.onetonline.org/link/details/33-2011.00" target="_blank" rel="noopener">33-2011.00</a></td></tr>
+<tr><td>🍞 <b>baker</b> 麵包糕點師</td><td><b>實用 88</b>、研究 11、<b>藝術 23</b>、社會 12、企業 18、<b>事務 53</b></td><td><a href="https://www.onetonline.org/link/details/51-3011.00" target="_blank" rel="noopener">51-3011.00</a></td></tr>
+<tr><td>💉 <b>nurse</b> 護理師</td><td>實用 41、<b>研究 62</b>、藝術 6、<b>社會 76</b>、企業 23、<b>事務 63</b></td><td><a href="https://www.onetonline.org/link/details/29-1141.00" target="_blank" rel="noopener">29-1141.00</a></td></tr>
+<tr><td>🧭 <b>tour guide</b> 導遊</td><td>實用 39、研究 23、<b>藝術 41</b>、<b>社會 73</b>、<b>企業 44</b>、事務 31</td><td><a href="https://www.onetonline.org/link/details/39-7011.00" target="_blank" rel="noopener">39-7011.00</a></td></tr>
+<tr><td>🧠 <b>psychologist</b> 心理師</td><td>實用 1、<b>研究 76</b>、藝術 34、<b>社會 93</b>、企業 28、<b>事務 42</b></td><td><a href="https://www.onetonline.org/link/details/19-3033.00" target="_blank" rel="noopener">19-3033.00</a></td></tr>
+<tr><td>🎨 <b>painter</b> 畫家</td><td><b>實用 51</b>、<b>研究 28</b>、<b>藝術 100</b>、社會 21、企業 23、事務 22</td><td><a href="https://www.onetonline.org/link/details/27-1013.00" target="_blank" rel="noopener">27-1013.00</a></td></tr>
+<tr><td>🖌️ <b>designer</b> 設計師</td><td>實用 40、研究 31、<b>藝術 100</b>、社會 19、<b>企業 41</b>、<b>事務 49</b></td><td><a href="https://www.onetonline.org/link/details/27-1024.00" target="_blank" rel="noopener">27-1024.00</a></td></tr>
+<tr><td>🧳 <b>flight attendant</b> 空服員</td><td><b>實用 51</b>、研究 17、藝術 5、<b>社會 53</b>、企業 44、<b>事務 57</b></td><td><a href="https://www.onetonline.org/link/details/53-2031.00" target="_blank" rel="noopener">53-2031.00</a></td></tr>
+<tr><td>🎤 <b>singer</b> 歌手</td><td>實用 31、研究 9、<b>藝術 94</b>、<b>社會 40</b>、<b>企業 40</b>、事務 20</td><td><a href="https://www.onetonline.org/link/details/27-2042.00" target="_blank" rel="noopener">27-2042.00</a></td></tr>
+<tr><td>🔧 <b>mechanic</b> 汽車技師</td><td><b>實用 100</b>、<b>研究 43</b>、藝術 0、社會 8、企業 10、<b>事務 55</b></td><td><a href="https://www.onetonline.org/link/details/49-3023.00" target="_blank" rel="noopener">49-3023.00</a></td></tr>
+<tr><td>🖥️ <b>computer engineer</b> 電腦工程師</td><td><b>實用 78</b>、<b>研究 76</b>、藝術 14、社會 14、企業 16、<b>事務 73</b></td><td><a href="https://www.onetonline.org/link/details/17-2061.00" target="_blank" rel="noopener">17-2061.00</a></td></tr>
+<tr><td>🏠 <b>real estate agent</b> 房仲</td><td>實用 19、研究 8、藝術 15、<b>社會 42</b>、<b>企業 91</b>、<b>事務 66</b></td><td><a href="https://www.onetonline.org/link/details/41-9022.00" target="_blank" rel="noopener">41-9022.00</a></td></tr>
+<tr><td>✂️ <b>hairstylist</b> 髮型師</td><td><b>實用 73</b>、研究 9、藝術 37、<b>社會 45</b>、企業 38、<b>事務 49</b></td><td><a href="https://www.onetonline.org/link/details/39-5012.00" target="_blank" rel="noopener">39-5012.00</a></td></tr>
+<tr><td>🏛️ <b>architect</b> 建築師</td><td><b>實用 65</b>、研究 48、<b>藝術 52</b>、社會 26、企業 44、<b>事務 57</b></td><td><a href="https://www.onetonline.org/link/details/17-1011.00" target="_blank" rel="noopener">17-1011.00</a></td></tr>
+<tr><td>🎧 <b>DJ</b> DJ（放音樂的人）</td><td>實用 33、研究 9、<b>藝術 64</b>、社會 32、<b>企業 43</b>、<b>事務 42</b></td><td><a href="https://www.onetonline.org/link/details/27-2091.00" target="_blank" rel="noopener">27-2091.00</a></td></tr>
+<tr><td>⚙️ <b>mechanical engineer</b> 機械工程師</td><td><b>實用 90</b>、<b>研究 69</b>、藝術 17、社會 4、企業 16、<b>事務 64</b></td><td><a href="https://www.onetonline.org/link/details/17-2141.00" target="_blank" rel="noopener">17-2141.00</a></td></tr>
+<tr><td>🧑‍🍳 <b>chef</b> 廚師</td><td><b>實用 64</b>、研究 11、藝術 29、社會 33、<b>企業 69</b>、<b>事務 56</b></td><td><a href="https://www.onetonline.org/link/details/35-1011.00" target="_blank" rel="noopener">35-1011.00</a></td></tr>
+ </tbody></table></div>
+ <h4>O*NET 查不到直接資料的職業</h4>
+ <div class="tw"><table><thead><tr><th>職業</th><th>原因</th><th>網站怎麼處理</th></tr></thead><tbody>
+<tr><td>📹 <b>YouTuber</b> YouTube 創作者</td><td>O*NET 沒有這個職業</td><td>結果頁列在「這些職業也可以認識」</td></tr>
+<tr><td>👷 <b>engineer</b> 工程師</td><td>沒有指定哪一種工程師</td><td>結果頁列在「這些職業也可以認識」</td></tr>
+<tr><td>🎥 <b>content creator</b> 內容創作者</td><td>O*NET 沒有這個職業</td><td>結果頁列在「這些職業也可以認識」</td></tr>
+<tr><td>🎮 <b>esports player</b> 電競選手</td><td>O*NET 搜尋 esports 沒有完全符合的職業（只自動改搜 sports）</td><td>結果頁列在「這些職業也可以認識」</td></tr>
+<tr><td>📣 <b>influencer</b> 網紅</td><td>O*NET 沒有這個職業</td><td>結果頁列在「這些職業也可以認識」</td></tr>
+<tr><td>🎭 <b>entertainer</b> 演藝人員</td><td>O*NET 27-2099.00 是「其他」類，沒有興趣分數</td><td>結果頁列在「這些職業也可以認識」</td></tr>
+<tr><td>🔮 <b>fortune teller</b> 占卜師</td><td>O*NET 沒有這個職業</td><td>結果頁不列（沒有任何職業研究資料）；單字卡照舊</td></tr>
+ </tbody></table></div>
+</details>
+</main>
+<div class="fx" id="fx"></div>
+<script>
+const TY={"R":{"ic":"🔧","k":"動手做","f":"實用型","c":"#E8743B","bg":"#FFE6D6","d":"用工具做東西、修東西，活動身體，在戶外工作"},"I":{"ic":"🔬","k":"愛探索","f":"研究型","c":"#2F6FDE","bg":"#DCE8FB","d":"研究東西、動物和植物、生病的原因，或人為什麼會這樣做"},"A":{"ic":"🎨","k":"愛創作","f":"藝術型","c":"#B24FD0","bg":"#F3E1FA","d":"畫畫、表演、寫作、做料理、做音樂、設計東西"},"S":{"ic":"🤝","k":"愛幫助","f":"社會型","c":"#2FA35A","bg":"#DCF0C8","d":"幫助、教導、照顧別人，為別人服務"},"E":{"ic":"📣","k":"愛帶領","f":"企業型","c":"#D4452E","bg":"#FFE0DA","d":"帶領大家、和別人談條件、推銷東西、說服別人"},"C":{"ic":"📋","k":"愛整理","f":"事務型","c":"#1E8C8C","bg":"#D5F1EF","d":"照著步驟和規則，把資料整理得清清楚楚"}};
+const ORDER='RIASEC';
+const ITEMS=[{"t":"R","ic":"🔧","zh":"修理汽車的煞車","e":"mechanic"},{"t":"I","ic":"🐶","zh":"幫生病的小動物檢查，找出牠哪裡不舒服","e":"veterinarian"},{"t":"A","ic":"🎨","zh":"用水彩、蠟筆或電腦畫畫","e":"painter"},{"t":"S","ic":"🧑‍🏫","zh":"教學生學會新東西","e":"teacher"},{"t":"E","ic":"💼","zh":"安排大家的工作，決定誰做什麼","e":"business manager"},{"t":"C","ic":"✈️","zh":"照著檢查表，一項一項檢查飛機","e":"pilot"},{"t":"R","ic":"🍞","zh":"量好麵粉，準備做麵包的麵團","e":"baker"},{"t":"I","ic":"🎮","zh":"試玩遊戲，找出錯誤並記錄下來","e":"game tester"},{"t":"A","ic":"🖌️","zh":"幫公司設計商標（logo）和網頁","e":"designer"},{"t":"S","ic":"💉","zh":"幫受傷的人急救、擦藥、包紮","e":"nurse"},{"t":"E","ic":"⚖️","zh":"找證據，在法院幫別人說話","e":"lawyer"},{"t":"C","ic":"🧳","zh":"檢查急救箱和安全設備有沒有準備好","e":"flight attendant"},{"t":"R","ic":"🚒","zh":"開消防車，去火災現場救人","e":"firefighter"},{"t":"I","ic":"🩺","zh":"看檢查報告，找出病人生了什麼病","e":"doctor"},{"t":"A","ic":"🎤","zh":"站上舞台，唱歌給大家聽","e":"singer"},{"t":"S","ic":"🧠","zh":"聽別人說出心裡的感受，陪他想一想","e":"counselor"},{"t":"E","ic":"🏠","zh":"幫買房子和賣房子的人談好條件","e":"real estate agent"},{"t":"C","ic":"👮","zh":"把發生的事情詳細寫成紀錄","e":"police officer"},{"t":"R","ic":"🏃","zh":"每天練習運動，參加比賽","e":"professional athlete"},{"t":"I","ic":"⚙️","zh":"研究機器為什麼故障，想辦法改好","e":"mechanical engineer"},{"t":"A","ic":"🎭","zh":"背台詞、練習演戲","e":"actor"},{"t":"S","ic":"🧭","zh":"帶大家參觀，介紹景點、回答問題","e":"tour guide"},{"t":"E","ic":"🧑‍🍳","zh":"教廚房裡的人怎麼做菜，帶領大家","e":"chef"},{"t":"C","ic":"💻","zh":"把一步一步的指令排好，寫成電腦程式","e":"programmer"},{"t":"R","ic":"✂️","zh":"幫人剪頭髮、修出好看的髮型","e":"hairstylist"},{"t":"I","ic":"🧠","zh":"了解別人心情和行為上的困擾","e":"psychologist"},{"t":"A","ic":"🎧","zh":"用 DJ 機器播放音樂","e":"DJ"},{"t":"S","ic":"🩺","zh":"告訴大家怎麼吃、怎麼運動，才不會生病","e":"doctor"},{"t":"E","ic":"💼","zh":"計畫特價活動，讓更多人來買東西","e":"business manager"},{"t":"C","ic":"✂️","zh":"幫客人排好預約的時間","e":"hairstylist"}];
+const JOBS={"R":["mechanic","firefighter","mechanical engineer","baker","veterinarian","computer engineer","police officer","hairstylist","professional athlete","architect","pilot","chef","painter","flight attendant","game tester","programmer"],"I":["game tester","doctor","veterinarian","psychologist","computer engineer","mechanical engineer","programmer","counselor","nurse","lawyer","mechanic","painter"],"A":["actor","painter","designer","singer","DJ","teacher","architect","tour guide","baker"],"S":["teacher","counselor","psychologist","doctor","nurse","tour guide","flight attendant","actor","singer","professional athlete","hairstylist","real estate agent","veterinarian","business manager","firefighter"],"E":["business manager","real estate agent","lawyer","chef","professional athlete","tour guide","DJ","police officer","actor","pilot","designer","singer"],"C":["programmer","flight attendant","game tester","business manager","real estate agent","nurse","pilot","lawyer","architect","police officer","mechanic","baker","designer","hairstylist","firefighter"]};
+const WD={"doctor":[1,"醫生","🩺"],"professional athlete":[2,"職業運動員","🏃"],"YouTuber":[3,"YouTube 創作者","📹"],"lawyer":[4,"律師","⚖️"],"actor":[5,"演員","🎭"],"programmer":[6,"程式設計師","💻"],"veterinarian":[7,"獸醫","🐶"],"police officer":[8,"警察","👮"],"engineer":[9,"工程師","👷"],"content creator":[10,"內容創作者","🎥"],"esports player":[11,"電競選手","🎮"],"teacher":[12,"老師","🧑‍🏫"],"business manager":[13,"企業經理","💼"],"game tester":[14,"遊戲試玩員","🎮"],"pilot":[15,"機師","✈️"],"influencer":[16,"網紅","📣"],"counselor":[17,"心理諮商師","🧠"],"firefighter":[18,"消防員","🚒"],"entertainer":[19,"演藝人員","🎭"],"baker":[20,"麵包糕點師","🍞"],"nurse":[21,"護理師","💉"],"tour guide":[22,"導遊","🧭"],"fortune teller":[23,"占卜師","🔮"],"psychologist":[24,"心理師","🧠"],"painter":[25,"畫家","🎨"],"designer":[26,"設計師","🖌️"],"flight attendant":[27,"空服員","🧳"],"singer":[28,"歌手","🎤"],"mechanic":[29,"汽車技師","🔧"],"computer engineer":[30,"電腦工程師","🖥️"],"real estate agent":[31,"房仲","🏠"],"hairstylist":[32,"髮型師","✂️"],"architect":[33,"建築師","🏛️"],"DJ":[34,"DJ（放音樂的人）","🎧"],"mechanical engineer":[35,"機械工程師","⚙️"],"chef":[36,"廚師","🧑‍🍳"]};
+const $=id=>document.getElementById(id);
+let ans=[],cur=0;
+function speak(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.85;speechSynthesis.speak(u)}catch(e){}}
+function show(id){document.body.dataset.s=id;document.querySelectorAll('.scr').forEach(s=>s.classList.toggle('on',s.id===id));window.scrollTo(0,0)}
+function confetti(){const fx=$('fx');fx.innerHTML='';const cs=['#FFC93C','#2F8FD8','#E8743B','#2FA35A','#B24FD0','#D4452E'];
+ for(let k=0;k<40;k++){const i=document.createElement('i');i.style.left=Math.random()*100+'%';i.style.background=cs[k%6];i.style.animationDelay=Math.random()*.6+'s';fx.appendChild(i)}
+ setTimeout(()=>fx.innerHTML='',2600)}
+function render(){
+ const it=ITEMS[cur],qc=$('qc');
+ qc.classList.remove('in');void qc.offsetWidth;qc.classList.add('in');
+ $('pn').textContent='第 '+(cur+1)+' / '+ITEMS.length+' 題';
+ const p=cur/ITEMS.length*100;$('fill').style.width=p+'%';$('boat').style.left=Math.max(3,p)+'%';
+ $('lv').textContent='第 '+(Math.floor(cur/6)+1)+' 關';
+ $('qi').textContent=it.ic;$('qz').textContent=it.zh;
+ document.querySelectorAll('.fc').forEach(b=>b.classList.toggle('sel',+b.dataset.v===ans[cur]));
+ const w=WD[it.e];$('ri').textContent=w[2];$('re').textContent=it.e;$('rz').textContent=w[1]+'會做這件事';
+ $('rev').classList.toggle('on',!!ans[cur]);$('next').disabled=!ans[cur];
+ $('next').textContent=cur===ITEMS.length-1?'看結果 ▶':'下一題 ▶';
+ $('back').disabled=cur===0;
+}
+function pick(v){
+ const first=!ans[cur];ans[cur]=v;render();
+ if(first)speak(ITEMS[cur].e);
+}
+function next(){
+ if(!ans[cur])return;
+ if(cur===ITEMS.length-1){result();return}
+ cur++;
+ if(cur%6===0){mid(cur/6);return}
+ render();
+}
+function mid(k){
+ const bs=['🏝️','🐚','🗺️','⭐','🏆'];
+ $('mb').textContent=bs[k-1];$('mt').textContent='第 '+k+' 關完成！';
+ $('ms').textContent='已經探險 '+k*6+' 題，還有 '+(ITEMS.length-k*6)+' 題';
+ [...$('shelf').children].forEach((s,i)=>s.classList.toggle('got',i<k));
+ show('mid');confetti();
+}
+function score(){const s={};for(const t of ORDER)s[t]=0;ITEMS.forEach((it,i)=>s[it.t]+=ans[i]||0);return s}
+function tile(e){const w=WD[e];return '<a class="jt" href="story.html#w'+w[0]+'" data-e="'+e+'"><span class="ji">'+w[2]+'</span><span class="je">'+e+'</span><span class="jz">'+w[1]+'</span><span class="jgo">學這個字 ▶</span></a>'}
+function group(t,open){const y=TY[t];
+ const head='<h3>'+y.ic+' '+y.k+' <small>（'+y.f+'）</small></h3><p>'+y.d+'。<br>可以去認識這些職業：</p>';
+ return open?'<section class="tg" style="background:'+y.bg+'" data-t="'+t+'">'+head+'<div class="jg">'+JOBS[t].map(tile).join('')+'</div></section>'
+ :'<details class="tg" style="background:'+y.bg+'" data-t="'+t+'"><summary>'+y.ic+' '+y.k+' <small>（'+y.f+'）</small></summary><p>'+y.d+'。</p><div class="jg">'+JOBS[t].map(tile).join('')+'</div></details>'}
+function hex(s){
+ const c=200,R=150,pt=(k,r)=>[c+r*Math.sin(Math.PI/3*k),c-r*Math.cos(Math.PI/3*k)];
+ let g='';
+ for(const f of [1,.6,.2])g+='<polygon points="'+[0,1,2,3,4,5].map(k=>pt(k,R*f).join(',')).join(' ')+'" fill="'+(f===1?'#FBF7EF':'none')+'" stroke="#E6D9BF" stroke-width="2"/>';
+ for(let k=0;k<6;k++){const [x,y]=pt(k,R);g+='<line x1="200" y1="200" x2="'+x+'" y2="'+y+'" stroke="#E6D9BF" stroke-width="2"/>'}
+ const sh=[...ORDER].map((t,k)=>pt(k,R*Math.max(.08,(s[t]-5)/20)).join(',')).join(' ');
+ g+='<polygon class="shape" points="'+sh+'" fill="rgba(47,143,216,.35)" stroke="#2F8FD8" stroke-width="4" stroke-linejoin="round"/>';
+ [...ORDER].forEach((t,k)=>{const [x,y]=pt(k,R+30);g+='<text x="'+x+'" y="'+(y+12)+'" text-anchor="middle" font-size="34">'+TY[t].ic+'</text>'});
+ $('hex').innerHTML=g;$('hex').classList.remove('go');
+ setTimeout(()=>$('hex').classList.add('go'),80);
+}
+function result(){
+ const s=score(),vals=ORDER.split('').map(t=>s[t]),max=Math.max(...vals);
+ let top=ORDER.split('').filter(t=>s[t]===max);
+ if(top.length===1){const sec=Math.max(...vals.filter(v=>v<max)),two=ORDER.split('').filter(t=>s[t]===sec);if(two.length<=2)top=top.concat(two)}
+ const flat=vals.every(v=>v===max);
+ if(flat)top=[];
+ hex(s);
+ $('bars').innerHTML=ORDER.split('').map(t=>'<div class="bar" data-t="'+t+'"><span>'+TY[t].ic+' '+TY[t].k+' <small>'+TY[t].f+'</small></span><span style="text-align:right">'+s[t]+' 分</span><div class="bt"><i style="background:'+TY[t].c+'" data-w="'+(s[t]/25*100)+'"></i></div></div>').join('');
+ setTimeout(()=>document.querySelectorAll('.bt i').forEach(i=>i.style.width=i.dataset.w+'%'),80);
+ const nm=top.map(t=>TY[t].ic+' '+TY[t].k).join('、');
+ $('top').innerHTML=flat?'你六種興趣今天一樣多！':'你今天最常按喜歡的是：<br>'+nm;
+ $('topsub').textContent=flat?'每一座小島都可以去看看，慢慢找出你最喜歡的。':max<=10?'今天好像都不太喜歡也沒關係，興趣會慢慢出現，多認識不同的工作就會發現。':'這些小島上的職業，可以先去認識看看（不是一定要做這些工作喔）。';
+ $('tops').innerHTML=top.map(t=>group(t,true)).join('');
+ $('others').innerHTML=ORDER.split('').filter(t=>!top.includes(t)).map(t=>group(t,false)).join('');
+ show('res');confetti();
+ document.querySelectorAll('#tops .jt').forEach((a,i)=>setTimeout(()=>a.classList.add('on'),400+i*90));
+}
+function start(){ans=[];cur=0;show('quiz');render()}
+$('go').onclick=start;$('again').onclick=start;
+document.querySelectorAll('.fc').forEach(b=>b.onclick=()=>pick(+b.dataset.v));
+$('next').onclick=next;
+$('back').onclick=()=>{if(cur>0){cur--;render()}};
+$('cont').onclick=()=>{show('quiz');render()};
+$('say').onclick=()=>speak(ITEMS[cur].e);
+$('evgo').onclick=e=>{e.preventDefault();$('ev').open=true;$('ev').scrollIntoView()};
+function evHash(){if(location.hash==='#ev'){$('ev').open=true;setTimeout(()=>$('ev').scrollIntoView(),50)}}
+evHash();addEventListener('hashchange',evHash);
+</script>
+</body>
+</html>

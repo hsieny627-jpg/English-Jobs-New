@@ -1,0 +1,1094 @@
+{
+ "items": [
+  {
+   "n": 1,
+   "t": "R",
+   "ic": "🔧",
+   "zh": "修理汽車的煞車",
+   "e": "mechanic",
+   "q": [
+    "Repair, reline, replace, and adjust brakes."
+   ],
+   "url": "https://www.onetonline.org/link/details/49-3023.00",
+   "code": "49-3023.00",
+   "score": 100,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 2,
+   "t": "I",
+   "ic": "🐶",
+   "zh": "幫生病的小動物檢查，找出牠哪裡不舒服",
+   "e": "veterinarian",
+   "q": [
+    "Examine animals to detect and determine the nature of diseases or injuries."
+   ],
+   "url": "https://www.onetonline.org/link/details/29-1131.00",
+   "code": "29-1131.00",
+   "score": 83,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 3,
+   "t": "A",
+   "ic": "🎨",
+   "zh": "用水彩、蠟筆或電腦畫畫",
+   "e": "painter",
+   "q": [
+    "Use materials such as pens and ink, watercolors, charcoal, oil, or computer software to create artwork."
+   ],
+   "url": "https://www.onetonline.org/link/details/27-1013.00",
+   "code": "27-1013.00",
+   "score": 100,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 4,
+   "t": "S",
+   "ic": "🧑‍🏫",
+   "zh": "教學生學會新東西",
+   "e": "teacher",
+   "q": [
+    "Instruct students individually and in groups, using teaching methods such as lectures, discussions, and demonstrations."
+   ],
+   "url": "https://www.onetonline.org/link/details/25-2021.00",
+   "code": "25-2021.00",
+   "score": 100,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 5,
+   "t": "E",
+   "ic": "💼",
+   "zh": "安排大家的工作，決定誰做什麼",
+   "e": "business manager",
+   "q": [
+    "Prepare staff work schedules and assign specific duties."
+   ],
+   "url": "https://www.onetonline.org/link/details/11-1021.00",
+   "code": "11-1021.00",
+   "score": 100,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 6,
+   "t": "C",
+   "ic": "✈️",
+   "zh": "照著檢查表，一項一項檢查飛機",
+   "e": "pilot",
+   "q": [
+    "Inspect aircraft for defects and malfunctions, according to pre-flight checklists."
+   ],
+   "url": "https://www.onetonline.org/link/details/53-2011.00",
+   "code": "53-2011.00",
+   "score": 62,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 7,
+   "t": "R",
+   "ic": "🍞",
+   "zh": "量好麵粉，準備做麵包的麵團",
+   "e": "baker",
+   "q": [
+    "Measure or weigh flour or other ingredients to prepare batters, doughs, fillings, or icings, using scales or graduated containers."
+   ],
+   "url": "https://www.onetonline.org/link/details/51-3011.00",
+   "code": "51-3011.00",
+   "score": 88,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 8,
+   "t": "I",
+   "ic": "🎮",
+   "zh": "試玩遊戲，找出錯誤並記錄下來",
+   "e": "game tester",
+   "q": [
+    "Identify, analyze, and document problems with program function, output, online screen, or content."
+   ],
+   "url": "https://www.onetonline.org/link/details/15-1253.00",
+   "code": "15-1253.00",
+   "score": 79,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 9,
+   "t": "A",
+   "ic": "🖌️",
+   "zh": "幫公司設計商標（logo）和網頁",
+   "e": "designer",
+   "q": [
+    "Develop graphics and layouts for product illustrations, company logos, and Web sites."
+   ],
+   "url": "https://www.onetonline.org/link/details/27-1024.00",
+   "code": "27-1024.00",
+   "score": 100,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 10,
+   "t": "S",
+   "ic": "💉",
+   "zh": "幫受傷的人急救、擦藥、包紮",
+   "e": "nurse",
+   "q": [
+    "Provide health care, first aid, immunizations, or assistance in convalescence or rehabilitation in locations such as schools, hospitals, or industry."
+   ],
+   "url": "https://www.onetonline.org/link/details/29-1141.00",
+   "code": "29-1141.00",
+   "score": 76,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 11,
+   "t": "E",
+   "ic": "⚖️",
+   "zh": "找證據，在法院幫別人說話",
+   "e": "lawyer",
+   "q": [
+    "Gather evidence to formulate defense or to initiate legal actions by such means as interviewing clients and witnesses to ascertain the facts of a case.",
+    "Represent clients in court or before government agencies."
+   ],
+   "url": "https://www.onetonline.org/link/details/23-1011.00",
+   "code": "23-1011.00",
+   "score": 75,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 12,
+   "t": "C",
+   "ic": "🧳",
+   "zh": "檢查急救箱和安全設備有沒有準備好",
+   "e": "flight attendant",
+   "q": [
+    "Verify that first aid kits and other emergency equipment, including fire extinguishers and oxygen bottles, are in working order."
+   ],
+   "url": "https://www.onetonline.org/link/details/53-2031.00",
+   "code": "53-2031.00",
+   "score": 57,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 13,
+   "t": "R",
+   "ic": "🚒",
+   "zh": "開消防車，去火災現場救人",
+   "e": "firefighter",
+   "q": [
+    "Drive and operate fire fighting vehicles and equipment.",
+    "Rescue survivors from burning buildings, accident sites, and water hazards."
+   ],
+   "url": "https://www.onetonline.org/link/details/33-2011.00",
+   "code": "33-2011.00",
+   "score": 92,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 14,
+   "t": "I",
+   "ic": "🩺",
+   "zh": "看檢查報告，找出病人生了什麼病",
+   "e": "doctor",
+   "q": [
+    "Order, perform, and interpret tests and analyze records, reports, and examination information to diagnose patients' condition."
+   ],
+   "url": "https://www.onetonline.org/link/details/29-1215.00",
+   "code": "29-1215.00",
+   "score": 85,
+   "rank": 2,
+   "ok": true
+  },
+  {
+   "n": 15,
+   "t": "A",
+   "ic": "🎤",
+   "zh": "站上舞台，唱歌給大家聽",
+   "e": "singer",
+   "q": [
+    "Perform before live audiences in concerts, recitals, educational presentations, and other social gatherings."
+   ],
+   "url": "https://www.onetonline.org/link/details/27-2042.00",
+   "code": "27-2042.00",
+   "score": 94,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 16,
+   "t": "S",
+   "ic": "🧠",
+   "zh": "聽別人說出心裡的感受，陪他想一想",
+   "e": "counselor",
+   "q": [
+    "Encourage clients to express their feelings and discuss what is happening in their lives, helping them to develop insight into themselves or their relationships."
+   ],
+   "url": "https://www.onetonline.org/link/details/21-1014.00",
+   "code": "21-1014.00",
+   "score": 97,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 17,
+   "t": "E",
+   "ic": "🏠",
+   "zh": "幫買房子和賣房子的人談好條件",
+   "e": "real estate agent",
+   "q": [
+    "Act as an intermediary in negotiations between buyers and sellers, generally representing one or the other."
+   ],
+   "url": "https://www.onetonline.org/link/details/41-9022.00",
+   "code": "41-9022.00",
+   "score": 91,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 18,
+   "t": "C",
+   "ic": "👮",
+   "zh": "把發生的事情詳細寫成紀錄",
+   "e": "police officer",
+   "q": [
+    "Record facts to prepare reports that document incidents and activities."
+   ],
+   "url": "https://www.onetonline.org/link/details/33-3051.00",
+   "code": "33-3051.00",
+   "score": 56,
+   "rank": 2,
+   "ok": true
+  },
+  {
+   "n": 19,
+   "t": "R",
+   "ic": "🏃",
+   "zh": "每天練習運動，參加比賽",
+   "e": "professional athlete",
+   "q": [
+    "Attend scheduled practice or training sessions.",
+    "Participate in athletic events or competitive sports, according to established rules and regulations."
+   ],
+   "url": "https://www.onetonline.org/link/details/27-2021.00",
+   "code": "27-2021.00",
+   "score": 70,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 20,
+   "t": "I",
+   "ic": "⚙️",
+   "zh": "研究機器為什麼故障，想辦法改好",
+   "e": "mechanical engineer",
+   "q": [
+    "Investigate equipment failures or difficulties to diagnose faulty operation and recommend remedial actions."
+   ],
+   "url": "https://www.onetonline.org/link/details/17-2141.00",
+   "code": "17-2141.00",
+   "score": 69,
+   "rank": 2,
+   "ok": true
+  },
+  {
+   "n": 21,
+   "t": "A",
+   "ic": "🎭",
+   "zh": "背台詞、練習演戲",
+   "e": "actor",
+   "q": [
+    "Study and rehearse roles from scripts to interpret, learn and memorize lines, stunts, and cues as directed."
+   ],
+   "url": "https://www.onetonline.org/link/details/27-2011.00",
+   "code": "27-2011.00",
+   "score": 100,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 22,
+   "t": "S",
+   "ic": "🧭",
+   "zh": "帶大家參觀，介紹景點、回答問題",
+   "e": "tour guide",
+   "q": [
+    "Describe tour points of interest to group members, and respond to questions."
+   ],
+   "url": "https://www.onetonline.org/link/details/39-7011.00",
+   "code": "39-7011.00",
+   "score": 73,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 23,
+   "t": "E",
+   "ic": "🧑‍🍳",
+   "zh": "教廚房裡的人怎麼做菜，帶領大家",
+   "e": "chef",
+   "q": [
+    "Instruct cooks or other workers in the preparation, cooking, garnishing, or presentation of food."
+   ],
+   "url": "https://www.onetonline.org/link/details/35-1011.00",
+   "code": "35-1011.00",
+   "score": 69,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 24,
+   "t": "C",
+   "ic": "💻",
+   "zh": "把一步一步的指令排好，寫成電腦程式",
+   "e": "programmer",
+   "q": [
+    "Prepare detailed workflow charts and diagrams that describe input, output, and logical operation, and convert them into a series of instructions coded in a computer language."
+   ],
+   "url": "https://www.onetonline.org/link/details/15-1251.00",
+   "code": "15-1251.00",
+   "score": 82,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 25,
+   "t": "R",
+   "ic": "✂️",
+   "zh": "幫人剪頭髮、修出好看的髮型",
+   "e": "hairstylist",
+   "q": [
+    "Cut, trim and shape hair or hairpieces, based on customers' instructions, hair type, and facial features, using clippers, scissors, trimmers and razors."
+   ],
+   "url": "https://www.onetonline.org/link/details/39-5012.00",
+   "code": "39-5012.00",
+   "score": 73,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 26,
+   "t": "I",
+   "ic": "🧠",
+   "zh": "了解別人心情和行為上的困擾",
+   "e": "psychologist",
+   "q": [
+    "Identify psychological, emotional, or behavioral issues and diagnose disorders, using information obtained from interviews, tests, records, or reference materials."
+   ],
+   "url": "https://www.onetonline.org/link/details/19-3033.00",
+   "code": "19-3033.00",
+   "score": 76,
+   "rank": 2,
+   "ok": true
+  },
+  {
+   "n": 27,
+   "t": "A",
+   "ic": "🎧",
+   "zh": "用 DJ 機器播放音樂",
+   "e": "DJ",
+   "q": [
+    "Operate disc jockey controller and other equipment, such as microphones."
+   ],
+   "url": "https://www.onetonline.org/link/details/27-2091.00",
+   "code": "27-2091.00",
+   "score": 64,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 28,
+   "t": "S",
+   "ic": "🩺",
+   "zh": "告訴大家怎麼吃、怎麼運動，才不會生病",
+   "e": "doctor",
+   "q": [
+    "Advise patients and community members concerning diet, activity, hygiene, and disease prevention."
+   ],
+   "url": "https://www.onetonline.org/link/details/29-1215.00",
+   "code": "29-1215.00",
+   "score": 87,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 29,
+   "t": "E",
+   "ic": "💼",
+   "zh": "計畫特價活動，讓更多人來買東西",
+   "e": "business manager",
+   "q": [
+    "Plan or direct activities, such as sales promotions, that require coordination with other department managers."
+   ],
+   "url": "https://www.onetonline.org/link/details/11-1021.00",
+   "code": "11-1021.00",
+   "score": 100,
+   "rank": 1,
+   "ok": true
+  },
+  {
+   "n": 30,
+   "t": "C",
+   "ic": "✂️",
+   "zh": "幫客人排好預約的時間",
+   "e": "hairstylist",
+   "q": [
+    "Schedule client appointments."
+   ],
+   "url": "https://www.onetonline.org/link/details/39-5012.00",
+   "code": "39-5012.00",
+   "score": 49,
+   "rank": 2,
+   "ok": true
+  }
+ ],
+ "jobs": {
+  "doctor": {
+   "code": "29-1215.00",
+   "url": "https://www.onetonline.org/link/details/29-1215.00",
+   "scores": {
+    "S": 87,
+    "I": 85,
+    "C": 49,
+    "R": 46,
+    "E": 22,
+    "A": 8
+   },
+   "top3": [
+    "S",
+    "I",
+    "C"
+   ],
+   "ok": true
+  },
+  "professional athlete": {
+   "code": "27-2021.00",
+   "url": "https://www.onetonline.org/link/details/27-2021.00",
+   "scores": {
+    "R": 70,
+    "E": 59,
+    "S": 55,
+    "C": 34,
+    "A": 19,
+    "I": 7
+   },
+   "top3": [
+    "R",
+    "E",
+    "S"
+   ],
+   "ok": true
+  },
+  "lawyer": {
+   "code": "23-1011.00",
+   "url": "https://www.onetonline.org/link/details/23-1011.00",
+   "scores": {
+    "E": 75,
+    "C": 60,
+    "I": 56,
+    "S": 41,
+    "A": 23,
+    "R": 2
+   },
+   "top3": [
+    "E",
+    "C",
+    "I"
+   ],
+   "ok": true
+  },
+  "actor": {
+   "code": "27-2011.00",
+   "url": "https://www.onetonline.org/link/details/27-2011.00",
+   "scores": {
+    "A": 100,
+    "S": 51,
+    "E": 50,
+    "R": 22,
+    "I": 19,
+    "C": 14
+   },
+   "top3": [
+    "A",
+    "S",
+    "E"
+   ],
+   "ok": true
+  },
+  "programmer": {
+   "code": "15-1251.00",
+   "url": "https://www.onetonline.org/link/details/15-1251.00",
+   "scores": {
+    "C": 82,
+    "I": 68,
+    "R": 40,
+    "A": 25,
+    "E": 18,
+    "S": 16
+   },
+   "top3": [
+    "C",
+    "I",
+    "R"
+   ],
+   "ok": true
+  },
+  "veterinarian": {
+   "code": "29-1131.00",
+   "url": "https://www.onetonline.org/link/details/29-1131.00",
+   "scores": {
+    "I": 83,
+    "R": 83,
+    "C": 41,
+    "S": 41,
+    "E": 12,
+    "A": 0
+   },
+   "top3": [
+    "R",
+    "I",
+    "S"
+   ],
+   "ok": true
+  },
+  "police officer": {
+   "code": "33-3051.00",
+   "url": "https://www.onetonline.org/link/details/33-3051.00",
+   "scores": {
+    "R": 73,
+    "C": 56,
+    "E": 51,
+    "S": 41,
+    "I": 29,
+    "A": 1
+   },
+   "top3": [
+    "R",
+    "C",
+    "E"
+   ],
+   "ok": true
+  },
+  "teacher": {
+   "code": "25-2021.00",
+   "url": "https://www.onetonline.org/link/details/25-2021.00",
+   "scores": {
+    "S": 100,
+    "A": 48,
+    "C": 46,
+    "I": 39,
+    "R": 27,
+    "E": 26
+   },
+   "top3": [
+    "S",
+    "A",
+    "C"
+   ],
+   "ok": true
+  },
+  "business manager": {
+   "code": "11-1021.00",
+   "url": "https://www.onetonline.org/link/details/11-1021.00",
+   "scores": {
+    "E": 100,
+    "C": 72,
+    "S": 40,
+    "I": 23,
+    "R": 20,
+    "A": 5
+   },
+   "top3": [
+    "E",
+    "C",
+    "S"
+   ],
+   "ok": true
+  },
+  "game tester": {
+   "code": "15-1253.00",
+   "url": "https://www.onetonline.org/link/details/15-1253.00",
+   "scores": {
+    "I": 79,
+    "C": 78,
+    "R": 47,
+    "A": 12,
+    "E": 10,
+    "S": 9
+   },
+   "top3": [
+    "I",
+    "C",
+    "R"
+   ],
+   "ok": true
+  },
+  "pilot": {
+   "code": "53-2011.00",
+   "url": "https://www.onetonline.org/link/details/53-2011.00",
+   "scores": {
+    "C": 62,
+    "R": 62,
+    "E": 47,
+    "I": 36,
+    "S": 25,
+    "A": 7
+   },
+   "top3": [
+    "R",
+    "C",
+    "E"
+   ],
+   "ok": true
+  },
+  "counselor": {
+   "code": "21-1014.00",
+   "url": "https://www.onetonline.org/link/details/21-1014.00",
+   "scores": {
+    "S": 97,
+    "I": 57,
+    "C": 41,
+    "A": 34,
+    "E": 33,
+    "R": 5
+   },
+   "top3": [
+    "S",
+    "I",
+    "C"
+   ],
+   "ok": true
+  },
+  "firefighter": {
+   "code": "33-2011.00",
+   "url": "https://www.onetonline.org/link/details/33-2011.00",
+   "scores": {
+    "R": 92,
+    "C": 41,
+    "S": 40,
+    "E": 34,
+    "I": 32,
+    "A": 5
+   },
+   "top3": [
+    "R",
+    "C",
+    "S"
+   ],
+   "ok": true
+  },
+  "baker": {
+   "code": "51-3011.00",
+   "url": "https://www.onetonline.org/link/details/51-3011.00",
+   "scores": {
+    "R": 88,
+    "C": 53,
+    "A": 23,
+    "E": 18,
+    "S": 12,
+    "I": 11
+   },
+   "top3": [
+    "R",
+    "C",
+    "A"
+   ],
+   "ok": true
+  },
+  "nurse": {
+   "code": "29-1141.00",
+   "url": "https://www.onetonline.org/link/details/29-1141.00",
+   "scores": {
+    "S": 76,
+    "C": 63,
+    "I": 62,
+    "R": 41,
+    "E": 23,
+    "A": 6
+   },
+   "top3": [
+    "S",
+    "C",
+    "I"
+   ],
+   "ok": true
+  },
+  "tour guide": {
+   "code": "39-7011.00",
+   "url": "https://www.onetonline.org/link/details/39-7011.00",
+   "scores": {
+    "S": 73,
+    "E": 44,
+    "A": 41,
+    "R": 39,
+    "C": 31,
+    "I": 23
+   },
+   "top3": [
+    "S",
+    "E",
+    "A"
+   ],
+   "ok": true
+  },
+  "psychologist": {
+   "code": "19-3033.00",
+   "url": "https://www.onetonline.org/link/details/19-3033.00",
+   "scores": {
+    "S": 93,
+    "I": 76,
+    "C": 42,
+    "A": 34,
+    "E": 28,
+    "R": 1
+   },
+   "top3": [
+    "S",
+    "I",
+    "C"
+   ],
+   "ok": true
+  },
+  "painter": {
+   "code": "27-1013.00",
+   "url": "https://www.onetonline.org/link/details/27-1013.00",
+   "scores": {
+    "A": 100,
+    "R": 51,
+    "I": 28,
+    "E": 23,
+    "C": 22,
+    "S": 21
+   },
+   "top3": [
+    "A",
+    "R",
+    "I"
+   ],
+   "ok": true
+  },
+  "designer": {
+   "code": "27-1024.00",
+   "url": "https://www.onetonline.org/link/details/27-1024.00",
+   "scores": {
+    "A": 100,
+    "C": 49,
+    "E": 41,
+    "R": 40,
+    "I": 31,
+    "S": 19
+   },
+   "top3": [
+    "A",
+    "C",
+    "E"
+   ],
+   "ok": true
+  },
+  "flight attendant": {
+   "code": "53-2031.00",
+   "url": "https://www.onetonline.org/link/details/53-2031.00",
+   "scores": {
+    "C": 57,
+    "S": 53,
+    "R": 51,
+    "E": 44,
+    "I": 17,
+    "A": 5
+   },
+   "top3": [
+    "C",
+    "S",
+    "R"
+   ],
+   "ok": true
+  },
+  "singer": {
+   "code": "27-2042.00",
+   "url": "https://www.onetonline.org/link/details/27-2042.00",
+   "scores": {
+    "A": 94,
+    "E": 40,
+    "S": 40,
+    "R": 31,
+    "C": 20,
+    "I": 9
+   },
+   "top3": [
+    "A",
+    "S",
+    "E"
+   ],
+   "ok": true
+  },
+  "mechanic": {
+   "code": "49-3023.00",
+   "url": "https://www.onetonline.org/link/details/49-3023.00",
+   "scores": {
+    "R": 100,
+    "C": 55,
+    "I": 43,
+    "E": 10,
+    "S": 8,
+    "A": 0
+   },
+   "top3": [
+    "R",
+    "C",
+    "I"
+   ],
+   "ok": true
+  },
+  "computer engineer": {
+   "code": "17-2061.00",
+   "url": "https://www.onetonline.org/link/details/17-2061.00",
+   "scores": {
+    "R": 78,
+    "I": 76,
+    "C": 73,
+    "E": 16,
+    "A": 14,
+    "S": 14
+   },
+   "top3": [
+    "R",
+    "I",
+    "C"
+   ],
+   "ok": true
+  },
+  "real estate agent": {
+   "code": "41-9022.00",
+   "url": "https://www.onetonline.org/link/details/41-9022.00",
+   "scores": {
+    "E": 91,
+    "C": 66,
+    "S": 42,
+    "R": 19,
+    "A": 15,
+    "I": 8
+   },
+   "top3": [
+    "E",
+    "C",
+    "S"
+   ],
+   "ok": true
+  },
+  "hairstylist": {
+   "code": "39-5012.00",
+   "url": "https://www.onetonline.org/link/details/39-5012.00",
+   "scores": {
+    "R": 73,
+    "C": 49,
+    "S": 45,
+    "E": 38,
+    "A": 37,
+    "I": 9
+   },
+   "top3": [
+    "R",
+    "C",
+    "S"
+   ],
+   "ok": true
+  },
+  "architect": {
+   "code": "17-1011.00",
+   "url": "https://www.onetonline.org/link/details/17-1011.00",
+   "scores": {
+    "R": 65,
+    "C": 57,
+    "A": 52,
+    "I": 48,
+    "E": 44,
+    "S": 26
+   },
+   "top3": [
+    "R",
+    "C",
+    "A"
+   ],
+   "ok": true
+  },
+  "DJ": {
+   "code": "27-2091.00",
+   "url": "https://www.onetonline.org/link/details/27-2091.00",
+   "scores": {
+    "A": 64,
+    "E": 43,
+    "C": 42,
+    "R": 33,
+    "S": 32,
+    "I": 9
+   },
+   "top3": [
+    "A",
+    "E",
+    "C"
+   ],
+   "ok": true
+  },
+  "mechanical engineer": {
+   "code": "17-2141.00",
+   "url": "https://www.onetonline.org/link/details/17-2141.00",
+   "scores": {
+    "R": 90,
+    "I": 69,
+    "C": 64,
+    "A": 17,
+    "E": 16,
+    "S": 4
+   },
+   "top3": [
+    "R",
+    "I",
+    "C"
+   ],
+   "ok": true
+  },
+  "chef": {
+   "code": "35-1011.00",
+   "url": "https://www.onetonline.org/link/details/35-1011.00",
+   "scores": {
+    "E": 69,
+    "R": 64,
+    "C": 56,
+    "S": 33,
+    "A": 29,
+    "I": 11
+   },
+   "top3": [
+    "E",
+    "R",
+    "C"
+   ],
+   "ok": true
+  }
+ },
+ "no_data": [
+  {
+   "e": "YouTuber",
+   "why": "O*NET 沒有這個職業",
+   "show": true
+  },
+  {
+   "e": "engineer",
+   "why": "沒有指定哪一種工程師",
+   "show": true
+  },
+  {
+   "e": "content creator",
+   "why": "O*NET 沒有這個職業",
+   "show": true
+  },
+  {
+   "e": "esports player",
+   "why": "O*NET 搜尋 esports 沒有完全符合的職業（只自動改搜 sports）",
+   "show": true
+  },
+  {
+   "e": "influencer",
+   "why": "O*NET 沒有這個職業",
+   "show": true
+  },
+  {
+   "e": "entertainer",
+   "why": "O*NET 27-2099.00 是「其他」類，沒有興趣分數",
+   "show": true
+  },
+  {
+   "e": "fortune teller",
+   "why": "O*NET 沒有這個職業",
+   "show": false
+  }
+ ],
+ "claims": [
+  {
+   "name": "O*NET 興趣量表可以改編，創用 CC 授權",
+   "url": "https://www.onetcenter.org/IP.html",
+   "quotes": [
+    "The O*NET Interest Profiler may be redistributed or used to develop other assessments",
+    "Develop customized versions"
+   ],
+   "ok": true
+  },
+  {
+   "name": "30 題迷你版：每型 5 題，可信度 .74～.81",
+   "url": "https://www.onetcenter.org/dl_files/Mini-IP.pdf",
+   "quotes": [
+    "The five-item interest scales had alpha coefficients ranging from .74 to .81",
+    "the 30-item version meets satisfactory reliability standards"
+   ],
+   "ok": true
+  },
+  {
+   "name": "用表情符號作答",
+   "url": "https://www.onetcenter.org/reports/IP_Emoji.html",
+   "quotes": [
+    "An emoji-anchored scale uses ideograms symbolizing facial expressions for each point on the response scale"
+   ],
+   "ok": true
+  },
+  {
+   "name": "Tracey & Ward 1998：年紀越大，六型結構越清楚",
+   "url": "https://api.openalex.org/works/doi:10.1037/0022-0167.45.3.290",
+   "quotes": [
+    "the fit of the circular model was positively related to age",
+    "elementary and middle school students evaluated their interests and competencies using different dimensions than did college students"
+   ],
+   "ok": true
+  },
+  {
+   "name": "Tracey 2002：五到八年級興趣還在改變",
+   "url": "https://api.openalex.org/works/doi:10.1037/0022-0167.49.2.148",
+   "quotes": [
+    "there were changes both in the structure and level of interest and competence ratings over time",
+    "especially by 8th grade"
+   ],
+   "ok": true
+  },
+  {
+   "name": "教育部議題融入說明手冊：生涯規劃教育（國小）、性別平等 性E3",
+   "url": "https://stv.naer.edu.tw/data/course_manual/A/%E8%AD%B0%E9%A1%8C%E8%9E%8D%E5%85%A5%E8%AA%AA%E6%98%8E%E6%89%8B%E5%86%8A(%E5%AE%9A%E7%A8%BF%E7%89%88).pdf",
+   "quotes": [
+    "國小教育階段的生涯發展著重自我概念的發展以及覺察能力的培養",
+    "涯E4認識自己的特質與興趣",
+    "涯E8對工作/教育環境的好奇心",
+    "涯E9認識不同類型工作/教育環境",
+    "性E3覺察性別角色的刻板印象，了解家庭、學校與職業的分工，不應受性別的限制"
+   ],
+   "ok": true
+  },
+  {
+   "name": "台灣六型中文名稱（大考中心興趣量表）",
+   "url": "https://www.yphs.tp.edu.tw/wp-content/uploads/doc/yp1255/%E8%88%88%E8%B6%A3%E9%87%8F%E8%A1%A8%E8%A7%A3%E9%87%8B%E8%88%87%E6%87%89%E7%94%A8.pdf",
+   "quotes": [
+    "實用型(R)、研究型(I)、藝術型(A)、社會型",
+    "(S)、企業型(E)、事務型(C)"
+   ],
+   "ok": true
+  }
+ ],
+ "defs": {
+  "E": "Work involves managing, negotiating, marketing, or selling, typically in a business setting, or leading or advising people in political and legal situations. Enterprising occupations are often associated with business initiatives, sales, marketing/advertising, finance, management/administration, professional advising, public speaking, politics, or law.",
+  "R": "Work involves designing, building, or repairing of equipment, materials, or structures, engaging in physical activity, or working outdoors. Realistic occupations are often associated with engineering, mechanics and electronics, construction, woodworking, transportation, machine operation, agriculture, animal services, physical or manual labor, athletics, or protective services.",
+  "C": "Work involves following procedures and regulations to organize information or data, typically in a business setting. Conventional occupations are often associated with office work, accounting, mathematics/statistics, information technology, finance, or human resources.",
+  "S": "Work involves helping, teaching, advising, assisting, or providing service to others. Social occupations are often associated with social, health care, personal service, teaching/education, or religious activities.",
+  "A": "Work involves creating original visual artwork, performances, written works, food, or music for a variety of media, or applying artistic principles to the design of various objects and materials. Artistic occupations are often associated with visual arts, applied arts and design, performing arts, music, creative writing, media, or culinary art.",
+  "I": "Work involves studying and researching non-living objects, living organisms, disease or other forms of impairment, or human behavior. Investigative occupations are often associated with physical, life, medical, or social sciences, and can be found in the fields of humanities, mathematics/statistics, information technology, or health care service."
+ },
+ "balanced": true
+}
