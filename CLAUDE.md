@@ -83,13 +83,15 @@ NODE_PATH=$(npm root -g) node _verify.js   # 量測，只印失敗項＋一行�
 給學生的說明（放「這些職業也可以認識」）：美國勞動部替 900 多種工作做過調查，但 YouTuber、網紅、內容創作者這些很新的工作還沒有調查資料，所以先不分類，不代表它們不好。
 
 **2. 題目改字（30 題中改 15 題，其餘不變；每句都要對得到原文）**
-3 用筆、水彩或電腦畫畫｜6 **整題換成 programmer（事務型分數最高的職業，避免職業和型矛盾）**：找出電腦程式哪裡寫錯，改好再檢查一次（Correct errors by making appropriate changes and rechecking the program to ensure that the desired results are produced.）｜7 把麵粉放在秤上秤重，準備做麵包｜8 試玩電玩遊戲，找出哪裡有問題，記錄下來｜9 幫公司設計標誌（logo）和網頁畫面｜12 檢查急救箱和滅火器能不能用｜16 聽別人說出心裡的感受，幫他更了解自己｜17 幫要買房子和要賣房子的人商量｜18 把發生了什麼事，仔細寫下來｜19 按時練習運動，參加比賽｜20 研究機器為什麼壞掉，想辦法改好｜22 帶大家去參觀，介紹好玩的地方、回答問題｜24 把電腦要做的事一步一步排好，寫成程式｜26 找出別人在心情或行為上遇到的困難｜29 **整題換成 business manager 另一句**：選出新的工作夥伴，教他們怎麼做事（Perform personnel functions, such as selection, training, or evaluation.）。
+3 用筆、水彩或電腦畫畫｜6 **整題換成 programmer（事務型分數最高的職業，避免職業和型矛盾）**：找出電腦程式哪裡寫錯，改好再檢查一次（Correct errors by making appropriate changes and rechecking the program to ensure that the desired results are produced.）｜7 把麵粉放在秤上秤重，準備做麵包｜8 試玩電玩遊戲，找出哪裡有問題，記錄下來｜9 幫公司設計標誌（logo）和網頁畫面｜12 檢查急救箱和滅火器能不能用｜16 聽別人說出心裡的感受，幫他更了解自己｜17 幫要買房子和要賣房子的人商量｜18 把發生了什麼事，仔細寫下來｜19 按時練習運動，參加比賽｜20 研究機器為什麼壞掉，想辦法改好｜22 帶大家去參觀，介紹好玩的地方、回答問題｜24 把電腦要做的事一步一步排好，寫成程式｜26 找出別人在心情或行為上遇到的困難｜29 **整題換成 business manager 另一句**：選出新來上班的人，教他們怎麼工作（Perform personnel functions, such as selection, training, or evaluation.；「工作夥伴」學生看不懂，2026/10/9 改）。
+第 6 題給學生／老師的說明：「第 6 題要考『事務型』（喜歡照步驟、把事情整理好）。美國調查：程式設計師的六種分數裡，事務型 82 分最高，所以用程式設計師的工作出題。」
 原則：每一型的題目優先用「這一型分數最高」的職業，學生才不會覺得職業和型對不起來。
 
-**3. 探險首頁重做（表面效度：精緻、嚴謹、讓學生信服）**
+**3. 探險首頁重做（表面效度：精緻、嚴謹、讓學生信服；使用者要求「最優質精緻的質感」）**
+- 質感規格：一套固定字級（標題／內文／說明三級，iPad 內文 ≥ 22px）、固定間距（8 的倍數）、卡片統一圓角與細邊框＋柔和陰影；顏色只用深藍、金色、白底和六型色；圖示同一風格；不要漂浮的小島、不要散落的小字；每一區有清楚標題。做完自己截圖檢查 iPad 橫、直和 1920 螢幕的版面。
 - 動線只有一條：標題 → 研究根據 3 張卡 → 為什麼做這個測驗 → 六種興趣 → 三句話 → 開始按鈕。主色深藍＋金色；六型固定顏色全站統一；每區塊一句話；動畫收斂（淡入、輕彈）。
 - 研究根據 3 張卡：🇺🇸 改編自美國勞動部 O*NET「職業興趣量表」（onetcenter.org/IP.html）｜📚 何倫 Holland 六種興趣理論：研究歷史很長、輔導老師很常使用（IP.html 原文 rich and extensive research history；widely accepted and used by counselors）｜🔬 研究發現小學生的興趣還在改變（Tracey & Ward 1998、Tracey 2002）。
-- **為什麼不做教育部／新北市的測驗？**（誠實寫，不可說我們比較準）：台灣的正式興趣測驗都是給國中以上：師大心測中心「職涯測驗系統」只有國中版、高中版、大學版（https://career.ntnu.edu.tw/ ；國中版預試對象 8、9 年級 1790 人，信度 α>.93：https://career.ntnu.edu.tw/junior/TestInterest/TI_Intro.aspx ）；大考中心興趣量表「測驗對象：高中以上學生」（https://career.ceec.edu.tw/StudentSection/Introduce ）。新北市教育局給國小的興趣測驗查不到。→ 學生版說法：「正式的興趣測驗比較準，但都是給國中以上的哥哥姊姊做的。我們用的是**同一套何倫六型理論**（師大、大考中心都用它），改寫成四年級看得懂的探索活動。上國中以後，可以做師大心測中心的正式測驗。」
+- **網頁不提教育部、教育局或其他測驗，不做任何比較**（使用者 2026/10/9 決定）。只列：①原始測驗（O*NET 興趣量表）的出處 ②科學研究證據＋網址。理由：我們的活動沒有量過信度，跟任何測驗比較都沒有證據。注意：新北市教育局 2026 有與師大合作的「數位職涯探索量表」，國小學生做過（https://tve.ntpc.edu.tw/Upload/Announcement/260930095215266661E8BNM.pdf ），所以**絕對不可以寫「國小沒有正式測驗」**。
 - 這個測驗的目的（取代「不能決定未來」的負面說法）：幫你 ①發現自己現在最喜歡做哪些事 ②認識很多以前不知道的工作 ③學會這些工作的英文。根據：教育部手冊國小要做的就是 涯E4 認識自己的興趣、涯E8 對工作的好奇心、涯E9 認識不同的工作。
 - 三句話（開始按鈕上方，字最大）：1️⃣ 這個測驗幫你發現：你**現在**最喜歡做哪些事。2️⃣ 你現在喜歡的事，長大以後可能會不一樣——就像以前喜歡的玩具，現在可能不玩了。3️⃣ 所以結果不是「你以後一定要做什麼」，而是「可以先去認識哪些工作」。
 - 六型名稱改成大考中心正式名稱＋英文原文＋一句說明：🔧實用型 Realistic 喜歡動手做、修東西｜🔬研究型 Investigative 喜歡觀察、研究｜🎨藝術型 Artistic 喜歡創作、表演｜🤝社會型 Social 喜歡幫助、教別人｜📣企業型 Enterprising 喜歡帶領、說服別人｜📋事務型 Conventional 喜歡照步驟整理資料。全頁（題目翻面、結果頁、證據頁）都改用這套名稱。
@@ -99,11 +101,13 @@ NODE_PATH=$(npm root -g) node _verify.js   # 量測，只印失敗項＋一行�
 - 母音紅色、不發音字母灰色。⚠️ story.html 的 isV 把字中間的 y 一律當母音（lawyer 的 y 是 /j/ 子音，會標錯），SILENT 也沒對過字典 → 用 Cambridge 美式音標逐字核對（加進 `_audit.py` 或 `_quiz_check.py`），**連 story.html 一起改正**，並記到 word-check.html「查證後改正的地方」。
 - 自動唸 3 次，唸完「下一題」才亮（保險：最多 8 秒一定會亮，避免 iPad 語音卡住）。單字正下方「🔊 再聽一次」唸 1 次。
 
-**5. 結果頁最後的「六型職業總表」**
+**5. 結果頁最後的「六型職業總表」＋每個職業的「興趣成分」**
 - 6 欄（手機 2 欄），欄頭＝圖示＋中文正式名＋英文。每個職業一張卡：圖示＋英文（母音紅、不發音灰）＋中文＋🔊＋「音節」按鈕。
-- 放哪一欄（給學生看的說法）：「每個職業放在它**最強**的那一型（美國調查分數最高的）。例：teacher 社會型 100 分最高 → 放社會型。兩型一樣高（例：獸醫 實用 83、研究 83）→ 兩邊都放。」
+- 放哪一欄（給學生看的說法，上一版「最強」學生看不懂）：「每個職業放在它**分數最高**的那一欄。」旁邊用圖示範：teacher 的六條分數 → 最長的是社會型 100 → 箭頭飛進社會型那一欄。兩型同分（獸醫 實用 83＝研究 83、機師 實用 62＝事務 62）兩欄都放，卡片上標「同分」。
+- **興趣成分**（點職業卡打開）：六條長條從高排到低、一條一條長出來，前 3 名掛 🥇🥈🥉，旁邊是那一型的圖示和顏色；下面一句話：「老師最常做的是『社會型』的事：幫助、教別人（100 分）。」頂端說明：「每個工作都會用到六種興趣，只是多少不一樣。美國勞動部替每個工作的六種興趣打分數（0～100 分），分數越高，這個工作越常做這一型的事。」
+  證據：O*NET 資料檔說明 “numeric profile data for each O*NET-SOC occupation… OI reports the RIASEC level of each interest”（https://www.onetcenter.org/dictionary/30.0/excel/interests.html ）；分數換算成 0～100：“descriptor means have been standardized to a scale ranging from 0 to 100”（https://www.onetonline.org/help/online/scales ）；“Career interest types are broad types of work you enjoy. Select an interest to discover occupations that support the interest type.”（https://www.onetonline.org/find/descriptor/browse/1.B.1 ）。這三句加進 CLAIMS。esports player 要註明「分數是全部運動員一起算」。
 - 收錄：題目出現過的職業＋結果頁的職業＋新歸類的 esports player、entertainer、engineer。
-- 「音節」按鈕：點了用動畫呈現切分過程——整個字 → 出現切線 → 音節分開彈跳 → 顯示「doc · tor ＝ 2 個音節」＋每個音節一個 👏。音節資料用 story.html 的 SYL（已在 evidence/audit.json 對 Cambridge 核對）。
+- 音節有 3 個按鈕，各一種動畫，最後都顯示「doc · tor ＝ 2 個音節」：①👏 拍手（保留）：整個字 → 出現切線 → 音節分開彈跳，每個音節拍一下 👏 ②🚂 音節火車：每個音節是一節車廂，火車開進來，車廂一節一節分開、車廂上寫 1、2、3 ③✂️ 剪刀：剪刀沿著字移動，在音節中間「喀擦」剪開，碎片彈開。音節資料用 story.html 的 SYL（已在 evidence/audit.json 對 Cambridge 核對）。
 
 
 - 我建議的「📚 上課順序」（6 單元，學生最愛的先教、句型 I want to be a/an ___.）**使用者還沒同意**，不要自己做。
