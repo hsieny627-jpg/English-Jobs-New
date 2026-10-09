@@ -113,6 +113,9 @@ FIXES = [
  ('2026/10/4', 'lawyer', 'yer 唸起來像「爺」', '刪除：用國字標英文發音不準確（美式 /ˈlɔɪ.jɚ/）', 'Cambridge lawyer'),
  ('2026/10/4', 'designer', 'de ＝ 畫出來', 'de ＝ 出來（de "out"）', 'Etymonline design'),
  ('2026/10/4', 'business manager', '不發音的字母標在 u', '不發音的是 i（u 和 busy 一樣唸 /ɪ/）', 'Cambridge busy、business'),
+ ('2026/10/9', 'business manager', '灰色（不發音）標在第 3 個字母 s，i 是紅色', '灰色標在 i（business 唸 /ˈbɪz.nɪs/，s 唸 /z/ 有聲音）', 'Cambridge business'),
+ ('2026/10/9', 'lawyer', 'y 標成紅色（母音）', 'y 是黑色（子音）：lawyer 唸 /ˈlɔɪ.jɚ/，y 唸 /j/', 'Cambridge lawyer'),
+ ('2026/10/9', 'professional athlete', 'professional 的 i 標成紅色（母音）', 'i 是黑色：ssi 一起唸 /ʃ/（/prəˈfeʃ.ən.əl/），i 沒有母音的聲音', 'Cambridge professional'),
 ]
 fix_rows = ''.join(f'<tr><td>{html.escape(w)}</td><td class="old">{html.escape(o)}</td><td class="new">{html.escape(n)}</td><td>{html.escape(s)}</td></tr>' for d, w, o, n, s in FIXES)
 aud_rows = ''.join(
@@ -121,6 +124,17 @@ aud_rows = ''.join(
 syl_rows = ''.join(
     f'<tr><td class="mk">{"✅" if s["ok"] else "❌"}</td><td><b>{html.escape(s["word"])}</b></td><td>{html.escape(s["site"].replace("-", "·"))}（{s["site_n"]}）</td>'
     f'<td>/{html.escape(s["ipa"] or "")}/（{s["ipa_n"]}）</td><td>{a(s["url"], "Cambridge")}</td></tr>' for s in AUD['syllables'])
+def let_html(l):
+    out, pos = '', 0
+    for c in l['word']:
+        col = '#8C8378;background:#E6E0D6' if pos in l['gray'] else '#E0483E' if pos in l['red'] else '#23201C'
+        out += ' ' if c == ' ' else f'<span style="color:{col}">{html.escape(c)}</span>'; pos += 1
+    return out
+let_rows = ''.join(
+    f'<tr><td class="mk">{"✅" if l["ok"] and l["site_ok"] else "❌"}</td><td><b style="font-size:20px">{let_html(l)}</b></td>'
+    f'<td>{"<br>".join("<b>" + html.escape(p["word"]) + "</b> /" + html.escape(p["ipa"] or "") + "/：" + html.escape("　".join(x.replace(":", "→") + ("（不發音）" if x.endswith(":") else "") for x in p["align"].split(" "))) for p in l["parts"])}</td>'
+    f'<td>{"<br>".join(a(p["url"], "Cambridge") for p in l["parts"])}</td></tr>' for l in AUD['letters'])
+l_ok = sum(l['ok'] and l['site_ok'] for l in AUD['letters'])
 n_ok = sum(c['ok'] for c in AUD['claims']); s_ok = sum(s['ok'] for s in AUD['syllables'])
 
 page = f'''<!DOCTYPE html>
@@ -222,7 +236,7 @@ td.vd{{min-width:200px}}
 
 <section id="audit">
  <h2>🔬 卡片上每一句跟英文有關的話</h2>
- <p class="ans">字源、年代、拆字、記憶技巧、遊戲的是非題……一共 <b>{len(AUD['claims'])}</b> 條，每一條都在出處原文找到證據：<b>{n_ok} 條 ✅</b></p>
+ <p class="ans">字源、年代、拆字、記憶技巧、遊戲的是非題……一共 <b>{len(AUD['claims'])}</b> 條，每一條都在出處原文找到證據：<b>{n_ok} 條 ✅</b>{'（其中 ' + str(sum(c.get('kept', False) for c in AUD['claims'])) + ' 條：Etymonline 這次擋自動抓取，沿用上一次抓到的原文句子）' if any(c.get('kept') for c in AUD['claims']) else ''}</p>
  <div class="tw"><table>
   <thead><tr><th></th><th>卡片</th><th>網站上寫的話</th><th>出處原文（英文）</th><th>連結</th></tr></thead>
   <tbody>{aud_rows}</tbody>
@@ -235,6 +249,15 @@ td.vd{{min-width:200px}}
  <div class="tw"><table>
   <thead><tr><th></th><th>單字</th><th>卡片上的音節</th><th>Cambridge 美式音標</th><th>連結</th></tr></thead>
   <tbody>{syl_rows}</tbody>
+ </table></div>
+</section>
+
+<section id="letters">
+ <h2>🔴 母音（紅）和不發音（灰）：對 Cambridge 美式音標</h2>
+ <p class="ans">每個字一個字母一個字母對到字典的美式音標，音標接起來要和字典一模一樣。<b>沒有聲音的字母＝灰色</b>；a e i o u y 有母音的聲音＝<b style="color:#E0483E">紅色</b>；其他是黑色（例如 lawyer 的 y 唸 /j/ 是子音）。<b>{len(AUD['letters'])}</b> 個字，<b>{l_ok} 個完全一樣 ✅</b></p>
+ <div class="tw"><table>
+  <thead><tr><th></th><th>單字</th><th>字母 → 美式音標</th><th>連結</th></tr></thead>
+  <tbody>{let_rows}</tbody>
  </table></div>
 </section>
 

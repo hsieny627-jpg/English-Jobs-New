@@ -11,8 +11,14 @@ def fetch(url):
     if os.path.exists(f) and os.path.getsize(f) > 200:
         return open(f, encoding='utf8').read()
     h = subprocess.run(['curl', '-sS', '-L', '--max-redirs', '8', '-A', 'Mozilla/5.0', url], capture_output=True, text=True).stdout
+    if BLOCKED in h: return h  # 網站的防機器人頁面（Cloudflare），不存快取
     open(f, 'w', encoding='utf8').write(h); time.sleep(0.3)
     return h
+
+BLOCKED = '<title>Just a moment...</title>'
+# 網站擋自動抓取時，沿用上一次核對成功的結果（標記 kept，word-check.html 會註明）
+try: PREV = {(c['card'], c['claim']): c for c in json.load(open('evidence/audit.json', encoding='utf8'))['claims'] if c['ok']}
+except Exception: PREV = {}
 
 def norm(t):
     t = unicodedata.normalize('NFKD', t.replace('æ', 'ae').replace('Æ', 'AE'))
@@ -112,6 +118,8 @@ C = [
 
 res = []
 for who, claim, url, pats in C:
+    if BLOCKED in fetch(url) and (who, claim) in PREV:
+        res.append(dict(PREV[(who, claim)], kept=True)); continue
     t = text_of(url)
     hits = []
     for p in pats:
@@ -133,8 +141,51 @@ for k, v in SYL.items():
         syl.append({'word': w, 'site': p, 'site_n': len(p.split('-')), 'ipa': i, 'ipa_n': n, 'ok': n == len(p.split('-')),
                     'url': CAM('e-sports' if w == 'esports' else w.lower())})
 
-json.dump({'claims': res, 'syllables': syl}, open('evidence/audit.json', 'w', encoding='utf8'), ensure_ascii=False, indent=1)
-bad = [r for r in res if not r['ok']] + [s for s in syl if not s['ok']]
+# 母音（紅）、不發音（灰）：每個字拆成「字母 → Cambridge 美式音標」的對應；音標接起來要＝字典
+# 規則：對到空白（沒有聲音）的字母＝不發音（灰）；a e i o u y 所在那一段有母音的聲音＝母音（紅）；
+# 其他（例如 lawyer 的 y 唸 /j/、professional 的 ssi 唸 /ʃ/）算子音（黑）。
+ALIGN = {
+ 'doctor': 'd:d o:ɑː c:k t:t or:ɚ', 'professional': 'p:p r:r o:ə f:f e:e ssi:ʃ o:ə n:n a:ə l:l', 'athlete': 'a:æ th:θ l:l e:iː t:t e:',
+ 'programmer': 'p:p r:r o:oʊ g:ɡ r:r a:æ mm:m er:ɚ', 'engineer': 'e:e n:n g:dʒ i:ɪ n:n ee:ɪ r:r', 'esports': 'e:iː s:s p:p o:ɔː r:r t:t s:s',
+ 'player': 'p:p l:l ay:eɪ er:ɚ', 'teacher': 't:t ea:iː ch:tʃ er:ɚ', 'business': 'b:b u:ɪ s:z i: n:n e:ɪ ss:s', 'manager': 'm:m a:æ n:n a:ə g:dʒ er:ɚ',
+ 'influencer': 'i:ɪ n:n f:f l:l u:u e:ə n:n c:s er:ɚ', 'lawyer': 'l:l aw:ɔɪ y:j er:ɚ', 'baker': 'b:b a:eɪ k:k er:ɚ',
+ 'psychologist': 'p: s:s y:aɪ ch:k o:ɑː l:l o:ə g:dʒ i:ɪ s:s t:t', 'nurse': 'n:n ur:ɝː s:s e:', 'painter': 'p:p ai:eɪ n:n t:t̬ er:ɚ',
+ 'police': 'p:p o:ə l:l i:iː c:s e:', 'officer': 'o:ɑː ff:f i:ɪ c:s er:ɚ', 'designer': 'd:d e:ɪ s:z i:aɪ g: n:n er:ɚ', 'singer': 's:s i:ɪ ng:ŋ er:ɚ',
+ 'veterinarian': 'v:v e:e t:t e:ə r:r i:ɪ n:n a:e r:r i:i a:ə n:n', 'mechanic': 'm:m e:ə ch:k a:æ n:n i:ɪ c:k',
+ 'computer': 'c:k o:ə m:m p:p u:juː t:t̬ er:ɚ', 'hairstylist': 'h:h ai:e r:r s:s t:t y:aɪ l:l i:ɪ s:s t:t', 'architect': 'a:ɑː r:r ch:k i:ə t:t e:e c:k t:t',
+ 'content': 'c:k o:ə n:n t:t e:e n:n t:t', 'creator': 'c:k r:r e:i a:eɪ t:t̬ or:ɚ', 'game': 'g:ɡ a:eɪ m:m e:', 'tester': 't:t e:e s:s t:t er:ɚ',
+ 'counselor': 'c:k ou:aʊ n:n s:s e:ə l:l or:ɚ', 'entertainer': 'e:e n:n t:t̬ er:ɚ t:t ai:eɪ n:n er:ɚ', 'tour': 't:t ou:ʊ r:r', 'guide': 'g:ɡ u: i:aɪ d:d e:',
+ 'fortune': 'f:f o:ɔː r:r t:tʃ u:uː n:n e:', 'teller': 't:t e:e ll:l er:ɚ', 'actor': 'a:æ c:k t:t or:ɚ', 'pilot': 'p:p i:aɪ l:l o:ə t:t',
+ 'firefighter': 'f:f i:aɪ r:r e: f:f i:aɪ gh: t:t̬ er:ɚ', 'YouTuber': 'Y:j ou:uː T:t u:uː b:b er:ɚ', 'flight': 'f:f l:l i:aɪ gh: t:t',
+ 'attendant': 'a:ə tt:t e:e n:n d:d a:ə n:n t:t', 'real': 'r:r e:iː a:ə l:l', 'estate': 'e:ɪ s:s t:t a:eɪ t:t e:', 'agent': 'a:eɪ g:dʒ e:ə n:n t:t',
+ 'DJ': 'D:diː J:dʒeɪ', 'mechanical': 'm:m e:ə ch:k a:æ n:n i:ɪ c:k a:ə l:l', 'chef': 'ch:ʃ e:e f:f',
+}
+VOWEL_SOUND = set('aeiouæɑɒɔəɚɝɛɪʊʌ')
+def us_ipa(w):
+    return ipa(w)
+letters = []
+for k in SYL:
+    red, gray, pos, ok, detail = [], [], 0, True, []
+    for w in k.split(' '):
+        i = us_ipa(w); chunks = [c.split(':') for c in ALIGN[w].split(' ')]
+        same_letters = ''.join(a for a, _ in chunks) == w
+        same_sound = i is not None and ''.join(b for _, b in chunks) == re.sub(r'[ˈˌ.]', '', i)
+        ok = ok and same_letters and same_sound
+        for a, b in chunks:
+            for c in a:
+                if b == '': gray.append(pos)
+                elif c.lower() in 'aeiouy' and any(x in VOWEL_SOUND for x in b): red.append(pos)
+                pos += 1
+        detail.append({'word': w, 'ipa': i, 'align': ALIGN[w], 'url': CAM('e-sports' if w == 'esports' else w.lower()), 'ok': same_letters and same_sound})
+        pos += 1
+    letters.append({'word': k, 'red': red, 'gray': gray, 'parts': detail, 'ok': ok})
+VOW_SITE = json.loads(re.search(r'const VOW=(\{.*?\});', story).group(1)) if 'const VOW=' in story else {}
+SIL_SITE = json.loads(re.search(r'const SILENT=(\{.*?\});', story).group(1)) if 'const SILENT={"' in story else {}
+for l in letters:
+    l['site_ok'] = VOW_SITE.get(l['word']) == l['red'] and SIL_SITE.get(l['word'], []) == l['gray']
+
+json.dump({'claims': res, 'syllables': syl, 'letters': letters}, open('evidence/audit.json', 'w', encoding='utf8'), ensure_ascii=False, indent=1)
+bad = [r for r in res if not r['ok']] + [s for s in syl if not s['ok']] + [dict(l, url='Cambridge 對應或網站資料不一致') for l in letters if not (l['ok'] and l['site_ok'])]
 for b in bad:
     print('❌', b.get('card', b.get('word')), b.get('claim', b.get('site')), b['url'])
-print(f'說法 {len(res)} 條、音節 {len(syl)} 個；失敗 {len(bad)}')
+print(f'說法 {len(res)} 條、音節 {len(syl)} 個、母音／不發音 {len(letters)} 個字；失敗 {len(bad)}')

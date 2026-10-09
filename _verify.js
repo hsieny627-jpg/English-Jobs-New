@@ -168,66 +168,145 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     const aud = JSON.parse(require('fs').readFileSync(path.join(__dirname, 'evidence', 'audit.json'), 'utf8'));
     for (const c of aud.claims) ok(c.ok, `查證失敗：${c.card}「${c.claim}」 ${c.url}`);
     for (const s of aud.syllables) ok(s.ok, `音節和字典不一樣：${s.word} ${s.site} /${s.ipa}/`);
+    for (const l of aud.letters) ok(l.ok && l.site_ok, `母音／不發音和 Cambridge 對不上，或 story.html 沒更新：${l.word}`);
     const st = require('fs').readFileSync(path.join(__dirname, 'story.html'), 'utf8') + require('fs').readFileSync(path.join(__dirname, 'games.html'), 'utf8');
     for (const bad of ['veterinae', '管馬的人', '畫出來', '像「爺」', '拱門', 'pro</b> 先']) ok(!st.includes(bad), `還有改正前的寫法：${bad}`);
   }
-  // 職業興趣探險：原文核對全部通過；四種尺寸 30 題每一題不超出、按鈕夠大、字夠大；結果頁連結指到同一個字；計分
+  // 職業興趣探險：原文核對全部通過；四種尺寸走完 30 題＋5 次圖鑑挑戰，每個畫面不超出、按鈕夠大、字夠大、不用捲動就看得到按鈕
   {
     const fsx = require('fs');
     const Q = JSON.parse(fsx.readFileSync(path.join(__dirname, 'evidence', 'quiz.json'), 'utf8'));
     for (const i of Q.items) ok(i.ok, `測驗第 ${i.n} 題：O*NET 原文或興趣分數不符 ${i.url}`);
     for (const c of Q.claims) ok(c.ok, `測驗研究說法找不到原文：${c.name} ${c.url}`);
-    for (const [e, j] of Object.entries(Q.jobs)) ok(j.ok, `${e}：O*NET 興趣分數不完整`);
+    for (const [e, j] of Object.entries(Q.jobs)) ok(j.ok, `${e}：O*NET 興趣分數不完整或歸類根據不符`);
+    for (const x of Q.no_data) ok(x.ok, `${x.e}：職稱資料庫和說明不符`);
+    ok(Q.titles_db.ok, '職稱資料庫筆數不對');
     ok(Q.balanced && Q.items.length === 30, '測驗題目不是六型各 5 題');
+    ok(Q.engineers.length === 34 && Q.engineers.every(e => e.ok), '工程師 34 種的前 3 名不全是 R I C');
+    const html = fsx.readFileSync(path.join(__dirname, 'quiz.html'), 'utf8');
+    for (const no of ['教育部', '教育局', '國小沒有正式測驗', 'class="isl"', '小島', '愛動手', '動手做 <small>']) ok(!html.includes(no), `quiz.html 不應該出現：${no}`);
+    for (const t of ['實用型', 'Realistic', '研究型', 'Investigative', '藝術型', 'Artistic', '社會型', 'Social', '企業型', 'Enterprising', '事務型', 'Conventional', '不算進興趣分數', '羅盤告訴你可以先往哪裡探索，不是終點'])
+      ok(html.includes(t), `quiz.html 少了：${t}`);
+    const stub = () => { window.speechSynthesis.speak = u => setTimeout(() => u.onend && u.onend(), 5); window.speechSynthesis.cancel = () => {}; };
     const q = await browser.newPage();
+    await q.addInitScript(stub);
     const qe = []; q.on('pageerror', e => qe.push(e.message));
     await q.goto(url('story.html'));
     const words = await q.evaluate(() => W.map(d => d.e));
+    const scr = () => q.evaluate(() => document.body.dataset.s);
     for (const [w, hh, name] of sizes) {
       await q.setViewportSize({ width: w, height: hh });
       await q.goto(url('quiz.html'));
       const chk = sel => q.evaluate(sel => {
         const root = document.querySelector(sel), rr = root.getBoundingClientRect();
+        const vis = e => e.offsetParent !== null || getComputedStyle(e).position === 'fixed';
         return { over: document.documentElement.scrollWidth > document.documentElement.clientWidth,
-          out: [...root.querySelectorAll('*')].filter(e => e.offsetParent !== null && !e.closest('.tw,svg') && e.getBoundingClientRect().right > rr.right + 2).map(e => e.className || e.tagName).slice(0, 3),
-          small: [...root.querySelectorAll('button,a')].filter(e => e.offsetParent !== null && (e.getBoundingClientRect().height < 48 || e.getBoundingClientRect().width < 48)).map(e => e.textContent.trim()).slice(0, 3),
-          tiny: [...root.querySelectorAll('*')].filter(e => e.offsetParent !== null && !e.closest('#ev,svg') && [...e.childNodes].some(n => n.nodeType === 3 && n.textContent.trim()) && parseFloat(getComputedStyle(e).fontSize) < 16).map(e => e.textContent.trim()).slice(0, 3) };
+          out: [...root.querySelectorAll('*')].filter(e => vis(e) && !e.closest('.tw,svg,.fly,.train') && e.getBoundingClientRect().right > Math.min(rr.right, innerWidth) + 2).map(e => e.className || e.tagName).slice(0, 3),
+          small: [...root.querySelectorAll('button,a')].filter(e => vis(e) && !e.closest('.tw') && (e.getBoundingClientRect().height < 48 || e.getBoundingClientRect().width < 48)).map(e => e.textContent.trim()).slice(0, 3),
+          tiny: [...root.querySelectorAll('*')].filter(e => vis(e) && !e.closest('#ev,svg') && [...e.childNodes].some(n => n.nodeType === 3 && n.textContent.trim()) && parseFloat(getComputedStyle(e).fontSize) < 16).map(e => e.textContent.trim()).slice(0, 3),
+          body: [...root.querySelectorAll('.qz,.three p,.why div,.rc h3,.say1x,.psay,.think')].filter(vis).map(e => parseFloat(getComputedStyle(e).fontSize)) };
       }, sel);
       const look = async (sel, what) => { const r = await chk(sel);
         ok(!r.over, `${name}：${what}會橫向捲動`); ok(!r.out.length, `${name}：${what}超出畫面 ${r.out.join('、')}`);
-        ok(!r.small.length, `${name}：${what}按鈕太小 ${r.small.join('、')}`); ok(!r.tiny.length, `${name}：${what}字太小 ${r.tiny.join('、')}`); };
+        ok(!r.small.length, `${name}：${what}按鈕太小 ${r.small.join('、')}`); ok(!r.tiny.length, `${name}：${what}字太小 ${r.tiny.join('、')}`);
+        if (w >= 768 && w <= 1024) ok(r.body.every(f => f >= 22), `${name}：${what}內文小於 22px ${r.body.join(',')}`); };
+      const inView = async (sel, what) => { const b = await q.evaluate(sel => { const r = document.querySelector(sel).getBoundingClientRect(); return r.bottom; }, sel);
+        ok(b <= hh + 1, `${name}：${what}要往下捲才看得到（${Math.round(b)} > ${hh}）`); };
       await look('#start', '測驗開場');
       ok((await q.$eval('#start', e => e.textContent)).includes('僅供參考'), `${name}：開場沒有「僅供參考」`);
-      await q.click('#go');
+      ok(await q.$$eval('#start .rc', x => x.length) === 3 && await q.$$eval('#start .tc', x => x.length) === 6 && await q.$$eval('#start .three .card', x => x.length) === 3, `${name}：開場不是 3 張研究卡＋六型＋三句話`);
+      await q.click('#go'); await q.waitForTimeout(3700);
+      ok(await scr() === 'mission' && await q.$$eval('#map1 .st', x => x.length) === 5, `${name}：沒有出現探險地圖 5 個站`);
+      await look('#mission', '探險地圖'); await inView('#sail', '「出發」');
+      await q.click('#sail');
       for (let k = 0; k < 30; k++) {
-        if (await q.evaluate(() => document.getElementById('mid').classList.contains('on'))) { await q.waitForTimeout(900); await look('#mid', '中場'); await q.click('#cont'); }
-        ok(await q.evaluate(() => !document.getElementById('next').disabled) === false, `${name}：第 ${k + 1} 題還沒選就可以下一題`);
+        ok(await q.evaluate(() => document.getElementById('next').disabled), `${name}：第 ${k + 1} 題還沒選就可以下一題`);
         await q.click(`.fc[data-v="${(k % 4) + 1}"]`);
-        await q.waitForTimeout(500);
-        await look('#quiz', `第 ${k + 1} 題`);
-        const nb = await q.evaluate(() => document.getElementById('next').getBoundingClientRect().bottom);
-        ok(nb <= hh, `${name}：第 ${k + 1} 題「下一題」要往下捲才看得到（${Math.round(nb)} > ${hh}）`);
-        const r = await q.evaluate(k => ({ re: document.getElementById('re').textContent, zh: document.getElementById('qz').textContent, it: ITEMS[k] }), k);
-        ok(r.re === Q.items[k].e && r.zh === Q.items[k].zh, `${name}：第 ${k + 1} 題內容和 evidence/quiz.json 不一樣`);
+        await q.waitForTimeout(k === 0 ? 1600 : (k === 29 || w === 1024) ? 800 : 120);
+        ok(!(await q.evaluate(() => document.getElementById('next').disabled)), `${name}：第 ${k + 1} 題唸完英文「下一題」沒有亮`);
+        if (k === 0 || k === 29 || w === 1024) { await look('#quiz', `第 ${k + 1} 題`); await inView('#next', `第 ${k + 1} 題「下一題」`); }
+        const r = await q.evaluate(() => ({ re: document.getElementById('re').textContent, zh: document.getElementById('qz').textContent, flip: document.getElementById('flip').classList.contains('on') }));
+        ok(r.re === Q.items[k].e && r.zh === Q.items[k].zh && r.flip, `${name}：第 ${k + 1} 題內容和 evidence/quiz.json 不一樣或卡片沒翻面`);
+        if (k === 1) { // 回上一題：不用再聽，「下一題」直接可以按
+          await q.click('#back'); ok(!(await q.evaluate(() => document.getElementById('next').disabled)), `${name}：回上一題還要再聽一次`); await q.click('#next'); }
         await q.click('#next');
+        if (k % 6 === 5) {
+          await q.waitForTimeout(1100);
+          ok(await scr() === 'mid' && await q.$$eval('#map2 .st.lit', x => x.length) === (k + 1) / 6, `${name}：第 ${(k + 1) / 6} 站完成沒有點亮`);
+          await look('#mid', '關卡完成'); await inView('#chal', '「開始圖鑑挑戰」');
+          await q.click('#chal'); await q.waitForTimeout(400);
+          for (let c = 0; c < 3; c++) {
+            await look('#chal-s', '圖鑑挑戰'); await inView('#copts', '挑戰選項');
+            const lvjobs = await q.$$eval('.copt', b => b.map(x => x.dataset.e));
+            ok(lvjobs.length >= 4 && lvjobs.every(e => Q.items.slice(k - 5, k + 1).some(i => i.e === e)), `${name}：挑戰選項不是這一站解鎖的職業`);
+            await q.click(c === 1 ? '.copt:not([data-ok])' : '.copt[data-ok]');
+            if (c === 1) ok(await q.$('.copt.ans') !== null && (await q.$eval('#cfb', e => e.textContent)).includes('正確答案'), `${name}：答錯沒有顯示正確答案`);
+            await inView('#cnext', '挑戰「下一題」');
+            await q.click('#cnext'); await q.waitForTimeout(150);
+          }
+          ok(await scr() === 'refl' && (await q.$eval('#rscore', e => e.textContent)).includes('2 / 3'), `${name}：挑戰答對數不對或沒有「想一想」`);
+          ok(await q.$$eval('#rlist .card', x => x.length) === 6, `${name}：想一想沒有列出 6 件事`);
+          await look('#refl', '想一想'); await inView('#cont', '「繼續」');
+          await q.click('#cont'); await q.waitForTimeout(200);
+        }
       }
-      await q.waitForTimeout(1500);
-      ok(await q.evaluate(() => document.getElementById('res').classList.contains('on')), `${name}：30 題後沒有出現結果`);
+      await q.waitForTimeout(2800);
+      ok(await scr() === 'res', `${name}：30 題後沒有出現結果`);
       await look('#res', '結果頁');
       ok((await q.$eval('.warn', e => e.textContent)).includes('僅供參考'), `${name}：結果頁沒有「僅供參考」`);
-      ok(await q.$$eval('#tops .tg', g => g.length) >= 1 && await q.$$eval('#bars .bar', b => b.length) === 6, `${name}：結果頁沒有六型或沒有推薦小島`);
+      ok(await q.$$eval('#tops .tg', g => g.length) >= 1 && await q.$$eval('#bars .bar', b => b.length) === 6 && await q.$('#cmpr .ndl') !== null, `${name}：結果頁沒有羅盤／六型／推薦`);
       await q.evaluate(() => document.querySelectorAll('details.tg').forEach(d => d.open = true));
       await look('#res', '結果頁（全部打開）');
+      // 職業圖鑑：六欄、每張卡在分數最高的欄
+      const dex = await q.$$eval('.dcolw', cs => cs.map(c => [...c.querySelectorAll('.dc')].map(d => d.dataset.e)));
+      ok(dex.length === 6, `${name}：職業圖鑑不是 6 欄`);
+      if (w === 1920) {
+        const want = { R: [], I: [], A: [], S: [], E: [], C: [] };
+        for (const [e, j] of Object.entries(Q.jobs)) { const mx = Math.max(...Object.values(j.scores)); for (const t of 'RIASEC') if (j.scores[t] === mx) want[t].push(e); }
+        'RIASEC'.split('').forEach((t, i) => ok(JSON.stringify([...dex[i]].sort()) === JSON.stringify(want[t].sort()), `職業圖鑑 ${t} 欄放錯：${dex[i].join(',')}`));
+        ok(await q.$$eval('.dc .tie', x => x.length) === 4, '同分（獸醫、機師）沒有兩欄都標「同分」');
+        const cols = await q.$eval('#dex', d => getComputedStyle(d).gridTemplateColumns.split(' ').length);
+        ok(cols === 6, `1920 職業圖鑑不是 6 欄並排（${cols}）`);
+      }
+      if (w === 375) ok(await q.$eval('#dex', d => getComputedStyle(d).gridTemplateColumns.split(' ').length) === 2, '手機職業圖鑑不是 2 欄');
+      // 興趣成分＋三種音節動畫
+      await q.click('.dc[data-e="teacher"]'); await q.waitForTimeout(2000);
+      await look('#panel', '興趣成分');
+      const sh = await q.evaluate(() => ({ bars: document.querySelectorAll('.pb').length, med: [...document.querySelectorAll('.pb .md')].map(m => m.textContent).join(''), say: document.getElementById('psayt').textContent, first: document.querySelector('.pb').dataset.t }));
+      ok(sh.bars === 6 && sh.med === '🥇🥈🥉' && sh.first === 'S' && sh.say.includes('老師最常做的是『社會型』的事：幫助、教別人（100 分）'), `${name}：老師的興趣成分不對 ${JSON.stringify(sh)}`);
+      for (const m of ['clap', 'train', 'cut']) {
+        await q.click(`.sbtn button[data-m="${m}"]`); await q.waitForTimeout(m === 'train' ? 3600 : m === 'cut' ? 2700 : 3000);
+        ok((await q.$eval('#sres', e => e.textContent)).includes('teach · er ＝ 2 個音節'), `${name}：音節動畫 ${m} 最後沒有顯示「teach · er ＝ 2 個音節」`);
+        await look('#panel', `音節動畫 ${m}`);
+      }
+      await q.click('#xbtn');
+      ok(!(await q.evaluate(() => document.getElementById('sheet').classList.contains('on'))), `${name}：興趣成分關不掉`);
     }
-    // 結果頁每一張職業卡都連到同一個字的單字卡
-    const pairs = await q.$$eval('#res .jt', as => as.map(a => [a.dataset.e, a.getAttribute('href')]));
-    ok(pairs.length > 60, `結果頁職業卡只有 ${pairs.length} 張`);
-    for (const [e, href] of pairs) ok(words[+href.split('#w')[1] - 1] === e, `測驗結果 ${e} 連到的單字卡不是 ${e}`);
-    ok(!pairs.some(([e]) => e === 'fortune teller'), '測驗結果不應該出現 fortune teller');
+    // 每一張職業卡打開後，連到同一個字的單字卡；esports player 要註明分數是全部運動員一起算
+    const es = await q.$$eval('#res .dc, #res button.jt', as => [...new Set(as.map(a => a.dataset.e))]);
+    ok(es.length === Object.keys(Q.jobs).length, `結果頁職業 ${es.length} 個，應該 ${Object.keys(Q.jobs).length} 個`);
+    for (const e of es) { const r = await q.evaluate(e => { openSheet(e); const h = document.getElementById('plink').getAttribute('href'); const t = document.getElementById('panel').textContent; closeSheet(); return { h, t }; }, e);
+      ok(words[+r.h.split('#w')[1] - 1] === e, `測驗 ${e} 連到的單字卡不是 ${e}`);
+      if (e === 'esports player') ok(r.t.includes('全部運動員一起算'), 'esports player 沒有註明分數是全部運動員一起算'); }
+    const ex = await q.$$eval('#extra .jt', as => as.map(a => [a.dataset.e, a.getAttribute('href')]));
+    ok(ex.map(x => x[0]).sort().join() === 'YouTuber,content creator,influencer', `「也可以認識」應該是 YouTuber、content creator、influencer：${ex.map(x => x[0])}`);
+    for (const [e, href] of ex) ok(words[+href.split('#w')[1] - 1] === e, `測驗結果 ${e} 連到的單字卡不是 ${e}`);
+    ok(!(await q.$eval('#res', e => e.innerHTML)).includes('fortune teller'), '測驗結果頁不應該出現 fortune teller');
+    // 母音紅、不發音灰：lawyer 的 y 不是紅色；business 的 i 是灰色
+    ok(await q.evaluate(() => VOW.lawyer.indexOf(3) < 0 && SILENT['business manager'][0] === 3), '母音／不發音資料沒有改正（lawyer y、business i）');
+    // 8 秒保險：語音一直不結束，「下一題」最多 8 秒也要亮
+    {
+      const z = await browser.newPage({ viewport: { width: 1024, height: 768 } });
+      await z.addInitScript(() => { window.speechSynthesis.speak = () => {}; window.speechSynthesis.cancel = () => {}; });
+      await z.goto(url('quiz.html')); await z.click('#go'); await z.waitForTimeout(3600); await z.click('#sail'); await z.click('.fc[data-v="5"]');
+      await z.waitForTimeout(3000); ok(await z.evaluate(() => document.getElementById('next').disabled), '語音還沒唸完「下一題」就亮了');
+      await z.waitForTimeout(5300); ok(!(await z.evaluate(() => document.getElementById('next').disabled)), '語音卡住時 8 秒後「下一題」沒有亮');
+      await z.close();
+    }
     // 計分：全部「不確定」＝一樣多；只喜歡 🎨 ＝ 🎨 最高
-    const run = async f => { await q.goto(url('quiz.html')); await q.click('#go');
-      for (let k = 0; k < 30; k++) { if (await q.evaluate(() => document.getElementById('mid').classList.contains('on'))) await q.click('#cont');
-        const t = await q.evaluate(k => ITEMS[k].t, k); await q.click(`.fc[data-v="${f(t)}"]`); await q.click('#next'); }
+    const run = async f => { await q.goto(url('quiz.html')); await q.evaluate(() => { start(); document.getElementById('sail').click(); });
+      for (let k = 0; k < 30; k++) { const t = await q.evaluate(k => ITEMS[k].t, k); await q.evaluate(([v, k]) => { pick(v); unlock(k); next(); }, [f(t), k]);
+        if (k % 6 === 5) await q.evaluate(() => { chal(); for (let c = 0; c < 3; c++) { chPick(document.querySelector('.copt[data-ok]')); chNext(); } cont(); }); }
       return q.evaluate(() => ({ top: document.getElementById('top').textContent, tops: [...document.querySelectorAll('#tops .tg')].map(g => g.dataset.t), oth: document.querySelectorAll('#others .tg').length })); };
     let r = await run(() => 3);
     ok(r.top.includes('一樣多') && r.tops.length === 0 && r.oth === 6, `計分：全部不確定，結果不對 ${JSON.stringify(r)}`);
@@ -236,7 +315,7 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     r = await run(t => t === 'R' ? 5 : 2);
     ok(r.tops.join('') === 'R', `計分：只喜歡 🔧，結果不對 ${JSON.stringify(r)}`);
     await q.goto(url('quiz.html#ev')); await q.waitForTimeout(150);
-    ok(await q.$eval('#ev', d => d.open) && await q.$$eval('#ev tbody tr', t => t.length) >= 30 + 29 + 7, 'quiz.html#ev：沒有打開證據或表格不完整');
+    ok(await q.$eval('#ev', d => d.open) && await q.$$eval('#ev tbody tr', t => t.length) >= 9 + 6 + 30 + 32 + 3 + 4 + 34, 'quiz.html#ev：沒有打開證據或表格不完整');
     ok(await q.$('a.homeln[href="index.html"]').then(e => e && e.isVisible()), 'quiz.html：看不到 🏠 首頁');
     ok(!qe.length, `測驗頁錯誤 ${qe.join(' ')}`);
     await q.close();
