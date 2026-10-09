@@ -567,7 +567,7 @@ const GAMES={magnet:Gm,dark:Gd,ninja:Gn,detect:Gt,lava:Gv};
    2026/10/9 使用者要求：登入一看就懂、清楚知道下一步；班級打錯，已經打的班級號碼立刻清空，可以馬上重打。 */
 const SCG=0,SCSRC='school';
 const SCURL=String(window.SCORE_URL||'').trim(),SCON=!!SCURL&&!window.__SCORE_TEST_OFF;
-const SCCLS={3:['304','307','311'],4:['402','406','409','410']},SCDEMO='30405';
+const SCCLS={3:['304','307','311'],4:['402','406','409','410']},SCDEMO='30405',SCMAX=30;   /* 每一班座號 1～30（2026/10/9 使用者決定） */
 function scGet(k){try{return JSON.parse(localStorage.getItem('score_'+k)||'null')}catch(e){return null}}
 function scPut(k,v){try{localStorage.setItem('score_'+k,JSON.stringify(v))}catch(e){}}
 let SCID=scGet('last'),SCGUEST=false,SCDEV=scGet('dev'),SCV=null,SCIN='',SCEND=null;
@@ -576,7 +576,8 @@ function scGr(){return SCID?+String(SCID).charAt(0):0}
 function scLive(){return SCON&&!!SCID&&!SCGUEST}
 function scOn(){return SCH.on()}
 function scCheck(id){if(!/^\d{5}$/.test(id))return {err:'len'};const c=id.slice(0,3),s=+id.slice(3),g=c[0]==='3'?3:(c[0]==='4'?4:0);
- if(!g||SCCLS[g].indexOf(c)<0)return {err:'cls',cls:c};if(s<1||s>40)return {err:'seat'};return {id,cls:c,seat:s,g}}
+ if(!g||SCCLS[g].indexOf(c)<0)return {err:'cls',cls:c};if(s<1||s>SCMAX)return {err:'seat'};return {id,cls:c,seat:s,g}}
+if(SCID&&scCheck(String(SCID)).err){SCID=null;scPut('last',null)}   /* 以前登入的號碼現在不合規定（例如 31 號以上）➜ 重新登入 */
 const clsOk=c=>SCCLS[3].indexOf(c)>-1||SCCLS[4].indexOf(c)>-1;
 function scFetch(q,body,ms){return new Promise((ok,no)=>{let done=false;const t=setTimeout(()=>{if(!done){done=true;no(new Error('timeout'))}},ms||9000);
  const u=SCURL+(q?(SCURL.indexOf('?')<0?'?':'&')+q:'');
@@ -614,7 +615,7 @@ function scKeyPress(k){if(!$('#scGrp'))return;
  if(SCTYPED.length>=5)return;SCTYPED+=k;
  if(SCTYPED.length===3&&!clsOk(SCTYPED)){const bad=SCTYPED;SCTYPED='';scShake();
   scPaint('🏫 沒有 '+bad+' 班！已經幫你清掉了，請重新打班級<small>三年級：304、307、311　四年級：402、406、409、410</small>');return}
- if(SCTYPED.length===5){const s=+SCTYPED.slice(3);if(s<1||s>40){const bad=SCTYPED.slice(3);SCTYPED=SCTYPED.slice(0,3);scShake();scPaint('🪑 沒有 '+bad+' 號！請重新打座號（01～40）');return}}
+ if(SCTYPED.length===5){const s=+SCTYPED.slice(3);if(s<1||s>SCMAX){const bad=SCTYPED.slice(3);SCTYPED=SCTYPED.slice(0,3);scShake();scPaint('🪑 沒有 '+bad+' 號！請重新打座號（01～'+SCMAX+'）');return}}
  scPaint()}
 function scWho(r){const go=()=>{SCID=r.id;scPut('id_g'+r.g,SCID);scPut('last',SCID);SCGUEST=false;$('#scme').innerHTML=scMeHTML();const a=SCLOGAFTER;SCLOGAFTER=null;SCH.close();if(a)a()};
  const m=$('#scMsg');m.className='scmsg ok';m.textContent='✅ '+r.cls+' 班 '+r.seat+' 號';

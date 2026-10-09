@@ -252,8 +252,13 @@ module.exports = async function (browser, url) {
     r = await now(); ok(r.box === '' && r.err && r.msg.includes('沒有 999 班') && r.msg.includes('清掉') && r.step === 1, `登入：班級打錯沒有立刻清空 ${JSON.stringify(r)}`);
     for (const k of '304') await p.click(`.sckey [data-k="${k}"]`);
     r = await now(); ok(r.box === '304' && r.step === 2 && r.msg.includes('座號'), `登入：打完班級沒有亮「② 打座號」${JSON.stringify(r)}`);
-    for (const k of '45') await p.click(`.sckey [data-k="${k}"]`);
-    r = await now(); ok(r.box === '304' && r.err && r.msg.includes('沒有 45 號'), `登入：座號打錯沒有清掉座號 ${JSON.stringify(r)}`);
+    for (const k of '31') await p.click(`.sckey [data-k="${k}"]`);
+    r = await now(); ok(r.box === '304' && r.err && r.msg.includes('沒有 31 號') && r.msg.includes('01～30'), `登入：座號 31 號（超過 30）沒有清掉座號 ${JSON.stringify(r)}`);
+    for (const k of '00') await p.click(`.sckey [data-k="${k}"]`);
+    r = await now(); ok(r.box === '304' && r.err && r.msg.includes('沒有 00 號'), `登入：座號 00 沒有清掉座號 ${JSON.stringify(r)}`);
+    for (const k of '30') await p.click(`.sckey [data-k="${k}"]`);
+    r = await now(); ok(r.box === '30430' && !r.err && r.step === 3, `登入：30 號應該可以 ${JSON.stringify(r)}`);
+    await p.click('.sckey [data-k="b"]'); await p.click('.sckey [data-k="b"]');
     await p.click('.sckey [data-k="ok"]'); r = await now(); ok(r.err && r.box === '304', '登入：沒打完就按 ✅ 沒有提醒');
     for (const k of '05') await p.click(`.sckey [data-k="${k}"]`);
     r = await now(); ok(r.box === '30405' && r.step === 3 && await p.$eval('.okb', b => b.classList.contains('ready')), '登入：打完沒有亮「③ 按 ✅」');
