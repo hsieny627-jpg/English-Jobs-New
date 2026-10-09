@@ -36,7 +36,7 @@ ITEMS = [
  ('C', '💻', '把一步一步的指令排好，寫成電腦程式', 'programmer', ['Prepare detailed workflow charts and diagrams that describe input, output, and logical operation, and convert them into a series of instructions coded in a computer language.']),
  ('R', '✂️', '幫人剪頭髮、修出好看的髮型', 'hairstylist', ["Cut, trim and shape hair or hairpieces, based on customers' instructions, hair type, and facial features, using clippers, scissors, trimmers and razors."]),
  ('I', '🧠', '了解別人心情和行為上的困擾', 'psychologist', ['Identify psychological, emotional, or behavioral issues and diagnose disorders, using information obtained from interviews, tests, records, or reference materials.']),
- ('A', '🎧', '用 DJ 機器播放音樂', 'DJ', ['Operate disc jockey controller and other equipment, such as microphones.']),
+ ('A', '🎧', '選大家喜歡的歌，放給大家聽', 'DJ', ['Select and play music incorporating crowd preferences and mood.']),
  ('S', '🩺', '告訴大家怎麼吃、怎麼運動，才不會生病', 'doctor', ['Advise patients and community members concerning diet, activity, hygiene, and disease prevention.']),
  ('E', '💼', '計畫特價活動，讓更多人來買東西', 'business manager', ['Plan or direct activities, such as sales promotions, that require coordination with other department managers.']),
  ('C', '✂️', '幫客人排好預約的時間', 'hairstylist', ['Schedule client appointments.']),

@@ -267,7 +267,7 @@ ${FACES.map(([f, t, v]) => `   <button class="fc" data-v="${v}" aria-label="${t}
  <h4>怎麼計分、怎麼呈現</h4>
  <ul>
   <li>作答：5 個表情（O*NET 用表情符號作答的研究）。😍 5 分、🙂 4、😐 3、🙁 2、😖 1；每型 5 題，最少 5 分、最多 25 分。</li>
-  <li>六型全部顯示（六角形＋長條），不只給一個答案；說法是「你<b>今天</b>最常按喜歡的是…」，不說「你是…型的人」。</li>
+  <li>六型全部顯示（六角形＋長條），不只給一個答案；說法是「你<b>今天</b>最常按「喜歡」的是…」，不說「你是…型的人」。</li>
   <li>列出最高分的型（同分並列）；只有一型最高時，再加上第二高的型（第二高有 3 型以上同分就不加）。六型一樣高，或最高分不到 11 分（平均是「不喜歡」），會出現另外的鼓勵說法。</li>
   <li>職業清單寫「可以去認識」，不寫「適合你」；不問性別、不問名字、不存任何資料。</li>
   <li>結果頁每一型列出的職業：O*NET 興趣分數前 3 名有這一型（📋 事務型只列前 2 名）。</li>
@@ -366,7 +366,7 @@ function result(){
  $('bars').innerHTML=ORDER.split('').map(t=>'<div class="bar" data-t="'+t+'"><span>'+TY[t].ic+' '+TY[t].k+' <small>'+TY[t].f+'</small></span><span style="text-align:right">'+s[t]+' 分</span><div class="bt"><i style="background:'+TY[t].c+'" data-w="'+(s[t]/25*100)+'"></i></div></div>').join('');
  setTimeout(()=>document.querySelectorAll('.bt i').forEach(i=>i.style.width=i.dataset.w+'%'),80);
  const nm=top.map(t=>TY[t].ic+' '+TY[t].k).join('、');
- $('top').innerHTML=flat?'你六種興趣今天一樣多！':'你今天最常按喜歡的是：<br>'+nm;
+ $('top').innerHTML=flat?'你六種興趣今天一樣多！':'你今天最常按「喜歡」的是：<br>'+nm;
  $('topsub').textContent=flat?'每一座小島都可以去看看，慢慢找出你最喜歡的。':max<=10?'今天好像都不太喜歡也沒關係，興趣會慢慢出現，多認識不同的工作就會發現。':'這些小島上的職業，可以先去認識看看（不是一定要做這些工作喔）。';
  $('tops').innerHTML=top.map(t=>group(t,true)).join('');
  $('others').innerHTML=ORDER.split('').filter(t=>!top.includes(t)).map(t=>group(t,false)).join('');
