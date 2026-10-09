@@ -271,7 +271,20 @@ body[data-s=play] #play{display:flex}
 .hole.hit .msign{background:#EAF7EF;border-color:var(--ok)}.hole.hit .mface{animation:bonk .4s ease}
 .hole.miss .msign{background:#FDE3E3;border-color:var(--no)}
 @keyframes bonk{40%{transform:scaleY(.6)}}
+/* 🔒 老師的任務表 */
+.gcard.locked{filter:grayscale(.7);opacity:.75}
+.glock{font-size:var(--t3);font-weight:700;border-radius:999px;padding:2px 12px;background:#fff;border:2px solid var(--line)}
+.glock.open{color:#137A42;border-color:var(--ok)}.glock.off,.glock.end{color:var(--no);border-color:#F2B8B8}.glock.soon{color:var(--goldt);border-color:var(--gold)}
+.intro .two .lockb{background:#9AA3B5;box-shadow:none;cursor:not-allowed;font-size:var(--t2)}
+/* 🔔 音效開關：顯眼 */
+#bar #muteBtn{background:var(--gold);border:2px solid #A57A10;color:var(--navy);min-width:132px}
+#bar #muteBtn.off{background:#fff;border-color:var(--no);color:var(--no)}
 /* 🥁 拍數節奏 */
+.btsay.big{min-width:96px;min-height:96px;font-size:48px}
+.btq{font-size:var(--t2);font-weight:700;color:var(--soft)}
+.btq .hintw{font-size:1.4em;opacity:.55}
+.btn.show{display:inline-flex;align-items:baseline;gap:.3em;flex-wrap:wrap;justify-content:center;animation:gIn .4s cubic-bezier(.2,1.5,.4,1)}
+.btn.show .bti{font-size:.9em}.btn.show .btz{font-size:.4em;color:var(--soft);font-family:"PingFang TC","Noto Sans TC",sans-serif}
 .bt{background:linear-gradient(180deg,#F1FAF4,#DDF1E4);display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;padding:8px 12px}
 .btw{display:flex;align-items:center;justify-content:center;gap:8px 16px;flex-wrap:wrap;text-align:center}
 .bti{font-size:clamp(40px,7vh,72px);line-height:1}

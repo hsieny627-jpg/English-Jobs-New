@@ -44,6 +44,8 @@ const html = `<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>職業英文單字</title>
 <style>
+/* 英文不合字（2026/10/9）：Andika 會把 fi、ffi 合成一個字，紅色的 i 就變黑色 */
+*{font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0}
 ${font}
 :root{--bg:#FFF7E8;--card:#fff;--ink:#23201C;--soft:#7A7166;--line:#F0E2C8;
 --c1:#15233A;--c1t:#FFD24A;--c2:#FF7A45;--c2bg:#FFE3D6;--c3:#2F6FDE;--c3bg:#DCE8FB;--c4:#2FA35A;--c4bg:#DCF0C8}

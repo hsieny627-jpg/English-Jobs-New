@@ -28,7 +28,7 @@ module.exports = async function (browser, url) {
     const p = await browser.newPage({ viewport: { width: w, height: h }, hasTouch: false });
     p.errs = []; p.on('pageerror', e => p.errs.push(e.message));
     await p.addInitScript(stub);
-    if (scoreOff) await p.addInitScript(() => { window.__SCORE_TEST_OFF = 1; });
+    if (scoreOff) await p.addInitScript(() => { window.__SCORE_TEST_OFF = 1; window.__TASK_TEST_OFF = 1; });
     await p.route(/script\.google\.com/, r => r.abort());   // 量測絕對不送到真的成績表
     return p;
   };
@@ -73,6 +73,17 @@ module.exports = async function (browser, url) {
     }
     // 職業神探：容易搞混的職業不放在同一題
     ok(D.CONF.every(g => g.every(e => D.ITEMS.some(i => i.e === e))), '神探的 CONF 有不在題目裡的職業');
+    // 音節照 AI-Agent-Open-Code 的規則（_syl_rule.py 算出來的 ＝ story.html）
+    const rule = JSON.parse(require('child_process').execFileSync('python3', ['-c', 'import _syl_rule as r, json; print(json.dumps(r.NEW))'], { cwd: dir }).toString());
+    ok(Object.keys(rule).length === Object.keys(SYL).length && Object.keys(rule).every(k => rule[k] === SYL[k]), 'story.html 的音節和 _syl_rule.py 的規則不一樣');
+    ok(SYL.mechanic === 'me-cha-nic' && SYL.teacher === 'tea-cher', 'mechanic／teacher 的音節不是學生的切法');
+    // 英文不合字（fi、ffi 合在一起，紅色 i 會變黑）
+    ok(await p.evaluate(() => getComputedStyle(document.querySelector('.dce')).fontVariantLigatures === 'none'), '英文還會合字（fi、ffi）');
+    // 驚喜卡加的時間：一場加起來最多 20 秒
+    const cap = await p.evaluate(() => { gid = 'dark'; tUsed = 0; gLeft = 90; pool = []; const T = SURP.dark.concat(SURP.memory).filter(isTime); let got = 0;
+      for (const e of T) { const c = roll(e); if (tUsed < TIMEMAX) { doEvt(c); got++; } } let tm = 0; for (let k = 0; k < 200; k++) { const e = draw1(); if (e && isTime(e)) tm++; } return { used: tUsed, tm, got }; });
+    ok(cap.used === 20 && cap.tm === 0 && cap.got >= 1, `驚喜卡加的時間超過 20 秒或用完還會出現 ${JSON.stringify(cap)}`);
+    ok(!Object.values(D.SURP).flat().some(e => e.k === 'gt' && e.v > 20), '還有一張驚喜卡加超過 20 秒');
     await p.close();
   }
 
@@ -161,6 +172,22 @@ module.exports = async function (browser, url) {
         ok(okSeen && back, `${id}：觀看示範沒有自己答對、或沒有回到開始畫面`);
         ok(await p.evaluate(() => JX.state().score === 0), `${id}：示範算了分數`);
       }
+      // 🔔 音效開關：顯眼、按了會關、重新整理還記得；英文發音照常
+      await p.goto(url('jobdex.html')); await p.waitForTimeout(150);
+      ok(await p.$eval('#muteBtn', b => b.textContent.includes('音效 開') && b.getBoundingClientRect().height >= 48), '沒有「🔔 音效」按鈕');
+      await p.click('#muteBtn');
+      ok(await p.evaluate(() => MUTE === true && document.getElementById('muteBtn').textContent.includes('音效 關')), '按了音效沒有關');
+      await p.reload(); await p.waitForTimeout(150);
+      ok(await p.evaluate(() => MUTE === true), '音效關掉以後，重新整理又開了');
+      await p.click('#muteBtn'); ok(await p.evaluate(() => MUTE === false), '音效打不開');
+      // 🔒 老師的任務表：沒開放、還沒到時間、已經截止 ➜ 鎖住；還沒截止 ➜ 寫幾點截止
+      await p.evaluate(() => { const h = 3600e3; TASK = { dark: { on: false }, mole: { on: true, from: Date.now() + h }, lava: { on: true, to: Date.now() - 1000 }, beat: { on: true, to: Date.now() + h } }; gridPaint(); });
+      const lk = await p.evaluate(() => Object.fromEntries([...document.querySelectorAll('.gcard')].map(c => [c.dataset.g, [c.classList.contains('locked'), (c.querySelector('.glock') || {}).textContent || '']])));
+      ok(lk.dark[0] && lk.mole[0] && lk.lava[0] && !lk.beat[0] && !lk.memory[0] && lk.dark[1].includes('還沒開放') && lk.mole[1].includes('開放') && lk.lava[1].includes('截止') && lk.beat[1].includes('截止'), `任務表的鎖不對 ${JSON.stringify(lk)}`);
+      await p.evaluate(() => bookPage('lava')); await p.waitForTimeout(100);
+      ok(await p.$eval('#startBtn', b => b.disabled && b.textContent.includes('截止')), '截止的遊戲還可以按開始');
+      await p.evaluate(() => begin('lava', 'all')); ok(await p.evaluate(() => document.body.dataset.s !== 'play'), '截止的遊戲還是開始了');
+      await p.evaluate(() => { TASK = null; try { localStorage.removeItem('jx_task'); } catch (e) {} gridPaint(); });
       await p.goto(url('jobdex.html#ninja')); await p.waitForTimeout(150);
       ok(await p.evaluate(() => document.body.dataset.s === 'hub'), 'jobdex.html#ninja（舊網址）沒有回到大廳');
       ok(await p.$('a.homeln2[href="index.html"]').then(e => e && e.isVisible()), 'jobdex.html：看不到 🏠 首頁');
@@ -226,10 +253,12 @@ module.exports = async function (browser, url) {
       if (id === 'detect') { const all = await p.evaluate(() => [...new Set(D.ITEMS.map(i => i.e))]);
         for (const e0 of all.concat([null])) { const [lu, CONF, e] = await p.evaluate(e0 => { const g = JX.GAMES.detect; g.ask(e0 || JX.state().cur, {}); return [[...document.querySelectorAll('.sus')].map(x => x.dataset.e), D.CONF, g.e]; }, e0);
         ok(lu.length === 8 && lu.includes(e) && !CONF.some(g => g.includes(e) && g.filter(x => lu.includes(x)).length > 1), `${tag}：嫌疑人裡有和答案容易搞混的職業 ${e}：${lu.join('、')}`); } }
+      if (id === 'beat') { const bw = await p.evaluate(() => ({ t: document.getElementById('btnw').textContent, e: JX.state().cur })); ok(!bw.t.includes(bw.e) && bw.t.includes('聽'), `${tag}：還沒答就看得到字 ${JSON.stringify(bw)}`); }
       // ① 真的用手指答對
       await realRight(p, id, k0 === 0); await p.waitForTimeout(150);
       s = await st(p);
       ok(s.right === 1 && s.wrong === 0 && s.score >= 100, `${tag}：用手指答對第一題沒有成功 ${JSON.stringify(s)}`);
+      if (id === 'beat') ok(await p.evaluate(() => { const t = document.getElementById('btnw'); return t.classList.contains('show') && t.querySelector('.btsy') !== null; }), `${tag}：答對以後沒有出現那個字`);
       // ② 再連對 2 題 ➜ 🎁 驚喜卡
       for (let k = 0; k < 2; k++) { if (!(await waitQ(p))) break; await p.evaluate(() => JX.GAMES[JX.state().gid].cheat(true)); }
       let t0 = Date.now(), pk = false; while (Date.now() - t0 < 6000) { if (await p.$eval('#pick', e => e.classList.contains('on'))) { pk = true; break; } await p.waitForTimeout(100); }
@@ -297,6 +326,15 @@ module.exports = async function (browser, url) {
       if (/a=who/.test(u)) return r.fulfill({ contentType: 'application/json', body: '{"roster":false}' });
       return r.fulfill({ contentType: 'application/json', body: '{"boards":false}' });
     });
+    // 任務表（Google 試算表 gviz）：用假的表格，日期兩種寫法都要看得懂；只寫日期的截止＝那一天 23:59
+    await p.route(/docs\.google\.com\/spreadsheets/, r => { const cb = decodeURIComponent(r.request().url()).match(/responseHandler:([\w$]+)/)[1];
+      const row = (id, on, a, b) => ({ c: [{ v: id }, { v: id }, { v: on }, a == null ? null : a, b == null ? null : b] });
+      r.fulfill({ contentType: 'text/javascript', body: cb + '(' + JSON.stringify({ table: { rows: [row('memory', '是'), row('mole', '否'), row('lava', '是', null, { v: 'Date(2020,0,1)', f: '2020/1/1' }), row('dark', '是', { v: 'Date(2099,9,9,8,0,0)' }), row('beat', '是', null, { v: '2099/10/9 23:59', f: '2099/10/9 23:59' })] } }) + ')' }); });
+    await p.goto(url('jobdex.html')); await p.waitForTimeout(800);
+    const tk = await p.evaluate(() => ({ m: lockOf('memory'), o: lockOf('mole'), l: lockOf('lava'), d: lockOf('dark'), b: lockOf('beat'), lt: TASK && TASK.lava && new Date(TASK.lava.to).getHours() }));
+    ok(tk.m === null && tk.o.k === 'off' && tk.l.k === 'end' && tk.lt === 23 && tk.d.k === 'soon' && tk.d.txt.includes('10/9 08:00') && tk.b.k === 'open' && tk.b.txt.includes('10/9 23:59'), `任務表讀不懂 ${JSON.stringify(tk)}`);
+    await p.unroute(/docs\.google\.com\/spreadsheets/); await p.evaluate(() => { TASK = null; try { localStorage.removeItem('jx_task'); } catch (e) {} });
+    await p.addInitScript(() => { window.__TASK_TEST_OFF = 1; });
     await p.goto(url('jobdex.html')); await p.waitForTimeout(150);
     ok((await p.$eval('#scme', e => e.textContent)).includes('還沒登入'), '登入：大廳沒有顯示「還沒登入」');
     await p.evaluate(() => { location.hash = 'dark'; }); await p.waitForTimeout(150);

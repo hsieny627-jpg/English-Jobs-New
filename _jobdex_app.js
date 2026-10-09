@@ -41,8 +41,11 @@ try{pickVoice();speechSynthesis.onvoiceschanged=pickVoice}catch(e){}
 function say(t,done){const tok=++sayTok;let fin=false;const end=()=>{if(fin)return;fin=true;clearTimeout(st);if(tok===sayTok&&done)done()};const st=setTimeout(end,8000);
  try{const ss=window.speechSynthesis;ss.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='en-US';if(VOX)u.voice=VOX;u.rate=RATE;u.onend=end;u.onerror=end;ss.speak(u)}catch(e){setTimeout(end,10)}}
 function sayStop(){sayTok++;try{speechSynthesis.cancel()}catch(e){}}
+/* 🔔 音效開關（2026/10/9 使用者：音效很惱人）：只關叮咚聲，英文發音照常 */
+let MUTE=!!store('mute');
+function muteBtn(){const b=$('#muteBtn');if(b){b.classList.toggle('off',MUTE);b.innerHTML=MUTE?'🔕 音效 關':'🔔 音效 開';b.setAttribute('aria-pressed',MUTE?'true':'false')}}
 let AC=null;
-function tone(fs,dur,type,vol){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t0=AC.currentTime;
+function tone(fs,dur,type,vol){if(MUTE)return;try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t0=AC.currentTime;
  fs.forEach((f,k)=>{const o=AC.createOscillator(),g=AC.createGain();o.type=type||'sine';o.frequency.value=f;o.connect(g);g.connect(AC.destination);
  const s=t0+k*dur*.8;g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(vol||.15,s+.02);g.gain.exponentialRampToValueAtTime(.001,s+dur);o.start(s);o.stop(s+dur+.05)})}catch(e){}}
 const sfx={ok:()=>tone([660,880,1320],.16,'triangle'),no:()=>tone([220,170],.22,'square',.06),tick:()=>tone([1000],.05,'square',.04),wow:()=>tone([523,659,784,1047,1319],.14,'triangle',.13),
@@ -75,16 +78,19 @@ function eWhy(e){const v=e.v;
  if(e.k==='fast')return '下一題 5 秒內答對';if(e.k==='streak')return '連對數字直接加上去';if(e.k==='freeze')return '下一題前 '+v+' 秒，時間不動';return ''}
 function doEvt(e){const v=e.v;
  if(e.k==='pts'){score+=v;popScore(v)}else if(e.k==='lucky'){score+=e.got;popScore(e.got)}else if(e.k==='now'){const add=lastGain*(v-1);score+=add;popScore(add)}
- else if(e.k==='mul'){mult=v[0];multLeft=v[1]}else if(e.k==='time')timeAdd+=v;else if(e.k==='shield')shield+=v;
- else if(e.k==='slot'||e.k==='pct'||e.k==='dbl'){score+=e.got;popScore(e.got)}else if(e.k==='gt'){gLeft+=v}
+ else if(e.k==='mul'){mult=v[0];multLeft=v[1]}else if(e.k==='time'){timeAdd+=v;tUsed+=v}else if(e.k==='shield')shield+=v;
+ else if(e.k==='slot'||e.k==='pct'||e.k==='dbl'){score+=e.got;popScore(e.got)}else if(e.k==='gt'){gLeft+=v;tUsed+=v}
  else if(e.k==='rain'){rainV=v[0];rainN=v[1]}else if(e.k==='combo')combo={need:v[0],mul:v[1],n:0};else if(e.k==='hint')hintNext=1;
- else if(e.k==='gold')goldNext=v;else if(e.k==='fast')fastV=v;else if(e.k==='streak'){streak+=v;if(streak>best)best=streak}else if(e.k==='freeze')freezeNext=v}
-function roll(e){const c=Object.assign({},e);
+ else if(e.k==='gold')goldNext=v;else if(e.k==='fast')fastV=v;else if(e.k==='streak'){streak+=v;if(streak>best)best=streak}else if(e.k==='freeze'){freezeNext=v;tUsed+=v}}
+function roll(e){const c=Object.assign({},e);if(isTime(c))c.v=Math.max(1,Math.min(c.v,TIMEMAX-tUsed));
  if(c.k==='lucky')c.got=c.v[0]+Math.round(Math.random()*(c.v[1]-c.v[0])/10)*10;
  if(c.k==='slot'){const r=Math.random()<0.2?[7,7,7]:[1,2,3].map(()=>1+Math.floor(Math.random()*9));c.reel=r;c.jack=r[0]===r[1]&&r[1]===r[2];c.got=(r[0]*100+r[1]*10+r[2])*(c.jack?10:2)}
  if(c.k==='pct')c.got=Math.max(c.v>=50?500:300,Math.round(score*c.v/1000)*10);
  if(c.k==='dbl')c.got=Math.min(c.v,Math.max(500,score));return c}
-function draw1(){if(!pool.length)pool=shuf(SURP[gid].slice());return pool.shift()}
+/* 驚喜卡加的時間：一場加起來最多 20 秒（2026/10/9 使用者決定；多給時間、時間膠囊、大沙漏、冷凍都算） */
+const TIMEMAX=20;let tUsed=0;
+const isTime=e=>e.k==='time'||e.k==='gt'||e.k==='freeze';
+function draw1(){for(let k=0;k<2;k++){if(!pool.length)pool=shuf(SURP[gid].slice());while(pool.length){const e=pool.shift();if(isTime(e)&&tUsed>=TIMEMAX)continue;return e}}return null}
 /* 每個遊戲有自己的卡包樣式（參考頁的 38 種分給 5 個遊戲），一場洗一次、不重複 */
 function mySkins(){const k=META.findIndex(m=>m.id===gid);return SKIN.map((s,i)=>i).filter(i=>i%META.length===k)}
 function nextSkin(){if(!skinQ.length)skinQ=shuf(mySkins());return SKIN[skinQ.shift()]}
@@ -164,9 +170,9 @@ function tagsIn(){const a=[];const n=3-(streak%3);a.push('<span class="tg'+(n===
  if(hintNext)a.push('<span class="tg hot">💡 提示</span>');if(SCH.rkTxt)a.push('<span class="tg">'+SCH.rkTxt+'</span>');return a.join('')}
 
 function begin(id,book,opt){
- const m=META.find(x=>x.id===id);if(!m)return;try{G&&G.stop&&G.stop()}catch(e){}gid=id;G=GAMES[id];BK='all';ended=false;cdOn=true;DEMO=opt&&opt.demo?{n:0,id}:null;
+ const m=META.find(x=>x.id===id);if(!m)return;if(!(opt&&opt.demo)&&locked(id)){bookPage(id);return}try{G&&G.stop&&G.stop()}catch(e){}gid=id;G=GAMES[id];BK='all';ended=false;cdOn=true;DEMO=opt&&opt.demo?{n:0,id}:null;
  score=0;streak=0;best=0;right=0;wrong=0;mult=1;multLeft=0;fastV=0;wrongList=[];busy=false;bonusMode=false;
- asked=0;speedSum=0;shield=0;timeAdd=0;opened=[];lastGain=0;pool=shuf(SURP[id].slice());skinQ=shuf(mySkins());jokeQ=shuf(JOKE.slice());rainN=0;rainV=0;
+ asked=0;speedSum=0;shield=0;timeAdd=0;tUsed=0;opened=[];lastGain=0;pool=shuf(SURP[id].slice());skinQ=shuf(mySkins());jokeQ=shuf(JOKE.slice());rainN=0;rainV=0;
  hintNext=0;goldNext=0;freezeNext=0;frozenLeft=0;combo=null;left=QT;qt=QT;gLeft=GT;gPause=0;MISSLOG=[];missHide(false);
  GQ=[];GSEEN=[];GSIM=[];gFix=0;gFirst=false;SCEND=null;SCH.rkTxt='';$('#gscore').hidden=true;if(!DEMO)scStart(true);
  DECK=G.deck(BK);queue=shuf(DECK);
@@ -312,14 +318,36 @@ function hub(sec){ended=true;qOn=false;cdOn=false;DEMO=null;sayStop();missHide(f
  const ma=$('#missAll');if(ma)ma.classList.remove('on');['#gain','#pick'].forEach(s=>{$(s).classList.remove('on');$(s).innerHTML=''});gPause=0;
  SCH.close();show('hub');gridPaint();$('#scme').innerHTML=scMeHTML();view(sec==='dex'?'dex':'games');
  if(location.hash&&location.hash!=='#'+(sec||''))history.replaceState(null,'',location.pathname+(sec?'#'+sec:''))}
-function gridPaint(){$('#grid').innerHTML=META.map(m=>{const b=store('best_'+m.id)||0;
- return '<button class="gcard" data-g="'+m.id+'" style="--c:'+m.c+';--b:'+m.b+'"><span class="gi">'+m.ic+'</span><span class="gt">'+m.name+'</span><span class="gr">'+m.line+'</span>'+(b?'<span class="gb">🏆 '+b+'</span>':'')+'</button>'}).join('')}
+function gridPaint(){$('#grid').innerHTML=META.map(m=>{const b=store('best_'+m.id)||0,L=lockOf(m.id);
+ return '<button class="gcard'+(L&&L.k!=='open'?' locked':'')+'" data-g="'+m.id+'" style="--c:'+m.c+';--b:'+m.b+'"><span class="gi">'+m.ic+'</span><span class="gt">'+m.name+'</span><span class="gr">'+m.line+'</span>'+
+  (L?'<span class="glock '+L.k+'">'+L.txt+'</span>':'')+(b?'<span class="gb">🏆 '+b+'</span>':'')+'</button>'}).join('')}
+/* 老師的任務表（2026/10/9）：Google 試算表「任務」那一頁（task-url.js）＝ 哪些遊戲開放、幾點開始、幾點截止。
+   老師改表格，網站重新讀（打開時、之後每 2 分鐘）；讀不到就照上一次讀到的，從來沒讀到就全部開放。時間看平板的時鐘。 */
+const TASKID=String(window.TASK_SHEET||'').trim();let TASK=store('task');
+function tTime(c,end){if(!c||c.v==null||c.v==='')return null;let m=/^Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+))?/.exec(String(c.v)),y,mo,d,h,mi;
+ if(m){y=+m[1];mo=+m[2];d=+m[3];h=m[4]==null?null:+m[4];mi=+(m[5]||0)}
+ else{m=/(\d{4})\D+(\d{1,2})\D+(\d{1,2})(?:\D+(\d{1,2}):(\d{2}))?/.exec(String(c.f||c.v));if(!m)return null;y=+m[1];mo=m[2]-1;d=+m[3];h=m[4]==null?null:+m[4];mi=+(m[5]||0)}
+ if(h==null||(h===0&&mi===0&&end))return end?new Date(y,mo,d,23,59,59).getTime():new Date(y,mo,d).getTime();return new Date(y,mo,d,h,mi,end?59:0).getTime()}
+function taskLoad(){if(!TASKID||window.__TASK_TEST_OFF)return;const cb='__jxTask'+Date.now(),sc=document.createElement('script');
+ window[cb]=r=>{try{const t={};((r&&r.table&&r.table.rows)||[]).forEach(row=>{const c=row.c||[],id=c[0]&&String(c[0].v||'').trim();if(!id)return;
+   t[id]={on:!(c[2]&&/否/.test(String(c[2].v||''))),from:tTime(c[3],false),to:tTime(c[4],true)}});
+  if(Object.keys(t).length){TASK=t;store('task',t);taskPaint()}}catch(e){}delete window[cb];sc.remove()};
+ sc.onerror=()=>{delete window[cb];sc.remove()};
+ sc.src='https://docs.google.com/spreadsheets/d/'+TASKID+'/gviz/tq?headers=1&sheet='+encodeURIComponent('任務')+'&tqx=responseHandler:'+cb;document.head.appendChild(sc)}
+const pad2=n=>('0'+n).slice(-2);
+function fmtT(ms){const d=new Date(ms);return (d.getMonth()+1)+'/'+d.getDate()+' '+pad2(d.getHours())+':'+pad2(d.getMinutes())}
+function lockOf(id){const t=TASK&&TASK[id];if(!t)return null;const now=Date.now();
+ if(!t.on)return {k:'off',txt:'🔒 老師還沒開放'};if(t.from&&now<t.from)return {k:'soon',txt:'🔒 '+fmtT(t.from)+' 開放'};
+ if(t.to&&now>t.to)return {k:'end',txt:'🔒 已經截止（'+fmtT(t.to)+'）'};return t.to?{k:'open',txt:'⏰ '+fmtT(t.to)+' 截止'}:null}
+function locked(id){const L=lockOf(id);return !!L&&L.k!=='open'}
+function taskPaint(){if(document.body.dataset.s==='hub')gridPaint();else if(document.body.dataset.s==='book'&&BOOKID)bookPage(BOOKID)}
+setInterval(()=>{taskLoad();taskPaint()},120000);
 /* 遊戲開始前：👀 觀看示範／▶ 開始遊戲（2026/10/9 使用者要求）；不用再選一本，一律用全部的字 */
 function bookPage(id){const m=META.find(x=>x.id===id);if(!m)return;const b=store('best_'+id)||0;
  $('#book').innerHTML='<div class="intro" style="--c:'+m.c+';--b:'+m.b+'"><div class="gi0">'+m.ic+'</div><h2 class="h2">'+m.name+'</h2>'+
   '<div class="rule">'+m.how.map(h=>'<div><span>'+h[0]+'</span><span>'+h[1]+'</span></div>').join('')+'</div>'+
-  '<div class="two"><button class="ghost" id="demoBtn">👀 觀看示範</button><button class="go" id="startBtn">▶ 開始遊戲</button></div>'+
-  '<p class="one">⏳ 一場 1 分 30 秒'+(b?'　🏆 最佳 '+b:'')+'</p></div>';
+  '<div class="two"><button class="ghost" id="demoBtn">👀 觀看示範</button>'+(locked(id)?'<button class="go lockb" id="startBtn" disabled>'+lockOf(id).txt+'</button>':'<button class="go" id="startBtn">▶ 開始遊戲</button>')+'</div>'+
+  '<p class="one">⏳ 一場 1 分 30 秒'+(lockOf(id)&&lockOf(id).k==='open'?'　'+lockOf(id).txt:'')+(b?'　🏆 最佳 '+b:'')+'</p></div>';
  BOOKID=id;show('book');location.replace('#'+id)}
 let DEXB='all',BOOKID=null;
 function dexPaint(b){DEXB=b;autoStop();$$('#tabs button').forEach(x=>x.classList.toggle('on',x.dataset.b===b));
@@ -591,7 +619,8 @@ const Gw={rt:true,deck:()=>BOOK.all,okDelay(){return 900},
  demo(){let h=this.H.find(x=>x.up&&x.e===this.e)||this.pop(this.e);h.t=99;const d=this.H.find(x=>x.up&&x.e!==this.e)||this.pop(this.ws[1]);if(d)d.t=99;
   const r=h.el.getBoundingClientRect(),ar=A().getBoundingClientRect();return [{x:r.left-ar.left+r.width/2,y:r.top-ar.top+r.height*.4,tap:()=>this.whack(h),say:'舉著 '+this.e+' 的那一隻，敲下去！'}]}};
 
-/* ══ 🥁 拍數節奏（2026/10/9 新增，取代音節忍者）：聽一個字，拍鼓拍出它有幾拍（幾個母音的聲音）。
+/* ══ 🥁 拍數節奏（2026/10/9 新增，取代音節忍者）：只聽單字的聲音（看不到字），拍鼓拍出它有幾個音節；答對才出現那個字
+   （母音紅、不發音灰），再一節一節亮。
    只數拍數、不切位置：每一本字典的拍數都一樣（evidence/audit.json 對過 Cambridge 音標），所以沒有爭議 ══ */
 const Gb={rt:true,deck:()=>BOOK.all,okDelay(){return 600+SA.count(saOpt(cur))*560},
  setup(){const a=A();a.className='bt';
@@ -600,17 +629,17 @@ const Gb={rt:true,deck:()=>BOOK.all,okDelay(){return 600+SA.count(saOpt(cur))*56
   $('#btok').addEventListener('click',()=>this.done());$('#btw').addEventListener('click',ev=>{if(ev.target.closest('.btsay'))this.sayW()})},
  sayW(){SA.play('word '+this.e.toLowerCase(),this.e,(t,cb)=>say(t,cb))},
  ask(e,o){this.e=e;this.n=0;this.need=SA.count(saOpt(e));const j=J[e];
-  $('#btw').innerHTML='<span class="bti">'+j.ic+'</span><span class="btn en" id="btnw">'+colorWord(e)+'</span><span class="btz">'+j.z+'</span><button class="btsay" aria-label="再聽一次">🔊</button>'+(o.hint?'<span class="bth">💡 數一數紅色的母音</span>':'');
+  $('#btw').innerHTML='<button class="btsay big" aria-label="再聽一次">🔊</button><span class="btq" id="btnw">'+(o.hint?'<span class="en hintw">'+colorWord(e)+'</span>':'🎧 聽一聽，有幾個音節？')+'</span>';
   this.dots();setTimeout(()=>{if(this.e===e&&qOn)this.sayW()},300)},
  dots(){$('#btdots').innerHTML=this.n?'<b>'+this.n+'</b> 拍　'+'<i>●</i>'.repeat(this.n):'🥁 拍幾下？'},
  hit(){if(!qOn||busy||this.n>=9)return;this.n++;sfx.drum();const d=$('#drumb');d.classList.remove('hit');void d.offsetWidth;d.classList.add('hit');this.dots()},
  done(){if(!qOn||busy)return;if(!this.n){const d=$('#btdots');d.classList.remove('shake');void d.offsetWidth;d.classList.add('shake');return}
   const ok=this.n===this.need,r=$('#btw').getBoundingClientRect(),ar=A().getBoundingClientRect();if(ok)this.show(this.e);else sfx.clank();
   judge(ok,{n:this.n},false,{x:W()/2,y:r.top-ar.top+20})},
- show(e){/* 答對：一節一節亮起來，一節一聲鼓 */const P=SA.parts(saOpt(e));let h='',k=0;P.forEach(w=>{h+='<span class="btwd">'+w.map(s=>'<span class="btsy" data-k="'+(k++)+'">'+colorRange(e,s.a,s.b)+'</span>').join('<b class="btdot">·</b>')+'</span>'});
-  const el=$('#btnw');el.innerHTML=h;const S=$$('#btnw .btsy');S.forEach((s,i)=>setTimeout(()=>{if(gid!=='beat')return;S.forEach(x=>x.classList.remove('now'));s.classList.add('now');sfx.drum()},200+i*520))},
+ show(e){/* 答對才出現這個字：圖示＋英文（母音紅、不發音灰）＋中文，再一節一節亮起來，一節一聲鼓 */const P=SA.parts(saOpt(e)),j=J[e];let h='',k=0;P.forEach(w=>{h+='<span class="btwd">'+w.map(s=>'<span class="btsy" data-k="'+(k++)+'">'+colorRange(e,s.a,s.b)+'</span>').join('<b class="btdot">·</b>')+'</span>'});
+  const el=$('#btnw');el.className='btn en show';el.innerHTML='<span class="bti">'+j.ic+'</span>'+h+'<span class="btz">'+j.z+'</span>';const S=$$('#btnw .btsy');S.forEach((s,i)=>setTimeout(()=>{if(gid!=='beat')return;S.forEach(x=>x.classList.remove('now'));s.classList.add('now');sfx.drum()},200+i*520))},
  miss(e,pk){const n=SA.count(saOpt(e)),dj=!SA.vgroups(saOpt(e),SA.parts(saOpt(e))).length;
-  return {key:'bt|'+e,q:J[e].ic+' '+en(e)+' '+J[e].z+'：有幾拍？',p:pk&&pk.n?'你拍了 '+pk.n+' 下':null,a:'<span class="en">'+sylColor(e,'<b style="color:var(--goldt)"> · </b>')+'</span> ＝ '+n+' 拍',
+  return {key:'bt|'+e,q:'🎧 聽到的字有幾個音節？',p:pk&&pk.n?'你拍了 '+pk.n+' 下':null,a:J[e].ic+' <span class="en">'+sylColor(e,'<b style="color:var(--goldt)"> · </b>')+'</span> '+J[e].z+' ＝ '+n+' 拍',
    why:dj?'D、J 是兩個字母，一個字母一拍':n+' 個母音的聲音 ＝ '+n+' 拍（灰色的字母不出聲，不算）',hint:en(e)+' ＝ '+sylText(e)+'（'+n+' 拍）',sp:e}},
  stop(){},
  cheat(ok){this.n=ok?this.need:this.need+1;this.done()},
@@ -747,9 +776,10 @@ const SCH={rkTxt:'',on:()=>gOv().classList.contains('on'),open:()=>gOv().classLi
 
 /* ══ 事件 ══ */
 $('#grid').addEventListener('click',e=>{const c=e.target.closest('.gcard');if(c)bookPage(c.dataset.g)});
-$('#book').addEventListener('click',e=>{const id=BOOKID;if(e.target.closest('#demoBtn')){sayStop();begin(id,'all',{demo:true});return}if(e.target.closest('#startBtn'))scGate(()=>begin(id,'all'))});
+$('#book').addEventListener('click',e=>{const id=BOOKID;if(e.target.closest('#demoBtn')){sayStop();begin(id,'all',{demo:true});return}if(e.target.closest('#startBtn')&&!locked(id))scGate(()=>begin(id,'all'))});
 $('#seg').addEventListener('click',e=>{const b=e.target.closest('button');if(b){view(b.dataset.v);history.replaceState(null,'',location.pathname+(b.dataset.v==='dex'?'#dex':''))}});
 $('#autoBtn').addEventListener('click',()=>{if(AUTO)autoStop();else autoStart()});
+$('#muteBtn').addEventListener('click',()=>{MUTE=!MUTE;store('mute',MUTE);muteBtn()});muteBtn();taskLoad();
 $('#tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)dexPaint(b.dataset.b)});
 document.addEventListener('click',ev=>{
  const sb=ev.target.closest('.say1');if(sb){ev.stopPropagation();if(sb.closest('#sheet')){SA.stop();say(sb.dataset.e)}else sayCard(sb.dataset.e);return}

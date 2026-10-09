@@ -59,7 +59,7 @@ const META = [
   { id: 'mole', ic: '🔨', name: '打地鼠', c: '#8A6408', b: '#F7E9BE', line: '敲舉著對的英文的地鼠', how: [['👀', '看上面的<b>圖示和中文</b>'], ['🔨', '地鼠舉著英文冒出來，<b>敲對的那一隻</b>'], ['⚡', '敲錯會扣連對，越來越快！']] },
   { id: 'lava', ic: '🌋', name: '火山大逃亡', c: '#D9692B', b: '#FCEEE4', line: '聽英文，跳上對的石頭', how: [['🔊', '<b>聽</b>英文（按 🔊 可以再聽）'], ['🪨', '點石頭上對的圖示，<b>跳上去</b>'], ['🌋', '岩漿一直漲，動作要快！']] },
   { id: 'dark', ic: '🔦', name: '黑夜搜查', c: '#1B2B4B', b: '#E6EAF2', line: '用手電筒找英文', how: [['🔦', '手指在黑暗中<b>滑一滑</b>＝手電筒'], ['👆', '照到上面那個職業的<b>英文</b>，點它']] },
-  { id: 'beat', ic: '🥁', name: '拍數節奏', c: '#2E9358', b: '#E5F4EA', line: '聽英文，拍出有幾拍', how: [['🔊', '<b>聽</b>英文，數一數<b>紅色母音</b>'], ['🥁', '有幾拍就<b>拍鼓幾下</b>，再按 ✅']] },
+  { id: 'beat', ic: '🥁', name: '拍數節奏', c: '#2E9358', b: '#E5F4EA', line: '只聽聲音，拍出幾個音節', how: [['🎧', '<b>只聽</b>英文的聲音（看不到字）'], ['🥁', '有幾個音節就<b>拍鼓幾下</b>，再按 ✅'], ['🎉', '答對了，才會出現這個字']] },
   { id: 'detect', ic: '🕵️', name: '職業神探', c: '#CF3F55', b: '#FBE8EB', line: '看線索，抓出是誰', how: [['🧩', '看線索：<b>他的工作</b>、中文第一個字'], ['🔍', '把<b>放大鏡拖到</b>那個人身上＝抓人']] },
   { id: 'magnet', ic: '🧲', name: '興趣磁鐵', c: '#2C6FC9', b: '#E6EFFA', line: '把職業甩進興趣磁鐵', how: [['👆', '按住職業卡，<b>甩進</b>磁鐵（或拖過去放開）'], ['🧲', '丟進它<b>分數最高</b>的那一型']] },
 ];
@@ -73,7 +73,7 @@ const FX = [
   ['⚡ 電力全開', 'pts', 500], ['🔋 充飽電', 'pts', 1000], ['🌩 雷擊暴衝', 'pts', 2000], ['🧧 神秘紅包', 'lucky', [200, 1000]], ['💰 超級紅包', 'lucky', [100, 5000]],
   ['🎰 幸運拉霸', 'slot', 1], ['🔥 連擊火焰', 'now', 2], ['🎆 煙火綻放', 'now', 3], ['🚀 火箭點火', 'now', 5], ['🌟 超新星', 'mul', [2, 3]],
   ['🧲 磁力吸分', 'mul', [3, 3]], ['🌀 能量漩渦', 'mul', [5, 2]], ['💣 超級炸彈', 'mul', [10, 1]], ['🌌 銀河加持', 'mul', [2, 5]], ['⏰ 多給時間', 'time', 8],
-  ['⏳ 時間膠囊', 'gt', 20], ['⌛ 大沙漏', 'gt', 40], ['🛡 免死金牌', 'shield', 1], ['🛡 雙層護盾', 'shield', 2], ['🔗 連鎖反應', 'combo', [3, 4]],
+  ['⏳ 時間膠囊', 'gt', 20], ['⌛ 大沙漏', 'gt', 20], ['🛡 免死金牌', 'shield', 1], ['🛡 雙層護盾', 'shield', 2], ['🔗 連鎖反應', 'combo', [3, 4]],
   ['⛓ 超級連鎖', 'combo', [5, 6]], ['💡 送你提示', 'hint', 1], ['🏅 黃金題', 'gold', 1000], ['👑 皇冠題', 'gold', 3000], ['🎯 快手獎', 'fast', 500],
   ['🔥 連對加碼', 'streak', 3], ['🌋 連對爆發', 'streak', 5], ['❄️ 冷凍光束', 'freeze', 5], ['🧊 超級冰凍', 'freeze', 10], ['📈 總分加成', 'pct', 20],
   ['📊 總分大加成', 'pct', 50], ['🌧 分數雨', 'rain', [300, 3]], ['⛈ 分數暴雨', 'rain', [500, 5]], ['💥 總分翻倍', 'dbl', 3000],
@@ -99,6 +99,8 @@ const html = `<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>職業圖鑑＋複習遊戲</title>
 <style>
+/* 英文不合字（2026/10/9）：Andika 會把 fi、ffi 合成一個字，紅色的 i 就變黑色 */
+*{font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0}
 ${font}
 ${css}
 ${SA.CSS}
@@ -150,12 +152,14 @@ ${SA.CSS}
 <nav id="bar">
  <button id="quit">⬅ 返回</button>
  <span class="grp" id="rateGrp"><button data-r="0.6">🐢 慢</button><button data-r="0.9">🐇 正常</button></span>
+ <button id="muteBtn" class="mute" aria-pressed="false">🔔 音效 開</button>
  <a href="index.html" class="homeln2">🏠 首頁</a>
 </nav>
 
 <div id="sheet" role="dialog" aria-modal="true"><div class="panel" id="panel"></div></div>
 <div id="gain"></div><div id="pick"></div><div id="burst"></div>
 <script src="score-url.js"></script>
+<script src="task-url.js"></script>
 <script src="audio/syl/aud.js"></script>
 <script>
 const D=${JSON.stringify(DATA)};

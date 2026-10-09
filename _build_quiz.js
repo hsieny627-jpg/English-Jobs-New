@@ -91,6 +91,8 @@ const html = `<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>職業興趣探險</title>
 <style>
+/* 英文不合字（2026/10/9）：Andika 會把 fi、ffi 合成一個字，紅色的 i 就變黑色 */
+*{font-variant-ligatures:none;font-feature-settings:"liga" 0,"clig" 0}
 ${font}
 :root{--navy:#1B2B4B;--navy2:#2E4470;--soft:#5B6782;--line:#DFE4EE;--tint:#F4F6FA;--gold:#D9A520;--gold2:#F7E9BE;--goldt:#8A6408;--vow:#D7362F;--sil:#8C93A3;
 --r:20px;--sh:0 1px 2px rgba(27,43,75,.06),0 8px 24px rgba(27,43,75,.07);

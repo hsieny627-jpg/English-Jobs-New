@@ -278,8 +278,8 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
       for (const m of (w === 1024 ? ['clap', 'train', 'cut'] : ['clap'])) {
         // 音節動畫（_syl_anim.js）：數母音 ➜ 切開＋原因 ➜ 一節一節唸 ➜ 整個字
         await q.click(`.sa-btn button[data-m="${m}"]`);
-        let txt = '', t0 = Date.now(); while (Date.now() - t0 < 16000) { txt = await q.$eval('.sa-msg', e => e.textContent); if (txt.includes('teach · er ＝ 2 拍') && (await q.$eval('.sa-whybox', e => e.textContent)).includes('字尾 er')) break; await q.waitForTimeout(250); }
-        ok(txt.includes('teach · er ＝ 2 拍') && (await q.$eval('.sa-whybox', e => e.textContent)).includes('字尾 er'), `${name}：音節動畫 ${m} 最後沒有顯示「teach · er ＝ 2 拍」和為什麼這樣切（${txt}）`);
+        let txt = '', t0 = Date.now(); while (Date.now() - t0 < 16000) { txt = await q.$eval('.sa-msg', e => e.textContent); if (txt.includes('tea · cher ＝ 2 拍') && (await q.$eval('.sa-whybox', e => e.textContent)).includes('ch（兩個字母一個聲音）')) break; await q.waitForTimeout(250); }
+        ok(txt.includes('tea · cher ＝ 2 拍') && (await q.$eval('.sa-whybox', e => e.textContent)).includes('ch（兩個字母一個聲音）'), `${name}：音節動畫 ${m} 最後沒有顯示「tea · cher ＝ 2 拍」和為什麼這樣切（${txt}）`);
         await look('#panel', `音節動畫 ${m}`);
       }
       await q.click('#xbtn');

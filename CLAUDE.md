@@ -38,6 +38,7 @@ python3 _quiz_check.py         # 測驗：30 題、32 個職業興趣分數（�
 python3 _audit.py              # 每一句英文說法對原文（新增卡片文字就在 C 清單加一條）
 NODE_PATH=$(npm root -g) node _verify.js   # 量測，只印失敗項＋一行總結；必須 0 失敗（約 20 分鐘；會呼叫 _verify_jobdex.js）
 NODE_PATH=$(npm root -g) node _verify_jobdex.js   # 只量 jobdex.html（約 8 分鐘）
+python3 _syl_rule.py [--write]   # 音節照學生的規則算（--write 寫回 story.html）
 TTS_MODELS=<模型資料夾> python3 _syl_audio.py   # 音節的聲音（audio/syl）：音節改了才要重做；模型 Kokoro v1.0＋Whisper small.en（sherpa-onnx），不放進 repo
 ```
 量測涵蓋：手機／iPad 直／iPad 橫／1920 觸控螢幕不橫向捲動、按鈕 ≥ 48px、36 張卡每一步不超出、每個連結打開正確畫面、
@@ -97,7 +98,7 @@ TTS_MODELS=<模型資料夾> python3 _syl_audio.py   # 音節的聲音（audio/s
 - **2026/10/9 jobdex 變簡單＋音節（使用者同意的規劃，「其他照您的建議」）**：
   - 30 句工作內容換了 8 句（quiz 和職業神探同一份，`_quiz_check.py` ITEMS，全部 O*NET 原文核對通過）：3 畫家「用筆、水彩或炭筆畫畫」（拿掉電腦，免得和設計師搞混）、10 護理師「在學校或醫院幫人急救、打預防針」（原本的「擦藥、包紮」原文沒有）、12 空服員「示範怎麼用安全帶、救生衣和氧氣面罩」（原本「檢查急救箱和滅火器」學生抗議不像）、15 歌手加原文「Sing as a soloist…」（原本原文沒有「唱歌」）、18 警察「巡邏的時候，注意並記下奇怪的人和事」、20 機械工程師「研究、設計新的機器」（原本和汽車技師太像）、26 心理師「用測驗了解一個人的興趣和個性」（原本和諮商師幾乎一樣）、30 髮型師「記下每位客人做過哪些美髮服務」（原本「排預約」不像髮型師）。題目的型、職業、平衡都沒變。
   - 職業神探：拿掉「興趣類型」線索（和圖鑑、磁鐵說的最高型會不一樣）；線索只剩 ① 他的工作 ② 中文第一個字（6 秒後）；容易搞混的職業不和答案同一題（`_build_jobdex.js` 的 CONF：醫生／護理師／獸醫、心理師／諮商師、程式設計師／遊戲試玩員、汽車技師／機械工程師、畫家／設計師、企業經理／廚師、警察／律師）。
-  - **音節切法照網站原本的 SYL（使用者決定，暫時）**。mechanic：Cambridge /məˈkæn.ɪk/、Merriam-Webster 斷行點 me·chan·ic → me｜chan｜ic；M-W 發音欄同一頁有 mi-ˈka-nik 和 mi-ˈkan-ik 兩種；參考網站 AI-Agent-Open-Code 的規則（一個子音跟後面走）會切 me｜cha｜nic。36 個字約 23 個字字典和參考網站切法不同，**拍數全部一樣**。
+  - ~~音節切法照網站原本的 SYL~~（**誤會**：使用者說「照我的切分方式」是指學生的 me·cha·nic，見下一條，已改）。mechanic：Cambridge /məˈkæn.ɪk/、Merriam-Webster 斷行點 me·chan·ic → me｜chan｜ic；M-W 發音欄同一頁有 mi-ˈka-nik 和 mi-ˈkan-ik 兩種；參考網站 AI-Agent-Open-Code 的規則（一個子音跟後面走）會切 me｜cha｜nic。36 個字約 23 個字字典和參考網站切法不同，**拍數全部一樣**。
   - 「為什麼這樣切」：`_syl_why.js` 用學生聽得懂的一句話說每一刀（字尾 er 自己一拍、兩個子音從中間切、ch 兩個字母一個聲音…），圖鑑 ℹ️ 說明和 quiz 圖鑑都顯示。
   - 音節動畫（`_syl_anim.js`，jobdex、quiz 共用）：① 紅色母音一個一個亮、頭上 ①②③ ➜「N 個母音的聲音＝N 拍」② 一刀一刀切，每一刀說原因 ③ 一節一節唸（那一節放大變亮，唸那一節的聲音）④ 唸整個字。👏🚂✂️ 三種走同一套；火車沒有輪子。
   - 一節一節的聲音：`_syl_audio.py` 照 Cambridge 音標切成網站的音節，用參考網站同一套離線語音（Kokoro v1.0 美式女聲 af_bella，`_tts/` 抄自 AI-Agent-Open-Code/tools）照音標唸；整個字做好當場用 Whisper 聽一次，聽錯換語速重做，36 個字全部聽對。檔案在 `audio/syl/`。
@@ -106,12 +107,20 @@ TTS_MODELS=<模型資料夾> python3 _syl_audio.py   # 音節的聲音（audio/s
   - 畫面變簡單：大廳＝標題＋🎮 遊戲／📖 圖鑑兩個大按鈕；遊戲卡只有大圖示＋名字＋一句話；下面一排固定：⬅ 返回｜🐢 慢／🐇 正常｜🏠 首頁（大廳的 ⬅ 隱藏但位置保留）；O*NET 說明收進「📚 給老師看」。
   - 圖鑑字卡：**點英文＝只唸**（那張卡邊框變金色、英文放大變亮）；「ℹ️ 說明」才打開音節＋興趣成分；「▶ 從第一張自動播放」每個字唸 3 次、自動換下一張、再按一次停止。
 
+- **2026/10/9 晚上再改（使用者要求）**：
+  - **音節＝學生的切法，和 AI-Agent-Open-Code 同一條規則**：兩個母音中間只有 1 個子音的聲音（ch、ll、mm、ng、ss、tt… 兩個字母一個聲音算 1 個）➜ 跟後面走；2 個以上 ➜ 照 Cambridge 美式音標的切點；ar／er／or 的 r、aw／ay 的 w／y 跟著前面的母音；不出聲的字母跟著前面。`_syl_rule.py` 照這條規則從 evidence/audit.json 算出來，`python3 _syl_rule.py --write` 寫回 story.html 的 SYL（量測會比對）。改了 21 個字：me·cha·nic、me·cha·ni·cal、tea·cher、ba·ker、pain·ter、si·nger、tes·ter、te·ller、ma·na·ger、in·flu·en·cer、en·ter·tai·ner、de·sig·ner、psy·cho·lo·gist、hair·sty·list、fire·figh·ter、pro·gra·mmer、pro·fe·ssio·nal、o·ffi·cer、a·tten·dant、e·state、ve·ter·i·nar·i·an（使用者看過整張表才同意）。拍數全部不變。「為什麼這樣切」（`_syl_why.js`）和一節一節的錄音（audio/syl）都照新切法重做。
+  - **英文不合字**：Andika 字型會把 fi、ffi 合成一個字，firefighter、officer 的紅色 i 變黑。全站加 `font-variant-ligatures:none`（每一頁的 `<style>` 第一行）。
+  - 🔔 **音效開關**：jobdex 下面那一排，金色、顯眼；只關叮咚聲，英文發音照常；記在這台平板。
+  - 🥁 **拍數節奏**：只聽單字的聲音（看不到字、圖示、中文），拍出幾個音節；答對才出現那個字（母音紅、不發音灰）＋一節一節亮。
+  - **驚喜卡加的時間：一場加起來最多 20 秒**（多給時間、時間膠囊、大沙漏、冷凍都算；大沙漏 40 ➜ 20 秒；用完就不再出現加時間的卡）。
+  - 🔒 **老師的任務表**：Google 試算表「職業英文遊戲 任務表（老師設定開放時間）」https://docs.google.com/spreadsheets/d/170YmyKw7wH_tpM2DAx8ir3y30hG4S_5A7HzvziK9euo/edit 的「任務」頁：遊戲代號｜遊戲｜開放（是／否）｜開始時間｜截止時間（只寫日期＝那一天 23:59）。網址在 `task-url.js`。網站用 gviz 讀（打開時、之後每 2 分鐘）；**試算表要設「知道連結的任何人都可以檢視」才讀得到**；讀不到照上一次讀到的，從來沒讀到就全部開放；時間看平板的時鐘。鎖住的遊戲：大廳灰色＋🔒 原因，開始畫面不能按「開始遊戲」（觀看示範可以）。目前只管 jobdex 的 7 種遊戲。
+  - 新對話開場白：`新對話開場白.md`（用選擇題問、一次做完、有兩種意思先問）。
+
 ## 六、還沒做／等使用者決定
 
 - **AI-Agent-Open-Code 網站的登入也要照 jobdex 的新登入改**（使用者 2026/10/9 要求：所有題目和遊戲的登入介面秒懂、班級打錯立刻清空）。這個對話沒有那個 repo 的寫入權限，還沒做。
 
 - 我建議的「📚 上課順序」（6 單元，學生最愛的先教、句型 I want to be a/an ___.）**使用者還沒同意**，不要自己做。
 - 大人 13＋中學生 2 個字還沒進 10 種遊戲。
-- 音節切法：字典（Cambridge）和參考網站規則不同的約 23 個字，使用者暫時維持網站原本的切法，之後可能再決定要不要統一。
 - 音節忍者以後可以改成「只數拍數」再放回來（使用者 2026/10/9）。
 - 發音用裝置內建語音（en-US），沒有逐字檢查。
