@@ -143,9 +143,9 @@ for k, v in SYL.items():
 
 # 母音（紅）、不發音（灰）：每個字拆成「字母 → Cambridge 美式音標」的對應；音標接起來要＝字典
 # 規則：對到空白（沒有聲音）的字母＝不發音（灰）；a e i o u y 所在那一段有母音的聲音＝母音（紅）；
-# 其他（例如 lawyer 的 y 唸 /j/、professional 的 ssi 唸 /ʃ/）算子音（黑）。
+# 其他（例如 lawyer 的 y 唸 /j/）算子音（黑）。professional 的 -ssion：ss 唸 /ʃ/、io 一起唸 /ə/（2026/10/9 使用者決定 i 維持紅色）。
 ALIGN = {
- 'doctor': 'd:d o:ɑː c:k t:t or:ɚ', 'professional': 'p:p r:r o:ə f:f e:e ssi:ʃ o:ə n:n a:ə l:l', 'athlete': 'a:æ th:θ l:l e:iː t:t e:',
+ 'doctor': 'd:d o:ɑː c:k t:t or:ɚ', 'professional': 'p:p r:r o:ə f:f e:e ss:ʃ io:ə n:n a:ə l:l', 'athlete': 'a:æ th:θ l:l e:iː t:t e:',
  'programmer': 'p:p r:r o:oʊ g:ɡ r:r a:æ mm:m er:ɚ', 'engineer': 'e:e n:n g:dʒ i:ɪ n:n ee:ɪ r:r', 'esports': 'e:iː s:s p:p o:ɔː r:r t:t s:s',
  'player': 'p:p l:l ay:eɪ er:ɚ', 'teacher': 't:t ea:iː ch:tʃ er:ɚ', 'business': 'b:b u:ɪ s:z i: n:n e:ɪ ss:s', 'manager': 'm:m a:æ n:n a:ə g:dʒ er:ɚ',
  'influencer': 'i:ɪ n:n f:f l:l u:u e:ə n:n c:s er:ɚ', 'lawyer': 'l:l aw:ɔɪ y:j er:ɚ', 'baker': 'b:b a:eɪ k:k er:ɚ',

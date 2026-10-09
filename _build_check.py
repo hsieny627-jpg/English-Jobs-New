@@ -115,7 +115,6 @@ FIXES = [
  ('2026/10/4', 'business manager', '不發音的字母標在 u', '不發音的是 i（u 和 busy 一樣唸 /ɪ/）', 'Cambridge busy、business'),
  ('2026/10/9', 'business manager', '灰色（不發音）標在第 3 個字母 s，i 是紅色', '灰色標在 i（business 唸 /ˈbɪz.nɪs/，s 唸 /z/ 有聲音）', 'Cambridge business'),
  ('2026/10/9', 'lawyer', 'y 標成紅色（母音）', 'y 是黑色（子音）：lawyer 唸 /ˈlɔɪ.jɚ/，y 唸 /j/', 'Cambridge lawyer'),
- ('2026/10/9', 'professional athlete', 'professional 的 i 標成紅色（母音）', 'i 是黑色：ssi 一起唸 /ʃ/（/prəˈfeʃ.ən.əl/），i 沒有母音的聲音', 'Cambridge professional'),
 ]
 fix_rows = ''.join(f'<tr><td>{html.escape(w)}</td><td class="old">{html.escape(o)}</td><td class="new">{html.escape(n)}</td><td>{html.escape(s)}</td></tr>' for d, w, o, n, s in FIXES)
 aud_rows = ''.join(
@@ -254,7 +253,7 @@ td.vd{{min-width:200px}}
 
 <section id="letters">
  <h2>🔴 母音（紅）和不發音（灰）：對 Cambridge 美式音標</h2>
- <p class="ans">每個字一個字母一個字母對到字典的美式音標，音標接起來要和字典一模一樣。<b>沒有聲音的字母＝灰色</b>；a e i o u y 有母音的聲音＝<b style="color:#E0483E">紅色</b>；其他是黑色（例如 lawyer 的 y 唸 /j/ 是子音）。<b>{len(AUD['letters'])}</b> 個字，<b>{l_ok} 個完全一樣 ✅</b></p>
+ <p class="ans">每個字一個字母一個字母對到字典的美式音標，音標接起來要和字典一模一樣。<b>沒有聲音的字母＝灰色</b>；a e i o u y 有母音的聲音＝<b style="color:#E0483E">紅色</b>；其他是黑色（例如 lawyer 的 y 唸 /j/ 是子音；professional 的 ss 唸 /ʃ/、io 一起唸 /ə/，所以 i 是紅色）。<b>{len(AUD['letters'])}</b> 個字，<b>{l_ok} 個完全一樣 ✅</b></p>
  <div class="tw"><table>
   <thead><tr><th></th><th>單字</th><th>字母 → 美式音標</th><th>連結</th></tr></thead>
   <tbody>{let_rows}</tbody>

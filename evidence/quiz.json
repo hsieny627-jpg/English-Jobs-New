@@ -426,15 +426,15 @@
   {
    "n": 29,
    "t": "E",
-   "ic": "⚖️",
-   "zh": "幫意見不合的兩個人，談出兩邊都同意的辦法",
-   "e": "lawyer",
+   "ic": "💼",
+   "zh": "選出新的工作夥伴，教他們怎麼做事",
+   "e": "business manager",
    "q": [
-    "Negotiate settlements of civil disputes."
+    "Perform personnel functions, such as selection, training, or evaluation."
    ],
-   "url": "https://www.onetonline.org/link/details/23-1011.00",
-   "code": "23-1011.00",
-   "score": 75,
+   "url": "https://www.onetonline.org/link/details/11-1021.00",
+   "code": "11-1021.00",
+   "score": 100,
    "rank": 1,
    "ok": true
   },
@@ -1212,6 +1212,35 @@
    "url": "https://www.onetonline.org/find/descriptor/browse/1.B.1",
    "quotes": [
     "Career interest types are broad types of work you enjoy. Select an interest to discover occupations that support the interest type."
+   ],
+   "ok": true,
+   "page": true
+  },
+  {
+   "name": "分數怎麼來的：專家先替 269 種工作打分數",
+   "url": "https://www.onetcenter.org/dl_files/ML_OIPs.pdf",
+   "quotes": [
+    "recruited sets of trained O*NET analysts, as well as academics with expertise in the study of vocational interests to provide RIASEC ratings for the 269 occupations identified in Step 4"
+   ],
+   "ok": true,
+   "page": true
+  },
+  {
+   "name": "分數怎麼來的：電腦讀工作說明和工作內容，跟著專家的分數學",
+   "url": "https://www.onetcenter.org/dl_files/ML_OIPs.pdf",
+   "quotes": [
+    "methods for quantifying occupation text data (e.g., descriptions, task statements)",
+    "numeric RIASEC ratings for O*NET-SOCs provided by trained human raters",
+    "Separate models were trained to predict each RIASEC dimension"
+   ],
+   "ok": true,
+   "page": true
+  },
+  {
+   "name": "分數怎麼來的：電腦替 923 種工作打好分數",
+   "url": "https://www.onetcenter.org/reports/ML_OIPs.html",
+   "quotes": [
+    "supervised machine learning to populate RIASEC Occupational Interest Profiles (OIPs) and high-point codes for 923 data-level O*NET-SOC occupations"
    ],
    "ok": true,
    "page": true

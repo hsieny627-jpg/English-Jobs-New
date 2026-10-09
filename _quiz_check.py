@@ -1,7 +1,7 @@
 # 職涯探索測驗：題目、職業興趣分數、研究說法，全部重抓原文核對 → evidence/quiz.json
 # python3 _quiz_check.py（之後 node _build_quiz.js 產生 quiz.html）
 # 題目改了就改下面 ITEMS；每題的 q 必須是 O*NET 那個職業「工作內容」的逐字原文。
-# 原則：每一型的題目優先用「這一型分數最高」的職業（第 6 題 programmer 事務型 82 最高、第 29 題 lawyer 企業型 75 最高）。
+# 原則：每一型的題目優先用「這一型分數最高」的職業（第 6 題 programmer 事務型 82 最高、第 29 題 business manager 企業型 100 最高）。
 import csv, io, json, os, re, subprocess, tempfile
 
 DIR = os.path.dirname(os.path.abspath(__file__))
@@ -39,7 +39,7 @@ ITEMS = [
  ('I', '🧠', '找出別人在心情或行為上遇到的困難', 'psychologist', ['Identify psychological, emotional, or behavioral issues and diagnose disorders, using information obtained from interviews, tests, records, or reference materials.']),
  ('A', '🎧', '選大家喜歡的歌，放給大家聽', 'DJ', ['Select and play music incorporating crowd preferences and mood.']),
  ('S', '🩺', '告訴大家怎麼吃、怎麼運動，才不會生病', 'doctor', ['Advise patients and community members concerning diet, activity, hygiene, and disease prevention.']),
- ('E', '⚖️', '幫意見不合的兩個人，談出兩邊都同意的辦法', 'lawyer', ['Negotiate settlements of civil disputes.']),
+ ('E', '💼', '選出新的工作夥伴，教他們怎麼做事', 'business manager', ['Perform personnel functions, such as selection, training, or evaluation.']),
  ('C', '✂️', '幫客人排好預約的時間', 'hairstylist', ['Schedule client appointments.']),
 ]
 
@@ -85,6 +85,12 @@ CLAIMS = [
   ['descriptor means have been standardized to a scale ranging from 0 to 100'], True),
  ('興趣類型＝你喜歡的工作種類', 'https://www.onetonline.org/find/descriptor/browse/1.B.1',
   ['Career interest types are broad types of work you enjoy. Select an interest to discover occupations that support the interest type.'], True),
+ ('分數怎麼來的：專家先替 269 種工作打分數', 'https://www.onetcenter.org/dl_files/ML_OIPs.pdf',
+  ['recruited sets of trained O*NET analysts, as well as academics with expertise in the study of vocational interests to provide RIASEC ratings for the 269 occupations identified in Step 4'], True),
+ ('分數怎麼來的：電腦讀工作說明和工作內容，跟著專家的分數學', 'https://www.onetcenter.org/dl_files/ML_OIPs.pdf',
+  ['methods for quantifying occupation text data (e.g., descriptions, task statements)', 'numeric RIASEC ratings for O*NET-SOCs provided by trained human raters', 'Separate models were trained to predict each RIASEC dimension'], True),
+ ('分數怎麼來的：電腦替 923 種工作打好分數', 'https://www.onetcenter.org/reports/ML_OIPs.html',
+  ['supervised machine learning to populate RIASEC Occupational Interest Profiles (OIPs) and high-point codes for 923 data-level O*NET-SOC occupations'], True),
  # 下面兩項是規劃的根據，網頁不顯示（2026/10/9 使用者決定：網頁不提教育部和其他測驗）
  ('教育部議題融入說明手冊：國小 涯E4、涯E8、涯E9（測驗的目的）',
   'https://stv.naer.edu.tw/data/course_manual/A/%E8%AD%B0%E9%A1%8C%E8%9E%8D%E5%85%A5%E8%AA%AA%E6%98%8E%E6%89%8B%E5%86%8A(%E5%AE%9A%E7%A8%BF%E7%89%88).pdf',

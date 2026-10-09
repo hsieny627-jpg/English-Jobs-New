@@ -57,6 +57,7 @@ const RATED = Math.floor(Q.titles_db.rated / 100) * 100;
 const claim = k => Q.claims.find(c => c.name.startsWith(k));
 const doi = { 'Tracey & Ward 1998': 'https://doi.org/10.1037/0022-0167.45.3.290', 'Tracey 2002': 'https://doi.org/10.1037/0022-0167.49.2.148' };
 
+const HOW = '<div class="how"><b>🤔 分數怎麼來的？</b><ol><li>研究「興趣」的大學教授和受過訓練的專家，先替 269 種工作打分數。</li><li>電腦讀每個工作的說明和「每天要做的事」，跟著專家的分數學打分數。</li><li>電腦學會以後，替 ' + Q.titles_db.rated + ' 種工作都打好分數。</li></ol><a href="https://www.onetcenter.org/reports/ML_OIPs.html" target="_blank" rel="noopener">出處：O*NET 研究報告 ↗</a></div>';
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 // 母音紅、不發音灰（資料：story.html 的 VOW、SILENT，已對 Cambridge 美式音標）
 const colorWord = e => [...e].map((c, i) => c === ' ' ? '<span class="sp"> </span>'
@@ -344,6 +345,9 @@ details.tg summary small{font-family:'AndikaEmbed',sans-serif;font-size:var(--t3
 .tie{position:absolute;left:8px;top:8px;font-size:16px;font-weight:700;color:var(--goldt);background:var(--gold2);border-radius:8px;padding:0 8px}
 .got{position:absolute;right:8px;top:8px;font-size:16px;display:none}
 .dc.un .got{display:block}
+.how{margin:24px 0 0;padding:24px;border-radius:var(--r);background:var(--tint);font-size:var(--t2)}
+.how ol{margin:8px 0;padding-left:1.6em}.how li{margin:4px 0}
+.how a{display:inline-flex;align-items:center;min-height:48px;font-size:var(--t3);font-weight:700}
 .dexn{text-align:center;font-size:var(--t3);color:var(--soft);margin:16px 0 0}
 /* 興趣成分＋音節（打開職業卡） */
 #sheet{position:fixed;inset:0;z-index:50;display:none;background:rgba(27,43,75,.55);padding:16px;overflow-y:auto;-webkit-overflow-scrolling:touch}
@@ -354,6 +358,7 @@ details.tg summary small{font-family:'AndikaEmbed',sans-serif;font-size:var(--t3
 .ph .pi{font-size:72px;line-height:1}
 .ph .pe{font-family:'AndikaEmbed',sans-serif;font-size:var(--t1);font-weight:700;line-height:1.1}
 .ph .pz{font-size:var(--t2);color:var(--soft)}
+.hows{margin:0 0 16px}.hows summary{cursor:pointer;min-height:48px;display:flex;align-items:center;font-size:var(--t3);font-weight:700}.hows .how{margin:0;padding:16px;font-size:var(--t3)}
 .pexp{margin:16px 0;padding:16px;border-radius:16px;background:var(--tint);font-size:var(--t3)}
 .pbars{display:flex;flex-direction:column;gap:8px}
 .pb{display:grid;grid-template-columns:2.2em 8.2em minmax(0,1fr) 3.2em;gap:8px;align-items:center;font-size:var(--t2);opacity:0;transform:translateX(-12px);transition:opacity .3s,transform .3s}
@@ -600,7 +605,7 @@ ${FACES.map(([f, t, v]) => `    <button class="fc" data-v="${v}" aria-label="${t
   <div id="others"></div>
   <details class="tg" style="--c:var(--navy);--b:var(--tint)" id="extra">
    <summary>🌟 這些職業也可以認識 <small>（還沒有自己的興趣分數）</small></summary>
-   <p>美國勞動部替 ${RATED} 多種工作打了六種興趣的分數，但 YouTuber、網紅、內容創作者還沒有自己的一項分數，所以先不分類，不代表它們不好。</p>
+   <p>美國勞動部替 ${RATED} 多種工作打了六種興趣的分數，（怎麼打的，看下面「📖 我的職業圖鑑」的說明），但 YouTuber、網紅、內容創作者還沒有自己的一項分數，所以先不分類，不代表它們不好。</p>
    <div class="jg">${EXTRA.map(e => `<a class="jt" href="story.html#w${W[e].no}" data-e="${esc(e)}"><span class="ji">${W[e].ic}</span><span class="je en">${colorWord(e)}</span><span class="jz">${esc(W[e].z)}</span></a>`).join('')}</div>
   </details>
  </section>
@@ -620,6 +625,7 @@ ${FACES.map(([f, t, v]) => `    <button class="fc" data-v="${v}" aria-label="${t
   <div class="dex" id="dex">
 ${ORDER.split('').map(t => `   <div class="dcolw" style="--c:${TY[t].c};--b:${TY[t].bg}"><div class="dcolh"><b>${TY[t].ic} ${TY[t].f}</b><small>${TY[t].en}</small></div><div class="dcolb">${DEX[t].map(e => dexCard(e, t)).join('')}</div></div>`).join('\n')}
   </div>
+  ${HOW}
   <p class="dexn">兩型同分的職業，兩欄都放，卡片上標「同分」。🔓＝這次探險解鎖的職業。</p>
  </section>
  <div class="again"><button class="go gold" id="again">🔄 再玩一次</button><a class="ghost" href="index.html">🏠 回首頁</a></div>
@@ -844,10 +850,11 @@ function watchDemo(){demoSeen=false;$('demo').classList.remove('go');
  try{const io=new IntersectionObserver(es=>{es.forEach(x=>{if(x.isIntersecting&&!demoSeen){demoSeen=true;playDemo();io.disconnect()}})},{threshold:.4});io.observe($('demo'))}catch(e){playDemo()}}
 /* ---- 興趣成分＋音節 ---- */
 const MED=['🥇','🥈','🥉'];
+const HOWX=${JSON.stringify(HOW)};
 function openSheet(e,sylMode){const w=WD[e],j=SC[e];
  let h='<button class="x" id="xbtn" aria-label="關閉">✕</button><div class="ph"><span class="pi">'+w[2]+'</span><div><div class="pe en" id="pe">'+colorWord(e)+'</div><div class="pz">'+w[1]+'</div></div><button class="b48" id="psay" aria-label="聽英文">🔊</button></div>';
  if(j){const s=j.s,arr=ORDER.split('').sort((a,b)=>s[b]-s[a]||ORDER.indexOf(a)-ORDER.indexOf(b)),mx=s[arr[0]],tops=arr.filter(t=>s[t]===mx);
-  h+='<div class="pexp">🧪 <b>興趣成分</b>：每個工作都會用到六種興趣，只是多少不一樣。美國勞動部替每個工作的六種興趣打分數（0～100 分），分數越高，這個工作越常做這一型的事。</div><div class="pbars">'
+  h+='<div class="pexp">🧪 <b>興趣成分</b>：每個工作都會用到六種興趣，只是多少不一樣。美國勞動部替每個工作的六種興趣打分數（0～100 分），分數越高，這個工作越常做這一型的事。</div><details class="hows"><summary>🤔 分數怎麼來的？</summary>'+HOWX+'</details><div class="pbars">'
    +arr.map(t=>{const rk=1+ORDER.split('').filter(u=>s[u]>s[t]).length;return '<div class="pb" style="--c:'+TY[t].c+'" data-t="'+t+'"><span class="md">'+(rk<=3?MED[rk-1]:'')+'</span><span class="pn2">'+TY[t].ic+' '+TY[t].f+'</span><span class="pt"><i data-w="'+s[t]+'"></i></span><span class="pv">'+s[t]+'</span></div>'}).join('')+'</div>'
    +'<p class="psay" id="psayt">'+w[1]+'最常做的是'+tops.map(t=>'『'+TY[t].f+'』').join('和')+'的事：'+tops.map(t=>TY[t].act).join('；')+'（'+(tops.length>1?'都是 ':'')+mx+' 分）。</p>'
    +(j.note?'<p class="pnote">※ '+j.note+'</p>':'')+(FUN[e]?'<p class="pfun">💡 '+FUN[e]+'</p>':'')

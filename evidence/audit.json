@@ -1207,6 +1207,7 @@
    "red": [
     2,
     4,
+    7,
     8,
     10,
     13,
@@ -1219,7 +1220,7 @@
     {
      "word": "professional",
      "ipa": "prəˈfeʃ.ən.əl",
-     "align": "p:p r:r o:ə f:f e:e ssi:ʃ o:ə n:n a:ə l:l",
+     "align": "p:p r:r o:ə f:f e:e ss:ʃ io:ə n:n a:ə l:l",
      "url": "https://dictionary.cambridge.org/dictionary/english/professional",
      "ok": true
     },
