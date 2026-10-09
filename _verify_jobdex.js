@@ -1,7 +1,8 @@
-// 量測 jobdex.html（📖 職業圖鑑＋🎮 5 種複習遊戲）：由 _verify.js 呼叫，也可以單獨跑 NODE_PATH=$(npm root -g) node _verify_jobdex.js
+// 量測 jobdex.html（📖 職業圖鑑＋🎮 7 種複習遊戲）：由 _verify.js 呼叫，也可以單獨跑 NODE_PATH=$(npm root -g) node _verify_jobdex.js
 // 1. 資料：頁面上的職業、六型分數、最高型、母音／不發音、音節、30 句工作內容，和 evidence/quiz.json、story.html 一模一樣
-// 2. 大廳＋圖鑑：4 種尺寸不橫向捲動、按鈕 ≥ 48px、字 ≥ 16px；每一本的數量；35 張卡的母音紅、不發音灰；興趣成分；三種音節動畫
-// 3. 5 種遊戲 ✕ 3 種尺寸（iPad 直、iPad 橫、1920 觸控螢幕）：真的用手指動作答對第一題、連對 3 題開驚喜卡、答錯頁、⭐ 加分題、
+// 2. 大廳＋圖鑑：4 種尺寸不橫向捲動、按鈕 ≥ 48px、字 ≥ 16px；每一本的數量；35 張卡的母音紅、不發音灰；點英文只唸、ℹ️ 說明；自動播放；興趣成分；音節動畫（數母音、切開＋原因、一節一節唸）；
+//    每個遊戲開始前有 👀 觀看示範／▶ 開始遊戲；示範會自己玩 2 題再回來
+// 3. 7 種遊戲 ✕ 3 種尺寸（iPad 直、iPad 橫、1920 觸控螢幕）：真的用手指動作答對第一題、連對 3 題開驚喜卡、答錯頁、⭐ 加分題、
 //    時間到 ➜ 答錯整理 ➜ 結束畫面；東西都在畫面裡、按鈕 ≥ 48px、不橫向捲動
 // 4. 登入：班級打錯立刻清空、座號打錯清掉座號、三個步驟會亮；成績送到 Google 成績表（量測時用假的伺服器，不會送出去）
 const fs = require('fs');
@@ -20,6 +21,8 @@ module.exports = async function (browser, url) {
   const words = [...story.matchAll(/\{no:(\d+),e:'([^']+)',z:'([^']+)',ic:'([^']+)'/g)].map(m => ({ no: +m[1], e: m[2], z: m[3], ic: m[4] }));
   const html = fs.readFileSync(path.join(dir, 'jobdex.html'), 'utf8');
   for (const no of ['教育部', '教育局', 'fortune teller']) ok(!html.includes(no), `不應該出現：${no}`);
+  const WHY0 = e => require('./_syl_why.js').why(e, SYL[e], VOW[e] || [], SILENT[e] || []);
+  const games = ['memory', 'mole', 'lava', 'dark', 'beat', 'detect', 'magnet'];
   const stub = () => { window.speechSynthesis.speak = u => setTimeout(() => u.onend && u.onend(), 5); window.speechSynthesis.cancel = () => {}; };
   const newPage = async (w, h, scoreOff = true) => {
     const p = await browser.newPage({ viewport: { width: w, height: h }, hasTouch: false });
@@ -56,6 +59,20 @@ module.exports = async function (browser, url) {
     ok(JSON.stringify(D.BOOK.X.slice().sort()) === JSON.stringify(['YouTuber', 'content creator', 'influencer'].sort()), '「還沒有分數」那本不對');
     ok(JSON.stringify(D.ITEMS) === JSON.stringify(Q.items.map(i => ({ t: i.t, ic: i.ic, zh: i.zh, e: i.e }))), '神探的 30 句工作內容和 evidence/quiz.json 不一樣');
     ok(Object.values(D.SURP).every(s => s.length === 30) && D.SKIN.length === 38, '驚喜卡不是每個遊戲 30 張／卡包樣式不是 38 種');
+    ok(D.META.length === 7 && !D.META.some(m => m.id === 'ninja'), '遊戲不是 7 個，或音節忍者還在');
+    // 音節：每一刀都有原因；每一節剛好 1 個母音的聲音（DJ 是字母）；每一節、每個字都有錄好的聲音
+    const WHY = require('./_syl_why.js').why;
+    const man = JSON.parse(fs.readFileSync(path.join(dir, 'audio', 'syl', 'aud.js'), 'utf8').match(/=\s*(\{[\s\S]*\});/)[1]);
+    for (const w of keep) {
+      const j = D.J[w.e], ws = SYL[w.e].split(' '), n = SYL[w.e].split(/[- ]/).length;
+      ok(JSON.stringify(j.why) === JSON.stringify(WHY(w.e, SYL[w.e], VOW[w.e] || [], SILENT[w.e] || [])) && j.why.length === n - ws.length && j.why.every(c => c.why && c.l + c.r), `${w.e}：「為什麼這樣切」不對`);
+      const r = await p.evaluate(e => { const o = saOpt(e); return { n: SA.count(o), g: SA.vgroups(o, SA.parts(o)).length, t: SA.text(o) }; }, w.e);
+      ok(r.n === n && (w.e === 'DJ' ? r.g === 0 : r.g === n), `${w.e}：母音的聲音 ${r.g} 個，音節 ${n} 個，對不起來`);
+      const keys = ['word ' + w.e.toLowerCase()].concat(n > 1 ? [...Array(n).keys()].map(k => 'syl ' + w.e.toLowerCase() + ' ' + k) : []);
+      for (const k of keys) ok(man[k] && fs.existsSync(path.join(dir, 'audio', 'syl', man[k][0])) && man[k][1] > 0.2, `${w.e}：沒有錄好的聲音「${k}」`);
+    }
+    // 職業神探：容易搞混的職業不放在同一題
+    ok(D.CONF.every(g => g.every(e => D.ITEMS.some(i => i.e === e))), '神探的 CONF 有不在題目裡的職業');
     await p.close();
   }
 
@@ -69,14 +86,19 @@ module.exports = async function (browser, url) {
   for (const [w, h, name] of [[375, 667, '手機'], [768, 1024, 'iPad 直'], [1024, 768, 'iPad 橫'], [1920, 1080, '教室觸控螢幕']]) {
     const p = await newPage(w, h);
     await p.goto(url('jobdex.html')); await p.waitForTimeout(200);
-    let g = await geom(p, '#hub button, #hub a, #bar button, #bar a, .homeln');
+    let g = await geom(p, '#hub button, #hub a, #bar button, #bar a');
     ok(!g.over, `${name}：大廳會橫向捲動`); ok(!g.small.length, `${name}：大廳按鈕太小 ${g.small.join('、')}`);
-    const tiny = await p.$$eval('.gcard .gr, .dcz, .dce, .tabs button, #bar button', es => es.filter(e => parseFloat(getComputedStyle(e).fontSize) < 16).length);
+    await p.click('#seg [data-v=dex]'); await p.waitForTimeout(150);
+    g = await geom(p, '#hub button, #hub a, #bar button, #bar a');
+    ok(!g.over, `${name}：圖鑑會橫向捲動`); ok(!g.small.length, `${name}：圖鑑按鈕太小 ${g.small.join('、')}`);
+    await p.click('#seg [data-v=games]'); await p.waitForTimeout(100);
+    const tiny = await p.$$eval('.gcard .gr, .dcz, .dce, .tabs button, #bar button, .info', es => es.filter(e => parseFloat(getComputedStyle(e).fontSize) < 16).length);
     ok(!tiny, `${name}：大廳有 ${tiny} 個字小於 16px`);
-    ok(await p.$$eval('.gcard', c => c.length) === 5, `${name}：遊戲不是 5 個`);
+    ok(await p.$$eval('.gcard', c => c.length) === 7, `${name}：遊戲不是 7 個`);
     const tabs = await p.$$eval('#tabs button', bs => bs.map(b => [b.dataset.b, +b.querySelector('small').textContent]));
     ok(JSON.stringify(tabs) === JSON.stringify([['all', 35], ['R', 13], ['I', 2], ['A', 6], ['S', 6], ['E', 4], ['C', 3], ['X', 3]]), `${name}：圖鑑每一本的數量不對 ${JSON.stringify(tabs)}`);
     if (w === 1024) {
+      await p.click('#seg [data-v=dex]'); await p.waitForTimeout(150);
       // 35 張卡的母音紅、不發音灰
       const cards = await p.$$eval('#dexg .dc', cs => cs.map(c => { const e = c.dataset.e, out = { e, v: [], g: [], txt: '' }; let i = 0;
         for (const nd of c.querySelector('.dce').childNodes) { const t = nd.textContent; if (nd.nodeType === 1 && nd.classList.contains('lv')) out.v.push(i); if (nd.nodeType === 1 && nd.classList.contains('lg')) out.g.push(i); out.txt += nd.nodeType === 1 && nd.classList.contains('sp') ? ' ' : t; i += t.length; }
@@ -85,29 +107,63 @@ module.exports = async function (browser, url) {
       for (const c of cards) ok(c.txt === c.e && JSON.stringify(c.v) === JSON.stringify(VOW[c.e] || []) && JSON.stringify(c.g) === JSON.stringify(SILENT[c.e] || []), `圖鑑 ${c.e}：母音紅／不發音灰不對`);
       for (const [b, k] of tabs) { await p.click(`#tabs button[data-b="${b}"]`); ok(await p.$$eval('#dexg .dc', c => c.length) === k, `圖鑑 ${b} 本張數不對`); }
       await p.click('#tabs button[data-b="all"]');
-      // 每一張卡打開：興趣成分 6 條（分數＝O*NET）、三種音節動畫
+      // 點英文 ＝ 只唸（不打開說明），那張卡會亮
+      await p.evaluate(() => { window.__said = []; const o = speechSynthesis.speak; speechSynthesis.speak = u => { window.__said.push(u.text); o(u); }; });
+      await p.click('#dexg .dc[data-e="doctor"] .dce');
+      const tp = await p.evaluate(() => ({ said: window.__said.slice(), sheet: document.getElementById('sheet').classList.contains('on'), lit: !!document.querySelector('#dexg .dc.playing[data-e="doctor"]') }));
+      ok(tp.said[0] === 'doctor' && !tp.sheet && tp.lit, `點英文：沒有只唸出來／打開了說明／卡沒有亮 ${JSON.stringify(tp)}`);
+      // ▶ 自動播放：從第一張開始，每個字唸 3 次，正在唸的卡會亮
+      await p.waitForTimeout(300); await p.evaluate(() => { window.__said = []; });
+      await p.click('#autoBtn'); await p.waitForTimeout(2600);
+      const ap = await p.evaluate(() => ({ said: window.__said.slice(), lit: [...document.querySelectorAll('#dexg .dc.playing')].map(c => c.dataset.e), first: document.querySelector('#dexg .dc').dataset.e }));
+      ok(ap.said.slice(0, 3).every(x => x === ap.first) && ap.said.length >= 3, `自動播放：第一個字沒有唸 3 次 ${JSON.stringify(ap)}`);
+      await p.waitForTimeout(1200);
+      const ap2 = await p.evaluate(() => [...document.querySelectorAll('#dexg .dc.playing')].map(c => c.dataset.e));
+      const second = await p.$$eval('#dexg .dc', c => c[1].dataset.e);
+      ok(ap2.length === 1 && ap2[0] === second, `自動播放：沒有接著唸第二張 ${JSON.stringify(ap2)}`);
+      await p.click('#autoBtn'); await p.waitForTimeout(100);
+      ok(await p.$$eval('#dexg .dc.playing', c => c.length) === 0, '自動播放：按停止沒有停');
+      // 每一張卡的 ℹ️ 說明：興趣成分 6 條（分數＝O*NET）、音節動畫
       for (const c of cards) {
-        await p.click(`#dexg .dc[data-e="${c.e}"] .dci`); await p.waitForTimeout(60);
-        const s = await p.evaluate(() => ({ bars: [...document.querySelectorAll('.pb')].map(b => [b.dataset.t, +b.querySelector('.pv').textContent]), link: document.querySelector('.plink a').getAttribute('href') }));
+        await p.click(`#dexg .dc[data-e="${c.e}"] .info`); await p.waitForTimeout(60);
+        const s = await p.evaluate(() => ({ bars: [...document.querySelectorAll('.pb')].map(b => [b.dataset.t, +b.querySelector('.pv').textContent]), link: document.querySelector('.plink a').getAttribute('href'), why: document.querySelector('.sa-whybox').textContent }));
         const q = Q.jobs[c.e];
         if (q) ok(s.bars.length === 6 && s.bars.every(([t, v]) => q.scores[t] === v), `${c.e}：興趣成分分數不對`);
         else ok(s.bars.length === 0, `${c.e}：沒有分數卻有長條`);
         ok(s.link === 'story.html#w' + words.find(w => w.e === c.e).no, `${c.e}：單字卡連結不對`);
-        if (['doctor', 'nurse', 'police officer', 'veterinarian'].includes(c.e)) for (const m of ['clap', 'train', 'cut']) {
-          await p.click(`.sbtn button[data-m="${m}"]`); await p.waitForTimeout(6800);
-          const r = await p.$eval('#sres', e => e.textContent);
-          ok(r.includes(SYL[c.e].split(' ').map(x => x.split('-').join(' · ')).join('　')) && r.includes(SYL[c.e].split(/[- ]/).length + ' 個音節'), `${c.e} ${m}：音節動畫結果不對（${r}）`);
+        ok(s.why.includes('為什麼這樣切'), `${c.e}：說明沒有「為什麼這樣切」`);
+        const modes = { doctor: ['clap', 'train', 'cut'], nurse: ['clap'], 'police officer': ['cut'], mechanic: ['train'] }[c.e] || [];
+        for (const m of modes) {
+          await p.click(`.sa-btn button[data-m="${m}"]`);
+          const n = SYL[c.e].split(/[- ]/).length, want = SYL[c.e].split(' ').map(x => x.split('-').join(' · ')).join('　') + ' ＝ ' + n + ' 拍';
+          let seen = { vo: 0, now: 0, cut: '' }, txt = '', t0 = Date.now();
+          while (Date.now() - t0 < 30000) {
+            const r = await p.evaluate(() => ({ t: document.querySelector('.sa-msg').textContent, vo: document.querySelectorAll('.sa-l.vo').length, now: document.querySelectorAll('.sa-s.now').length }));
+            txt = r.t; seen.vo = Math.max(seen.vo, r.vo); if (r.now) seen.now++; if (r.t.includes('｜')) seen.cut = r.t;
+            if (txt.includes(want)) break; await p.waitForTimeout(120);
+          }
+          ok(txt.includes(want), `${c.e} ${m}：音節動畫最後不是「${want}」（${txt}）`);
+          ok(seen.vo >= (VOW[c.e] || []).length && seen.now > 0, `${c.e} ${m}：沒有數母音或沒有一節一節亮 ${JSON.stringify(seen)}`);
+          if (n > 1) ok(seen.cut && WHY0(c.e).some(x => seen.cut.includes(x.why)), `${c.e} ${m}：切開的時候沒有說原因`);
         }
         await p.click('#xbtn');
       }
       // 網址直接進入
       await p.goto(url('jobdex.html#dex-A')); await p.waitForTimeout(150);
       ok(await p.$eval('#tabs button.on', b => b.dataset.b) === 'A' && await p.$$eval('#dexg .dc', c => c.length) === 6, 'jobdex.html#dex-A：沒有打開藝術型那一本');
-      for (const id of ['magnet', 'dark', 'ninja', 'detect', 'lava']) {
+      for (const id of games) {
         await p.goto(url('jobdex.html#' + id)); await p.waitForTimeout(150);
-        ok(await p.$eval('#book', e => e.classList.contains('on')) && (await p.$$eval('#book [data-bk]', b => b.length)) === (id === 'magnet' ? 1 : id === 'detect' ? 7 : 8), `jobdex.html#${id}：沒有出現選一本的畫面`);
+        ok(await p.$eval('#book', e => e.classList.contains('on')) && await p.$('#demoBtn') !== null && await p.$('#startBtn') !== null, `jobdex.html#${id}：開始前沒有「觀看示範」「開始遊戲」兩個按鈕`);
+        // 👀 觀看示範：手指自己玩 2 題（答對），不算分，玩完回到開始畫面
+        await p.click('#demoBtn'); let okSeen = false, back = false; const t0 = Date.now();
+        while (Date.now() - t0 < 40000) { const r = await p.evaluate(() => ({ ok: window.LASTOK === true && !!JX.demo(), s: document.body.dataset.s, d: !!JX.demo(), hand: !!document.getElementById('hand') }));
+          if (r.ok) okSeen = true; if (!r.d && r.s === 'book') { back = true; break; } await p.waitForTimeout(150); }
+        ok(okSeen && back, `${id}：觀看示範沒有自己答對、或沒有回到開始畫面`);
+        ok(await p.evaluate(() => JX.state().score === 0), `${id}：示範算了分數`);
       }
-      ok(await p.$('a.homeln[href="index.html"]').then(e => e && e.isVisible()), 'jobdex.html：看不到 🏠 首頁');
+      await p.goto(url('jobdex.html#ninja')); await p.waitForTimeout(150);
+      ok(await p.evaluate(() => document.body.dataset.s === 'hub'), 'jobdex.html#ninja（舊網址）沒有回到大廳');
+      ok(await p.$('a.homeln2[href="index.html"]').then(e => e && e.isVisible()), 'jobdex.html：看不到 🏠 首頁');
     }
     ok(!p.errs.length, `${name}：大廳錯誤 ${p.errs.join(' ')}`);
     await p.close();
@@ -133,15 +189,16 @@ module.exports = async function (browser, url) {
       await m.move(r[0], r[1], { steps: 4 });
       const r2 = await p.evaluate(() => { const g = JX.GAMES.dark, t = g.P.find(x => x.e === g.e); return [...(b => [b.x + b.width / 2, b.y + b.height / 2])(t.el.getBoundingClientRect())]; });
       await m.move(...r2); await m.down(); await m.up();
-    } else if (id === 'ninja') {
-      const need = await p.evaluate(() => { const g = JX.GAMES.ninja, a = document.getElementById('arena').getBoundingClientRect(), w = document.getElementById('njw').getBoundingClientRect();
-        return { gaps: g.gaps().filter(x => g.need.has(x.i)).map(x => x.x + a.left), top: w.top, bottom: w.bottom }; });
-      if (!need.gaps.length) await p.click('#nocut');
-      for (const x of need.gaps) {
-        const g2 = await p.evaluate(() => { const g = JX.GAMES.ninja, a = document.getElementById('arena').getBoundingClientRect(); return g.gaps().filter(x => g.need.has(x.i) && !g.cuts.has(x.i)).map(x => x.x + a.left)[0]; });
-        if (g2 == null) break;
-        await m.move(g2, need.top - 30); await m.down(); await m.move(g2, need.bottom + 30, { steps: 5 }); await m.up(); await p.waitForTimeout(80);
-      }
+    } else if (id === 'memory') {
+      const r = await p.evaluate(() => JX.GAMES.memory.pair().map(c => { const b = c.el.getBoundingClientRect(); return [b.x + b.width / 2, b.y + b.height / 2]; }));
+      for (const c of r) { await m.move(...c); await m.down(); await m.up(); await p.waitForTimeout(60); }
+    } else if (id === 'mole') {
+      const r = await p.evaluate(() => { const g = JX.GAMES.mole; let h = g.H.find(x => x.up && !x.hold && x.e === g.e) || g.pop(g.e); h.t = 99; const b = h.el.getBoundingClientRect(); return [b.x + b.width / 2, b.y + b.height * .5]; });
+      await m.move(...r); await m.down(); await m.up();
+    } else if (id === 'beat') {
+      const n = await p.evaluate(() => JX.GAMES.beat.need);
+      for (let k = 0; k < n; k++) { await p.click('#drumb'); await p.waitForTimeout(40); }
+      await p.click('#btok');
     } else if (id === 'detect') {
       const r = await p.evaluate(() => { const g = JX.GAMES.detect, L = document.getElementById('lens').getBoundingClientRect(), s = [...document.querySelectorAll('.sus')].find(x => x.dataset.e === g.e).getBoundingClientRect(); return { l: [L.x + L.width / 2, L.y + L.height / 2], s: [s.x + s.width / 2, s.y + s.height / 2] }; });
       await m.move(...r.l); await m.down(); await m.move(...r.s, { steps: 8 }); await m.up();
@@ -150,7 +207,6 @@ module.exports = async function (browser, url) {
       await m.move(...r); await m.down(); await m.up();
     }
   };
-  const games = ['magnet', 'dark', 'ninja', 'detect', 'lava'];
   const play = async ([w, h, name], k0) => {
     const p = await newPage(w, h);
     await p.goto(url('jobdex.html')); await p.waitForTimeout(150);
@@ -158,15 +214,18 @@ module.exports = async function (browser, url) {
       const tag = `${name} ${id}`;
       await p.evaluate(id => { location.hash = id; }, id); await p.waitForTimeout(200);
       let g = await geom(p, '#book button, #bar button, #bar a');
-      ok(!g.over && !g.small.length, `${tag}：選一本的畫面橫向捲動或按鈕太小 ${g.small.join('、')}`);
-      await p.click('#book [data-bk="all"]');
+      ok(!g.over && !g.small.length, `${tag}：開始畫面橫向捲動或按鈕太小 ${g.small.join('、')}`);
+      await p.click('#startBtn');
       let s = await waitQ(p);
       if (!s) { bad(`${tag}：第一題沒有出現`); continue; }
       ok(s.qt >= 5 && s.qt <= 15 && Math.abs(s.gLeft - 90) < 1, `${tag}：時間不對（每題 ${s.qt} 秒、整場 ${s.gLeft} 秒）`);
       g = await geom(p, '#hud button, #arena button, #bar button, #bar a, #lens');
       ok(!g.over && !g.small.length, `${tag}：遊戲畫面橫向捲動或按鈕太小 ${g.small.join('、')}`);
-      const out = await inArena(p, '.mag, .plate, #njw, .sus, .stone, .ledge, .lens, .nocut, .ask, .clue, .climber');
+      const out = await inArena(p, '.mag, .plate, .sus, .stone, .ledge, .lens, .ask, .clue, .climber, .mc, .hole, .drumb, .btok, .btre, .btw');
       ok(!out.length, `${tag}：有東西超出遊戲畫面 ${out.join('、')}`);
+      if (id === 'detect') { const all = await p.evaluate(() => [...new Set(D.ITEMS.map(i => i.e))]);
+        for (const e0 of all.concat([null])) { const [lu, CONF, e] = await p.evaluate(e0 => { const g = JX.GAMES.detect; g.ask(e0 || JX.state().cur, {}); return [[...document.querySelectorAll('.sus')].map(x => x.dataset.e), D.CONF, g.e]; }, e0);
+        ok(lu.length === 8 && lu.includes(e) && !CONF.some(g => g.includes(e) && g.filter(x => lu.includes(x)).length > 1), `${tag}：嫌疑人裡有和答案容易搞混的職業 ${e}：${lu.join('、')}`); } }
       // ① 真的用手指答對
       await realRight(p, id, k0 === 0); await p.waitForTimeout(150);
       s = await st(p);
@@ -193,8 +252,8 @@ module.exports = async function (browser, url) {
       const e = mi.cur;
       if (id === 'magnet') { const q = Q.jobs[e], mx = Math.max(...Object.values(q.scores)); ok('RIASEC'.split('').filter(t => q.scores[t] === mx).every(t => mi.a.includes({ R: '實用型', I: '研究型', A: '藝術型', S: '社會型', E: '企業型', C: '事務型' }[t])), `${tag}：答錯頁的正確型不對（${e}）`); }
       if (id === 'detect') ok(Q.items.some(i => mi.q.includes(i.zh.slice(0, 6))), `${tag}：答錯頁的線索不是核對過的句子`);
-      if (id === 'ninja') ok(mi.a.replace(/[｜（].*$/, '') !== '' && mi.a.includes(SYL[e].split(/[- ]/).length + ' 個音節'), `${tag}：答錯頁的音節不對`);
-      if (id === 'dark' || id === 'lava') ok(mi.a.includes(e), `${tag}：答錯頁的正確答案不對`);
+      if (id === 'beat') ok(mi.a.includes(SYL[e].split(/[- ]/).length + ' 拍'), `${tag}：答錯頁的拍數不對`);
+      if (['dark', 'lava', 'mole', 'memory'].includes(id)) ok(mi.a.includes(e), `${tag}：答錯頁的正確答案不對`);
       await p.waitForTimeout(8600);
       ok(await p.$('#miss .nxt') !== null && await p.$('#miss .bon') !== null, `${tag}：倒數 8 秒後沒有出現 ⭐ 加分、▶ 繼續`);
       g = await geom(p, '#miss button'); ok(!g.small.length, `${tag}：答錯頁按鈕太小`);
@@ -241,7 +300,7 @@ module.exports = async function (browser, url) {
     await p.goto(url('jobdex.html')); await p.waitForTimeout(150);
     ok((await p.$eval('#scme', e => e.textContent)).includes('還沒登入'), '登入：大廳沒有顯示「還沒登入」');
     await p.evaluate(() => { location.hash = 'dark'; }); await p.waitForTimeout(150);
-    await p.click('#book [data-bk="all"]'); await p.waitForTimeout(200);
+    await p.click('#startBtn'); await p.waitForTimeout(200);
     ok(await p.$eval('#scov', e => e.classList.contains('on')) && await p.$('#scGrp') !== null, '登入：開始遊戲前沒有先登入');
     const now = () => p.evaluate(() => ({ box: [...document.querySelectorAll('#scGrp i')].map(i => i.textContent).join(''), step: [1, 2, 3].find(k => document.getElementById('scSt' + k).classList.contains('now')), msg: document.getElementById('scMsg').textContent, err: document.getElementById('scMsg').classList.contains('err') }));
     let r = await now(); ok(r.step === 1 && r.box === '' && r.msg.includes('班級'), '登入：一開始沒有亮「① 打班級」');

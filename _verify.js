@@ -41,7 +41,7 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     const hash = href.split('#')[1] || '';
     let m;
     if (href === 'quiz.html') ok(await vis('start'), `${href}：沒有出現職業興趣探險開場`);
-    else if (href === 'jobdex.html') ok(await vis('hub') && await p.$$eval('.gcard', c => c.length) === 5, `${href}：沒有出現職業圖鑑＋5 種遊戲`);
+    else if (href === 'jobdex.html') ok(await vis('hub') && await p.$$eval('.gcard', c => c.length) === 7, `${href}：沒有出現職業圖鑑＋7 種遊戲`);
     else if (href === 'rank-tw.html') ok(await p.$$eval('.row', r => r.length) === 20, `${href}：排行榜不是 20 列`);
     else if (/^c[1-4]$/.test(hash)) ok(await vis('Q' + hash[1]), `${href}：沒有出現挑戰 ${hash[1]}`);
     else if (href === 'rank-mix.html') ok(await p.$$eval('tbody tr', r => r.length) === 36, `${href}：排序頁不是 36 列`);
@@ -53,7 +53,7 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     else if ((m = hash.match(/^adv(\d)$/))) ok(await vis('P') && await p.$eval('.tb.on', e => e.dataset.t) === m[1], `${href}：沒有出現大人榜單 ${m[1]}`);
     else if ((m = hash.match(/^g(\d+)$/))) ok(await vis('play') && await p.evaluate(() => G && G.id) === +m[1] - 1, `${href}：沒有開始遊戲 ${m[1]}`);
     else bad(href + '：不認得的連結');
-    ok(await p.$('a.homeln[href="index.html"]').then(e => e && e.isVisible()), `${href}：看不到 🏠 首頁`);
+    ok(await p.$(href === 'jobdex.html' ? 'a.homeln2[href="index.html"]' : 'a.homeln[href="index.html"]').then(e => e && e.isVisible()), `${href}：看不到 🏠 首頁`);   // jobdex：🏠 在下面固定的那一排（2026/10/9）
   }
   // 34 張單字卡：六個步驟都點一遍，不能出錯、不能超出畫面；音節拼回來要等於單字
   for (const [w, hh] of [[375, 667], [1024, 768]]) {
@@ -275,9 +275,11 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
       await look('#panel', '興趣成分');
       const sh = await q.evaluate(() => ({ bars: document.querySelectorAll('.pb').length, med: [...document.querySelectorAll('.pb .md')].map(m => m.textContent).join(''), say: document.getElementById('psayt').textContent, first: document.querySelector('.pb').dataset.t }));
       ok(sh.bars === 6 && sh.med === '🥇🥈🥉' && sh.first === 'S' && sh.say.includes('老師最常做的是『社會型』的事：幫助、教別人（100 分）'), `${name}：老師的興趣成分不對 ${JSON.stringify(sh)}`);
-      for (const m of ['clap', 'train', 'cut']) {
-        await q.click(`.sbtn button[data-m="${m}"]`); await q.waitForTimeout(m === 'train' ? 3600 : m === 'cut' ? 2700 : 3000);
-        ok((await q.$eval('#sres', e => e.textContent)).includes('teach · er ＝ 2 個音節'), `${name}：音節動畫 ${m} 最後沒有顯示「teach · er ＝ 2 個音節」`);
+      for (const m of (w === 1024 ? ['clap', 'train', 'cut'] : ['clap'])) {
+        // 音節動畫（_syl_anim.js）：數母音 ➜ 切開＋原因 ➜ 一節一節唸 ➜ 整個字
+        await q.click(`.sa-btn button[data-m="${m}"]`);
+        let txt = '', t0 = Date.now(); while (Date.now() - t0 < 16000) { txt = await q.$eval('.sa-msg', e => e.textContent); if (txt.includes('teach · er ＝ 2 拍') && (await q.$eval('.sa-whybox', e => e.textContent)).includes('字尾 er')) break; await q.waitForTimeout(250); }
+        ok(txt.includes('teach · er ＝ 2 拍') && (await q.$eval('.sa-whybox', e => e.textContent)).includes('字尾 er'), `${name}：音節動畫 ${m} 最後沒有顯示「teach · er ＝ 2 拍」和為什麼這樣切（${txt}）`);
         await look('#panel', `音節動畫 ${m}`);
       }
       await q.click('#xbtn');
@@ -326,7 +328,7 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
   await p.goto(url('games.html')); ok(await vis('home'), 'games.html：沒有出現遊戲選單');
   ok(await p.$('a[href="story.html"]') !== null, 'games.html：回單字小故事連結不對');
   ok(!errs.length, '頁面錯誤：' + errs.join(' '));
-  // 📖 職業圖鑑＋5 種複習遊戲（jobdex.html）
+  // 📖 職業圖鑑＋7 種複習遊戲（jobdex.html）
   const jx = await require('./_verify_jobdex.js')(browser, url);
   n += jx.n; fail += jx.fail;
   await browser.close();

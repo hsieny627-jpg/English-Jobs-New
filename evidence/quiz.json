@@ -34,7 +34,7 @@
    "n": 3,
    "t": "A",
    "ic": "🎨",
-   "zh": "用筆、水彩或電腦畫畫",
+   "zh": "用筆、水彩或炭筆畫畫",
    "e": "painter",
    "q": [
     "Use materials such as pens and ink, watercolors, charcoal, oil, or computer software to create artwork."
@@ -139,7 +139,7 @@
    "n": 10,
    "t": "S",
    "ic": "💉",
-   "zh": "幫受傷的人急救、擦藥、包紮",
+   "zh": "在學校或醫院幫人急救、打預防針",
    "e": "nurse",
    "q": [
     "Provide health care, first aid, immunizations, or assistance in convalescence or rehabilitation in locations such as schools, hospitals, or industry."
@@ -170,10 +170,10 @@
    "n": 12,
    "t": "C",
    "ic": "🧳",
-   "zh": "檢查急救箱和滅火器能不能用",
+   "zh": "示範怎麼用安全帶、救生衣和氧氣面罩",
    "e": "flight attendant",
    "q": [
-    "Verify that first aid kits and other emergency equipment, including fire extinguishers and oxygen bottles, are in working order."
+    "Announce and demonstrate safety and emergency procedures, such as the use of oxygen masks, seat belts, and life jackets."
    ],
    "url": "https://www.onetonline.org/link/details/53-2031.00",
    "code": "53-2031.00",
@@ -219,7 +219,8 @@
    "zh": "站上舞台，唱歌給大家聽",
    "e": "singer",
    "q": [
-    "Perform before live audiences in concerts, recitals, educational presentations, and other social gatherings."
+    "Perform before live audiences in concerts, recitals, educational presentations, and other social gatherings.",
+    "Sing as a soloist or as a member of a vocal group."
    ],
    "url": "https://www.onetonline.org/link/details/27-2042.00",
    "code": "27-2042.00",
@@ -261,10 +262,10 @@
    "n": 18,
    "t": "C",
    "ic": "👮",
-   "zh": "把發生了什麼事，仔細寫下來",
+   "zh": "巡邏的時候，注意並記下奇怪的人和事",
    "e": "police officer",
    "q": [
-    "Record facts to prepare reports that document incidents and activities."
+    "Monitor, note, report, and investigate suspicious persons and situations, safety hazards, and unusual or illegal activity in patrol area."
    ],
    "url": "https://www.onetonline.org/link/details/33-3051.00",
    "code": "33-3051.00",
@@ -292,10 +293,10 @@
    "n": 20,
    "t": "I",
    "ic": "⚙️",
-   "zh": "研究機器為什麼壞掉，想辦法改好",
+   "zh": "研究、設計新的機器",
    "e": "mechanical engineer",
    "q": [
-    "Investigate equipment failures or difficulties to diagnose faulty operation and recommend remedial actions."
+    "Research, design, evaluate, install, operate, or maintain mechanical products, equipment, systems or processes to meet requirements."
    ],
    "url": "https://www.onetonline.org/link/details/17-2141.00",
    "code": "17-2141.00",
@@ -381,11 +382,11 @@
   {
    "n": 26,
    "t": "I",
-   "ic": "🧠",
-   "zh": "找出別人在心情或行為上遇到的困難",
+   "ic": "📝",
+   "zh": "用測驗了解一個人的興趣和個性",
    "e": "psychologist",
    "q": [
-    "Identify psychological, emotional, or behavioral issues and diagnose disorders, using information obtained from interviews, tests, records, or reference materials."
+    "Select, administer, score, and interpret psychological tests to obtain information on individuals' intelligence, achievements, interests, or personalities."
    ],
    "url": "https://www.onetonline.org/link/details/19-3033.00",
    "code": "19-3033.00",
@@ -441,11 +442,11 @@
   {
    "n": 30,
    "t": "C",
-   "ic": "✂️",
-   "zh": "幫客人排好預約的時間",
+   "ic": "📒",
+   "zh": "記下每位客人做過哪些美髮服務",
    "e": "hairstylist",
    "q": [
-    "Schedule client appointments."
+    "Update and maintain customer information records, such as beauty services provided."
    ],
    "url": "https://www.onetonline.org/link/details/39-5012.00",
    "code": "39-5012.00",

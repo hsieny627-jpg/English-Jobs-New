@@ -3,9 +3,10 @@
    ⏳ 每一場（2026/10/9 使用者改成 1 分 30 秒）、⏱ 每一題 15 秒、答對 100 ＋ 速度（剩幾秒 ÷ 總秒數 ✕ 900）＋ 連對 ✕ 20，再乘驚喜卡倍數；
    連對 3 題開驚喜卡（二選一 40%、三選一 30%、四選一 20%、五選一 10%）；答錯 ➜ 整頁看清楚（唸 3 次、倒數 8 秒）➜ ⭐ 加分（再看 8 秒 ➜ 同一題再玩一次，答對 500 ✕ 2）；
    答錯的題目過 2～3 題再出一次；結束 ➜ 答錯整理 ➜ 成績（Google 成績表）。
-   2026/10/9 使用者決定：答錯頁、驚喜卡、加分視窗的時間都不算進那 1 分 30 秒；一直在動的遊戲（磁鐵、黑夜、忍者、火山）答對的算式在旁邊飄出來，不停下來。 */
+   2026/10/9 使用者決定：答錯頁、驚喜卡、加分視窗的時間都不算進那 1 分 30 秒；一直在動的遊戲答對的算式在旁邊飄出來，不停下來（只有職業神探跳加分視窗）。
+   2026/10/9 改版：音節忍者拿掉（切的位置字典之間不一樣），新增 🃏 記憶翻牌、🔨 打地鼠、🥁 拍數節奏；每個遊戲開始前有 👀 觀看示範／▶ 開始遊戲；不用再選一本。 */
 'use strict';
-const {TY,ORDER,J,BOOK,ITEMS,META,SURP,SKIN,JOKE,OPENA,HOW}=D;
+const {TY,ORDER,J,BOOK,ITEMS,META,SURP,SKIN,JOKE,OPENA,HOW,CONF}=D;
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const pick=a=>a[Math.floor(Math.random()*a.length)];
@@ -85,7 +86,7 @@ function roll(e){const c=Object.assign({},e);
  if(c.k==='dbl')c.got=Math.min(c.v,Math.max(500,score));return c}
 function draw1(){if(!pool.length)pool=shuf(SURP[gid].slice());return pool.shift()}
 /* 每個遊戲有自己的卡包樣式（參考頁的 38 種分給 5 個遊戲），一場洗一次、不重複 */
-function mySkins(){const k=META.findIndex(m=>m.id===gid);return SKIN.map((s,i)=>i).filter(i=>i%5===k)}
+function mySkins(){const k=META.findIndex(m=>m.id===gid);return SKIN.map((s,i)=>i).filter(i=>i%META.length===k)}
 function nextSkin(){if(!skinQ.length)skinQ=shuf(mySkins());return SKIN[skinQ.shift()]}
 function nextJoke(){if(!jokeQ.length)jokeQ=shuf(JOKE.slice());return jokeQ.shift()}
 function cardHTML(e,sk){const em=String(e.t).split(' ')[0],nm=String(e.t).split(' ').slice(1).join(' ');
@@ -140,7 +141,7 @@ function flyGain(d,x,y){const f=document.createElement('div');f.className='fly';
 /* 計時：一場 1 分 30 秒（答錯頁、驚喜卡、加分視窗、加分題不算）；每一題 15 秒 */
 let lastT=0;
 function loop(t){const dt=lastT?Math.min(.1,(t-lastT)/1000):0;lastT=t;
- if(!ended&&G){const paused=gPause>0||cdOn;
+ if(!ended&&G){const paused=gPause>0||cdOn||!!DEMO;
   if(!paused&&!bonusMode){gLeft-=dt;if(gLeft<=0){gLeft=0;paint();timeOver();requestAnimationFrame(loop);return}}
   if(!paused&&qOn){if(frozenLeft>0)frozenLeft-=dt;else{const before=left;left-=dt;
    if(left<=5&&left>0&&Math.ceil(before)!==Math.ceil(left))sfx.tick();
@@ -162,16 +163,17 @@ function tagsIn(){const a=[];const n=3-(streak%3);a.push('<span class="tg'+(n===
  if(rainN>0)a.push('<span class="tg hot">🌧 '+rainN+'</span>');if(goldNext)a.push('<span class="tg hot">🏅 ＋'+goldNext+'</span>');if(fastV)a.push('<span class="tg hot">🎯 5 秒內</span>');
  if(hintNext)a.push('<span class="tg hot">💡 提示</span>');if(SCH.rkTxt)a.push('<span class="tg">'+SCH.rkTxt+'</span>');return a.join('')}
 
-function begin(id,book){
- const m=META.find(x=>x.id===id);if(!m)return;try{G&&G.stop&&G.stop()}catch(e){}gid=id;G=GAMES[id];BK=book||'all';ended=false;cdOn=true;
+function begin(id,book,opt){
+ const m=META.find(x=>x.id===id);if(!m)return;try{G&&G.stop&&G.stop()}catch(e){}gid=id;G=GAMES[id];BK='all';ended=false;cdOn=true;DEMO=opt&&opt.demo?{n:0,id}:null;
  score=0;streak=0;best=0;right=0;wrong=0;mult=1;multLeft=0;fastV=0;wrongList=[];busy=false;bonusMode=false;
  asked=0;speedSum=0;shield=0;timeAdd=0;opened=[];lastGain=0;pool=shuf(SURP[id].slice());skinQ=shuf(mySkins());jokeQ=shuf(JOKE.slice());rainN=0;rainV=0;
  hintNext=0;goldNext=0;freezeNext=0;frozenLeft=0;combo=null;left=QT;qt=QT;gLeft=GT;gPause=0;MISSLOG=[];missHide(false);
- GQ=[];GSEEN=[];GSIM=[];gFix=0;gFirst=false;SCEND=null;SCH.rkTxt='';$('#gscore').hidden=true;scStart(true);
+ GQ=[];GSEEN=[];GSIM=[];gFix=0;gFirst=false;SCEND=null;SCH.rkTxt='';$('#gscore').hidden=true;if(!DEMO)scStart(true);
  DECK=G.deck(BK);queue=shuf(DECK);
  ['#gain','#pick'].forEach(s=>{$(s).classList.remove('on');$(s).innerHTML=''});
  show('play');$('#gname').textContent=m.ic+' '+m.name;
  A().className='';A().innerHTML='';G.setup();paint();
+ if(DEMO){const b=document.createElement('div');b.className='demobar';b.innerHTML='<span id="demoTxt">👀 示範：看手指怎麼玩</span><button id="demoX">✕ 不看了</button>';A().appendChild(b);cdOn=false;next();location.replace('#'+id);return}
  const cd=document.createElement('div');cd.className='cdown';A().appendChild(cd);let n=3;
  const tick=()=>{if(ended||gid!==id){cd.remove();return}if(n===0){cd.remove();cdOn=false;next();return}cd.innerHTML='<b>'+n+'</b>';sfx.tick();n--;setTimeout(tick,650)};tick();
  location.replace('#'+id);
@@ -182,7 +184,22 @@ function next(){if(ended)return;busy=false;bonusMode=false;$$('.bonusq').forEach
  gQi=DECK.indexOf(cur);gT0=Date.now();
  const h=hintNext;hintNext=0;
  qt=Math.max(5,(G.qt?G.qt():QT)+timeAdd);timeAdd=0;frozenLeft=freezeNext;freezeNext=0;left=qt;
- G.ask(cur,{hint:h,bonus:false});qOn=true;paint()}
+ G.ask(cur,{hint:h,bonus:false});qOn=true;paint();if(DEMO)demoRun()}
+/* 記憶翻牌：學生配好的那一對才是「這一題」 */
+function setCur(e){cur=e;gQi=DECK.indexOf(e)}
+/* 👀 觀看示範（2026/10/9）：一隻手指照遊戲本來的玩法示範 2 題，不計時、不算分、不送成績，示範完回到開始畫面 */
+let DEMO=null;
+function demoEnd(){const id=DEMO&&DEMO.id;DEMO=null;ended=true;qOn=false;sayStop();try{G&&G.stop&&G.stop()}catch(e){}G=null;A().innerHTML='';if(id)bookPage(id)}
+function demoRun(){const my=DEMO;if(!my||!G.demo)return;
+ setTimeout(()=>{if(DEMO!==my||!qOn)return;let steps;try{steps=G.demo()}catch(e){console.error(e);return}
+  let hd=$('#hand');if(!hd){hd=document.createElement('div');hd.id='hand';hd.textContent='👆';A().appendChild(hd)}
+  let px=W()*.5,py=H()-30;hd.style.left=px+'px';hd.style.top=py+'px';
+  const go=i=>{if(DEMO!==my||i>=steps.length)return;const s=steps[i],x0=px,y0=py,T=REDUCE?60:(s.ms||800),t0=performance.now();if(s.say){const t=$('#demoTxt');if(t)t.textContent='👀 '+s.say}
+   const f=t=>{if(DEMO!==my)return;const k=Math.min(1,(t-t0)/T),q=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2,x=x0+(s.x-x0)*q,y=y0+(s.y-y0)*q;hd.style.left=x+'px';hd.style.top=y+'px';if(s.drag)s.drag(x,y);
+    if(k<1){requestAnimationFrame(f);return}px=s.x;py=s.y;hd.classList.remove('tap');void hd.offsetWidth;hd.classList.add('tap');
+    setTimeout(()=>{if(DEMO!==my)return;if(s.tap)s.tap();setTimeout(()=>go(i+1),s.after||300)},200)};
+   requestAnimationFrame(f)};
+  go(0)},G===GAMES.detect?1500:900)}
 function timeUp(){if(busy)return;G.timeout&&G.timeout();judge(false,null,true)}
 function award(sp){right++;streak++;if(streak>best)best=streak;speedSum+=sp;
  const st=streak*20,sub=100+sp+st;let mul=1,extra=0,extraIc='',storm=false;
@@ -200,6 +217,7 @@ function gRec(ok,timeout){if(gFirst){const sec=(Date.now()-gT0)/1000;
  else if(ok)gFix++}
 function judge(ok,pk,timeout,at){
  if(busy||ended)return;busy=true;qOn=false;window.LASTOK=ok;
+ if(DEMO){if(ok){sfx.ok();const t=$('#demoTxt');if(t)t.textContent='✅ 答對了！'}const my=DEMO;setTimeout(()=>{if(DEMO!==my)return;my.n++;if(my.n>=2)demoEnd();else next()},(G.okDelay?G.okDelay():700)+700);return}
  if(bonusMode)return bonusJudge(ok,pk,timeout);
  asked++;gRec(ok,timeout);
  if(ok){const sp0=Math.round(900*(left/qt)),d=award(sp0);
@@ -284,69 +302,59 @@ function endBody(){const k='best_'+gid;let b=store(k)||0;
  const had=MISSLOG.length>0;missAll('這一場　答錯整理',()=>gScOpen(had?300:2500))}
 function gScOpen(ms){clearTimeout(gScOpen.t);if(!SCEND)return;gScOpen.t=setTimeout(()=>{if(!SCEND||!ended||document.body.dataset.s!=='end'||missOn())return;SCH.open();scScene()},ms)}
 
-/* ══ 畫面切換、大廳、圖鑑 ══ */
-function show(s){document.body.dataset.s=s;
+/* ══ 畫面切換、大廳、圖鑑（2026/10/9 改版：每個畫面只留學生需要的；下面一排按鈕位置固定） ══ */
+function show(s){document.body.dataset.s=s;autoStop();
  $$('#hubwrap .scr').forEach(x=>x.classList.toggle('on',(s==='hub'&&x.id==='hub')||(s==='book'&&x.id==='book')));
  if(s==='hub'||s==='book')window.scrollTo(0,0);fixBar()}
-function hub(sec){ended=true;qOn=false;cdOn=false;sayStop();missHide(false);try{G&&G.stop&&G.stop()}catch(e){}G=null;
+let VIEW='games';
+function view(v){VIEW=v;$$('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));$$('#hub .pane').forEach(p=>p.classList.toggle('on',p.id===v));autoStop()}
+function hub(sec){ended=true;qOn=false;cdOn=false;DEMO=null;sayStop();missHide(false);try{G&&G.stop&&G.stop()}catch(e){}G=null;
  const ma=$('#missAll');if(ma)ma.classList.remove('on');['#gain','#pick'].forEach(s=>{$(s).classList.remove('on');$(s).innerHTML=''});gPause=0;
- SCH.close();show('hub');gridPaint();$('#scme').innerHTML=scMeHTML();
- if(location.hash&&location.hash!=='#'+(sec||''))history.replaceState(null,'',location.pathname+(sec?'#'+sec:''));
- if(sec){const t=$('#'+sec);if(t)setTimeout(()=>t.scrollIntoView(),30)}}
-function gridPaint(){$('#grid').innerHTML=META.map((m,n)=>{const b=store('best_'+m.id)||0;
- return '<button class="gcard" data-g="'+m.id+'" style="--c:'+m.c+';--b:'+m.b+'"><span class="gn">'+(n+1)+'</span><span class="gi" style="color:'+m.c+'">'+m.svg+'</span>'+
-  '<span class="gt">'+m.ic+' '+m.name+'</span><span class="gr">'+m.rule+'</span><span class="gb">⏳ 1 分 30 秒　📚 '+m.learn+(b?'　🏆 最佳 <b>'+b+'</b>':'')+'</span></button>'}).join('')}
-/* 開始前：選「全部」或其中一本（分批練習）；興趣磁鐵固定用全部（2026/10/9 使用者同意） */
-function bookPage(id){const m=META.find(x=>x.id===id),g=GAMES[id];if(!m)return;
- const bs=g.books().filter(k=>g.deck(k).length);
- const lab=k=>k==='all'?['📖 全部','#1B2B4B']:k==='X'?['❔ 還沒有分數','#5B6782']:[TY[k].ic+' '+TY[k].f,TY[k].c];
- $('#book').innerHTML='<div class="gi0" style="--b:'+m.b+';color:'+m.c+'">'+m.svg+'</div><h2 class="h2">'+m.ic+' '+m.name+'</h2>'+
-  '<div class="card rule">'+m.how.map(h=>'<div><span>'+h[0]+'</span><span>'+h[1]+'</span></div>').join('')+'</div>'+
-  '<p class="one">'+(bs.length>1?'要練哪一本？點一下就開始':'點一下就開始')+'</p><div class="bk">'+bs.map(k=>{const L=lab(k);
-   return '<button data-bk="'+k+'" style="--c:'+L[1]+'"><b>'+L[0]+'</b><span>'+g.deck(k).length+' 個職業</span></button>'}).join('')+'</div>';
+ SCH.close();show('hub');gridPaint();$('#scme').innerHTML=scMeHTML();view(sec==='dex'?'dex':'games');
+ if(location.hash&&location.hash!=='#'+(sec||''))history.replaceState(null,'',location.pathname+(sec?'#'+sec:''))}
+function gridPaint(){$('#grid').innerHTML=META.map(m=>{const b=store('best_'+m.id)||0;
+ return '<button class="gcard" data-g="'+m.id+'" style="--c:'+m.c+';--b:'+m.b+'"><span class="gi">'+m.ic+'</span><span class="gt">'+m.name+'</span><span class="gr">'+m.line+'</span>'+(b?'<span class="gb">🏆 '+b+'</span>':'')+'</button>'}).join('')}
+/* 遊戲開始前：👀 觀看示範／▶ 開始遊戲（2026/10/9 使用者要求）；不用再選一本，一律用全部的字 */
+function bookPage(id){const m=META.find(x=>x.id===id);if(!m)return;const b=store('best_'+id)||0;
+ $('#book').innerHTML='<div class="intro" style="--c:'+m.c+';--b:'+m.b+'"><div class="gi0">'+m.ic+'</div><h2 class="h2">'+m.name+'</h2>'+
+  '<div class="rule">'+m.how.map(h=>'<div><span>'+h[0]+'</span><span>'+h[1]+'</span></div>').join('')+'</div>'+
+  '<div class="two"><button class="ghost" id="demoBtn">👀 觀看示範</button><button class="go" id="startBtn">▶ 開始遊戲</button></div>'+
+  '<p class="one">⏳ 一場 1 分 30 秒'+(b?'　🏆 最佳 '+b:'')+'</p></div>';
  BOOKID=id;show('book');location.replace('#'+id)}
 let DEXB='all',BOOKID=null;
-function dexPaint(b){DEXB=b;$$('#tabs button').forEach(x=>x.classList.toggle('on',x.dataset.b===b));
- $('#bookh').innerHTML=b==='all'?'全部 '+BOOK.all.length+' 個職業':b==='X'?'這些工作還沒有自己的興趣分數，先不分類（不代表它們不好）':
-  '<span class="chip" style="--c:'+TY[b].c+';--b:'+TY[b].bg+'">'+TY[b].ic+' '+TY[b].f+' '+TY[b].en+'</span>'+TY[b].d+'：分數最高的是這一型';
+function dexPaint(b){DEXB=b;autoStop();$$('#tabs button').forEach(x=>x.classList.toggle('on',x.dataset.b===b));
+ $('#bookh').innerHTML=b==='all'?'':b==='X'?'這些工作還沒有自己的興趣分數':'<span class="chip" style="--c:'+TY[b].c+';--b:'+TY[b].bg+'">'+TY[b].ic+' '+TY[b].f+'</span>'+TY[b].d;
  $('#dexg').innerHTML=BOOK[b].map(e=>{const j=J[e],t=b==='all'||b==='X'?(j.top?j.top[0]:null):b;
-  return '<div class="dc" data-e="'+esc(e)+'" role="button" tabindex="0" style="--c:'+(t?TY[t].c:'#B9C2D3')+'">'+(j.top&&j.top.length>1?'<span class="tie">同分</span>':'')+
-   '<span class="dci">'+j.ic+'</span><span class="dce">'+colorWord(e)+'</span><span class="dcz">'+j.z+'</span>'+
-   '<span class="dcb"><button class="b48 say1" data-e="'+esc(e)+'" aria-label="聽 '+esc(e)+'">🔊</button><button class="b48 sylb" data-e="'+esc(e)+'">音節</button></span></div>'}).join('')}
-/* 興趣成分＋三種音節動畫（照 quiz.html 的職業圖鑑） */
+  return '<div class="dc" data-e="'+esc(e)+'" style="--c:'+(t?TY[t].c:'#B9C2D3')+'">'+(j.top&&j.top.length>1?'<span class="tie">同分</span>':'')+
+   '<span class="dci">'+j.ic+'</span><button class="dce say1" data-e="'+esc(e)+'" aria-label="聽 '+esc(e)+'">'+colorWord(e)+'</button><span class="dcz">'+j.z+'</span><span class="dcn"></span>'+
+   '<button class="info" data-e="'+esc(e)+'">ℹ️ 說明</button></div>'}).join('')}
+/* 正在唸的那張卡：邊框變色、英文放大變亮 */
+function markCard(e){$$('#dexg .dc.playing').forEach(x=>x.classList.remove('playing'));const c=e&&$$('#dexg .dc').find(x=>x.dataset.e===e);if(c)c.classList.add('playing');return c}
+function sayCard(e){autoStop();markCard(e);say(e,()=>markCard(null))}
+/* ▶ 自動播放：從第一張開始，每個字唸 3 次 */
+let AUTO=null;
+function autoStart(){autoStop();const list=$$('#dexg .dc').map(x=>x.dataset.e);let i=0;const my=AUTO={};$('#autoBtn').classList.add('on');$('#autoBtn').innerHTML='⏹ 停止播放';
+ const card=()=>{if(AUTO!==my)return;if(i>=list.length){autoStop();return}const e=list[i++],c=markCard(e);if(c)c.scrollIntoView({block:'center',behavior:REDUCE?'auto':'smooth'});let k=0;
+  const once=()=>{if(AUTO!==my)return;if(k>=3){setTimeout(card,700);return}k++;const n=c&&c.querySelector('.dcn');if(n)n.textContent=k+' / 3';say(e,()=>setTimeout(once,550))};setTimeout(once,450)};
+ card()}
+function autoStop(){const was=!!AUTO;AUTO=null;$$('#dexg .dcn').forEach(x=>x.textContent='');markCard(null);const b=$('#autoBtn');if(b){b.classList.remove('on');b.innerHTML='▶ 從第一張自動播放<small>每個字唸 3 次</small>'}if(was)sayStop()}
+/* ℹ️ 說明：音節（幾拍、怎麼切、為什麼）＋興趣成分 */
 const MED=['🥇','🥈','🥉'];
-function openSheet(e,sylMode){const j=J[e];
- let h='<button class="x" id="xbtn" aria-label="關閉">✕</button><div class="ph"><span class="pi">'+j.ic+'</span><div><div class="pe">'+colorWord(e)+'</div><div class="pz">'+j.z+'</div></div><button class="b48" id="psay" aria-label="聽英文">🔊</button></div>';
+function openSheet(e){const j=J[e];autoStop();
+ let h='<button class="x" id="xbtn" aria-label="關閉">✕</button><div class="ph"><span class="pi">'+j.ic+'</span><div><button class="pe say1" data-e="'+esc(e)+'">'+colorWord(e)+'</button><div class="pz">'+j.z+'</div></div></div>'+
+  '<h3 class="sh3">✂️ 音節：有幾拍？怎麼切？</h3><div id="sabox"></div>';
  if(j.s){const s=j.s,arr=ORDER.split('').sort((a,b)=>s[b]-s[a]||ORDER.indexOf(a)-ORDER.indexOf(b)),mx=s[arr[0]],tops=arr.filter(t=>s[t]===mx);
-  h+='<div class="pexp">🧪 <b>興趣成分</b>：每個工作都會用到六種興趣，只是多少不一樣。美國勞動部替每個工作的六種興趣打分數（0～100 分），分數越高，這個工作越常做這一型的事。</div><details class="hows"><summary>🤔 分數怎麼來的？</summary>'+HOW+'</details><div class="pbars">'+
+  h+='<h3 class="sh3">🧪 興趣成分</h3><div class="pbars">'+
    arr.map(t=>{const rk=1+ORDER.split('').filter(u=>s[u]>s[t]).length;return '<div class="pb" style="--c:'+TY[t].c+'" data-t="'+t+'"><span class="md">'+(rk<=3?MED[rk-1]:'')+'</span><span class="pn2">'+TY[t].ic+' '+TY[t].f+'</span><span class="pt"><i data-w="'+s[t]+'"></i></span><span class="pv">'+s[t]+'</span></div>'}).join('')+'</div>'+
-   '<p class="psay">'+j.z+'最常做的是'+tops.map(t=>'『'+TY[t].f+'』').join('和')+'的事：'+tops.map(t=>TY[t].act).join('；')+'（'+(tops.length>1?'都是 ':'')+mx+' 分）。</p>'+
-   (j.note?'<p class="pnote">※ '+j.note+'</p>':'')+'<p class="pnote">資料：<a href="'+j.url+'" target="_blank" rel="noopener">O*NET '+j.code+'</a></p>'}
- else h+='<div class="pexp">這個工作還沒有自己的興趣分數。</div>';
- h+='<div class="syls" id="syls"><h3>✂️ 音節：這個字有幾拍？</h3><div class="sbtn"><button data-m="clap">👏 拍手</button><button data-m="train">🚂 音節火車</button><button data-m="cut">✂️ 剪刀</button></div><div class="syst" id="syst"></div><div class="sres" id="sres"></div></div>'+
-  '<div class="plink" style="margin-top:24px"><a class="ghost" href="story.html#w'+j.n+'">📚 學這個字（單字卡）▶</a></div>';
+   '<p class="psay">'+j.z+'最常做的是'+tops.map(t=>'『'+TY[t].f+'』').join('和')+'的事：'+tops.map(t=>TY[t].act).join('；')+'。</p>'+
+   '<details class="hows"><summary>📚 給老師看：分數怎麼來的</summary><p class="pnote">美國勞動部 O*NET 替每個工作的六種興趣打分數（0～100 分）。'+(j.note?'※ '+esc(j.note)+'　':'')+'資料：<a href="'+j.url+'" target="_blank" rel="noopener">O*NET '+j.code+'</a></p>'+HOW+'</details>'}
+ else h+='<h3 class="sh3">🧪 興趣成分</h3><p class="pnote">這個工作還沒有自己的興趣分數。</p>';
+ h+='<div class="plink"><a class="ghost" href="story.html#w'+j.n+'">📚 學這個字（單字卡）▶</a></div>';
  $('#panel').innerHTML=h;$('#sheet').classList.add('on');$('#sheet').dataset.e=e;$('#sheet').scrollTop=0;
- $$('.pb').forEach((b,i)=>setTimeout(()=>{b.classList.add('on');const x=b.querySelector('i');x.style.width=x.dataset.w+'%'},200+i*260));
- sylStatic(e);if(sylMode){setTimeout(()=>{$('#syls').scrollIntoView({block:'start'});playSyl(e,sylMode)},300)}else say(e)}
-function closeSheet(){$('#sheet').classList.remove('on');clearSyl();sayStop()}
-let sylT=[];function clearSyl(){sylT.forEach(clearTimeout);sylT=[]}function later(f,ms){sylT.push(setTimeout(f,ms))}
-function sylDone(e){$('#sres').innerHTML='<span class="en">'+sylText(e)+'</span> ＝ '+sylCount(e)+' 個音節'}
-function wordHTML(e,cut){return sylData(e).map(w=>'<span class="wd">'+w.map((s,i)=>(i&&cut?'<span class="cut"></span>':'')+'<span class="sy">'+colorRange(e,s.a,s.b)+'</span>').join('')+'</span>').join('<span class="wgap"></span>')}
-function sylStatic(e){$('#syst').className='syst';$('#syst').innerHTML=wordHTML(e,false);$('#sres').innerHTML='點上面的按鈕，看看這個字可以分成幾拍'}
-function playSyl(e,m){clearSyl();const st=$('#syst');st.className='syst';$('#sres').innerHTML='';$$('.sbtn button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
- say(e);const n=sylCount(e);
- if(m==='clap'){st.innerHTML=wordHTML(e,true);later(()=>st.classList.add('cutting'),500);later(()=>st.classList.add('apart'),1000);
-  [...st.querySelectorAll('.sy')].forEach((x,k)=>later(()=>{x.classList.remove('beat');void x.offsetWidth;x.classList.add('beat');const c=document.createElement('span');c.className='clap';c.textContent='👏';x.appendChild(c);sfx.clap()},1500+k*650));
-  later(()=>sylDone(e),1600+n*650)}
- else if(m==='train'){let k=0;st.innerHTML='<div class="train out"><span class="eng">🚂</span>'+sylData(e).map(w=>w.map(s=>'<span class="car"><span class="nb">'+(++k)+'</span><span>'+colorRange(e,s.a,s.b)+'</span></span>').join('')).join('')+'</div>';
-  const tr=st.querySelector('.train');later(()=>tr.classList.remove('out'),60);later(()=>tr.classList.add('apart'),1600);
-  [...st.querySelectorAll('.nb')].forEach((b,i)=>later(()=>{b.classList.add('on');sfx.pop()},2200+i*500));later(()=>sylDone(e),2300+n*500)}
- else{st.innerHTML=wordHTML(e,false)+'<span class="sci">✂️</span>';const sci=st.querySelector('.sci'),sy=[...st.querySelectorAll('.sy')],box=st.getBoundingClientRect();sci.style.left='4%';
-  const ends=[];let idx=0;sylData(e).forEach(w=>{w.forEach((s,i)=>{if(i>0)ends.push(sy[idx]);idx++})});
-  if(!ends.length){later(()=>{sci.style.left='96%'},300);later(()=>{$('#sres').innerHTML='只有 1 個音節，不用剪！'},900);later(()=>sylDone(e),1500);return}
-  ends.forEach((x,k)=>{later(()=>{const r=x.getBoundingClientRect();sci.style.left=(r.left-box.left)+'px'},400+k*800);
-   later(()=>{st.querySelectorAll('.snip').forEach(o=>o.remove());const r=x.getBoundingClientRect(),s=document.createElement('span');s.className='snip';s.textContent='喀擦！';s.style.left=(r.left-box.left)+'px';st.appendChild(s);sfx.snip();x.style.marginLeft='.3em'},800+k*800)});
-  later(()=>{sci.style.left='96%';st.classList.add('split')},900+ends.length*800);later(()=>sylDone(e),1500+ends.length*800)}}
+ SA.mount($('#sabox'),saOpt(e));
+ $$('.pb').forEach((b,i)=>setTimeout(()=>{b.classList.add('on');const x=b.querySelector('i');x.style.width=x.dataset.w+'%'},200+i*200))}
+function saOpt(e){const j=J[e];return {e,syl:j.syl,v:j.v,g:j.g,why:j.why,say:(t,cb)=>say(t,cb),sfx:{pop:sfx.pop,snip:sfx.snip,clap:sfx.clap,drum:sfx.drum,clank:sfx.clank}}}
+function closeSheet(){$('#sheet').classList.remove('on');SA.stop();sayStop()}
 
 /* ══ 共用：拖拉 ══ */
 function ptr(ev){const r=A().getBoundingClientRect();return {x:ev.clientX-r.left,y:ev.clientY-r.top,t:performance.now()}}
@@ -358,7 +366,7 @@ function decoys(e,n,ok){/* 長得像的字優先（同一個字母開頭、長�
 
 /* ══ 🧲 興趣磁鐵 ══ */
 const MAGA={R:240,I:300,A:0,S:60,E:120,C:180};
-const Gm={rt:true,books:()=>['all'],deck:()=>ALL.filter(e=>J[e].s),
+const Gm={rt:true,deck:()=>ALL.filter(e=>J[e].s),
  qt(){return bonusMode?10:Math.max(5,10-0.3*asked)},mul(){return gLeft<=15?2:1},
  setup(){const a=A();a.className='mg';a.innerHTML='<svg class="hex" id="mghex"></svg><div class="lane"></div>'+ORDER.split('').map(t=>'<div class="mag" data-t="'+t+'" style="--c:'+TY[t].c+';--b:'+TY[t].bg+'"><i>'+TY[t].ic+'</i><b>'+TY[t].f+'</b><small>'+TY[t].en+'</small></div>').join('');
   this.card=null;this.lay();this.onR=()=>this.lay();addEventListener('resize',this.onR);this.stormShown=false},
@@ -401,10 +409,12 @@ const Gm={rt:true,books:()=>['all'],deck:()=>ALL.filter(e=>J[e].s),
    why:'美國勞動部的資料：'+j.z+'的六種興趣裡，'+tops.map(t=>TY[t].f).join('和')+' '+mx+' 分最高'+(tops.length>1?'（同分，兩個都對）':'')+'。'+(j.note?'（'+esc(j.note)+'）':''),
    hint:en(e)+' '+j.z+' ➜ '+tops.map(tyName).join('、'),sp:e}},
  stop(){removeEventListener('resize',this.onR)},
- cheat(ok){const c=this.card,tops=topsOf(c.e);this.shoot(ok?tops[0]:ORDER.split('').find(t=>!tops.includes(t)))}};
+ cheat(ok){const c=this.card,tops=topsOf(c.e);this.shoot(ok?tops[0]:ORDER.split('').find(t=>!tops.includes(t)))},
+ demo(){const c=this.card,t=topsOf(c.e)[0],m=this.M[t];c.held=true;
+  return [{x:c.x,y:c.y,say:c.e+'：'+TY[t].f+'分數最高'},{x:m.x,y:m.y,ms:1100,drag:(x,y)=>{c.x=x;c.y=y;this.place()},tap:()=>{c.held=false;this.shoot(t)}}]}};
 
 /* ══ 🔦 黑夜搜查 ══ */
-const Gd={rt:true,books:()=>['all'].concat(ORDER.split('')).concat(['X']),deck:b=>BOOK[b]||[],
+const Gd={rt:true,deck:()=>BOOK.all,
  setup(){const a=A();a.className='dk';
   a.innerHTML='<svg class="city" viewBox="0 0 400 100" preserveAspectRatio="none"><path d="M0 100V60h20V40h18v20h14V30h22v30h10V50h24v50zM112 100V44h16V24h20v20h14v56zM170 100V56h26V36h12v20h18v44zM232 100V30h10V14h16v16h10v70zM276 100V50h22V40h16v10h14v50zM344 100V36h18v-8h14v8h24v64z" fill="#1E2C48"/></svg>'+
    '<div id="plates"></div><div class="dark" id="dkv"></div><div class="beam" id="beam"></div><div class="ask" id="dkask"></div><div class="tip">🔦 手指滑一滑＝手電筒　👆 照到了再點它</div>';
@@ -439,62 +449,14 @@ const Gd={rt:true,books:()=>['all'].concat(ORDER.split('')).concat(['X']),deck:b
   judge(ok,{e:p.e},false,{x:p.x,y:p.y-40})},
  miss(e,pk){const j=J[e];return {key:'dk|'+e,q:j.ic+' '+j.z+' 的英文是哪一個？',p:pk?'你點了 '+en(pk.e)+'（'+J[pk.e].z+'）':null,a:en(e),why:j.ic+' '+j.z+' ＝ '+en(e),hint:j.ic+' '+j.z+' ＝ '+en(e),sp:e}},
  stop(){const a=A();a.removeEventListener('pointerdown',this.pd);a.removeEventListener('pointermove',this.pm);a.removeEventListener('pointerup',this.pu)},
- cheat(ok){const p=this.P.find(x=>ok?x.e===this.e:x.e!==this.e);this.choose(p)}};
-
-/* ══ 🥷 音節忍者 ══ */
-const Gn={rt:true,books:()=>['all'].concat(ORDER.split('')).concat(['X']),deck:b=>BOOK[b]||[],
- okDelay(){return 900+sylCount(cur)*330},
- setup(){const a=A();a.className='nj';
-  a.innerHTML='<div class="moon"></div>'+[6,14,82,90,95].map((x,k)=>'<span class="bam" style="left:'+x+'%;height:'+(30+k*9)+'%"></span>').join('')+
-   '<div class="cuts" id="njcuts"></div><div class="wordz" id="njw"></div><div class="fuse"><i id="njf"></i></div><svg class="slash" id="njs"></svg><button class="nocut" id="nocut">🙅 這個字不用切</button>';
-  this.trail=[];
-  this.pd=ev=>{if(ev.target.closest('#nocut')||!qOn||busy)return;const p=ptr(ev);this.trail=[p];this.stroke=true;this.cutThis=false};
-  this.pm=ev=>{if(!this.stroke)return;const p=ptr(ev),q=this.trail[this.trail.length-1];this.trail.push(p);if(this.trail.length>14)this.trail.shift();this.draw();if(!this.cutThis&&qOn&&!busy)this.cross(q,p)};
-  this.pu=()=>{this.stroke=false;setTimeout(()=>{if(!this.stroke){this.trail=[];this.draw()}},120)};
-  a.addEventListener('pointerdown',this.pd);a.addEventListener('pointermove',this.pm);addEventListener('pointerup',this.pu);addEventListener('pointercancel',this.pu);
-  $('#nocut').addEventListener('click',()=>{if(!qOn||busy)return;if(this.need.size===0)this.win();else{this.fail({nocut:true})}})},
- ask(e,o){this.e=e;this.cuts=new Set();this.bad=null;this.need=new Set();
-  sylData(e).forEach(w=>w.forEach((s,i)=>{if(i>0)this.need.add(s.a)}));
-  this.render(true);$('#njcuts').textContent=o.hint?(this.need.size?'💡 要切 '+this.need.size+' 刀':'💡 這個字不用切'):'';
-  setTimeout(()=>say(e),250)},
- render(fresh){const e=this.e,w=$('#njw');let h='';let pos=0;
-  for(const tok of e.split(' ')){h+='<span class="tok">';let pc='',k=0;
-   for(let i=pos;i<pos+tok.length;i++){if(i>pos&&(this.cuts.has(i)||this.bad===i)){h+='<span class="pc'+(k?' pcut':'')+(k%2?' r':' l')+'">'+pc+'</span>';pc='';k++}
-    pc+='<span class="ch" data-i="'+i+'">'+ch(e,i)+'</span>'}
-   h+='<span class="pc'+(k?' pcut':'')+(k%2?' r':(k?' l':''))+'">'+pc+'</span></span>';pos+=tok.length+1}
-  w.innerHTML=h;if(fresh){w.className='wordz';let fs=Math.min(H()*.17,130);w.style.fontSize=fs+'px';
-   while(fs>24&&w.scrollWidth>W()*.9){fs-=4;w.style.fontSize=fs+'px'}void w.offsetWidth;w.className='wordz bob'}},
- gaps(){/* 字母之間可以切的地方：同一個字裡、字母和字母中間 */const r=A().getBoundingClientRect(),out=[];
-  const cs=[...A().querySelectorAll('#njw .ch')];for(let k=1;k<cs.length;k++){const a=+cs[k-1].dataset.i,b=+cs[k].dataset.i;if(b!==a+1)continue;
-   const ra=cs[k-1].getBoundingClientRect(),rb=cs[k].getBoundingClientRect();out.push({i:b,x:(ra.right+rb.left)/2-r.left,lw:(rb.width+ra.width)/2})}return out},
- cross(p,q){const w=$('#njw').getBoundingClientRect(),r=A().getBoundingClientRect(),my=(w.top+w.bottom)/2-r.top;
-  if((p.y-my)*(q.y-my)>0||p.y===q.y)return;const x=p.x+(q.x-p.x)*(my-p.y)/(q.y-p.y);if(x<w.left-r.left||x>w.right-r.left)return;
-  let best=null,bd=1e9;for(const g of this.gaps()){const d=Math.abs(g.x-x);if(d<bd){bd=d;best=g}}
-  if(!best||bd>best.lw*.75)return;this.cutThis=true;this.cutAt(best.i)},
- cutAt(i){if(this.cuts.has(i)||busy||!qOn)return;
-  if(this.need.has(i)){this.cuts.add(i);sfx.snip();this.render(false);if(this.cuts.size===this.need.size)this.win()}
-  else{this.bad=i;this.render(false);this.fail({cut:i})}},
- win(){const e=this.e;$('#njw').classList.remove('bob');const pcs=[...A().querySelectorAll('#njw .pc')],r=A().getBoundingClientRect();
-  pcs.forEach((p,k)=>setTimeout(()=>{if(gid!=='ninja')return;p.classList.remove('beat');void p.offsetWidth;p.classList.add('beat');sfx.drum();
-   const b=p.getBoundingClientRect(),d=document.createElement('span');d.className='drum';d.textContent='🥁';d.style.left=(b.left+b.width/2-r.left-20)+'px';d.style.top=(b.top-r.top-60)+'px';A().appendChild(d);setTimeout(()=>d.remove(),700)},250+k*330));
-  setTimeout(()=>say(e),250+pcs.length*330);const wb=$('#njw').getBoundingClientRect();
-  judge(true,null,false,{x:W()/2,y:wb.top-r.top-30})},
- fail(pk){const w=$('#njw');w.classList.remove('bob');w.classList.add('clang');sfx.clank();judge(false,pk)},
- draw(){const s=$('#njs');if(!s)return;const t=this.trail;s.innerHTML=t.length>1?'<polyline points="'+t.map(p=>p.x+','+p.y).join(' ')+'" fill="none" stroke="#FFF6D6" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/><polyline points="'+t.map(p=>p.x+','+p.y).join(' ')+'" fill="none" stroke="#D9A520" stroke-width="2.5" stroke-linecap="round"/>':''},
- frame(){const f=$('#njf');if(f)f.style.width=(100*left/qt)+'%'},
- miss(e,pk){const n=sylCount(e);let p=null;
-  if(pk&&pk.nocut)p='你按了「不用切」';else if(pk&&pk.cut!=null){const cs=[...this.cuts,pk.cut].sort((a,b)=>a-b);let s='',last=0;
-   for(const c of cs){s+=colorRange(e,last,c)+'<b style="color:var(--no)">｜</b>';last=c}s+=colorRange(e,last,e.length);p='你切成 <span class="en">'+s+'</span>'}
-  return {key:'nj|'+e,q:J[e].ic+' '+en(e)+' '+J[e].z+'：音節要切在哪裡？',p,a:'<span class="en">'+sylColor(e,'<b style="color:var(--goldt)">｜</b>')+'</span>（'+n+' 個音節）',
-   why:n===1?'只有 1 個音節（1 拍），一刀都不用切。':sylText(e)+'：'+n+' 個音節，拍 '+n+' 下。',hint:en(e)+' ＝ '+sylText(e)+'（'+n+' 拍）',sp:e}},
- stop(){const a=A();a.removeEventListener('pointerdown',this.pd);a.removeEventListener('pointermove',this.pm);removeEventListener('pointerup',this.pu);removeEventListener('pointercancel',this.pu)},
- cheat(ok){if(ok){if(!this.need.size){this.win();return}[...this.need].sort((a,b)=>a-b).forEach(i=>this.cutAt(i))}
-  else{const g=this.gaps().find(x=>!this.need.has(x.i));if(g)this.cutAt(g.i);else this.fail({nocut:true})}}};
+ cheat(ok){const p=this.P.find(x=>ok?x.e===this.e:x.e!==this.e);this.choose(p)},
+ demo(){this.P.forEach(p=>{p.vx=p.vy=0});const T=this.P.find(x=>x.e===this.e),o=this.P.find(x=>x.e!==this.e);
+  return [{x:o.x,y:o.y,ms:1000,drag:(x,y)=>this.light(x,y),say:'手指滑一滑，照亮看看'},{x:T.x,y:T.y,ms:1000,drag:(x,y)=>this.light(x,y),tap:()=>this.choose(T),say:'找到 '+this.e+'，點它！'}]}};
 
 /* ══ 🕵 職業神探 ══ */
 const SUS='<svg viewBox="0 0 100 120"><circle cx="50" cy="34" r="22" fill="currentColor"/><path d="M8 120c0-30 18-50 42-50s42 20 42 50z" fill="currentColor"/></svg>';
 const SUSC=['#1B2B4B','#2E4470','#3A4A6B','#24375E','#33415E','#1F3354','#2B3B5C','#3B4E73'];
-const Gt={rt:false,books:()=>['all'].concat(ORDER.split('')),deck:b=>(b==='all'?LIST_ITEMS:(BOOK[b]||[]).filter(e=>LIST_ITEMS.includes(e))),
+const Gt={rt:false,deck:()=>LIST_ITEMS,
  setup(){const a=A();a.className='dt';a.innerHTML='<div class="clues" id="clues"></div><div class="lineup" id="lineup"></div><div class="lens idle" id="lens">🔍</div><div class="dtip">👆 點名牌聽英文　🔍 拖到嫌疑人身上＝抓人</div>';
   const L=$('#lens');this.home();
   L.addEventListener('pointerdown',ev=>{if(!qOn||busy)return;ev.preventDefault();L.setPointerCapture(ev.pointerId);this.hold=true;L.classList.add('hold');L.classList.remove('idle')});
@@ -507,25 +469,28 @@ const Gt={rt:false,books:()=>['all'].concat(ORDER.split('')),deck:b=>(b==='all'?
  lay(){const lu=$('#lineup'),cl=$('#clues');if(!lu)return;const top=cl.offsetTop+cl.offsetHeight+10,ls=($('#lens').offsetWidth||90)+24;const cols=W()>=700?4:2;
   lu.style.top=top+'px';lu.style.bottom=(W()>=700?ls*.55:ls)+'px';lu.style.right=(W()>=700?ls:12)+'px';lu.style.gridTemplateColumns='repeat('+cols+',minmax(0,1fr))'},
  ask(e,o){this.e=e;const its=ITEMS.filter(i=>i.e===e);this.it=pick(its);const t=this.it.t;this.t0=performance.now();
-  const same=shuf(LIST_ITEMS.filter(x=>x!==e&&J[x].top3.includes(t))).slice(0,3),rest=shuf(LIST_ITEMS.filter(x=>x!==e&&!same.includes(x))).slice(0,7-same.length);
-  this.S=shuf([e].concat(same,rest));
-  $('#clues').innerHTML='<div class="clue" id="cl1"><em>① 興趣類型</em><b>？</b></div><div class="clue" id="cl2"><em>② 他的工作</em><b>？</b></div><div class="clue" id="cl3"><em>③ 中文名字</em><b>？</b></div>';
+  /* 嫌疑人：容易搞混的（CONF，也會做這件事的職業）不放在同一題（2026/10/9） */
+  const bad=new Set([e]);CONF.forEach(g=>{if(g.includes(e))g.forEach(x=>bad.add(x))});
+  this.S=shuf([e].concat(shuf(LIST_ITEMS.filter(x=>!bad.has(x))).slice(0,7)));
+  $('#clues').innerHTML='<div class="clue" id="cl1"><em>① 他的工作</em><b>？</b></div><div class="clue" id="cl2"><em>② 中文名字</em><b>？</b></div>';
   $('#lineup').innerHTML=this.S.map((x,k)=>'<div class="sus" data-e="'+esc(x)+'" style="color:'+SUSC[k%8]+'">'+SUS+'<span class="nm">'+colorWord(x)+'</span></div>').join('');
-  this.shown=0;this.lay();this.home();$('#lens').classList.add('idle');if(o.hint)this.reveal(3)},
- reveal(n){const it=this.it,z=J[this.e].z;const C=[null,'<em>① 興趣類型</em><b style="color:'+TY[it.t].c+'">'+tyName(it.t)+'</b>','<em>② 他的工作</em><b>'+esc(it.zh)+'</b>','<em>③ 中文名字</em><b>'+z[0]+'＿'.repeat(Math.max(1,z.length-1))+'</b>'];
+  this.shown=0;this.lay();this.home();$('#lens').classList.add('idle');this.reveal(o.hint?2:1)},
+ reveal(n){const it=this.it,z=J[this.e].z;const C=[null,'<em>① 他的工作</em><b>'+it.ic+' '+esc(it.zh)+'</b>','<em>② 中文名字</em><b>'+z[0]+'＿'.repeat(Math.max(1,z.length-1))+'</b>'];
   while(this.shown<n){this.shown++;const c=$('#cl'+this.shown);c.innerHTML=C[this.shown];c.classList.add('on');sfx.pop()}},
- frame(){if(!qOn||!this.it)return;const el=qt-left;this.reveal(el>=8?3:el>=4?2:1)},
+ frame(){if(!qOn||!this.it)return;const el=qt-left;this.reveal(el>=6?2:1)},
  accuse(s){const ok=s.dataset.e===this.e,L=$('#lens');const b=s.getBoundingClientRect(),r=A().getBoundingClientRect();L.style.left=(b.left+b.width/2-r.left)+'px';L.style.top=(b.top+b.height*.35-r.top)+'px';
   s.insertAdjacentHTML('beforeend','<span class="stamp'+(ok?'':' no')+'">'+(ok?'破案！':'抓錯了')+'</span>');if(ok){s.classList.add('caught');say(this.e)}
   judge(ok,{e:s.dataset.e})},
- miss(e,pk){const j=J[e],it=this.it;return {key:'dt|'+e,q:'線索：'+tyName(it.t)+'｜'+esc(it.zh)+'｜'+j.z[0]+'…',p:pk?'你抓了 '+en(pk.e)+'（'+J[pk.e].z+'）':null,a:j.ic+' '+en(e)+' '+j.z,
+ miss(e,pk){const j=J[e],it=this.it;return {key:'dt|'+e,q:'線索：'+esc(it.zh)+'｜'+j.z[0]+'…',p:pk?'你抓了 '+en(pk.e)+'（'+J[pk.e].z+'）':null,a:j.ic+' '+en(e)+' '+j.z,
   why:j.z+'的工作：'+esc(it.zh),hint:en(e)+' '+j.z+'：'+esc(it.zh),sp:e}},
  stop(){removeEventListener('resize',this.onR)},
- cheat(ok){const s=$$('.sus').find(x=>ok?x.dataset.e===this.e:x.dataset.e!==this.e);this.accuse(s)}};
+ cheat(ok){const s=$$('.sus').find(x=>ok?x.dataset.e===this.e:x.dataset.e!==this.e);this.accuse(s)},
+ demo(){this.reveal(2);const L=$('#lens'),ar=A().getBoundingClientRect(),lb=L.getBoundingClientRect(),s=$$('.sus').find(x=>x.dataset.e===this.e),sb=s.getBoundingClientRect();
+  return [{x:lb.left-ar.left+lb.width/2,y:lb.top-ar.top+lb.height/2,ms:900,say:'看線索，按住放大鏡'},{x:sb.left-ar.left+sb.width/2,y:sb.top-ar.top+sb.height*.35,ms:1300,drag:(x,y)=>{L.style.left=x+'px';L.style.top=y+'px'},tap:()=>this.accuse(s),say:'拖到 '+this.e+' 身上＝抓人'}]}};
 
 /* ══ 🌋 火山大逃亡 ══ */
 const CLIMB='<svg viewBox="0 0 60 90"><circle cx="30" cy="16" r="11" fill="#F2D27A"/><path d="M18 14a12 12 0 0 1 24 0z" fill="#D9A520"/><circle cx="30" cy="8" r="3" fill="#FFF6D6"/><path d="M16 30h28l4 30H12z" fill="#1B2B4B"/><path d="M20 60l-4 28M40 60l4 28" stroke="#1B2B4B" stroke-width="7" stroke-linecap="round"/><path d="M16 34l-10 16M44 34l10 16" stroke="#1B2B4B" stroke-width="6" stroke-linecap="round"/><rect x="38" y="30" width="12" height="20" rx="4" fill="#D9692B"/></svg>';
-const Gv={rt:true,books:()=>['all'].concat(ORDER.split('')).concat(['X']),deck:b=>BOOK[b]||[],okDelay(){return 1300},missDelay:1100,
+const Gv={rt:true,deck:()=>BOOK.all,okDelay(){return 1300},missDelay:1100,
  setup(){const a=A();a.className='vc';a.innerHTML='<div class="world" id="vw"></div><div class="lava" id="lava"></div><div class="vhud"><button class="vsay" id="vsay" aria-label="再聽一次">🔊</button><span class="m" id="vm">🧗 0 公尺</span></div>';
   this.m=0;this.ledge=null;this.cl=null;this.ST=[];this.tm=0;const w=$('#vw');
   this.sw=()=>clamp(W()*.24,120,200);this.sh=()=>clamp(H()*.11,60,96);
@@ -559,8 +524,101 @@ const Gv={rt:true,books:()=>['all'].concat(ORDER.split('')).concat(['X']),deck:b
  endLine(){return '<span>🧗 爬了 <b>'+this.m+'</b> 公尺</span>'},
  miss(e,pk){const j=J[e];return {key:'vc|'+e,q:'🔊 聽到的英文是？',p:pk?'你跳到 '+J[pk.e].ic+'（'+en(pk.e)+' '+J[pk.e].z+'）':null,a:j.ic+' '+en(e)+' '+j.z,why:'',hint:en(e)+' ＝ '+j.ic+' '+j.z,sp:e}},
  stop(){removeEventListener('resize',this.onR);this.e=null},
- cheat(ok){const s=this.ST.find(x=>ok?x.e===this.e:x.e!==this.e);s.x=s.x||s.cx;this.jump(s)}};
-const GAMES={magnet:Gm,dark:Gd,ninja:Gn,detect:Gt,lava:Gv};
+ cheat(ok){const s=this.ST.find(x=>ok?x.e===this.e:x.e!==this.e);s.x=s.x||s.cx;this.jump(s)},
+ demo(){this.ST.forEach(x=>{x.fixed=true;x.x=x.x||x.cx});const s=this.ST.find(x=>x.e===this.e),r=s.el.getBoundingClientRect(),ar=A().getBoundingClientRect();
+  return [{x:r.left-ar.left+r.width/2,y:r.top-ar.top+r.height/2,ms:1200,tap:()=>this.jump(s),say:'聽到 '+this.e+' ➜ 跳上 '+J[this.e].ic+' 的石頭'}]}};
+/* ══ 🃏 記憶翻牌（2026/10/9 新增）：「圖示＋中文」和「英文」兩張配成一對；一關比一關多（6 → 8 → 10 對）。
+   翻錯不算錯（翻回去再找）；每一對 15 秒，時間到才算錯 ══ */
+const Gy={rt:true,deck:()=>BOOK.all,okDelay(){return 650},
+ setup(){const a=A();a.className='my';a.innerHTML='<div class="myh" id="myh"></div><div class="myg" id="myg"></div>';this.lv=0;this.C=[];this.open=[];this.saved=null;
+  this.onR=()=>this.lay();addEventListener('resize',this.onR);
+  $('#myg').addEventListener('pointerdown',ev=>{const c=ev.target.closest('.mc');if(c){ev.preventDefault();this.tap(this.C[+c.dataset.k])}})},
+ left(){return this.C.filter(c=>!c.done)},
+ deal(e,n){const ws=[e],icons=new Set([J[e].ic]);for(const x of shuf(BOOK.all)){if(ws.length>=n)break;if(ws.includes(x)||icons.has(J[x].ic))continue;ws.push(x);icons.add(J[x].ic)}
+  this.C=shuf(ws.flatMap(x=>[{e:x,w:0},{e:x,w:1}])).map((c,k)=>Object.assign(c,{k,up:false,done:false}));this.open=[];
+  $('#myg').innerHTML=this.C.map(c=>'<button class="mc" data-k="'+c.k+'"><span class="mb">?</span><span class="mf">'+(c.w?'<span class="mw">'+colorWord(c.e)+'</span>':'<span class="mi">'+J[c.e].ic+'</span><span class="mz">'+J[c.e].z+'</span>')+'</span></button>').join('');
+  this.link();this.head();this.lay()},
+ link(){this.C.forEach(c=>{c.el=$('#myg').querySelector('[data-k="'+c.k+'"]')})},
+ head(){const n=this.C.length/2,d=this.C.filter(c=>c.done).length/2;
+  $('#myh').innerHTML=bonusMode?'⭐ 找出 '+J[cur].ic+' '+J[cur].z+' 這一對':'🃏 第 '+this.lv+' 關　配好 <b>'+d+'</b> ／ '+n+' 對'},
+ lay(){const g=$('#myg');if(!g||!this.C.length)return;const n=this.C.length,w=g.clientWidth-24,h=g.clientHeight-24;let best=null;
+  for(let c=3;c<=10;c++){const r=Math.ceil(n/c),cw=(w-(c-1)*8)/c,ch=(h-(r-1)*8)/r,s=Math.min(cw/1.3,ch);if(!best||s>best.s)best={c,s}}
+  const cs=Math.max(48,Math.floor(best.s));g.style.gridTemplateColumns='repeat('+best.c+','+Math.floor(Math.min((w-(best.c-1)*8)/best.c,cs*1.6))+'px)';g.style.setProperty('--cs',cs+'px')},
+ ask(e,o){if(o.bonus){this.saved={C:this.C,html:$('#myg').innerHTML};this.deal(e,3);return}
+  if(this.saved){$('#myg').innerHTML=this.saved.html;this.C=this.saved.C;this.saved=null;this.link();this.open=[];this.C.forEach(c=>{if(!c.done){c.up=false;c.el.classList.remove('up')}});this.lay()}
+  if(!this.left().length){this.lv++;this.deal(e,[6,8,10][Math.min(2,this.lv-1)]);
+   if(this.lv>1){const b=document.createElement('div');b.className='banner';b.textContent='🎉 第 '+(this.lv-1)+' 關過關！';A().appendChild(b);setTimeout(()=>b.remove(),1600)}}
+  else this.head();
+  if(o.hint){this.left().forEach(c=>c.el.classList.add('up'));setTimeout(()=>this.left().forEach(c=>{if(!this.open.includes(c))c.el.classList.remove('up')}),1600)}},
+ tap(c){if(!c||c.done||c.up||!qOn||busy||this.open.length>=2)return;c.up=true;c.el.classList.add('up');sfx.pop();if(c.w)say(c.e);
+  this.open.push(c);if(this.open.length<2)return;const [a,b]=this.open;
+  if(a.e===b.e&&(!bonusMode||a.e===cur)){a.done=b.done=true;this.open=[];setTimeout(()=>{a.el.classList.add('done');b.el.classList.add('done')},250);
+   const r=b.el.getBoundingClientRect(),ar=A().getBoundingClientRect(),x=r.left-ar.left+r.width/2,y=r.top-ar.top;sparks(x,y+r.height/2,'#FFD24A',14);if(!c.w)say(c.e);
+   setCur(a.e);judge(true,{e:a.e},false,{x,y});this.head()}
+  else setTimeout(()=>{[a,b].forEach(x=>{if(!x.done){x.up=false;x.el.classList.remove('up')}});this.open=[]},950)},
+ timeout(){this.open.forEach(x=>{x.up=false;x.el.classList.remove('up')});this.open=[];const l=this.left().filter(c=>!bonusMode||c.e===cur);if(l.length)setCur(l[0].e)},
+ miss(e){const j=J[e];return {key:'my|'+e,q:'這一對沒找到',p:null,a:j.ic+' '+j.z+' ＝ '+en(e),why:'「'+j.ic+' '+j.z+'」那張，配「'+en(e)+'」那張',hint:j.ic+' '+j.z+' ＝ '+en(e),sp:e}},
+ stop(){removeEventListener('resize',this.onR)},
+ pair(){const l=this.left().filter(c=>!bonusMode||c.e===cur),a=l[0];return a?[a,l.find(x=>x!==a&&x.e===a.e)]:[]},
+ cheat(ok){if(!ok){timeUp();return}this.open.forEach(x=>{x.up=false;x.el.classList.remove('up')});this.open=[];const [a,b]=this.pair();if(a){this.tap(a);this.tap(b)}},
+ demo(){const [a,b]=this.pair(),pt=c=>{const r=c.el.getBoundingClientRect(),ar=A().getBoundingClientRect();return {x:r.left-ar.left+r.width/2,y:r.top-ar.top+r.height/2}};
+  const o=this.left().find(x=>x.e!==a.e);return (o?[Object.assign(pt(a),{tap:()=>this.tap(a)}),Object.assign(pt(o),{tap:()=>this.tap(o),after:1300,say:'不一樣，翻回去'})]:[])
+   .concat([Object.assign(pt(a),{tap:()=>this.tap(a)}),Object.assign(pt(b),{tap:()=>this.tap(b),say:'一樣！配成一對'})])}};
+
+/* ══ 🔨 打地鼠（2026/10/9 新增）：上面是圖示＋中文，地鼠舉著英文冒出來，敲對的那一隻；越來越快 ══ */
+const Gw={rt:true,deck:()=>BOOK.all,okDelay(){return 900},
+ setup(){const a=A();a.className='wm';a.innerHTML='<div class="ask" id="wmask"></div><div class="holes" id="holes"></div>';
+  $('#holes').innerHTML=Array.from({length:9},(_,k)=>'<div class="hole" data-k="'+k+'"><div class="mole"><span class="msign"></span><span class="mface">🐹</span></div><i class="dirt"></i></div>').join('');
+  this.H=$$('#holes .hole').map((el,k)=>({k,el,sg:el.querySelector('.msign'),up:false,e:null,t:0,hold:false}));
+  $('#holes').addEventListener('pointerdown',ev=>{const h=ev.target.closest('.hole');if(!h)return;ev.preventDefault();this.whack(this.H[+h.dataset.k])})},
+ ask(e,o){this.e=e;const j=J[e];$('#wmask').innerHTML='<i>'+j.ic+'</i><b>'+j.z+'</b><span>的英文是？敲它！</span>';
+  this.ws=[e].concat(decoys(e,5));this.H.forEach(h=>{h.hold=false;this.down(h,true)});this.nx=.35;this.since=1;this.hint=o.hint},
+ stay(){return Math.max(1.3,2.7-asked*.06)},
+ pop(e){if(this.H.some(h=>h.up&&h.e===e))return null;const free=this.H.filter(h=>!h.up&&!h.hold);if(!free.length)return null;const h=pick(free);
+  h.up=true;h.e=e;h.t=this.stay();h.sg.innerHTML=colorWord(e);h.el.classList.remove('hit','miss');h.el.classList.add('up');h.el.classList.toggle('hintg',!!this.hint&&e===this.e);return h},
+ down(h,now){h.up=false;h.el.classList.remove('up','hintg');if(now){h.e=null;h.el.classList.remove('hit','miss')}},
+ frame(dt,paused){if(paused||!qOn)return;
+  for(const h of this.H)if(h.up&&!h.hold){h.t-=dt;if(h.t<=0)this.down(h)}
+  this.nx-=dt;if(this.nx<=0){const tUp=this.H.some(h=>h.up&&h.e===this.e);
+   let e=(!tUp&&(this.since>=2||Math.random()<.4))?this.e:pick(this.ws.slice(1));if(this.pop(e)){this.since=e===this.e?0:this.since+1}
+   this.nx=Math.max(.3,.75-asked*.015)+Math.random()*.3}},
+ whack(h){if(!h.up||h.hold||!qOn||busy)return;const ok=h.e===this.e;h.hold=true;h.el.classList.add(ok?'hit':'miss');sfx[ok?'clank':'no']();
+  const r=h.el.getBoundingClientRect(),ar=A().getBoundingClientRect(),x=r.left-ar.left+r.width/2,y=r.top-ar.top;if(ok){sparks(x,y+r.height/2,'#FFD24A',14);say(this.e)}
+  setTimeout(()=>{h.hold=false;this.down(h)},650);judge(ok,{e:h.e},false,{x,y})},
+ miss(e,pk){const j=J[e];return {key:'wm|'+e,q:j.ic+' '+j.z+' 的英文是哪一個？',p:pk?'你敲了 '+en(pk.e)+'（'+J[pk.e].z+'）':null,a:en(e),why:j.ic+' '+j.z+' ＝ '+en(e),hint:j.ic+' '+j.z+' ＝ '+en(e),sp:e}},
+ stop(){},
+ cheat(ok){let h=this.H.find(x=>x.up&&!x.hold&&(ok?x.e===this.e:x.e!==this.e));if(!h)h=this.pop(ok?this.e:this.ws.find(w=>w!==this.e&&!this.H.some(x=>x.up&&x.e===w)));if(h)this.whack(h)},
+ demo(){let h=this.H.find(x=>x.up&&x.e===this.e)||this.pop(this.e);h.t=99;const d=this.H.find(x=>x.up&&x.e!==this.e)||this.pop(this.ws[1]);if(d)d.t=99;
+  const r=h.el.getBoundingClientRect(),ar=A().getBoundingClientRect();return [{x:r.left-ar.left+r.width/2,y:r.top-ar.top+r.height*.4,tap:()=>this.whack(h),say:'舉著 '+this.e+' 的那一隻，敲下去！'}]}};
+
+/* ══ 🥁 拍數節奏（2026/10/9 新增，取代音節忍者）：聽一個字，拍鼓拍出它有幾拍（幾個母音的聲音）。
+   只數拍數、不切位置：每一本字典的拍數都一樣（evidence/audit.json 對過 Cambridge 音標），所以沒有爭議 ══ */
+const Gb={rt:true,deck:()=>BOOK.all,okDelay(){return 600+SA.count(saOpt(cur))*560},
+ setup(){const a=A();a.className='bt';
+  a.innerHTML='<div class="btw" id="btw"></div><div class="btdots" id="btdots"></div><button class="drumb" id="drumb" aria-label="拍鼓">🥁</button><div class="btrow"><button class="btre" id="btre">↺ 重拍</button><button class="btok" id="btok">✅ 好了</button></div>';
+  $('#drumb').addEventListener('pointerdown',ev=>{ev.preventDefault();this.hit()});$('#btre').addEventListener('click',()=>{if(!qOn||busy)return;this.n=0;this.dots()});
+  $('#btok').addEventListener('click',()=>this.done());$('#btw').addEventListener('click',ev=>{if(ev.target.closest('.btsay'))this.sayW()})},
+ sayW(){SA.play('word '+this.e.toLowerCase(),this.e,(t,cb)=>say(t,cb))},
+ ask(e,o){this.e=e;this.n=0;this.need=SA.count(saOpt(e));const j=J[e];
+  $('#btw').innerHTML='<span class="bti">'+j.ic+'</span><span class="btn en" id="btnw">'+colorWord(e)+'</span><span class="btz">'+j.z+'</span><button class="btsay" aria-label="再聽一次">🔊</button>'+(o.hint?'<span class="bth">💡 數一數紅色的母音</span>':'');
+  this.dots();setTimeout(()=>{if(this.e===e&&qOn)this.sayW()},300)},
+ dots(){$('#btdots').innerHTML=this.n?'<b>'+this.n+'</b> 拍　'+'<i>●</i>'.repeat(this.n):'🥁 拍幾下？'},
+ hit(){if(!qOn||busy||this.n>=9)return;this.n++;sfx.drum();const d=$('#drumb');d.classList.remove('hit');void d.offsetWidth;d.classList.add('hit');this.dots()},
+ done(){if(!qOn||busy)return;if(!this.n){const d=$('#btdots');d.classList.remove('shake');void d.offsetWidth;d.classList.add('shake');return}
+  const ok=this.n===this.need,r=$('#btw').getBoundingClientRect(),ar=A().getBoundingClientRect();if(ok)this.show(this.e);else sfx.clank();
+  judge(ok,{n:this.n},false,{x:W()/2,y:r.top-ar.top+20})},
+ show(e){/* 答對：一節一節亮起來，一節一聲鼓 */const P=SA.parts(saOpt(e));let h='',k=0;P.forEach(w=>{h+='<span class="btwd">'+w.map(s=>'<span class="btsy" data-k="'+(k++)+'">'+colorRange(e,s.a,s.b)+'</span>').join('<b class="btdot">·</b>')+'</span>'});
+  const el=$('#btnw');el.innerHTML=h;const S=$$('#btnw .btsy');S.forEach((s,i)=>setTimeout(()=>{if(gid!=='beat')return;S.forEach(x=>x.classList.remove('now'));s.classList.add('now');sfx.drum()},200+i*520))},
+ miss(e,pk){const n=SA.count(saOpt(e)),dj=!SA.vgroups(saOpt(e),SA.parts(saOpt(e))).length;
+  return {key:'bt|'+e,q:J[e].ic+' '+en(e)+' '+J[e].z+'：有幾拍？',p:pk&&pk.n?'你拍了 '+pk.n+' 下':null,a:'<span class="en">'+sylColor(e,'<b style="color:var(--goldt)"> · </b>')+'</span> ＝ '+n+' 拍',
+   why:dj?'D、J 是兩個字母，一個字母一拍':n+' 個母音的聲音 ＝ '+n+' 拍（灰色的字母不出聲，不算）',hint:en(e)+' ＝ '+sylText(e)+'（'+n+' 拍）',sp:e}},
+ stop(){},
+ cheat(ok){this.n=ok?this.need:this.need+1;this.done()},
+ demo(){const ar=A().getBoundingClientRect(),dr=$('#drumb').getBoundingClientRect(),ob=$('#btok').getBoundingClientRect(),steps=[];
+  for(let i=0;i<this.need;i++)steps.push({x:dr.left-ar.left+dr.width/2,y:dr.top-ar.top+dr.height/2,tap:()=>this.hit(),ms:i?380:800,after:i?120:250,say:i?null:this.need+' 個紅色母音 ➜ 拍 '+this.need+' 下'});
+  steps.push({x:ob.left-ar.left+ob.width/2,y:ob.top-ar.top+ob.height/2,tap:()=>this.done()});return steps}};
+
+const GAMES={memory:Gy,mole:Gw,lava:Gv,dark:Gd,beat:Gb,detect:Gt,magnet:Gm};
 
 /* ══════════ 成績紀錄（照參考頁 sentences/games.html 的 score 程式；Google 成績表同一張）══════════
    SCG 0 ＝ 三、四年級共用：年級看登入的 5 碼。題組代號 g年級 gm_job-遊戲（成績表「類別」＝ 🎮 遊戲，「題組名稱」寫職業單字・遊戲名）。
@@ -689,12 +747,14 @@ const SCH={rkTxt:'',on:()=>gOv().classList.contains('on'),open:()=>gOv().classLi
 
 /* ══ 事件 ══ */
 $('#grid').addEventListener('click',e=>{const c=e.target.closest('.gcard');if(c)bookPage(c.dataset.g)});
-$('#book').addEventListener('click',e=>{const b=e.target.closest('[data-bk]');if(!b)return;const id=BOOKID;scGate(()=>begin(id,b.dataset.bk))});
+$('#book').addEventListener('click',e=>{const id=BOOKID;if(e.target.closest('#demoBtn')){sayStop();begin(id,'all',{demo:true});return}if(e.target.closest('#startBtn'))scGate(()=>begin(id,'all'))});
+$('#seg').addEventListener('click',e=>{const b=e.target.closest('button');if(b){view(b.dataset.v);history.replaceState(null,'',location.pathname+(b.dataset.v==='dex'?'#dex':''))}});
+$('#autoBtn').addEventListener('click',()=>{if(AUTO)autoStop();else autoStart()});
 $('#tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)dexPaint(b.dataset.b)});
 document.addEventListener('click',ev=>{
- const sb=ev.target.closest('.say1');if(sb){ev.stopPropagation();say(sb.dataset.e);return}
- const yb=ev.target.closest('.sylb');if(yb){ev.stopPropagation();openSheet(yb.dataset.e,'clap');return}
- const dc=ev.target.closest('.dc');if(dc){openSheet(dc.dataset.e);return}
+ const sb=ev.target.closest('.say1');if(sb){ev.stopPropagation();if(sb.closest('#sheet')){SA.stop();say(sb.dataset.e)}else sayCard(sb.dataset.e);return}
+ const ib=ev.target.closest('.info');if(ib){ev.stopPropagation();openSheet(ib.dataset.e);return}
+ if(ev.target.closest('#demoX')){demoEnd();return}
  const t=ev.target;
  if(t.closest('#scSwap')){SCID=null;scPut('last',null);SCGUEST=false;scLogin(()=>{$('#scme').innerHTML=scMeHTML()});return}
  if(!scOn())return;let b;
@@ -705,23 +765,22 @@ document.addEventListener('click',ev=>{
  if(t.closest('#scNx')){scNext();return}
  const nm=SCEND.list[SCEND.k];if((nm==='acc'||nm==='gprog')&&!t.closest('button'))scNext()});
 document.addEventListener('keydown',ev=>{if($('#scGrp')&&scOn()){if(/^\d$/.test(ev.key))scKeyPress(ev.key);else if(ev.key==='Backspace')scKeyPress('b');else if(ev.key==='Enter')scKeyPress('ok');return}
- const dc=ev.target.closest&&ev.target.closest('.dc');if(dc&&(ev.key==='Enter'||ev.key===' ')&&ev.target===dc){ev.preventDefault();openSheet(dc.dataset.e)}
  if(ev.key==='Escape'&&$('#sheet').classList.contains('on'))closeSheet()});
-$('#sheet').addEventListener('click',ev=>{if(ev.target.id==='sheet'||ev.target.closest('#xbtn')){closeSheet();return}
- if(ev.target.closest('#psay')){say($('#sheet').dataset.e);return}const m=ev.target.closest('.sbtn button');if(m)playSyl($('#sheet').dataset.e,m.dataset.m)});
-$('#quit').addEventListener('click',()=>hub('games'));
+$('#sheet').addEventListener('click',ev=>{if(ev.target.id==='sheet'||ev.target.closest('#xbtn'))closeSheet()});
+/* ⬅ 返回：說明 ➜ 關掉；示範 ➜ 開始畫面；遊戲、開始畫面 ➜ 遊戲大廳 */
+$('#quit').addEventListener('click',()=>{if($('#sheet').classList.contains('on')){closeSheet();return}if(DEMO){demoEnd();return}hub(document.body.dataset.s==='hub'&&VIEW==='dex'?'dex':'games')});
 $('#retry').addEventListener('click',()=>{SCH.close();begin(gid,BK)});
 $('#backhub').addEventListener('click',()=>hub('games'));
 $('#missBtn').addEventListener('click',()=>missAll('這一場　答錯整理'));
 $('#gscore').addEventListener('click',()=>{if(SCEND){SCH.open();scScene()}});
-(function(){const saved=store('rate');if(saved)setRate(saved);const mark=()=>$$('#rateGrp button').forEach(b=>b.classList.toggle('on',Math.abs(parseFloat(b.dataset.r)-RATE)<0.001));mark();
+(function(){const saved=store('rate');if(saved)setRate(saved);const mark=()=>$$('#rateGrp button').forEach(b=>b.classList.toggle('on',(parseFloat(b.dataset.r)<0.8)===(RATE<0.8)));mark();
  $('#rateGrp').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;setRate(b.dataset.r);store('rate',RATE);mark();sayStop()})})();
-/* 網址：jobdex.html#magnet ＝ 直接到那個遊戲的「選一本」；#dex ＝ 圖鑑；#dex-R ＝ 圖鑑的實用型 */
+/* 網址：jobdex.html#memory ＝ 那個遊戲的開始畫面（👀 觀看示範／▶ 開始遊戲）；#dex ＝ 圖鑑；#dex-R ＝ 圖鑑的實用型 */
 function route(){const h=location.hash.slice(1);
  if(GAMES[h]){if(document.body.dataset.s==='play'&&gid===h)return;bookPage(h);return}
- const m=h.match(/^dex(?:-([A-Z]))?$/);if(m){hub();dexPaint(BOOK[m[1]]?m[1]:'all');setTimeout(()=>$('#dex').scrollIntoView(),30);return}
- if(h==='games'){hub('games');return}
+ const m=h.match(/^dex(?:-([A-Z]))?$/);if(m){hub('dex');dexPaint(BOOK[m[1]]?m[1]:'all');return}
+ if(h==='games'||h==='ninja'){hub('games');return}
  if(document.body.dataset.s!=='hub')hub()}
 dexPaint('all');gridPaint();$('#scme').innerHTML=scMeHTML();route();
 addEventListener('hashchange',()=>{if(document.body.dataset.s!=='play')route()});
-window.JX={GAMES,begin,judge,setLeft:s=>{gLeft=s},state:()=>({gid,score,right,wrong,streak,gLeft,left,qt,qOn,busy,ended,bonusMode,gPause,asked,cur,miss:MISSLOG.length,opened:opened.length,GQ:GQ.length,fix:gFix})};
+window.JX={GAMES,begin,judge,demo:()=>DEMO,setLeft:s=>{gLeft=s},state:()=>({gid,score,right,wrong,streak,gLeft,left,qt,qOn,busy,ended,bonusMode,gPause,asked,cur,miss:MISSLOG.length,opened:opened.length,GQ:GQ.length,fix:gFix})};

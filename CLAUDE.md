@@ -21,14 +21,14 @@
 | `story.html` | 36 張單字卡（每張 6 步）＋挑戰 1～4＋複習＋進階 | 資料在檔案裡的 `const W=[…]`、`SYL`、`TIP`、`AKA`、`SILENT`；**卡片順序由 `_build_mix.py` 決定**，不要手動排 |
 | `games.html` | 10 種遊戲（只有 21 個學生職業，大人 13＋中學生 2 還沒進遊戲） | 資料在 `const DATA=` |
 | `quiz.html` | 🧭 職業興趣探險（30 題，何倫六型，5 站＋圖鑑挑戰＋興趣羅盤＋職業圖鑑）＋📚 給老師看的證據 | 題目改 `_quiz_check.py` 的 `ITEMS` → `python3 _quiz_check.py`（抓 O*NET 原文核對 → `evidence/quiz.json`）→ `node _build_quiz.js` |
-| `jobdex.html` | 📖 職業圖鑑（全部＋六型各一本＋還沒有分數）＋🎮 5 種複習遊戲＋Google 成績表登入 | **產生出來的**：改 `_jobdex_app.js`（程式）、`_jobdex.css`（樣式）、`_build_jobdex.js`（資料、頁面骨架）→ `node _build_jobdex.js`。資料全部從 `evidence/quiz.json`、story.html 讀，不手寫。卡包樣式／翻卡的話抄自參考頁，在 `_jobdex_ref.json`。成績表網址在 `score-url.js`（抄自 AI-Agent-Open-Code/score/url.js，那邊改了這裡也要改） |
+| `jobdex.html` | 📖 職業圖鑑（全部＋六型各一本＋還沒有分數）＋🎮 7 種複習遊戲＋Google 成績表登入 | **產生出來的**：改 `_jobdex_app.js`（程式）、`_jobdex.css`（樣式）、`_build_jobdex.js`（資料、頁面骨架）→ `node _build_jobdex.js`。資料全部從 `evidence/quiz.json`、story.html 讀，不手寫。卡包樣式／翻卡的話抄自參考頁，在 `_jobdex_ref.json`。成績表網址在 `score-url.js`（抄自 AI-Agent-Open-Code/score/url.js，那邊改了這裡也要改） |
 | `rank-tw.html` | 2026 台灣中小學生前 10 名＋證據 | `node _build_rank.js` |
 | `rank-mix.html` | 四榜綜合排序＋證據 | `python3 _build_mix.py`（會重排 story.html），再 `node _build_home.js` |
 | `word-check.html` | 英文用字考證（字典、O*NET、Ngram、每句話的原文、音節、改正紀錄） | `python3 _build_check.py` |
 | `evidence/*.json` | 所有查證的原始結果 | `_ngram.py`、`_ngram_us_gb.py`、`_dict_check.py`、`_onet_check.py`、`_audit.py` 重抓 |
 | `notebooklm/` | 給 NotebookLM 的前 10 名英文單字 | 手寫 Markdown |
 
-網址直接進入：`jobdex.html#magnet／#dark／#ninja／#detect／#lava`（遊戲選一本）、`jobdex.html#dex`、`#dex-R`～`#dex-C`、`#dex-X`（圖鑑）；`story.html#c1～#c4`（挑戰）、`#w1～#w36`（第幾張卡）、`#rev`、`#adv0～#adv2`；`games.html#g1～#g10`；`quiz.html`、`quiz.html#ev`（證據）。每頁左上角都有 🏠 首頁。
+網址直接進入：`jobdex.html#memory／#mole／#lava／#dark／#beat／#detect／#magnet`（遊戲開始畫面：👀 觀看示範／▶ 開始遊戲；舊的 #ninja 回大廳）、`jobdex.html#dex`、`#dex-R`～`#dex-C`、`#dex-X`（圖鑑）；`story.html#c1～#c4`（挑戰）、`#w1～#w36`（第幾張卡）、`#rev`、`#adv0～#adv2`；`games.html#g1～#g10`；`quiz.html`、`quiz.html#ev`（證據）。每頁左上角都有 🏠 首頁（jobdex.html 例外：🏠 在下面固定的那一排，2026/10/9）。
 
 ## 三、指令
 
@@ -36,8 +36,9 @@
 node _build_home.js && node _build_rank.js && python3 _build_check.py && node _build_quiz.js && node _build_jobdex.js   # 重建
 python3 _quiz_check.py         # 測驗：30 題、32 個職業興趣分數（含 34 種工程師）、職稱資料庫、11 項說法重抓原文核對
 python3 _audit.py              # 每一句英文說法對原文（新增卡片文字就在 C 清單加一條）
-NODE_PATH=$(npm root -g) node _verify.js   # 量測，只印失敗項＋一行總結；必須 0 失敗（約 11 分鐘；會呼叫 _verify_jobdex.js）
-NODE_PATH=$(npm root -g) node _verify_jobdex.js   # 只量 jobdex.html（約 5 分鐘）
+NODE_PATH=$(npm root -g) node _verify.js   # 量測，只印失敗項＋一行總結；必須 0 失敗（約 20 分鐘；會呼叫 _verify_jobdex.js）
+NODE_PATH=$(npm root -g) node _verify_jobdex.js   # 只量 jobdex.html（約 8 分鐘）
+TTS_MODELS=<模型資料夾> python3 _syl_audio.py   # 音節的聲音（audio/syl）：音節改了才要重做；模型 Kokoro v1.0＋Whisper small.en（sherpa-onnx），不放進 repo
 ```
 量測涵蓋：手機／iPad 直／iPad 橫／1920 觸控螢幕不橫向捲動、按鈕 ≥ 48px、36 張卡每一步不超出、每個連結打開正確畫面、
 卡片順序＝四榜綜合、`evidence/audit.json` 全部通過（含母音／不發音）、舊錯誤寫法不能再出現；測驗每個尺寸走完 30 題＋5 次挑戰、結果頁、圖鑑、三種音節動畫、8 秒保險（量測時用假的語音，唸完立刻結束）。
@@ -85,7 +86,7 @@ NODE_PATH=$(npm root -g) node _verify_jobdex.js   # 只量 jobdex.html（約 5 �
 - **母音紅色、不發音灰色（2026/10/9）**：`_audit.py` 的 ALIGN 把每個字拆成「字母→Cambridge 美式音標」，音標接起來要和字典一模一樣；沒有聲音的字母＝灰，a e i o u y 有母音的聲音＝紅，其他黑。story.html 改用 `VOW`、`SILENT`（JSON）資料，不再用「y 不在開頭就是母音」的規則。改正 2 處：business 的灰色原本標在 s（應該是 i）、lawyer 的 y（/j/ 子音）。professional 的 i **維持紅色**（2026/10/9 使用者決定：ss 一起唸 /ʃ/、io 一起唸 /ə/）。記在 word-check.html「查證後改正的地方」和新的「母音和不發音」表。
 - Etymonline 從雲端機器抓會被 Cloudflare 擋（"Just a moment..."）：`_audit.py` 這時沿用上一次核對成功的原文句子（標 kept，考證頁會註明條數），不會把擋住的頁面存進快取。
 
-- **📖 職業圖鑑＋🎮 5 種複習遊戲（jobdex.html，2026/10/9 完成）**：
+- **📖 職業圖鑑＋🎮 5 種複習遊戲（jobdex.html，2026/10/9 完成；同一天又改版，音節忍者拿掉、變 7 種，見下一條）**：
   - 圖鑑：全部 35（fortune teller 不放）；依 O*NET 最高分那一型分本（同分兩本都放，卡上標「同分」）：實用型 13、研究型 2、藝術型 6、社會型 6、企業型 4、事務型 3；還沒有分數 3（YouTuber、content creator、influencer）。卡片＝圖示、英文（母音紅／不發音灰）、中文、🔊、音節；點開＝興趣成分＋👏🚂✂️ 三種音節動畫（和 quiz 同一套）。
   - 遊戲框架照參考頁 AI-Agent-Open-Code/sentences/games.html：每題 15 秒、答對 100＋速度（剩幾秒÷總秒數×900）＋連對×20，再乘驚喜卡倍數；連對 3 題開驚喜卡（二～五選一 40/30/20/10%，只有好事；每個遊戲用參考頁 38 種卡包裡自己那幾種）；答錯 ➜ 整頁看清楚（唸 3 次、倒數 8 秒）➜ ⭐ 加分（再看 8 秒 ➜ 同一題用遊戲本來的玩法再玩一次，答對 500×2）；答錯的題目過 2～3 題再出；結束 ➜ 答錯整理 ➜ 成績；語速 0.5～1.0；下面一排 ⬅ 回遊戲大廳｜🗣 語速｜🏠 首頁。參考頁的「✂️ 刪掉錯的選項」卡不放（沒有選項），改「💡 送你提示」。
   - 使用者 2026/10/9 決定：**每場 1 分 30 秒**；答錯頁、驚喜卡、加分視窗、加分題的時間不算；磁鐵、黑夜、忍者、火山答對的算式在旁邊飄出來（不停下來），神探照參考頁跳加分視窗；開始前 3、2、1 倒數（不算時間）；**不能全部是四選一**，母音救援隊（拼字）刪掉。
@@ -93,10 +94,24 @@ NODE_PATH=$(npm root -g) node _verify_jobdex.js   # 只量 jobdex.html（約 5 �
   - 成績：接參考頁同一張 Google 成績表（score-url.js），三、四年級共用（年級看 5 碼），題組代號 `g年級gm_job-遊戲`（成績表類別＝🎮 遊戲、名稱「職業單字・遊戲名」）；成績畫面照參考頁遊戲版三幕。登入改版：① 打班級 ➜ ② 打座號 ➜ ③ 按 ✅，正在做的那一步會亮；**班級打錯（第 3 個數字打完就檢查）立刻清空**並列出正確班級；座號打錯只清座號。**每一班座號 1～30**（2026/10/9 使用者決定，`_jobdex_app.js` 的 SCMAX；Google 成績表伺服器 Code.gs 目前還收 1～40，要在 AI-Agent-Open-Code 那邊一起改）。量測時用假的伺服器，絕對不送到真的成績表。
   - 入口：首頁「職業興趣探險」下面、quiz 結果頁最後。
 
+- **2026/10/9 jobdex 變簡單＋音節（使用者同意的規劃，「其他照您的建議」）**：
+  - 30 句工作內容換了 8 句（quiz 和職業神探同一份，`_quiz_check.py` ITEMS，全部 O*NET 原文核對通過）：3 畫家「用筆、水彩或炭筆畫畫」（拿掉電腦，免得和設計師搞混）、10 護理師「在學校或醫院幫人急救、打預防針」（原本的「擦藥、包紮」原文沒有）、12 空服員「示範怎麼用安全帶、救生衣和氧氣面罩」（原本「檢查急救箱和滅火器」學生抗議不像）、15 歌手加原文「Sing as a soloist…」（原本原文沒有「唱歌」）、18 警察「巡邏的時候，注意並記下奇怪的人和事」、20 機械工程師「研究、設計新的機器」（原本和汽車技師太像）、26 心理師「用測驗了解一個人的興趣和個性」（原本和諮商師幾乎一樣）、30 髮型師「記下每位客人做過哪些美髮服務」（原本「排預約」不像髮型師）。題目的型、職業、平衡都沒變。
+  - 職業神探：拿掉「興趣類型」線索（和圖鑑、磁鐵說的最高型會不一樣）；線索只剩 ① 他的工作 ② 中文第一個字（6 秒後）；容易搞混的職業不和答案同一題（`_build_jobdex.js` 的 CONF：醫生／護理師／獸醫、心理師／諮商師、程式設計師／遊戲試玩員、汽車技師／機械工程師、畫家／設計師、企業經理／廚師、警察／律師）。
+  - **音節切法照網站原本的 SYL（使用者決定，暫時）**。mechanic：Cambridge /məˈkæn.ɪk/、Merriam-Webster 斷行點 me·chan·ic → me｜chan｜ic；M-W 發音欄同一頁有 mi-ˈka-nik 和 mi-ˈkan-ik 兩種；參考網站 AI-Agent-Open-Code 的規則（一個子音跟後面走）會切 me｜cha｜nic。36 個字約 23 個字字典和參考網站切法不同，**拍數全部一樣**。
+  - 「為什麼這樣切」：`_syl_why.js` 用學生聽得懂的一句話說每一刀（字尾 er 自己一拍、兩個子音從中間切、ch 兩個字母一個聲音…），圖鑑 ℹ️ 說明和 quiz 圖鑑都顯示。
+  - 音節動畫（`_syl_anim.js`，jobdex、quiz 共用）：① 紅色母音一個一個亮、頭上 ①②③ ➜「N 個母音的聲音＝N 拍」② 一刀一刀切，每一刀說原因 ③ 一節一節唸（那一節放大變亮，唸那一節的聲音）④ 唸整個字。👏🚂✂️ 三種走同一套；火車沒有輪子。
+  - 一節一節的聲音：`_syl_audio.py` 照 Cambridge 音標切成網站的音節，用參考網站同一套離線語音（Kokoro v1.0 美式女聲 af_bella，`_tts/` 抄自 AI-Agent-Open-Code/tools）照音標唸；整個字做好當場用 Whisper 聽一次，聽錯換語速重做，36 個字全部聽對。檔案在 `audio/syl/`。
+  - 🎮 遊戲：**音節忍者拿掉**（切的位置字典之間不一樣，遊戲只算一種對；以後可以改成「只數拍數」再放回來）。新增 🃏 記憶翻牌（圖示＋中文配英文，6→8→10 對，翻錯不算錯，每一對 15 秒）、🔨 打地鼠（敲舉著對的英文的地鼠，敲錯算錯）、🥁 拍數節奏（聽字拍鼓，拍數＝母音的聲音數，只數不切）。共 7 種：memory、mole、lava、dark、beat、detect、magnet。成績表題組代號照舊 `g年級gm_job-遊戲id`。
+  - 每個遊戲開始前：👀 觀看示範（手指照玩法自己答對 2 題，不計時、不算分、不送成績，玩完回開始畫面）／▶ 開始遊戲；**不用再選一本**，一律用全部的字。
+  - 畫面變簡單：大廳＝標題＋🎮 遊戲／📖 圖鑑兩個大按鈕；遊戲卡只有大圖示＋名字＋一句話；下面一排固定：⬅ 返回｜🐢 慢／🐇 正常｜🏠 首頁（大廳的 ⬅ 隱藏但位置保留）；O*NET 說明收進「📚 給老師看」。
+  - 圖鑑字卡：**點英文＝只唸**（那張卡邊框變金色、英文放大變亮）；「ℹ️ 說明」才打開音節＋興趣成分；「▶ 從第一張自動播放」每個字唸 3 次、自動換下一張、再按一次停止。
+
 ## 六、還沒做／等使用者決定
 
 - **AI-Agent-Open-Code 網站的登入也要照 jobdex 的新登入改**（使用者 2026/10/9 要求：所有題目和遊戲的登入介面秒懂、班級打錯立刻清空）。這個對話沒有那個 repo 的寫入權限，還沒做。
 
 - 我建議的「📚 上課順序」（6 單元，學生最愛的先教、句型 I want to be a/an ___.）**使用者還沒同意**，不要自己做。
 - 大人 13＋中學生 2 個字還沒進 10 種遊戲。
+- 音節切法：字典（Cambridge）和參考網站規則不同的約 23 個字，使用者暫時維持網站原本的切法，之後可能再決定要不要統一。
+- 音節忍者以後可以改成「只數拍數」再放回來（使用者 2026/10/9）。
 - 發音用裝置內建語音（en-US），沒有逐字檢查。

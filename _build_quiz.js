@@ -6,6 +6,8 @@ const dir = __dirname;
 const story = fs.readFileSync(path.join(dir, 'story.html'), 'utf8');
 const Q = JSON.parse(fs.readFileSync(path.join(dir, 'evidence', 'quiz.json'), 'utf8'));
 const AUD = JSON.parse(fs.readFileSync(path.join(dir, 'evidence', 'audit.json'), 'utf8'));
+const WHYF = require('./_syl_why.js').why;   // 每一刀為什麼切在這裡
+const SA = require('./_syl_anim.js');        // 音節動畫（和 jobdex.html 共用）
 
 const font = story.match(/@font-face\{[^}]*\}/)[0];
 const words = [...story.matchAll(/\{no:(\d+),e:'([^']+)',z:'([^']+)',ic:'([^']+)'/g)]
@@ -96,7 +98,7 @@ ${font}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:#fff;color:var(--navy);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;font-size:var(--t2);line-height:1.5;-webkit-text-size-adjust:100%;overflow-x:hidden}
-.en,.dce,.rve,.syst,.copt b{font-family:'AndikaEmbed',"PingFang TC","Noto Sans TC",sans-serif}
+.en,.dce,.rve,.copt b{font-family:'AndikaEmbed',"PingFang TC","Noto Sans TC",sans-serif}
 button{font-family:inherit;color:inherit;font-size:inherit}
 a{color:var(--navy2)}
 .app{max-width:1600px;margin:0 auto;padding:8px 16px 48px}
@@ -374,35 +376,6 @@ details.tg summary small{font-family:'AndikaEmbed',sans-serif;font-size:var(--t3
 .pfun{margin:16px 0 0;padding:16px;border-radius:16px;border:1px dashed var(--gold);background:#FFFBEF;font-size:var(--t3)}
 .syls{margin:24px 0 0;padding:24px 0 0;border-top:1px solid var(--line)}
 .syls h3{margin:0 0 16px;font-size:var(--t2)}
-.sbtn{display:flex;gap:12px;flex-wrap:wrap}
-.sbtn button{min-height:56px;padding:0 20px;border-radius:16px;border:2px solid var(--navy);background:#fff;font-size:var(--t3);font-weight:700;cursor:pointer}
-.sbtn button.on{background:var(--navy);color:#fff}
-.syst{position:relative;margin:16px 0 0;min-height:clamp(150px,22vh,220px);border-radius:16px;background:var(--tint);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:24px 8px;font-size:clamp(34px,calc(18px + 2.4vw),60px);font-weight:700}
-.sres{min-height:48px;margin:12px 0 0;text-align:center;font-size:var(--t2);font-weight:700}
-.sres .en{font-size:1.1em}
-.wd{display:inline-flex;align-items:flex-end;white-space:nowrap}
-.wgap{display:inline-block;width:.6em}
-.sy{position:relative;display:inline-block;transition:margin .5s cubic-bezier(.3,1.4,.5,1),transform .5s cubic-bezier(.3,1.4,.5,1)}
-.syst.apart .sy{margin:0 .4em}
-.sy.beat{animation:beat .45s ease}
-@keyframes beat{40%{transform:translateY(-.35em) scale(1.12)}}
-.clap{position:absolute;left:50%;top:-.9em;transform:translateX(-50%);font-size:.6em;animation:clap .6s ease both}
-@keyframes clap{0%{opacity:0;transform:translate(-50%,10px) scale(.4)}50%{opacity:1;transform:translate(-50%,0) scale(1.2)}100%{opacity:1;transform:translate(-50%,0) scale(1)}}
-.cut{display:inline-block;width:0;align-self:stretch;border-left:3px dashed var(--gold);transform:scaleY(0);transition:transform .3s;margin:0 -1.5px}
-.syst.cutting .cut{transform:scaleY(1)}
-.train{display:flex;align-items:flex-end;gap:4px;transition:transform 1.4s cubic-bezier(.2,.8,.3,1),gap .6s cubic-bezier(.3,1.4,.5,1)}
-.train.out{transform:translateX(120%)}
-.train.apart{gap:24px}
-.eng{font-size:1.25em;line-height:1}
-.car{position:relative;display:flex;flex-direction:column;align-items:center;padding:4px 12px 0;border-radius:12px 12px 4px 4px;background:#fff;border:3px solid var(--navy)}
-.car::after{content:'● ●';display:block;font-size:.3em;color:var(--navy);letter-spacing:.3em;margin-top:-2px}
-.car .nb{position:absolute;top:-1.1em;left:50%;transform:translateX(-50%) scale(0);font-size:max(16px,.45em);width:1.6em;height:1.6em;border-radius:50%;background:var(--gold);color:var(--navy);display:flex;align-items:center;justify-content:center;transition:transform .3s cubic-bezier(.3,1.8,.5,1)}
-.car .nb.on{transform:translateX(-50%) scale(1)}
-.sci{position:absolute;top:8px;font-size:.8em;line-height:1;transition:left .5s ease;transform:translateX(-50%) rotate(-90deg)}
-.snip{position:absolute;top:8px;font-size:max(16px,.35em);color:var(--goldt);font-weight:700;transform:translateX(-50%);animation:clap .5s ease both}
-.syst.split .sy{margin:0 .25em}
-.syst.split .sy:nth-child(odd){transform:rotate(-5deg) translateY(-4px)}
-.syst.split .sy:nth-child(even){transform:rotate(5deg) translateY(4px)}
 .plink{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0 0}
 /* 給老師看的證據 */
 #ev{margin-top:48px;border:1px solid var(--line);border-radius:var(--r);padding:8px 16px 16px;box-shadow:var(--sh)}
@@ -471,6 +444,7 @@ details.tg summary small{font-family:'AndikaEmbed',sans-serif;font-size:var(--t3
 }
 @media (min-width:1600px){:root{--t2:32px;--t3:24px;--big:42px;--t1:56px}.rail .sn{width:40px;height:40px;margin:-20px 0 0 -20px;font-size:20px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.fx{display:none}.cmpr .shape{transform:scale(1)}.jt{opacity:1;transform:none}.pb{opacity:1;transform:none}}
+${SA.CSS}
 </style>
 </head>
 <body data-s="start">
@@ -679,6 +653,7 @@ ${evEng}
 </main>
 <div id="sheet" role="dialog" aria-modal="true" aria-labelledby="pe"><div class="panel" id="panel"></div></div>
 <div class="fx" id="fx"></div>
+<script src="audio/syl/aud.js"></script>
 <script>
 const TY=${JSON.stringify(TY)};
 const ORDER='${ORDER}';
@@ -690,6 +665,8 @@ const WD=${JSON.stringify(Object.fromEntries(words.map(w => [w.e, [w.no, w.z, w.
 const SYL=${JSON.stringify(Object.fromEntries(Object.keys(SC).concat(EXTRA).map(e => [e, SYL[e]])))};
 const VOW=${JSON.stringify(Object.fromEntries(Object.entries(VOW).filter(([e]) => SC[e] || EXTRA.includes(e))))};
 const SILENT=${JSON.stringify(Object.fromEntries(Object.entries(SILENT).filter(([e]) => SC[e] || EXTRA.includes(e))))};
+const WHY=${JSON.stringify(Object.fromEntries(Object.keys(SC).concat(EXTRA).map(e => [e, WHYF(e, SYL[e], VOW[e] || [], SILENT[e] || [])])))};
+${SA.JS}
 const QN=${QJOBS.length};
 const $=id=>document.getElementById(id);
 let ans=[],cur=0,heard=[],unlocked=new Set(),lvl=0,chq=[],chk=0,chOk=0,lockT=0;
@@ -860,47 +837,16 @@ function openSheet(e,sylMode){const w=WD[e],j=SC[e];
    +(j.note?'<p class="pnote">※ '+j.note+'</p>':'')+(FUN[e]?'<p class="pfun">💡 '+FUN[e]+'</p>':'')
    +'<p class="pnote">資料：<a href="'+j.url+'" target="_blank" rel="noopener">O*NET '+j.code+'</a></p>'}
  else h+='<div class="pexp">這個工作還沒有自己的興趣分數。</div>';
- h+='<div class="syls" id="syls"><h3>✂️ 音節：這個字有幾拍？</h3><div class="sbtn"><button data-m="clap">👏 拍手</button><button data-m="train">🚂 音節火車</button><button data-m="cut">✂️ 剪刀</button></div><div class="syst" id="syst"></div><div class="sres" id="sres"></div></div>'
+ h+='<div class="syls" id="syls"><h3>✂️ 音節：有幾拍？怎麼切？</h3><div id="sabox"></div></div>'
   +'<div class="plink"><a class="ghost" id="plink" href="story.html#w'+w[0]+'">📚 學這個字（單字卡）▶</a></div>';
  $('panel').innerHTML=h;$('sheet').classList.add('on');$('sheet').dataset.e=e;$('sheet').scrollTop=0;
  document.querySelectorAll('.pb').forEach((b,i)=>setTimeout(()=>{b.classList.add('on');const x=b.querySelector('i');x.style.width=x.dataset.w+'%'},200+i*260));
- sylStatic(e);
- if(sylMode){setTimeout(()=>{$('syls').scrollIntoView({block:'start'});playSyl(e,sylMode)},300)}else speak(e,1);
+ SA.mount($('sabox'),saOpt(e));
+ if(sylMode){setTimeout(()=>{$('syls').scrollIntoView({block:'start'});SA.run($('sabox'),saOpt(e),sylMode)},300)}else speak(e,1);
 }
-function closeSheet(){$('sheet').classList.remove('on');clearSyl();stop()}
-let sylT=[];
-function clearSyl(){sylT.forEach(clearTimeout);sylT=[]}
-function later(f,ms){sylT.push(setTimeout(f,ms))}
-function sylData(e){const ws=(SYL[e]||e).split(' ');let pos=0;return ws.map(w=>{const ps=w.split('-').map(s=>{const o={t:s,a:pos,b:pos+s.length};pos+=s.length;return o});pos+=1;return ps})}
-function sylCount(e){return sylData(e).reduce((a,w)=>a+w.length,0)}
-function sylText(e){return sylData(e).map(w=>w.map(s=>s.t).join(' · ')).join('　')}
-function sylDone(e){$('sres').innerHTML='<span class="en">'+sylText(e)+'</span> ＝ '+sylCount(e)+' 個音節'}
-function wordHTML(e,cut){return sylData(e).map(w=>'<span class="wd">'+w.map((s,i)=>(i&&cut?'<span class="cut"></span>':'')+'<span class="sy">'+colorRange(e,s.a,s.b)+'</span>').join('')+'</span>').join('<span class="wgap"></span>')}
-function sylStatic(e){$('syst').className='syst';$('syst').innerHTML=wordHTML(e,false);$('sres').innerHTML='點上面的按鈕，看看這個字可以分成幾拍'}
-function playSyl(e,m){clearSyl();const st=$('syst');st.className='syst';$('sres').innerHTML='';
- document.querySelectorAll('.sbtn button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
- speak(e,1);const n=sylCount(e);
- if(m==='clap'){st.innerHTML=wordHTML(e,true);
-  later(()=>st.classList.add('cutting'),500);later(()=>st.classList.add('apart'),1000);
-  const sy=[...st.querySelectorAll('.sy')];
-  sy.forEach((x,k)=>later(()=>{x.classList.remove('beat');void x.offsetWidth;x.classList.add('beat');const c=document.createElement('span');c.className='clap';c.textContent='👏';x.appendChild(c);sfx.clap()},1500+k*650));
-  later(()=>sylDone(e),1600+n*650)}
- else if(m==='train'){let k=0;
-  st.innerHTML='<div class="train out" id="trn"><span class="eng">🚂</span>'+sylData(e).map(w=>w.map(s=>'<span class="car"><span class="nb">'+(++k)+'</span><span>'+colorRange(e,s.a,s.b)+'</span></span>').join('')).join('')+'</div>';
-  const tr=st.querySelector('.train');later(()=>tr.classList.remove('out'),60);
-  later(()=>tr.classList.add('apart'),1600);
-  [...st.querySelectorAll('.nb')].forEach((b,i)=>later(()=>{b.classList.add('on');sfx.pop()},2200+i*500));
-  later(()=>sylDone(e),2300+n*500)}
- else{st.innerHTML=wordHTML(e,false)+'<span class="sci" id="sci">✂️</span>';
-  const sci=st.querySelector('.sci'),sy=[...st.querySelectorAll('.sy')],box=st.getBoundingClientRect();
-  sci.style.left='4%';
-  const ends=[];let idx=0;sylData(e).forEach(w=>{w.forEach((s,i)=>{if(i>0)ends.push(sy[idx]);idx++})});
-  if(!ends.length){later(()=>{sci.style.left='96%'},300);later(()=>{$('sres').innerHTML='只有 1 個音節，不用剪！'},900);later(()=>sylDone(e),1500);return}
-  ends.forEach((x,k)=>{later(()=>{const r=x.getBoundingClientRect();sci.style.left=(r.left-box.left)+'px'},400+k*800);
-   later(()=>{st.querySelectorAll('.snip').forEach(o=>o.remove());const r=x.getBoundingClientRect(),s=document.createElement('span');s.className='snip';s.textContent='喀擦！';s.style.left=(r.left-box.left)+'px';st.appendChild(s);sfx.snip();x.style.marginLeft='.3em'},800+k*800)});
-  later(()=>{sci.style.left='96%';st.classList.add('split')},900+ends.length*800);
-  later(()=>sylDone(e),1500+ends.length*800)}
-}
+function closeSheet(){$('sheet').classList.remove('on');SA.stop();stop()}
+/* 音節動畫：和 jobdex.html 共用（_syl_anim.js） */
+function saOpt(e){return {e,syl:SYL[e]||e,v:VOW[e]||[],g:SILENT[e]||[],why:WHY[e]||[],say:(t,cb)=>speak(t,1,cb),sfx:{pop:sfx.pop,snip:sfx.snip,clap:sfx.clap,drum:sfx.pop,clank:sfx.pop}}}
 /* ---- 事件 ---- */
 $('go').onclick=start;$('again').onclick=start;
 $('sail').onclick=()=>{cur=0;show('quiz');render()};
@@ -920,7 +866,7 @@ document.addEventListener('keydown',ev=>{const dc=ev.target.closest&&ev.target.c
  if(ev.key==='Escape'&&$('sheet').classList.contains('on'))closeSheet()});
 $('sheet').addEventListener('click',ev=>{if(ev.target.id==='sheet'||ev.target.closest('#xbtn')){closeSheet();return}
  if(ev.target.closest('#psay')){speak($('sheet').dataset.e,1);return}
- const m=ev.target.closest('.sbtn button');if(m)playSyl($('sheet').dataset.e,m.dataset.m)});
+});
 $('evgo').onclick=e=>{e.preventDefault();$('ev').open=true;$('ev').scrollIntoView()};
 function evHash(){if(location.hash==='#ev'){$('ev').open=true;setTimeout(()=>$('ev').scrollIntoView(),50)}}
 evHash();addEventListener('hashchange',evHash);

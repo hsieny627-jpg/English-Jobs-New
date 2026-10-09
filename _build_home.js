@@ -104,7 +104,7 @@ h3{margin:18px 0 12px;font-size:24px;display:flex;align-items:baseline;gap:10px;
 
 <section class="s0" id="explore">
  ${tile('quiz.html', 'qz', '<span class="ic">🧭</span><span class="tx"><span class="tt">職業興趣探險</span><span class="dd">30 題・認識自己現在的興趣（僅供參考）</span></span>', '職業興趣探險')}
- ${tile('jobdex.html', 'qz jx', '<span class="ic">📖</span><span class="tx"><span class="tt">職業圖鑑＋複習遊戲</span><span class="dd">35 個職業・5 種遊戲，每場 1 分 30 秒</span></span>', '職業圖鑑＋複習遊戲')}
+ ${tile('jobdex.html', 'qz jx', '<span class="ic">📖</span><span class="tx"><span class="tt">職業圖鑑＋複習遊戲</span><span class="dd">35 個職業・7 種遊戲，每場 1 分 30 秒</span></span>', '職業圖鑑＋複習遊戲')}
 </section>
 
 <section class="s1" id="challenge">

@@ -12,7 +12,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:#fff;color:var(--navy);font-family:"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;font-size:var(--t2);line-height:1.5;-webkit-text-size-adjust:100%;overflow-x:hidden}
-.en,.dce,.rve,.syst,.copt b{font-family:'AndikaEmbed',"PingFang TC","Noto Sans TC",sans-serif}
+.en,.dce,.rve,.copt b{font-family:'AndikaEmbed',"PingFang TC","Noto Sans TC",sans-serif}
 button{font-family:inherit;color:inherit;font-size:inherit}
 a{color:var(--navy2)}
 .app{max-width:1600px;margin:0 auto;padding:8px 16px 48px}
@@ -290,35 +290,6 @@ details.tg summary small{font-family:'AndikaEmbed',sans-serif;font-size:var(--t3
 .pfun{margin:16px 0 0;padding:16px;border-radius:16px;border:1px dashed var(--gold);background:#FFFBEF;font-size:var(--t3)}
 .syls{margin:24px 0 0;padding:24px 0 0;border-top:1px solid var(--line)}
 .syls h3{margin:0 0 16px;font-size:var(--t2)}
-.sbtn{display:flex;gap:12px;flex-wrap:wrap}
-.sbtn button{min-height:56px;padding:0 20px;border-radius:16px;border:2px solid var(--navy);background:#fff;font-size:var(--t3);font-weight:700;cursor:pointer}
-.sbtn button.on{background:var(--navy);color:#fff}
-.syst{position:relative;margin:16px 0 0;min-height:clamp(150px,22vh,220px);border-radius:16px;background:var(--tint);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:24px 8px;font-size:clamp(34px,calc(18px + 2.4vw),60px);font-weight:700}
-.sres{min-height:48px;margin:12px 0 0;text-align:center;font-size:var(--t2);font-weight:700}
-.sres .en{font-size:1.1em}
-.wd{display:inline-flex;align-items:flex-end;white-space:nowrap}
-.wgap{display:inline-block;width:.6em}
-.sy{position:relative;display:inline-block;transition:margin .5s cubic-bezier(.3,1.4,.5,1),transform .5s cubic-bezier(.3,1.4,.5,1)}
-.syst.apart .sy{margin:0 .4em}
-.sy.beat{animation:beat .45s ease}
-@keyframes beat{40%{transform:translateY(-.35em) scale(1.12)}}
-.clap{position:absolute;left:50%;top:-.9em;transform:translateX(-50%);font-size:.6em;animation:clap .6s ease both}
-@keyframes clap{0%{opacity:0;transform:translate(-50%,10px) scale(.4)}50%{opacity:1;transform:translate(-50%,0) scale(1.2)}100%{opacity:1;transform:translate(-50%,0) scale(1)}}
-.cut{display:inline-block;width:0;align-self:stretch;border-left:3px dashed var(--gold);transform:scaleY(0);transition:transform .3s;margin:0 -1.5px}
-.syst.cutting .cut{transform:scaleY(1)}
-.train{display:flex;align-items:flex-end;gap:4px;transition:transform 1.4s cubic-bezier(.2,.8,.3,1),gap .6s cubic-bezier(.3,1.4,.5,1)}
-.train.out{transform:translateX(120%)}
-.train.apart{gap:24px}
-.eng{font-size:1.25em;line-height:1}
-.car{position:relative;display:flex;flex-direction:column;align-items:center;padding:4px 12px 0;border-radius:12px 12px 4px 4px;background:#fff;border:3px solid var(--navy)}
-.car::after{content:'● ●';display:block;font-size:.3em;color:var(--navy);letter-spacing:.3em;margin-top:-2px}
-.car .nb{position:absolute;top:-1.1em;left:50%;transform:translateX(-50%) scale(0);font-size:max(16px,.45em);width:1.6em;height:1.6em;border-radius:50%;background:var(--gold);color:var(--navy);display:flex;align-items:center;justify-content:center;transition:transform .3s cubic-bezier(.3,1.8,.5,1)}
-.car .nb.on{transform:translateX(-50%) scale(1)}
-.sci{position:absolute;top:8px;font-size:.8em;line-height:1;transition:left .5s ease;transform:translateX(-50%) rotate(-90deg)}
-.snip{position:absolute;top:8px;font-size:max(16px,.35em);color:var(--goldt);font-weight:700;transform:translateX(-50%);animation:clap .5s ease both}
-.syst.split .sy{margin:0 .25em}
-.syst.split .sy:nth-child(odd){transform:rotate(-5deg) translateY(-4px)}
-.syst.split .sy:nth-child(even){transform:rotate(5deg) translateY(4px)}
 .plink{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0 0}
 /* 給老師看的證據 */
 #ev{margin-top:48px;border:1px solid var(--line);border-radius:var(--r);padding:8px 16px 16px;box-shadow:var(--sh)}
@@ -387,6 +358,47 @@ details.tg summary small{font-family:'AndikaEmbed',sans-serif;font-size:var(--t3
 }
 @media (min-width:1600px){:root{--t2:32px;--t3:24px;--big:42px;--t1:56px}.rail .sn{width:40px;height:40px;margin:-20px 0 0 -20px;font-size:20px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.fx{display:none}.cmpr .shape{transform:scale(1)}.jt{opacity:1;transform:none}.pb{opacity:1;transform:none}}
+
+.sa{display:flex;flex-direction:column;gap:12px}
+.sa-btn{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.sa-btn button{min-height:64px;padding:0 24px;border-radius:18px;border:2px solid var(--navy,#1B2B4B);background:#fff;color:var(--navy,#1B2B4B);font-size:var(--t2,22px);font-weight:700;cursor:pointer}
+.sa-btn button.on{background:var(--navy,#1B2B4B);color:#fff}
+.sa-btn button:active{transform:scale(.96)}
+.sa-stage{position:relative;min-height:clamp(170px,26vh,250px);border-radius:18px;background:#F4F6FA;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:0 .7em;padding:56px 12px 24px;overflow:hidden;font-family:'AndikaEmbed',sans-serif;font-weight:700;font-size:clamp(36px,calc(18px + 2.6vw),64px);line-height:1.1;color:#1B2B4B}
+.sa-w{display:inline-flex;align-items:flex-end;white-space:nowrap}
+.sa-s{position:relative;display:inline-flex;align-items:flex-end;padding:.06em .04em;border-radius:.2em;transition:transform .35s cubic-bezier(.3,1.5,.5,1),filter .3s,background .3s,margin .45s cubic-bezier(.3,1.4,.5,1),box-shadow .3s;transform-origin:50% 80%}
+.sa-l{display:inline-block;transition:transform .3s cubic-bezier(.3,1.6,.5,1),text-shadow .3s}
+.sa-l.lv{color:#D7362F}.sa-l.lg{color:#8C93A3;background:#E4E7ED;border-radius:6px;padding:0 2px}
+.sa-l.vo{transform:translateY(-.12em) scale(1.25);text-shadow:0 0 .35em rgba(255,90,90,.55)}
+.sa-n{position:absolute;bottom:100%;left:50%;transform:translate(-50%,-.1em) scale(0);font-family:"PingFang TC","Noto Sans TC",sans-serif;font-size:max(18px,.5em);width:1.6em;height:1.6em;border-radius:50%;background:#D7362F;color:#fff;display:flex;align-items:center;justify-content:center;transition:transform .35s cubic-bezier(.3,1.8,.5,1);pointer-events:none}
+.sa-n.on{transform:translate(-50%,-.1em) scale(1)}
+.sa-stage.apart .sa-s+.sa-s{margin-left:.38em}
+.sa-cut{position:absolute;top:8%;bottom:8%;width:0;border-left:4px dashed #D9A520;transform:scaleY(0);transition:transform .35s;pointer-events:none}
+.sa-cut.on{transform:scaleY(1)}
+.sa-s.now{transform:scale(1.32);filter:brightness(1.15) saturate(1.3);background:#FFF3C4;box-shadow:0 0 0 .08em #D9A520,0 0 .6em rgba(217,165,32,.7);z-index:2}
+.sa-s.dim{opacity:.45}
+.sa-stage.all .sa-s{transform:scale(1.12);background:#FFF3C4}
+.sa-pop{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);font-size:.7em;pointer-events:none;animation:saPop .7s ease both}
+@keyframes saPop{0%{opacity:0;transform:translate(-50%,12px) scale(.4)}45%{opacity:1;transform:translate(-50%,0) scale(1.25)}100%{opacity:0;transform:translate(-50%,-14px) scale(1)}}
+.sa-sci{position:absolute;bottom:2px;font-size:.75em;line-height:1;transform:translateX(-50%) rotate(-90deg);transition:left .5s ease;pointer-events:none}
+.sa-snip{position:absolute;bottom:.15em;font-family:"PingFang TC",sans-serif;font-size:max(18px,.34em);color:#8A6408;font-weight:700;transform:translateX(-50%);animation:saPop 1s ease both;pointer-events:none}
+.sa-train .sa-s{background:#fff;border:3px solid #1B2B4B;border-radius:12px 12px 6px 6px;padding:.08em .18em .04em;margin-left:-3px}
+.sa-train .sa-s+.sa-s::before{content:'';position:absolute;right:100%;bottom:.25em;width:.3em;height:4px;background:#1B2B4B}
+.sa-train.apart .sa-s+.sa-s::before{opacity:0}
+.sa-train .sa-eng{font-size:1.15em;line-height:1;margin-right:.08em;display:inline-block}
+.sa-train.go .sa-eng{animation:saChug .5s ease-in-out infinite}
+@keyframes saChug{50%{transform:translateY(-.06em) rotate(-3deg)}}
+.sa-train .sa-s.now{background:#FFF3C4}
+.sa-msg{min-height:2.6em;text-align:center;font-size:var(--t2,22px);font-weight:700;line-height:1.35;color:#1B2B4B}
+.sa-msg b{color:#D7362F;font-size:1.25em}
+.sa-msg .en{font-family:'AndikaEmbed',sans-serif}
+.sa-why{margin:0;padding:16px 20px;border-radius:16px;background:#FFF8E3;border:1px dashed #D9A520;font-size:var(--t3,18px);line-height:1.5;list-style:none;display:flex;flex-direction:column;gap:6px}
+.sa-why li{display:flex;gap:10px;align-items:baseline}
+.sa-why .k{flex:none;font-family:'AndikaEmbed',sans-serif;font-weight:700;white-space:nowrap}
+.sa-why .k i{font-style:normal;color:#D9A520}
+.sa-why h4{margin:0 0 4px;font-size:var(--t3,18px)}
+@media (prefers-reduced-motion:reduce){.sa-s.now{transform:none}}
+
 </style>
 </head>
 <body data-s="start">
@@ -675,7 +687,7 @@ details.tg summary small{font-family:'AndikaEmbed',sans-serif;font-size:var(--t3
 <td>“Repair, reline, replace, and adjust brakes.”</td><td>實用型 100（第 1 高）<br><a href="https://www.onetonline.org/link/details/49-3023.00" target="_blank" rel="noopener">O*NET 49-3023.00</a></td></tr>
 <tr><td>2</td><td>🔬 研究型</td><td>🐶 幫生病的小動物檢查，找出牠哪裡不舒服</td><td><b>veterinarian</b></td>
 <td>“Examine animals to detect and determine the nature of diseases or injuries.”</td><td>研究型 83（第 1 高）<br><a href="https://www.onetonline.org/link/details/29-1131.00" target="_blank" rel="noopener">O*NET 29-1131.00</a></td></tr>
-<tr><td>3</td><td>🎨 藝術型</td><td>🎨 用筆、水彩或電腦畫畫</td><td><b>painter</b></td>
+<tr><td>3</td><td>🎨 藝術型</td><td>🎨 用筆、水彩或炭筆畫畫</td><td><b>painter</b></td>
 <td>“Use materials such as pens and ink, watercolors, charcoal, oil, or computer software to create artwork.”</td><td>藝術型 100（第 1 高）<br><a href="https://www.onetonline.org/link/details/27-1013.00" target="_blank" rel="noopener">O*NET 27-1013.00</a></td></tr>
 <tr><td>4</td><td>🤝 社會型</td><td>🧑‍🏫 教學生學會新東西</td><td><b>teacher</b></td>
 <td>“Instruct students individually and in groups, using teaching methods such as lectures, discussions, and demonstrations.”</td><td>社會型 100（第 1 高）<br><a href="https://www.onetonline.org/link/details/25-2021.00" target="_blank" rel="noopener">O*NET 25-2021.00</a></td></tr>
@@ -689,28 +701,28 @@ details.tg summary small{font-family:'AndikaEmbed',sans-serif;font-size:var(--t3
 <td>“Identify, analyze, and document problems with program function, output, online screen, or content.”</td><td>研究型 79（第 1 高）<br><a href="https://www.onetonline.org/link/details/15-1253.00" target="_blank" rel="noopener">O*NET 15-1253.00</a></td></tr>
 <tr><td>9</td><td>🎨 藝術型</td><td>🖌️ 幫公司設計標誌（logo）和網頁畫面</td><td><b>designer</b></td>
 <td>“Develop graphics and layouts for product illustrations, company logos, and Web sites.”</td><td>藝術型 100（第 1 高）<br><a href="https://www.onetonline.org/link/details/27-1024.00" target="_blank" rel="noopener">O*NET 27-1024.00</a></td></tr>
-<tr><td>10</td><td>🤝 社會型</td><td>💉 幫受傷的人急救、擦藥、包紮</td><td><b>nurse</b></td>
+<tr><td>10</td><td>🤝 社會型</td><td>💉 在學校或醫院幫人急救、打預防針</td><td><b>nurse</b></td>
 <td>“Provide health care, first aid, immunizations, or assistance in convalescence or rehabilitation in locations such as schools, hospitals, or industry.”</td><td>社會型 76（第 1 高）<br><a href="https://www.onetonline.org/link/details/29-1141.00" target="_blank" rel="noopener">O*NET 29-1141.00</a></td></tr>
 <tr><td>11</td><td>📣 企業型</td><td>⚖️ 找證據，在法院幫別人說話</td><td><b>lawyer</b></td>
 <td>“Gather evidence to formulate defense or to initiate legal actions by such means as interviewing clients and witnesses to ascertain the facts of a case.”<br>“Represent clients in court or before government agencies.”</td><td>企業型 75（第 1 高）<br><a href="https://www.onetonline.org/link/details/23-1011.00" target="_blank" rel="noopener">O*NET 23-1011.00</a></td></tr>
-<tr><td>12</td><td>📋 事務型</td><td>🧳 檢查急救箱和滅火器能不能用</td><td><b>flight attendant</b></td>
-<td>“Verify that first aid kits and other emergency equipment, including fire extinguishers and oxygen bottles, are in working order.”</td><td>事務型 57（第 1 高）<br><a href="https://www.onetonline.org/link/details/53-2031.00" target="_blank" rel="noopener">O*NET 53-2031.00</a></td></tr>
+<tr><td>12</td><td>📋 事務型</td><td>🧳 示範怎麼用安全帶、救生衣和氧氣面罩</td><td><b>flight attendant</b></td>
+<td>“Announce and demonstrate safety and emergency procedures, such as the use of oxygen masks, seat belts, and life jackets.”</td><td>事務型 57（第 1 高）<br><a href="https://www.onetonline.org/link/details/53-2031.00" target="_blank" rel="noopener">O*NET 53-2031.00</a></td></tr>
 <tr><td>13</td><td>🔧 實用型</td><td>🚒 開消防車，去火災現場救人</td><td><b>firefighter</b></td>
 <td>“Drive and operate fire fighting vehicles and equipment.”<br>“Rescue survivors from burning buildings, accident sites, and water hazards.”</td><td>實用型 92（第 1 高）<br><a href="https://www.onetonline.org/link/details/33-2011.00" target="_blank" rel="noopener">O*NET 33-2011.00</a></td></tr>
 <tr><td>14</td><td>🔬 研究型</td><td>🩺 看檢查報告，找出病人生了什麼病</td><td><b>doctor</b></td>
 <td>“Order, perform, and interpret tests and analyze records, reports, and examination information to diagnose patients' condition.”</td><td>研究型 85（第 2 高）<br><a href="https://www.onetonline.org/link/details/29-1215.00" target="_blank" rel="noopener">O*NET 29-1215.00</a></td></tr>
 <tr><td>15</td><td>🎨 藝術型</td><td>🎤 站上舞台，唱歌給大家聽</td><td><b>singer</b></td>
-<td>“Perform before live audiences in concerts, recitals, educational presentations, and other social gatherings.”</td><td>藝術型 94（第 1 高）<br><a href="https://www.onetonline.org/link/details/27-2042.00" target="_blank" rel="noopener">O*NET 27-2042.00</a></td></tr>
+<td>“Perform before live audiences in concerts, recitals, educational presentations, and other social gatherings.”<br>“Sing as a soloist or as a member of a vocal group.”</td><td>藝術型 94（第 1 高）<br><a href="https://www.onetonline.org/link/details/27-2042.00" target="_blank" rel="noopener">O*NET 27-2042.00</a></td></tr>
 <tr><td>16</td><td>🤝 社會型</td><td>🧠 聽別人說出心裡的感受，幫他更了解自己</td><td><b>counselor</b></td>
 <td>“Encourage clients to express their feelings and discuss what is happening in their lives, helping them to develop insight into themselves or their relationships.”</td><td>社會型 97（第 1 高）<br><a href="https://www.onetonline.org/link/details/21-1014.00" target="_blank" rel="noopener">O*NET 21-1014.00</a></td></tr>
 <tr><td>17</td><td>📣 企業型</td><td>🏠 幫要買房子和要賣房子的人商量</td><td><b>real estate agent</b></td>
 <td>“Act as an intermediary in negotiations between buyers and sellers, generally representing one or the other.”</td><td>企業型 91（第 1 高）<br><a href="https://www.onetonline.org/link/details/41-9022.00" target="_blank" rel="noopener">O*NET 41-9022.00</a></td></tr>
-<tr><td>18</td><td>📋 事務型</td><td>👮 把發生了什麼事，仔細寫下來</td><td><b>police officer</b></td>
-<td>“Record facts to prepare reports that document incidents and activities.”</td><td>事務型 56（第 2 高）<br><a href="https://www.onetonline.org/link/details/33-3051.00" target="_blank" rel="noopener">O*NET 33-3051.00</a></td></tr>
+<tr><td>18</td><td>📋 事務型</td><td>👮 巡邏的時候，注意並記下奇怪的人和事</td><td><b>police officer</b></td>
+<td>“Monitor, note, report, and investigate suspicious persons and situations, safety hazards, and unusual or illegal activity in patrol area.”</td><td>事務型 56（第 2 高）<br><a href="https://www.onetonline.org/link/details/33-3051.00" target="_blank" rel="noopener">O*NET 33-3051.00</a></td></tr>
 <tr><td>19</td><td>🔧 實用型</td><td>🏃 按時練習運動，參加比賽</td><td><b>professional athlete</b></td>
 <td>“Attend scheduled practice or training sessions.”<br>“Participate in athletic events or competitive sports, according to established rules and regulations.”</td><td>實用型 70（第 1 高）<br><a href="https://www.onetonline.org/link/details/27-2021.00" target="_blank" rel="noopener">O*NET 27-2021.00</a></td></tr>
-<tr><td>20</td><td>🔬 研究型</td><td>⚙️ 研究機器為什麼壞掉，想辦法改好</td><td><b>mechanical engineer</b></td>
-<td>“Investigate equipment failures or difficulties to diagnose faulty operation and recommend remedial actions.”</td><td>研究型 69（第 2 高）<br><a href="https://www.onetonline.org/link/details/17-2141.00" target="_blank" rel="noopener">O*NET 17-2141.00</a></td></tr>
+<tr><td>20</td><td>🔬 研究型</td><td>⚙️ 研究、設計新的機器</td><td><b>mechanical engineer</b></td>
+<td>“Research, design, evaluate, install, operate, or maintain mechanical products, equipment, systems or processes to meet requirements.”</td><td>研究型 69（第 2 高）<br><a href="https://www.onetonline.org/link/details/17-2141.00" target="_blank" rel="noopener">O*NET 17-2141.00</a></td></tr>
 <tr><td>21</td><td>🎨 藝術型</td><td>🎭 背台詞、練習演戲</td><td><b>actor</b></td>
 <td>“Study and rehearse roles from scripts to interpret, learn and memorize lines, stunts, and cues as directed.”</td><td>藝術型 100（第 1 高）<br><a href="https://www.onetonline.org/link/details/27-2011.00" target="_blank" rel="noopener">O*NET 27-2011.00</a></td></tr>
 <tr><td>22</td><td>🤝 社會型</td><td>🧭 帶大家去參觀，介紹好玩的地方、回答問題</td><td><b>tour guide</b></td>
@@ -721,16 +733,16 @@ details.tg summary small{font-family:'AndikaEmbed',sans-serif;font-size:var(--t3
 <td>“Prepare detailed workflow charts and diagrams that describe input, output, and logical operation, and convert them into a series of instructions coded in a computer language.”</td><td>事務型 82（第 1 高）<br><a href="https://www.onetonline.org/link/details/15-1251.00" target="_blank" rel="noopener">O*NET 15-1251.00</a></td></tr>
 <tr><td>25</td><td>🔧 實用型</td><td>✂️ 幫人剪頭髮、修出好看的髮型</td><td><b>hairstylist</b></td>
 <td>“Cut, trim and shape hair or hairpieces, based on customers' instructions, hair type, and facial features, using clippers, scissors, trimmers and razors.”</td><td>實用型 73（第 1 高）<br><a href="https://www.onetonline.org/link/details/39-5012.00" target="_blank" rel="noopener">O*NET 39-5012.00</a></td></tr>
-<tr><td>26</td><td>🔬 研究型</td><td>🧠 找出別人在心情或行為上遇到的困難</td><td><b>psychologist</b></td>
-<td>“Identify psychological, emotional, or behavioral issues and diagnose disorders, using information obtained from interviews, tests, records, or reference materials.”</td><td>研究型 76（第 2 高）<br><a href="https://www.onetonline.org/link/details/19-3033.00" target="_blank" rel="noopener">O*NET 19-3033.00</a></td></tr>
+<tr><td>26</td><td>🔬 研究型</td><td>📝 用測驗了解一個人的興趣和個性</td><td><b>psychologist</b></td>
+<td>“Select, administer, score, and interpret psychological tests to obtain information on individuals' intelligence, achievements, interests, or personalities.”</td><td>研究型 76（第 2 高）<br><a href="https://www.onetonline.org/link/details/19-3033.00" target="_blank" rel="noopener">O*NET 19-3033.00</a></td></tr>
 <tr><td>27</td><td>🎨 藝術型</td><td>🎧 選大家喜歡的歌，放給大家聽</td><td><b>DJ</b></td>
 <td>“Select and play music incorporating crowd preferences and mood.”</td><td>藝術型 64（第 1 高）<br><a href="https://www.onetonline.org/link/details/27-2091.00" target="_blank" rel="noopener">O*NET 27-2091.00</a></td></tr>
 <tr><td>28</td><td>🤝 社會型</td><td>🩺 告訴大家怎麼吃、怎麼運動，才不會生病</td><td><b>doctor</b></td>
 <td>“Advise patients and community members concerning diet, activity, hygiene, and disease prevention.”</td><td>社會型 87（第 1 高）<br><a href="https://www.onetonline.org/link/details/29-1215.00" target="_blank" rel="noopener">O*NET 29-1215.00</a></td></tr>
 <tr><td>29</td><td>📣 企業型</td><td>💼 選出新的工作夥伴，教他們怎麼做事</td><td><b>business manager</b></td>
 <td>“Perform personnel functions, such as selection, training, or evaluation.”</td><td>企業型 100（第 1 高）<br><a href="https://www.onetonline.org/link/details/11-1021.00" target="_blank" rel="noopener">O*NET 11-1021.00</a></td></tr>
-<tr><td>30</td><td>📋 事務型</td><td>✂️ 幫客人排好預約的時間</td><td><b>hairstylist</b></td>
-<td>“Schedule client appointments.”</td><td>事務型 49（第 2 高）<br><a href="https://www.onetonline.org/link/details/39-5012.00" target="_blank" rel="noopener">O*NET 39-5012.00</a></td></tr>
+<tr><td>30</td><td>📋 事務型</td><td>📒 記下每位客人做過哪些美髮服務</td><td><b>hairstylist</b></td>
+<td>“Update and maintain customer information records, such as beauty services provided.”</td><td>事務型 49（第 2 高）<br><a href="https://www.onetonline.org/link/details/39-5012.00" target="_blank" rel="noopener">O*NET 39-5012.00</a></td></tr>
  </tbody></table></div>
  <h4>32 個職業的 O*NET 興趣分數（粗體＝前 3 名）</h4>
  <div class="tw"><table><thead><tr><th>職業</th><th>六型分數</th><th>O*NET</th></tr></thead><tbody>
@@ -821,10 +833,11 @@ details.tg summary small{font-family:'AndikaEmbed',sans-serif;font-size:var(--t3
 </main>
 <div id="sheet" role="dialog" aria-modal="true" aria-labelledby="pe"><div class="panel" id="panel"></div></div>
 <div class="fx" id="fx"></div>
+<script src="audio/syl/aud.js"></script>
 <script>
 const TY={"R":{"ic":"🔧","f":"實用型","en":"Realistic","d":"喜歡動手做、修東西","act":"動手做、修東西","c":"#D9692B","bg":"#FCEEE4"},"I":{"ic":"🔬","f":"研究型","en":"Investigative","d":"喜歡觀察、研究","act":"觀察、研究","c":"#2C6FC9","bg":"#E6EFFA"},"A":{"ic":"🎨","f":"藝術型","en":"Artistic","d":"喜歡創作、表演","act":"創作、表演","c":"#9A4FC4","bg":"#F3E9F9"},"S":{"ic":"🤝","f":"社會型","en":"Social","d":"喜歡幫助、教別人","act":"幫助、教別人","c":"#2E9358","bg":"#E5F4EA"},"E":{"ic":"📣","f":"企業型","en":"Enterprising","d":"喜歡帶領、說服別人","act":"帶領、說服別人","c":"#CF3F55","bg":"#FBE8EB"},"C":{"ic":"📋","f":"事務型","en":"Conventional","d":"喜歡照步驟整理資料","act":"照步驟整理資料","c":"#14868A","bg":"#E1F3F3"}};
 const ORDER='RIASEC';
-const ITEMS=[{"t":"R","ic":"🔧","zh":"修理汽車的煞車","e":"mechanic"},{"t":"I","ic":"🐶","zh":"幫生病的小動物檢查，找出牠哪裡不舒服","e":"veterinarian"},{"t":"A","ic":"🎨","zh":"用筆、水彩或電腦畫畫","e":"painter"},{"t":"S","ic":"🧑‍🏫","zh":"教學生學會新東西","e":"teacher"},{"t":"E","ic":"💼","zh":"安排大家的工作，決定誰做什麼","e":"business manager"},{"t":"C","ic":"💻","zh":"找出電腦程式哪裡寫錯，改好再檢查一次","e":"programmer"},{"t":"R","ic":"🍞","zh":"把麵粉放在秤上秤重，準備做麵包","e":"baker"},{"t":"I","ic":"🎮","zh":"試玩電玩遊戲，找出哪裡有問題，記錄下來","e":"game tester"},{"t":"A","ic":"🖌️","zh":"幫公司設計標誌（logo）和網頁畫面","e":"designer"},{"t":"S","ic":"💉","zh":"幫受傷的人急救、擦藥、包紮","e":"nurse"},{"t":"E","ic":"⚖️","zh":"找證據，在法院幫別人說話","e":"lawyer"},{"t":"C","ic":"🧳","zh":"檢查急救箱和滅火器能不能用","e":"flight attendant"},{"t":"R","ic":"🚒","zh":"開消防車，去火災現場救人","e":"firefighter"},{"t":"I","ic":"🩺","zh":"看檢查報告，找出病人生了什麼病","e":"doctor"},{"t":"A","ic":"🎤","zh":"站上舞台，唱歌給大家聽","e":"singer"},{"t":"S","ic":"🧠","zh":"聽別人說出心裡的感受，幫他更了解自己","e":"counselor"},{"t":"E","ic":"🏠","zh":"幫要買房子和要賣房子的人商量","e":"real estate agent"},{"t":"C","ic":"👮","zh":"把發生了什麼事，仔細寫下來","e":"police officer"},{"t":"R","ic":"🏃","zh":"按時練習運動，參加比賽","e":"professional athlete"},{"t":"I","ic":"⚙️","zh":"研究機器為什麼壞掉，想辦法改好","e":"mechanical engineer"},{"t":"A","ic":"🎭","zh":"背台詞、練習演戲","e":"actor"},{"t":"S","ic":"🧭","zh":"帶大家去參觀，介紹好玩的地方、回答問題","e":"tour guide"},{"t":"E","ic":"🧑‍🍳","zh":"教廚房裡的人怎麼做菜，帶領大家","e":"chef"},{"t":"C","ic":"💻","zh":"把電腦要做的事一步一步排好，寫成程式","e":"programmer"},{"t":"R","ic":"✂️","zh":"幫人剪頭髮、修出好看的髮型","e":"hairstylist"},{"t":"I","ic":"🧠","zh":"找出別人在心情或行為上遇到的困難","e":"psychologist"},{"t":"A","ic":"🎧","zh":"選大家喜歡的歌，放給大家聽","e":"DJ"},{"t":"S","ic":"🩺","zh":"告訴大家怎麼吃、怎麼運動，才不會生病","e":"doctor"},{"t":"E","ic":"💼","zh":"選出新的工作夥伴，教他們怎麼做事","e":"business manager"},{"t":"C","ic":"✂️","zh":"幫客人排好預約的時間","e":"hairstylist"}];
+const ITEMS=[{"t":"R","ic":"🔧","zh":"修理汽車的煞車","e":"mechanic"},{"t":"I","ic":"🐶","zh":"幫生病的小動物檢查，找出牠哪裡不舒服","e":"veterinarian"},{"t":"A","ic":"🎨","zh":"用筆、水彩或炭筆畫畫","e":"painter"},{"t":"S","ic":"🧑‍🏫","zh":"教學生學會新東西","e":"teacher"},{"t":"E","ic":"💼","zh":"安排大家的工作，決定誰做什麼","e":"business manager"},{"t":"C","ic":"💻","zh":"找出電腦程式哪裡寫錯，改好再檢查一次","e":"programmer"},{"t":"R","ic":"🍞","zh":"把麵粉放在秤上秤重，準備做麵包","e":"baker"},{"t":"I","ic":"🎮","zh":"試玩電玩遊戲，找出哪裡有問題，記錄下來","e":"game tester"},{"t":"A","ic":"🖌️","zh":"幫公司設計標誌（logo）和網頁畫面","e":"designer"},{"t":"S","ic":"💉","zh":"在學校或醫院幫人急救、打預防針","e":"nurse"},{"t":"E","ic":"⚖️","zh":"找證據，在法院幫別人說話","e":"lawyer"},{"t":"C","ic":"🧳","zh":"示範怎麼用安全帶、救生衣和氧氣面罩","e":"flight attendant"},{"t":"R","ic":"🚒","zh":"開消防車，去火災現場救人","e":"firefighter"},{"t":"I","ic":"🩺","zh":"看檢查報告，找出病人生了什麼病","e":"doctor"},{"t":"A","ic":"🎤","zh":"站上舞台，唱歌給大家聽","e":"singer"},{"t":"S","ic":"🧠","zh":"聽別人說出心裡的感受，幫他更了解自己","e":"counselor"},{"t":"E","ic":"🏠","zh":"幫要買房子和要賣房子的人商量","e":"real estate agent"},{"t":"C","ic":"👮","zh":"巡邏的時候，注意並記下奇怪的人和事","e":"police officer"},{"t":"R","ic":"🏃","zh":"按時練習運動，參加比賽","e":"professional athlete"},{"t":"I","ic":"⚙️","zh":"研究、設計新的機器","e":"mechanical engineer"},{"t":"A","ic":"🎭","zh":"背台詞、練習演戲","e":"actor"},{"t":"S","ic":"🧭","zh":"帶大家去參觀，介紹好玩的地方、回答問題","e":"tour guide"},{"t":"E","ic":"🧑‍🍳","zh":"教廚房裡的人怎麼做菜，帶領大家","e":"chef"},{"t":"C","ic":"💻","zh":"把電腦要做的事一步一步排好，寫成程式","e":"programmer"},{"t":"R","ic":"✂️","zh":"幫人剪頭髮、修出好看的髮型","e":"hairstylist"},{"t":"I","ic":"📝","zh":"用測驗了解一個人的興趣和個性","e":"psychologist"},{"t":"A","ic":"🎧","zh":"選大家喜歡的歌，放給大家聽","e":"DJ"},{"t":"S","ic":"🩺","zh":"告訴大家怎麼吃、怎麼運動，才不會生病","e":"doctor"},{"t":"E","ic":"💼","zh":"選出新的工作夥伴，教他們怎麼做事","e":"business manager"},{"t":"C","ic":"📒","zh":"記下每位客人做過哪些美髮服務","e":"hairstylist"}];
 const JOBS={"R":["mechanic","firefighter","mechanical engineer","baker","veterinarian","engineer","computer engineer","police officer","hairstylist","professional athlete","esports player","architect","pilot","chef","painter","flight attendant","game tester","programmer"],"I":["game tester","doctor","veterinarian","engineer","psychologist","computer engineer","mechanical engineer","programmer","counselor","nurse","lawyer","mechanic","painter"],"A":["actor","entertainer","painter","designer","singer","DJ","teacher","architect","tour guide","baker"],"S":["teacher","counselor","psychologist","doctor","nurse","tour guide","flight attendant","actor","entertainer","singer","professional athlete","esports player","hairstylist","real estate agent","veterinarian","business manager","firefighter"],"E":["business manager","real estate agent","lawyer","chef","professional athlete","esports player","tour guide","DJ","police officer","actor","entertainer","pilot","designer","singer"],"C":["programmer","flight attendant","game tester","business manager","real estate agent","nurse","pilot","lawyer","architect","police officer","mechanic","baker","designer","hairstylist","firefighter"]};
 const SC={"doctor":{"s":{"S":87,"I":85,"C":49,"R":46,"E":22,"A":8},"top3":["S","I","C"],"url":"https://www.onetonline.org/link/details/29-1215.00","code":"29-1215.00","note":""},"professional athlete":{"s":{"R":70,"E":59,"S":55,"C":34,"A":19,"I":7},"top3":["R","E","S"],"url":"https://www.onetonline.org/link/details/27-2021.00","code":"27-2021.00","note":""},"lawyer":{"s":{"E":75,"C":60,"I":56,"S":41,"A":23,"R":2},"top3":["E","C","I"],"url":"https://www.onetonline.org/link/details/23-1011.00","code":"23-1011.00","note":""},"actor":{"s":{"A":100,"S":51,"E":50,"R":22,"I":19,"C":14},"top3":["A","S","E"],"url":"https://www.onetonline.org/link/details/27-2011.00","code":"27-2011.00","note":""},"programmer":{"s":{"C":82,"I":68,"R":40,"A":25,"E":18,"S":16},"top3":["C","I","R"],"url":"https://www.onetonline.org/link/details/15-1251.00","code":"15-1251.00","note":""},"veterinarian":{"s":{"I":83,"R":83,"C":41,"S":41,"E":12,"A":0},"top3":["R","I","S"],"url":"https://www.onetonline.org/link/details/29-1131.00","code":"29-1131.00","note":""},"police officer":{"s":{"R":73,"C":56,"E":51,"S":41,"I":29,"A":1},"top3":["R","C","E"],"url":"https://www.onetonline.org/link/details/33-3051.00","code":"33-3051.00","note":""},"engineer":{"s":{"R":78,"I":76,"A":17,"S":12,"E":24,"C":58},"top3":["R","I","C"],"url":"https://www.onetonline.org/find/family?f=17","code":"17-2xxx","note":"沒有指定哪一種工程師：分數是 O*NET 所有工程師（有分數的 34 種）的平均，34 種的前 3 名全部是實用、研究、事務型"},"esports player":{"s":{"R":70,"E":59,"S":55,"C":34,"A":19,"I":7},"top3":["R","E","S"],"url":"https://www.onetonline.org/link/details/27-2021.00","code":"27-2021.00","note":"分數是全部運動員一起算（電競選手和其他運動員同一個職業）"},"teacher":{"s":{"S":100,"A":48,"C":46,"I":39,"R":27,"E":26},"top3":["S","A","C"],"url":"https://www.onetonline.org/link/details/25-2021.00","code":"25-2021.00","note":""},"business manager":{"s":{"E":100,"C":72,"S":40,"I":23,"R":20,"A":5},"top3":["E","C","S"],"url":"https://www.onetonline.org/link/details/11-1021.00","code":"11-1021.00","note":""},"game tester":{"s":{"I":79,"C":78,"R":47,"A":12,"E":10,"S":9},"top3":["I","C","R"],"url":"https://www.onetonline.org/link/details/15-1253.00","code":"15-1253.00","note":""},"pilot":{"s":{"C":62,"R":62,"E":47,"I":36,"S":25,"A":7},"top3":["R","C","E"],"url":"https://www.onetonline.org/link/details/53-2011.00","code":"53-2011.00","note":""},"counselor":{"s":{"S":97,"I":57,"C":41,"A":34,"E":33,"R":5},"top3":["S","I","C"],"url":"https://www.onetonline.org/link/details/21-1014.00","code":"21-1014.00","note":""},"firefighter":{"s":{"R":92,"C":41,"S":40,"E":34,"I":32,"A":5},"top3":["R","C","S"],"url":"https://www.onetonline.org/link/details/33-2011.00","code":"33-2011.00","note":""},"entertainer":{"s":{"A":100,"S":51,"E":50,"R":22,"I":19,"C":14},"top3":["A","S","E"],"url":"https://www.onetonline.org/link/details/27-2011.00","code":"27-2011.00","note":"「Entertainer」列在演員（27-2011.00）和廣播主持人／電台 DJ（27-3011.00）兩個職業，兩個的前 3 名都是藝術、社會、企業型；分數用演員的"},"baker":{"s":{"R":88,"C":53,"A":23,"E":18,"S":12,"I":11},"top3":["R","C","A"],"url":"https://www.onetonline.org/link/details/51-3011.00","code":"51-3011.00","note":""},"nurse":{"s":{"S":76,"C":63,"I":62,"R":41,"E":23,"A":6},"top3":["S","C","I"],"url":"https://www.onetonline.org/link/details/29-1141.00","code":"29-1141.00","note":""},"tour guide":{"s":{"S":73,"E":44,"A":41,"R":39,"C":31,"I":23},"top3":["S","E","A"],"url":"https://www.onetonline.org/link/details/39-7011.00","code":"39-7011.00","note":""},"psychologist":{"s":{"S":93,"I":76,"C":42,"A":34,"E":28,"R":1},"top3":["S","I","C"],"url":"https://www.onetonline.org/link/details/19-3033.00","code":"19-3033.00","note":""},"painter":{"s":{"A":100,"R":51,"I":28,"E":23,"C":22,"S":21},"top3":["A","R","I"],"url":"https://www.onetonline.org/link/details/27-1013.00","code":"27-1013.00","note":""},"designer":{"s":{"A":100,"C":49,"E":41,"R":40,"I":31,"S":19},"top3":["A","C","E"],"url":"https://www.onetonline.org/link/details/27-1024.00","code":"27-1024.00","note":""},"flight attendant":{"s":{"C":57,"S":53,"R":51,"E":44,"I":17,"A":5},"top3":["C","S","R"],"url":"https://www.onetonline.org/link/details/53-2031.00","code":"53-2031.00","note":""},"singer":{"s":{"A":94,"E":40,"S":40,"R":31,"C":20,"I":9},"top3":["A","S","E"],"url":"https://www.onetonline.org/link/details/27-2042.00","code":"27-2042.00","note":""},"mechanic":{"s":{"R":100,"C":55,"I":43,"E":10,"S":8,"A":0},"top3":["R","C","I"],"url":"https://www.onetonline.org/link/details/49-3023.00","code":"49-3023.00","note":""},"computer engineer":{"s":{"R":78,"I":76,"C":73,"E":16,"A":14,"S":14},"top3":["R","I","C"],"url":"https://www.onetonline.org/link/details/17-2061.00","code":"17-2061.00","note":""},"real estate agent":{"s":{"E":91,"C":66,"S":42,"R":19,"A":15,"I":8},"top3":["E","C","S"],"url":"https://www.onetonline.org/link/details/41-9022.00","code":"41-9022.00","note":""},"hairstylist":{"s":{"R":73,"C":49,"S":45,"E":38,"A":37,"I":9},"top3":["R","C","S"],"url":"https://www.onetonline.org/link/details/39-5012.00","code":"39-5012.00","note":""},"architect":{"s":{"R":65,"C":57,"A":52,"I":48,"E":44,"S":26},"top3":["R","C","A"],"url":"https://www.onetonline.org/link/details/17-1011.00","code":"17-1011.00","note":""},"DJ":{"s":{"A":64,"E":43,"C":42,"R":33,"S":32,"I":9},"top3":["A","E","C"],"url":"https://www.onetonline.org/link/details/27-2091.00","code":"27-2091.00","note":""},"mechanical engineer":{"s":{"R":90,"I":69,"C":64,"A":17,"E":16,"S":4},"top3":["R","I","C"],"url":"https://www.onetonline.org/link/details/17-2141.00","code":"17-2141.00","note":""},"chef":{"s":{"E":69,"R":64,"C":56,"S":33,"A":29,"I":11},"top3":["E","R","C"],"url":"https://www.onetonline.org/link/details/35-1011.00","code":"35-1011.00","note":""}};
 const FUN={"programmer":"第 6 題要考「事務型」（喜歡照步驟、把事情整理好）。美國勞動部的資料：程式設計師的六種分數裡，事務型 82 分最高，所以用程式設計師的工作出題。"};
@@ -832,6 +845,80 @@ const WD={"doctor":[1,"醫生","🩺"],"professional athlete":[2,"職業運動�
 const SYL={"doctor":"doc-tor","professional athlete":"pro-fes-sion-al ath-lete","lawyer":"law-yer","actor":"ac-tor","programmer":"pro-gram-mer","veterinarian":"vet-er-i-nar-i-an","police officer":"po-lice of-fi-cer","engineer":"en-gi-neer","esports player":"e-sports play-er","teacher":"teach-er","business manager":"busi-ness man-ag-er","game tester":"game test-er","pilot":"pi-lot","counselor":"coun-se-lor","firefighter":"fire-fight-er","entertainer":"en-ter-tain-er","baker":"bak-er","nurse":"nurse","tour guide":"tour guide","psychologist":"psy-chol-o-gist","painter":"paint-er","designer":"de-sign-er","flight attendant":"flight at-ten-dant","singer":"sing-er","mechanic":"me-chan-ic","computer engineer":"com-pu-ter en-gi-neer","real estate agent":"re-al es-tate a-gent","hairstylist":"hair-styl-ist","architect":"ar-chi-tect","DJ":"D-J","mechanical engineer":"me-chan-i-cal en-gi-neer","chef":"chef","YouTuber":"You-Tu-ber","content creator":"con-tent cre-a-tor","influencer":"in-flu-enc-er"};
 const VOW={"doctor":[1,4],"professional athlete":[2,4,7,8,10,13,17],"programmer":[2,5,8],"engineer":[0,3,5,6],"esports player":[0,3,10,11,12],"teacher":[1,2,5],"business manager":[1,5,10,12,14],"influencer":[0,4,5,8],"lawyer":[1,4],"baker":[1,3],"psychologist":[2,5,7,9],"nurse":[1],"painter":[1,2,5],"police officer":[1,3,7,10,12],"designer":[1,3,6],"singer":[1,4],"veterinarian":[1,3,5,7,9,10],"mechanic":[1,4,6],"computer engineer":[1,4,6,9,12,14,15],"hairstylist":[1,2,6,8],"architect":[0,4,6],"content creator":[1,4,10,11,13],"game tester":[1,6,9],"counselor":[1,2,5,7],"entertainer":[0,3,6,7,9],"tour guide":[1,2,7],"actor":[0,3],"pilot":[1,3],"firefighter":[1,5,9],"YouTuber":[1,2,4,6],"flight attendant":[2,7,10,13],"real estate agent":[1,2,5,8,12,14],"DJ":[],"mechanical engineer":[1,4,6,8,11,14,16,17],"chef":[2]};
 const SILENT={"professional athlete":[19],"business manager":[3],"psychologist":[0],"nurse":[4],"police officer":[5],"designer":[4],"game tester":[3],"tour guide":[6,9],"firefighter":[3,6,7],"flight attendant":[3,4],"real estate agent":[10]};
+const WHY={"doctor":[{"at":3,"l":"doc","r":"tor","why":"中間有 c、t 2 個子音的聲音，從中間切"}],"professional athlete":[{"at":3,"l":"pro","r":"fes","why":"中間只有 1 個子音 f，跟後面的母音走"},{"at":6,"l":"fes","r":"sion","why":"兩個一樣的字母 ss，從中間切"},{"at":10,"l":"sion","r":"al","why":"字尾 al 自己一拍，從字尾前面切"},{"at":16,"l":"ath","r":"lete","why":"中間有 th、l 2 個子音的聲音，從中間切（th 兩個字母一個聲音）"}],"lawyer":[{"at":3,"l":"law","r":"yer","why":"中間只有 1 個子音 y，跟後面的母音走"}],"actor":[{"at":2,"l":"ac","r":"tor","why":"中間有 c、t 2 個子音的聲音，從中間切"}],"programmer":[{"at":3,"l":"pro","r":"gram","why":"gr 黏在一起唸，跟後面的母音走"},{"at":7,"l":"gram","r":"mer","why":"兩個一樣的字母 mm，從中間切"}],"veterinarian":[{"at":3,"l":"vet","r":"er","why":"字尾 er 自己一拍，從字尾前面切"},{"at":5,"l":"er","r":"i","why":"中間只有 1 個子音 r，這裡跟前面走（前面的母音唸短短的）"},{"at":6,"l":"i","r":"nar","why":"中間只有 1 個子音 n，跟後面的母音走"},{"at":9,"l":"nar","r":"i","why":"中間只有 1 個子音 r，這裡跟前面走（前面的母音唸短短的）"},{"at":10,"l":"i","r":"an","why":"兩個母音的聲音挨在一起，各自一拍，從中間分開"}],"police officer":[{"at":2,"l":"po","r":"lice","why":"中間只有 1 個子音 l，跟後面的母音走"},{"at":9,"l":"of","r":"fi","why":"兩個一樣的字母 ff，從中間切"},{"at":11,"l":"fi","r":"cer","why":"中間只有 1 個子音 c，跟後面的母音走"}],"engineer":[{"at":2,"l":"en","r":"gi","why":"中間有 n、g 2 個子音的聲音，從中間切"},{"at":4,"l":"gi","r":"neer","why":"中間只有 1 個子音 n，跟後面的母音走"}],"esports player":[{"at":1,"l":"e","r":"sports","why":"sp 黏在一起唸，跟後面的母音走"},{"at":12,"l":"play","r":"er","why":"字尾 er 自己一拍，從字尾前面切"}],"teacher":[{"at":5,"l":"teach","r":"er","why":"字尾 er 自己一拍，從字尾前面切"}],"business manager":[{"at":4,"l":"busi","r":"ness","why":"中間有 s、n 2 個子音的聲音，從中間切"},{"at":12,"l":"man","r":"ag","why":"中間只有 1 個子音 n，這裡跟前面走（前面的母音唸短短的）"},{"at":14,"l":"ag","r":"er","why":"中間只有 1 個子音 g，這裡跟前面走（前面的母音唸短短的）"}],"game tester":[{"at":9,"l":"test","r":"er","why":"字尾 er 自己一拍，從字尾前面切"}],"pilot":[{"at":2,"l":"pi","r":"lot","why":"中間只有 1 個子音 l，跟後面的母音走"}],"counselor":[{"at":4,"l":"coun","r":"se","why":"中間有 n、s 2 個子音的聲音，從中間切"},{"at":6,"l":"se","r":"lor","why":"中間只有 1 個子音 l，跟後面的母音走"}],"firefighter":[{"at":4,"l":"fire","r":"fight","why":"fire ＋ fighter：兩個字黏在一起，先從中間分開"},{"at":9,"l":"fight","r":"er","why":"字尾 er 自己一拍，從字尾前面切"}],"entertainer":[{"at":2,"l":"en","r":"ter","why":"中間有 n、t 2 個子音的聲音，從中間切"},{"at":5,"l":"ter","r":"tain","why":"中間有 r、t 2 個子音的聲音，從中間切"},{"at":9,"l":"tain","r":"er","why":"字尾 er 自己一拍，從字尾前面切"}],"baker":[{"at":3,"l":"bak","r":"er","why":"字尾 er 自己一拍，從字尾前面切"}],"nurse":[],"tour guide":[],"psychologist":[{"at":3,"l":"psy","r":"chol","why":"ch 兩個字母一個聲音，跟後面的母音走"},{"at":7,"l":"chol","r":"o","why":"中間只有 1 個子音 l，這裡跟前面走（前面的母音唸短短的）"},{"at":8,"l":"o","r":"gist","why":"中間只有 1 個子音 g，跟後面的母音走"}],"painter":[{"at":5,"l":"paint","r":"er","why":"字尾 er 自己一拍，從字尾前面切"}],"designer":[{"at":2,"l":"de","r":"sign","why":"中間只有 1 個子音 s，跟後面的母音走"},{"at":6,"l":"sign","r":"er","why":"字尾 er 自己一拍，從字尾前面切"}],"flight attendant":[{"at":9,"l":"at","r":"ten","why":"兩個一樣的字母 tt，從中間切"},{"at":12,"l":"ten","r":"dant","why":"中間有 n、d 2 個子音的聲音，從中間切"}],"singer":[{"at":4,"l":"sing","r":"er","why":"字尾 er 自己一拍，從字尾前面切"}],"mechanic":[{"at":2,"l":"me","r":"chan","why":"ch 兩個字母一個聲音，跟後面的母音走"},{"at":6,"l":"chan","r":"ic","why":"字尾 ic 自己一拍，從字尾前面切"}],"computer engineer":[{"at":3,"l":"com","r":"pu","why":"中間有 m、p 2 個子音的聲音，從中間切"},{"at":5,"l":"pu","r":"ter","why":"中間只有 1 個子音 t，跟後面的母音走"},{"at":11,"l":"en","r":"gi","why":"中間有 n、g 2 個子音的聲音，從中間切"},{"at":13,"l":"gi","r":"neer","why":"中間只有 1 個子音 n，跟後面的母音走"}],"real estate agent":[{"at":2,"l":"re","r":"al","why":"兩個母音的聲音挨在一起，各自一拍，從中間分開"},{"at":7,"l":"es","r":"tate","why":"中間有 s、t 2 個子音的聲音，從中間切"},{"at":13,"l":"a","r":"gent","why":"中間只有 1 個子音 g，跟後面的母音走"}],"hairstylist":[{"at":4,"l":"hair","r":"styl","why":"hair ＋ stylist：兩個字黏在一起，先從中間分開"},{"at":8,"l":"styl","r":"ist","why":"字尾 ist 自己一拍，從字尾前面切"}],"architect":[{"at":2,"l":"ar","r":"chi","why":"中間有 r、ch 2 個子音的聲音，從中間切（ch 兩個字母一個聲音，一起跟後面走）"},{"at":5,"l":"chi","r":"tect","why":"中間只有 1 個子音 t，跟後面的母音走"}],"DJ":[{"at":1,"l":"D","r":"J","why":"D 和 J 是兩個字母，一個字母唸一拍"}],"mechanical engineer":[{"at":2,"l":"me","r":"chan","why":"ch 兩個字母一個聲音，跟後面的母音走"},{"at":6,"l":"chan","r":"i","why":"中間只有 1 個子音 n，這裡跟前面走（前面的母音唸短短的）"},{"at":7,"l":"i","r":"cal","why":"中間只有 1 個子音 c，跟後面的母音走"},{"at":13,"l":"en","r":"gi","why":"中間有 n、g 2 個子音的聲音，從中間切"},{"at":15,"l":"gi","r":"neer","why":"中間只有 1 個子音 n，跟後面的母音走"}],"chef":[],"YouTuber":[{"at":3,"l":"You","r":"Tu","why":"You ＋ Tuber：兩個字黏在一起，先從中間分開"},{"at":5,"l":"Tu","r":"ber","why":"中間只有 1 個子音 b，跟後面的母音走"}],"content creator":[{"at":3,"l":"con","r":"tent","why":"中間有 n、t 2 個子音的聲音，從中間切"},{"at":11,"l":"cre","r":"a","why":"兩個母音的聲音挨在一起，各自一拍，從中間分開"},{"at":12,"l":"a","r":"tor","why":"中間只有 1 個子音 t，跟後面的母音走"}],"influencer":[{"at":2,"l":"in","r":"flu","why":"中間有 n、fl 2 個子音的聲音，從中間切（fl 黏在一起唸，一起跟後面走）"},{"at":5,"l":"flu","r":"enc","why":"兩個母音的聲音挨在一起，各自一拍，從中間分開"},{"at":8,"l":"enc","r":"er","why":"字尾 er 自己一拍，從字尾前面切"}]};
+
+/* 音節動畫（_syl_anim.js；jobdex、quiz 共用） */
+var SA=(function(){
+ var T=[],au=null,tok=0;
+ function later(f,ms){T.push(setTimeout(f,ms))}
+ function stop(){T.forEach(clearTimeout);T=[];tok++;try{if(au){au.pause()}}catch(e){}}
+ /* 錄好的聲音（audio/syl/aud.js 的 SYLAUD）；沒有就用裝置語音 */
+ function play(key,fallback,say,done){var my=tok,fin=false;var end=function(){if(fin)return;fin=true;clearTimeout(t);if(my===tok&&done)done()};
+  var A=window.SYLAUD&&window.SYLAUD[key],t=setTimeout(end,A?A[1]*1000+1800:6000);
+  if(!A){if(say)say(fallback,end);else setTimeout(end,600);return}
+  try{if(!au)au=new Audio();au.onended=end;au.onerror=function(){if(say)say(fallback,end);else end()};au.src=(window.SYLDIR||'audio/syl/')+A[0];var p=au.play();if(p&&p.catch)p.catch(function(){if(say)say(fallback,end);else end()})}catch(e){end()}}
+ function letter(o,i){var c=o.e[i];var k=o.g.indexOf(i)>-1?' lg':o.v.indexOf(i)>-1?' lv':'';return '<span class="sa-l'+k+'" data-i="'+i+'">'+c+'</span>'}
+ /* 音節資料：[[{t,a,b}...每個字], ...] */
+ function parts(o){var pos=0;return o.syl.split(' ').map(function(w){var ps=w.split('-').map(function(s){var r={t:s,a:pos,b:pos+s.length};pos+=s.length;return r});pos++;return ps})}
+ /* 每一節的母音（連在一起的紅色字母算一個聲音） */
+ function vgroups(o,P){var G=[];P.forEach(function(w){w.forEach(function(s){var cur=null;for(var i=s.a;i<s.b;i++){if(o.v.indexOf(i)>-1){if(cur&&cur[cur.length-1]===i-1)cur.push(i);else{cur=[i];G.push(cur)}}else cur=cur&&o.g.indexOf(i)>-1?cur:null}})});return G}
+ function count(o){var n=0;parts(o).forEach(function(w){n+=w.length});return n}
+ function text(o){return parts(o).map(function(w){return w.map(function(s){return s.t}).join(' · ')}).join('　')}
+ function whyHTML(o){if(!o.why||!o.why.length)return '<div class="sa-why"><h4>🤔 為什麼這樣切？</h4><div>'+(count(o)===1?'只有 1 個母音的聲音 ➜ 1 拍，不用切。':'每一個字自己唸，一個字一拍。')+'</div></div>';
+  return '<ul class="sa-why"><h4>🤔 為什麼這樣切？</h4>'+o.why.map(function(c){return '<li><span class="k">'+c.l+'<i>｜</i>'+c.r+'</span><span>'+c.why+'</span></li>'}).join('')+'</ul>'}
+ /* 畫字：mode = clap／train／cut */
+ function draw(st,o,mode){var P=parts(o),k=0,h='';
+  P.forEach(function(w,wi){h+='<span class="sa-w">'+(mode==='train'&&wi===0?'<span class="sa-eng">🚂</span>':'');
+   w.forEach(function(s){var x='';for(var i=s.a;i<s.b;i++)x+=letter(o,i);h+='<span class="sa-s" data-k="'+(k++)+'">'+x+'</span>'});h+='</span>'});
+  st.className='sa-stage'+(mode==='train'?' sa-train':'');st.innerHTML=h;return P}
+ /* o = {e 單字, syl 音節(doc-tor), v 母音位置, g 不發音位置, why 每一刀的原因, key 鑰匙用的字, say(文字,做完), sfx{pop,snip,clap,drum}} */
+ function run(root,o,mode){stop();var my=tok;var st=root.querySelector('.sa-stage'),msg=root.querySelector('.sa-msg'),wb=root.querySelector('.sa-whybox');
+  var sfx=o.sfx||{},fx=function(n){try{sfx[n]&&sfx[n]()}catch(e){}};
+  [].forEach.call(root.querySelectorAll('.sa-btn button'),function(b){b.classList.toggle('on',b.getAttribute('data-m')===mode)});
+  var P=draw(st,o,mode),S=[].slice.call(st.querySelectorAll('.sa-s')),n=S.length,ST=[].concat.apply([],P.map(function(w){return w.map(function(s){return s.t})})),G=vgroups(o,P),key=(o.key||o.e).toLowerCase();
+  if(wb)wb.innerHTML='';var t=300,dj=!G.length;
+  msg.innerHTML='👀 找一找：紅色的字母是<b style="font-size:1em">母音</b>';
+  /* ① 數母音 */
+  t+=900;
+  if(dj){S.forEach(function(s,i){later(function(){var b=document.createElement('span');b.className='sa-n';b.textContent=i+1;s.appendChild(b);void b.offsetWidth;b.classList.add('on');fx('pop');msg.innerHTML='<span class="en">'+ST[i]+'</span> 是一個字母，自己一拍'},t+i*800)});t+=n*800}
+  else G.forEach(function(g,i){later(function(){g.forEach(function(x){var l=st.querySelector('.sa-l[data-i="'+x+'"]');if(l)l.classList.add('vo')});
+   var first=st.querySelector('.sa-l[data-i="'+g[0]+'"]'),last=st.querySelector('.sa-l[data-i="'+g[g.length-1]+'"]');
+   var b=document.createElement('span');b.className='sa-n';b.textContent=i+1;first.style.position='relative';
+   if(g.length>1){b.style.left='calc(50% + '+((last.offsetLeft+last.offsetWidth-first.offsetLeft)/2-first.offsetWidth/2)+'px)'}
+   first.appendChild(b);void b.offsetWidth;b.classList.add('on');fx('pop');
+   msg.innerHTML='紅色母音：<b>'+(i+1)+'</b> 個'+(g.length>1?'（<span class="en">'+g.map(function(x){return o.e[x]}).join('')+'</span> 一起唸，算 1 個聲音）':'')},t+i*800)});
+  if(!dj)t+=G.length*800;
+  later(function(){msg.innerHTML=dj?'<b>'+n+'</b> 個字母 ＝ <b>'+n+'</b> 拍':'<b>'+G.length+'</b> 個母音的聲音 ＝ <b>'+n+'</b> 拍'+(n>1?'<br>每一拍有 1 個母音，所以可以切成 '+n+' 段':'<br>只有 1 個母音 ➜ 1 拍，不用切')},t);t+=1900;
+  /* ② 切開 */
+  var cuts=o.why||[],ci=0;
+  S.forEach(function(s,i){if(i===0)return;var prevW=S[i-1].parentNode,sameW=prevW===s.parentNode;if(!sameW)return;
+   var c=cuts[ci++];later(function(){if(my!==tok)return;
+    st.classList.add('apart');
+    if(mode==='cut'){var sc=st.querySelector('.sa-sci');if(!sc){sc=document.createElement('span');sc.className='sa-sci';sc.textContent='✂️';st.appendChild(sc)}
+     var r=s.getBoundingClientRect(),b=st.getBoundingClientRect();sc.style.left=(r.left-b.left-6)+'px';
+     later(function(){var sn=document.createElement('span');sn.className='sa-snip';sn.textContent='喀嚓！';sn.style.left=(s.getBoundingClientRect().left-st.getBoundingClientRect().left-6)+'px';st.appendChild(sn);fx('snip')},450)}
+    else fx(mode==='train'?'clank':'pop');
+    s.style.marginLeft='.55em';
+    msg.innerHTML=c?'<span class="en">'+c.l+' ｜ '+c.r+'</span><br>'+c.why:'切開';},t);t+=2600});
+  if(n>1)later(function(){var sc=st.querySelector('.sa-sci');if(sc)sc.remove()},t);
+  /* ③ 一節一節唸 */
+  later(function(){if(my!==tok)return;msg.innerHTML=n>1?'一節一節唸 🔊':'唸唸看 🔊';if(mode==='train')st.classList.add('go');var k=0;
+   var step=function(){if(my!==tok)return;S.forEach(function(x){x.classList.remove('now','dim')});
+    if(k>=n){/* ④ 整個字 */st.classList.add('all');msg.innerHTML='<span class="en">'+text(o)+'</span> ＝ <b>'+n+'</b> 拍 '+(mode==='clap'?'👏'.repeat(Math.min(n,7)):mode==='train'?'🚃'.repeat(Math.min(n,7)):'');
+     play('word '+key,o.e,o.say,function(){st.classList.remove('all','go');if(wb)wb.innerHTML=whyHTML(o);if(o.done)o.done(n)});return}
+    var s=S[k];S.forEach(function(x,j){if(j!==k)x.classList.add('dim')});s.classList.add('now');
+    var pop=document.createElement('span');pop.className='sa-pop';pop.textContent=mode==='clap'?'👏':mode==='train'?'🚃':'✂️';s.appendChild(pop);setTimeout(function(){pop.remove()},800);
+    fx(mode==='clap'?'clap':'drum');msg.innerHTML='第 <b>'+(k+1)+'</b> 拍：<span class="en" style="font-size:1.3em">'+ST[k]+'</span>';
+    var fb=ST[k];k++;
+    play(n>1?'syl '+key+' '+(k-1):'word '+key,fb,o.say,function(){later(step,n>1?350:150)})};
+   step()},t)}
+ /* 放進一個盒子：三個按鈕＋舞台＋說明 */
+ function box(o){return '<div class="sa"><div class="sa-btn"><button data-m="clap">👏 拍手</button><button data-m="train">🚂 音節火車</button><button data-m="cut">✂️ 剪刀</button></div><div class="sa-stage"></div><div class="sa-msg"></div><div class="sa-whybox"></div></div>'}
+ function mount(root,o){root.innerHTML=box(o);var P=draw(root.querySelector('.sa-stage'),o,'clap');root.querySelector('.sa-msg').innerHTML='點上面的按鈕，看這個字有幾拍、怎麼切';
+  root.querySelector('.sa-whybox').innerHTML=whyHTML(o);
+  root.querySelector('.sa-btn').addEventListener('click',function(ev){var b=ev.target.closest('button');if(b)run(root,o,b.getAttribute('data-m'))})}
+ return {mount:mount,run:run,stop:stop,count:count,text:text,play:play,parts:parts,vgroups:vgroups}})();
+
 const QN=26;
 const $=id=>document.getElementById(id);
 let ans=[],cur=0,heard=[],unlocked=new Set(),lvl=0,chq=[],chk=0,chOk=0,lockT=0;
@@ -1002,47 +1089,16 @@ function openSheet(e,sylMode){const w=WD[e],j=SC[e];
    +(j.note?'<p class="pnote">※ '+j.note+'</p>':'')+(FUN[e]?'<p class="pfun">💡 '+FUN[e]+'</p>':'')
    +'<p class="pnote">資料：<a href="'+j.url+'" target="_blank" rel="noopener">O*NET '+j.code+'</a></p>'}
  else h+='<div class="pexp">這個工作還沒有自己的興趣分數。</div>';
- h+='<div class="syls" id="syls"><h3>✂️ 音節：這個字有幾拍？</h3><div class="sbtn"><button data-m="clap">👏 拍手</button><button data-m="train">🚂 音節火車</button><button data-m="cut">✂️ 剪刀</button></div><div class="syst" id="syst"></div><div class="sres" id="sres"></div></div>'
+ h+='<div class="syls" id="syls"><h3>✂️ 音節：有幾拍？怎麼切？</h3><div id="sabox"></div></div>'
   +'<div class="plink"><a class="ghost" id="plink" href="story.html#w'+w[0]+'">📚 學這個字（單字卡）▶</a></div>';
  $('panel').innerHTML=h;$('sheet').classList.add('on');$('sheet').dataset.e=e;$('sheet').scrollTop=0;
  document.querySelectorAll('.pb').forEach((b,i)=>setTimeout(()=>{b.classList.add('on');const x=b.querySelector('i');x.style.width=x.dataset.w+'%'},200+i*260));
- sylStatic(e);
- if(sylMode){setTimeout(()=>{$('syls').scrollIntoView({block:'start'});playSyl(e,sylMode)},300)}else speak(e,1);
+ SA.mount($('sabox'),saOpt(e));
+ if(sylMode){setTimeout(()=>{$('syls').scrollIntoView({block:'start'});SA.run($('sabox'),saOpt(e),sylMode)},300)}else speak(e,1);
 }
-function closeSheet(){$('sheet').classList.remove('on');clearSyl();stop()}
-let sylT=[];
-function clearSyl(){sylT.forEach(clearTimeout);sylT=[]}
-function later(f,ms){sylT.push(setTimeout(f,ms))}
-function sylData(e){const ws=(SYL[e]||e).split(' ');let pos=0;return ws.map(w=>{const ps=w.split('-').map(s=>{const o={t:s,a:pos,b:pos+s.length};pos+=s.length;return o});pos+=1;return ps})}
-function sylCount(e){return sylData(e).reduce((a,w)=>a+w.length,0)}
-function sylText(e){return sylData(e).map(w=>w.map(s=>s.t).join(' · ')).join('　')}
-function sylDone(e){$('sres').innerHTML='<span class="en">'+sylText(e)+'</span> ＝ '+sylCount(e)+' 個音節'}
-function wordHTML(e,cut){return sylData(e).map(w=>'<span class="wd">'+w.map((s,i)=>(i&&cut?'<span class="cut"></span>':'')+'<span class="sy">'+colorRange(e,s.a,s.b)+'</span>').join('')+'</span>').join('<span class="wgap"></span>')}
-function sylStatic(e){$('syst').className='syst';$('syst').innerHTML=wordHTML(e,false);$('sres').innerHTML='點上面的按鈕，看看這個字可以分成幾拍'}
-function playSyl(e,m){clearSyl();const st=$('syst');st.className='syst';$('sres').innerHTML='';
- document.querySelectorAll('.sbtn button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));
- speak(e,1);const n=sylCount(e);
- if(m==='clap'){st.innerHTML=wordHTML(e,true);
-  later(()=>st.classList.add('cutting'),500);later(()=>st.classList.add('apart'),1000);
-  const sy=[...st.querySelectorAll('.sy')];
-  sy.forEach((x,k)=>later(()=>{x.classList.remove('beat');void x.offsetWidth;x.classList.add('beat');const c=document.createElement('span');c.className='clap';c.textContent='👏';x.appendChild(c);sfx.clap()},1500+k*650));
-  later(()=>sylDone(e),1600+n*650)}
- else if(m==='train'){let k=0;
-  st.innerHTML='<div class="train out" id="trn"><span class="eng">🚂</span>'+sylData(e).map(w=>w.map(s=>'<span class="car"><span class="nb">'+(++k)+'</span><span>'+colorRange(e,s.a,s.b)+'</span></span>').join('')).join('')+'</div>';
-  const tr=st.querySelector('.train');later(()=>tr.classList.remove('out'),60);
-  later(()=>tr.classList.add('apart'),1600);
-  [...st.querySelectorAll('.nb')].forEach((b,i)=>later(()=>{b.classList.add('on');sfx.pop()},2200+i*500));
-  later(()=>sylDone(e),2300+n*500)}
- else{st.innerHTML=wordHTML(e,false)+'<span class="sci" id="sci">✂️</span>';
-  const sci=st.querySelector('.sci'),sy=[...st.querySelectorAll('.sy')],box=st.getBoundingClientRect();
-  sci.style.left='4%';
-  const ends=[];let idx=0;sylData(e).forEach(w=>{w.forEach((s,i)=>{if(i>0)ends.push(sy[idx]);idx++})});
-  if(!ends.length){later(()=>{sci.style.left='96%'},300);later(()=>{$('sres').innerHTML='只有 1 個音節，不用剪！'},900);later(()=>sylDone(e),1500);return}
-  ends.forEach((x,k)=>{later(()=>{const r=x.getBoundingClientRect();sci.style.left=(r.left-box.left)+'px'},400+k*800);
-   later(()=>{st.querySelectorAll('.snip').forEach(o=>o.remove());const r=x.getBoundingClientRect(),s=document.createElement('span');s.className='snip';s.textContent='喀擦！';s.style.left=(r.left-box.left)+'px';st.appendChild(s);sfx.snip();x.style.marginLeft='.3em'},800+k*800)});
-  later(()=>{sci.style.left='96%';st.classList.add('split')},900+ends.length*800);
-  later(()=>sylDone(e),1500+ends.length*800)}
-}
+function closeSheet(){$('sheet').classList.remove('on');SA.stop();stop()}
+/* 音節動畫：和 jobdex.html 共用（_syl_anim.js） */
+function saOpt(e){return {e,syl:SYL[e]||e,v:VOW[e]||[],g:SILENT[e]||[],why:WHY[e]||[],say:(t,cb)=>speak(t,1,cb),sfx:{pop:sfx.pop,snip:sfx.snip,clap:sfx.clap,drum:sfx.pop,clank:sfx.pop}}}
 /* ---- 事件 ---- */
 $('go').onclick=start;$('again').onclick=start;
 $('sail').onclick=()=>{cur=0;show('quiz');render()};
@@ -1062,7 +1118,7 @@ document.addEventListener('keydown',ev=>{const dc=ev.target.closest&&ev.target.c
  if(ev.key==='Escape'&&$('sheet').classList.contains('on'))closeSheet()});
 $('sheet').addEventListener('click',ev=>{if(ev.target.id==='sheet'||ev.target.closest('#xbtn')){closeSheet();return}
  if(ev.target.closest('#psay')){speak($('sheet').dataset.e,1);return}
- const m=ev.target.closest('.sbtn button');if(m)playSyl($('sheet').dataset.e,m.dataset.m)});
+});
 $('evgo').onclick=e=>{e.preventDefault();$('ev').open=true;$('ev').scrollIntoView()};
 function evHash(){if(location.hash==='#ev'){$('ev').open=true;setTimeout(()=>$('ev').scrollIntoView(),50)}}
 evHash();addEventListener('hashchange',evHash);
