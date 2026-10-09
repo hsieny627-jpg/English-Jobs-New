@@ -68,6 +68,44 @@ NODE_PATH=$(npm root -g) node _verify.js   # 量測，只印失敗項＋一行�
 
 ## 六、還沒做／等使用者決定
 
+### ★ quiz 改版（2026/10/9 使用者已同意；下一個對話照做，不要重新規劃、不要重查下面已查證的資料）
+做法：題目改 `_quiz_check.py`（ITEMS、CLAIMS、NO_DATA）→ `python3 _quiz_check.py` → 改 `_build_quiz.js` → 量測 0 失敗 → 推 main。新的出處都要加進 CLAIMS 自動核對。
+
+**1. 7 個「沒有資料」的職業**（O*NET 官方職稱資料庫 v31：https://www.onetcenter.org/dl_files/database/db_31_0_csv/job_titles.csv ，54,269 個職稱）
+| 職業 | 決定 | 證據 |
+|---|---|---|
+| esports player | 歸類 R E S | 職稱「Esports Competitor」「Gamer」列在 27-2021.00 Athletes and Sports Competitors（R70 E59 S55）；要註明分數是全部運動員一起算 |
+| entertainer | 歸類 A S E | 職稱「Entertainer」列在 27-2011.00 Actors（A100 S51 E50）；也列在 27-2099.00（無資料） |
+| engineer | 歸類 R I C | SOC 17-2000「工程師」大類，有分數的 29 種工程師（17-2021～17-2199.11）前 3 名全部是 R、I、C；`_quiz_check.py` 要逐一抓這 29 頁自動核對 |
+| content creator | 不歸類 | 資料庫的「Content Creator」在 15-1255.01 Video Game Designers（做遊戲內容），和網站的「自媒體經營」意思不同 |
+| YouTuber、influencer | 不歸類 | 職稱資料庫裡沒有這些字 |
+| fortune teller | 不歸類、結果頁不列 | 「Fortune Teller」在 27-2099.00，原文：“O*NET data is not available for this type of title.” |
+給學生的說明（放「這些職業也可以認識」）：美國勞動部替 900 多種工作做過調查，但 YouTuber、網紅、內容創作者這些很新的工作還沒有調查資料，所以先不分類，不代表它們不好。
+
+**2. 題目改字（30 題中改 15 題，其餘不變；每句都要對得到原文）**
+3 用筆、水彩或電腦畫畫｜6 **整題換成 programmer（事務型分數最高的職業，避免職業和型矛盾）**：找出電腦程式哪裡寫錯，改好再檢查一次（Correct errors by making appropriate changes and rechecking the program to ensure that the desired results are produced.）｜7 把麵粉放在秤上秤重，準備做麵包｜8 試玩電玩遊戲，找出哪裡有問題，記錄下來｜9 幫公司設計標誌（logo）和網頁畫面｜12 檢查急救箱和滅火器能不能用｜16 聽別人說出心裡的感受，幫他更了解自己｜17 幫要買房子和要賣房子的人商量｜18 把發生了什麼事，仔細寫下來｜19 按時練習運動，參加比賽｜20 研究機器為什麼壞掉，想辦法改好｜22 帶大家去參觀，介紹好玩的地方、回答問題｜24 把電腦要做的事一步一步排好，寫成程式｜26 找出別人在心情或行為上遇到的困難｜29 **整題換成 business manager 另一句**：選出新的工作夥伴，教他們怎麼做事（Perform personnel functions, such as selection, training, or evaluation.）。
+原則：每一型的題目優先用「這一型分數最高」的職業，學生才不會覺得職業和型對不起來。
+
+**3. 探險首頁重做（表面效度：精緻、嚴謹、讓學生信服）**
+- 動線只有一條：標題 → 研究根據 3 張卡 → 為什麼做這個測驗 → 六種興趣 → 三句話 → 開始按鈕。主色深藍＋金色；六型固定顏色全站統一；每區塊一句話；動畫收斂（淡入、輕彈）。
+- 研究根據 3 張卡：🇺🇸 改編自美國勞動部 O*NET「職業興趣量表」（onetcenter.org/IP.html）｜📚 何倫 Holland 六種興趣理論：研究歷史很長、輔導老師很常使用（IP.html 原文 rich and extensive research history；widely accepted and used by counselors）｜🔬 研究發現小學生的興趣還在改變（Tracey & Ward 1998、Tracey 2002）。
+- **為什麼不做教育部／新北市的測驗？**（誠實寫，不可說我們比較準）：台灣的正式興趣測驗都是給國中以上：師大心測中心「職涯測驗系統」只有國中版、高中版、大學版（https://career.ntnu.edu.tw/ ；國中版預試對象 8、9 年級 1790 人，信度 α>.93：https://career.ntnu.edu.tw/junior/TestInterest/TI_Intro.aspx ）；大考中心興趣量表「測驗對象：高中以上學生」（https://career.ceec.edu.tw/StudentSection/Introduce ）。新北市教育局給國小的興趣測驗查不到。→ 學生版說法：「正式的興趣測驗比較準，但都是給國中以上的哥哥姊姊做的。我們用的是**同一套何倫六型理論**（師大、大考中心都用它），改寫成四年級看得懂的探索活動。上國中以後，可以做師大心測中心的正式測驗。」
+- 這個測驗的目的（取代「不能決定未來」的負面說法）：幫你 ①發現自己現在最喜歡做哪些事 ②認識很多以前不知道的工作 ③學會這些工作的英文。根據：教育部手冊國小要做的就是 涯E4 認識自己的興趣、涯E8 對工作的好奇心、涯E9 認識不同的工作。
+- 三句話（開始按鈕上方，字最大）：1️⃣ 這個測驗幫你發現：你**現在**最喜歡做哪些事。2️⃣ 你現在喜歡的事，長大以後可能會不一樣——就像以前喜歡的玩具，現在可能不玩了。3️⃣ 所以結果不是「你以後一定要做什麼」，而是「可以先去認識哪些工作」。
+- 六型名稱改成大考中心正式名稱＋英文原文＋一句說明：🔧實用型 Realistic 喜歡動手做、修東西｜🔬研究型 Investigative 喜歡觀察、研究｜🎨藝術型 Artistic 喜歡創作、表演｜🤝社會型 Social 喜歡幫助、教別人｜📣企業型 Enterprising 喜歡帶領、說服別人｜📋事務型 Conventional 喜歡照步驟整理資料。全頁（題目翻面、結果頁、證據頁）都改用這套名稱。
+- 「◀ 上一題」做得更明顯；回上一題不再強迫聽三次。
+
+**4. 每題翻出的英文單字**
+- 母音紅色、不發音字母灰色。⚠️ story.html 的 isV 把字中間的 y 一律當母音（lawyer 的 y 是 /j/ 子音，會標錯），SILENT 也沒對過字典 → 用 Cambridge 美式音標逐字核對（加進 `_audit.py` 或 `_quiz_check.py`），**連 story.html 一起改正**，並記到 word-check.html「查證後改正的地方」。
+- 自動唸 3 次，唸完「下一題」才亮（保險：最多 8 秒一定會亮，避免 iPad 語音卡住）。單字正下方「🔊 再聽一次」唸 1 次。
+
+**5. 結果頁最後的「六型職業總表」**
+- 6 欄（手機 2 欄），欄頭＝圖示＋中文正式名＋英文。每個職業一張卡：圖示＋英文（母音紅、不發音灰）＋中文＋🔊＋「音節」按鈕。
+- 放哪一欄（給學生看的說法）：「每個職業放在它**最強**的那一型（美國調查分數最高的）。例：teacher 社會型 100 分最高 → 放社會型。兩型一樣高（例：獸醫 實用 83、研究 83）→ 兩邊都放。」
+- 收錄：題目出現過的職業＋結果頁的職業＋新歸類的 esports player、entertainer、engineer。
+- 「音節」按鈕：點了用動畫呈現切分過程——整個字 → 出現切線 → 音節分開彈跳 → 顯示「doc · tor ＝ 2 個音節」＋每個音節一個 👏。音節資料用 story.html 的 SYL（已在 evidence/audit.json 對 Cambridge 核對）。
+
+
 - 我建議的「📚 上課順序」（6 單元，學生最愛的先教、句型 I want to be a/an ___.）**使用者還沒同意**，不要自己做。
 - 大人 13＋中學生 2 個字還沒進 10 種遊戲。
 - 發音用裝置內建語音（en-US），沒有逐字檢查。
