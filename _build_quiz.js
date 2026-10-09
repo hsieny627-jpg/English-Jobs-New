@@ -628,7 +628,7 @@ ${ORDER.split('').map(t => `   <div class="dcolw" style="--c:${TY[t].c};--b:${TY
   ${HOW}
   <p class="dexn">兩型同分的職業，兩欄都放，卡片上標「同分」。🔓＝這次探險解鎖的職業。</p>
  </section>
- <div class="again"><button class="go gold" id="again">🔄 再玩一次</button><a class="ghost" href="index.html">🏠 回首頁</a></div>
+ <div class="again"><button class="go gold" id="again">🔄 再玩一次</button><a class="ghost" href="jobdex.html">📖 職業圖鑑＋複習遊戲 ▶</a><a class="ghost" href="index.html">🏠 回首頁</a></div>
 </section>
 
 <details id="ev">

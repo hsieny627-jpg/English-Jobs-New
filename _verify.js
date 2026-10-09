@@ -25,7 +25,7 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     ok(!r.small.length, `${name}：按鈕太小 ${r.small.join('、')}`);
     ok(!r.tiny.length, `${name}：字太小 ${r.tiny.join('、')}`);
     ok(!r.clip.length, `${name}：字超出卡片 ${r.clip.join('、')}`);
-    ok(r.links === 1 + 4 + 36 + 2 + 10 + 4, `${name}：首頁連結數 ${r.links}`);
+    ok(r.links === 1 + 1 + 4 + 36 + 2 + 10 + 4, `${name}：首頁連結數 ${r.links}`);
     ok(!errs.length, `${name}：首頁錯誤 ${errs.join(' ')}`);
     await p.close();
   }
@@ -41,6 +41,7 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
     const hash = href.split('#')[1] || '';
     let m;
     if (href === 'quiz.html') ok(await vis('start'), `${href}：沒有出現職業興趣探險開場`);
+    else if (href === 'jobdex.html') ok(await vis('hub') && await p.$$eval('.gcard', c => c.length) === 5, `${href}：沒有出現職業圖鑑＋5 種遊戲`);
     else if (href === 'rank-tw.html') ok(await p.$$eval('.row', r => r.length) === 20, `${href}：排行榜不是 20 列`);
     else if (/^c[1-4]$/.test(hash)) ok(await vis('Q' + hash[1]), `${href}：沒有出現挑戰 ${hash[1]}`);
     else if (href === 'rank-mix.html') ok(await p.$$eval('tbody tr', r => r.length) === 36, `${href}：排序頁不是 36 列`);
@@ -325,6 +326,9 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
   await p.goto(url('games.html')); ok(await vis('home'), 'games.html：沒有出現遊戲選單');
   ok(await p.$('a[href="story.html"]') !== null, 'games.html：回單字小故事連結不對');
   ok(!errs.length, '頁面錯誤：' + errs.join(' '));
+  // 📖 職業圖鑑＋5 種複習遊戲（jobdex.html）
+  const jx = await require('./_verify_jobdex.js')(browser, url);
+  n += jx.n; fail += jx.fail;
   await browser.close();
   console.log(fail ? `量測 ${n} 項，${fail} 項失敗` : `量測 ${n} 項，0 失敗`);
   process.exit(fail ? 1 : 0);
