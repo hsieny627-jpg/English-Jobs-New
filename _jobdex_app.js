@@ -321,24 +321,33 @@ function hub(sec){ended=true;qOn=false;cdOn=false;DEMO=null;sayStop();missHide(f
 function gridPaint(){$('#grid').innerHTML=META.map(m=>{const b=store('best_'+m.id)||0,L=lockOf(m.id);
  return '<button class="gcard'+(L&&L.k!=='open'?' locked':'')+'" data-g="'+m.id+'" style="--c:'+m.c+';--b:'+m.b+'"><span class="gi">'+m.ic+'</span><span class="gt">'+m.name+'</span><span class="gr">'+m.line+'</span>'+
   (L?'<span class="glock '+L.k+'">'+L.txt+'</span>':'')+(b?'<span class="gb">🏆 '+b+'</span>':'')+'</button>'}).join('')}
-/* 老師的任務表（2026/10/9）：Google 試算表「任務」那一頁（task-url.js）＝ 哪些遊戲開放、幾點開始、幾點截止。
-   老師改表格，網站重新讀（打開時、之後每 2 分鐘）；讀不到就照上一次讀到的，從來沒讀到就全部開放。時間看平板的時鐘。 */
-const TASKID=String(window.TASK_SHEET||'').trim();let TASK=store('task');
-function tTime(c,end){if(!c||c.v==null||c.v==='')return null;let m=/^Date\((\d+),(\d+),(\d+)(?:,(\d+),(\d+))?/.exec(String(c.v)),y,mo,d,h,mi;
- if(m){y=+m[1];mo=+m[2];d=+m[3];h=m[4]==null?null:+m[4];mi=+(m[5]||0)}
- else{m=/(\d{4})\D+(\d{1,2})\D+(\d{1,2})(?:\D+(\d{1,2}):(\d{2}))?/.exec(String(c.f||c.v));if(!m)return null;y=+m[1];mo=m[2]-1;d=+m[3];h=m[4]==null?null:+m[4];mi=+(m[5]||0)}
- if(h==null||(h===0&&mi===0&&end))return end?new Date(y,mo,d,23,59,59).getTime():new Date(y,mo,d).getTime();return new Date(y,mo,d,h,mi,end?59:0).getTime()}
-function taskLoad(){if(!TASKID||window.__TASK_TEST_OFF)return;const cb='__jxTask'+Date.now(),sc=document.createElement('script');
- window[cb]=r=>{try{const t={};((r&&r.table&&r.table.rows)||[]).forEach(row=>{const c=row.c||[],id=c[0]&&String(c[0].v||'').trim();if(!id)return;
-   t[id]={on:!(c[2]&&/否/.test(String(c[2].v||''))),from:tTime(c[3],false),to:tTime(c[4],true)}});
-  if(Object.keys(t).length){TASK=t;store('task',t);taskPaint()}}catch(e){}delete window[cb];sc.remove()};
- sc.onerror=()=>{delete window[cb];sc.remove()};
- sc.src='https://docs.google.com/spreadsheets/d/'+TASKID+'/gviz/tq?headers=1&sheet='+encodeURIComponent('任務')+'&tqx=responseHandler:'+cb;document.head.appendChild(sc)}
+/* 老師的任務（2026/10/9 使用者：改成看 AI-Agent-Open-Code 老師看板〔📌 任務〕派的任務，跟句型網站同一套）：
+   登入以後問成績表伺服器 a=tasks（這一班的任務、時間用伺服器的）；打開時、之後每 2 分鐘再問；讀不到照這台平板上一次拿到的，從來沒拿到過 ＝ 全部開放。
+   鎖的規則 tkLock 抄自 AI-Agent-Open-Code/score/_calc.js（那邊改了這裡也要改）：這一班沒有正在進行的任務 ＝ 全部開放；
+   有任務正在進行 ＝ 只開任務裡的；任務裡的還沒到 ＝ 🔒 幾點開放、過了截止 ＝ 🔒 已經截止。題組代號 g年級gm_job-遊戲。 */
+let TASK=null;
+var tkLock=function tkLock(T, key, now) {
+    var act = [], mine = [], i, t;
+    for (i = 0; i < (T || []).length; i++) { t = T[i]; var on = t.from <= now && now <= t.to;
+      if (on) act.push(t); if (t.items.indexOf(key) >= 0) mine.push(t); }
+    var a = mine.filter(function (x) { return x.from <= now && now <= x.to; });
+    if (a.length) return { k: 'open', to: Math.max.apply(null, a.map(function (x) { return x.to; })), task: a[0] };
+    if (mine.length) {
+      var f = mine.filter(function (x) { return x.from > now; });
+      if (f.length) return { k: 'soon', from: Math.min.apply(null, f.map(function (x) { return x.from; })), task: f[0] };
+      return { k: 'end', to: Math.max.apply(null, mine.map(function (x) { return x.to; })), task: mine[0] };
+    }
+    if (act.length) return { k: 'off', act: act };
+    return { k: 'free' };
+  };
+function taskGet(){let id=null;try{id=SCID}catch(e){return null}if(!id)return null;if(!TASK||TASK.id!==SCID)TASK=store('task_'+SCID);return TASK}
+function taskLoad(){if(!SCON||!SCID||window.__TASK_TEST_OFF)return;const id=SCID;
+ scFetch('a=tasks&id='+id,null,7000).then(j=>{if(j&&j.ok&&id===SCID){TASK={id,off:(+j.now||Date.now())-Date.now(),tasks:j.tasks||[]};store('task_'+id,TASK);taskPaint()}},()=>{})}
 const pad2=n=>('0'+n).slice(-2);
 function fmtT(ms){const d=new Date(ms);return (d.getMonth()+1)+'/'+d.getDate()+' '+pad2(d.getHours())+':'+pad2(d.getMinutes())}
-function lockOf(id){const t=TASK&&TASK[id];if(!t)return null;const now=Date.now();
- if(!t.on)return {k:'off',txt:'🔒 老師還沒開放'};if(t.from&&now<t.from)return {k:'soon',txt:'🔒 '+fmtT(t.from)+' 開放'};
- if(t.to&&now>t.to)return {k:'end',txt:'🔒 已經截止（'+fmtT(t.to)+'）'};return t.to?{k:'open',txt:'⏰ '+fmtT(t.to)+' 截止'}:null}
+function lockOf(id){const T=taskGet();if(!T||!T.tasks)return null;const L=tkLock(T.tasks,'g'+String(SCID).charAt(0)+'gm_job-'+id,Date.now()+(T.off||0));
+ if(L.k==='free')return null;if(L.k==='off')return {k:'off',txt:'🔒 老師現在指定別的'};if(L.k==='soon')return {k:'soon',txt:'🔒 '+fmtT(L.from)+' 開放'};
+ if(L.k==='end')return {k:'end',txt:'🔒 已經截止（'+fmtT(L.to)+'）'};return {k:'open',txt:'⏰ '+fmtT(L.to)+' 截止'}}
 function locked(id){const L=lockOf(id);return !!L&&L.k!=='open'}
 function taskPaint(){if(document.body.dataset.s==='hub')gridPaint();else if(document.body.dataset.s==='book'&&BOOKID)bookPage(BOOKID)}
 setInterval(()=>{taskLoad();taskPaint()},120000);
@@ -654,7 +663,7 @@ const GAMES={memory:Gy,mole:Gw,lava:Gv,dark:Gd,beat:Gb,detect:Gt,magnet:Gm};
    2026/10/9 使用者要求：登入一看就懂、清楚知道下一步；班級打錯，已經打的班級號碼立刻清空，可以馬上重打。 */
 const SCG=0,SCSRC='school';
 const SCURL=String(window.SCORE_URL||'').trim(),SCON=!!SCURL&&!window.__SCORE_TEST_OFF;
-const SCCLS={3:['304','307','311'],4:['402','406','409','410']},SCDEMO='30405',SCMAX=30;   /* 每一班座號 1～30（2026/10/9 使用者決定） */
+const SCCLS={3:['304','307','311'],4:['402','406','409','410','400']},SCDEMO='30405',SCMAX=30;   /* 400 ＝ 四年級課後班（2026/10/9 使用者決定；成績表伺服器要部署新版才收） */   /* 每一班座號 1～30（2026/10/9 使用者決定） */
 function scGet(k){try{return JSON.parse(localStorage.getItem('score_'+k)||'null')}catch(e){return null}}
 function scPut(k,v){try{localStorage.setItem('score_'+k,JSON.stringify(v))}catch(e){}}
 let SCID=scGet('last'),SCGUEST=false,SCDEV=scGet('dev'),SCV=null,SCIN='',SCEND=null;
@@ -701,10 +710,10 @@ function scKeyPress(k){if(!$('#scGrp'))return;
   if(r.err){scShake();scPaint('再看一次');return}scWho(r);return}
  if(SCTYPED.length>=5)return;SCTYPED+=k;
  if(SCTYPED.length===3&&!clsOk(SCTYPED)){const bad=SCTYPED;SCTYPED='';scShake();
-  scPaint('🏫 沒有 '+bad+' 班！已經幫你清掉了，請重新打班級<small>三年級：304、307、311　四年級：402、406、409、410</small>');return}
+  scPaint('🏫 沒有 '+bad+' 班！已經幫你清掉了，請重新打班級<small>三年級：304、307、311　四年級：402、406、409、410、400（課後班）</small>');return}
  if(SCTYPED.length===5){const s=+SCTYPED.slice(3);if(s<1||s>SCMAX){const bad=SCTYPED.slice(3);SCTYPED=SCTYPED.slice(0,3);scShake();scPaint('🪑 沒有 '+bad+' 號！請重新打座號（01～'+SCMAX+'）');return}}
  scPaint()}
-function scWho(r){const go=()=>{SCID=r.id;scPut('id_g'+r.g,SCID);scPut('last',SCID);SCGUEST=false;$('#scme').innerHTML=scMeHTML();const a=SCLOGAFTER;SCLOGAFTER=null;SCH.close();if(a)a()};
+function scWho(r){const go=()=>{SCID=r.id;scPut('id_g'+r.g,SCID);scPut('last',SCID);SCGUEST=false;$('#scme').innerHTML=scMeHTML();taskLoad();taskPaint();const a=SCLOGAFTER;SCLOGAFTER=null;SCH.close();if(a)a()};
  const m=$('#scMsg');m.className='scmsg ok';m.textContent='✅ '+r.cls+' 班 '+r.seat+' 號';
  scFetch('a=who&id='+r.id,null,3000).then(j=>{if(!j||!j.roster||!j.name){go();return}
   SCH.box().innerHTML='<div class="scwho"><div>你是 '+r.cls+' 班 '+r.seat+' 號</div><div style="color:var(--goldt);font-size:1.3em">'+esc(j.name)+'</div><div>嗎？</div><div class="scnav"><button class="go" id="scYes">✅ 是我</button><button id="scNo">❌ 重新輸入</button></div></div>';

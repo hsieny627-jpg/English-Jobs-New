@@ -159,7 +159,6 @@ ${SA.CSS}
 <div id="sheet" role="dialog" aria-modal="true"><div class="panel" id="panel"></div></div>
 <div id="gain"></div><div id="pick"></div><div id="burst"></div>
 <script src="score-url.js"></script>
-<script src="task-url.js"></script>
 <script src="audio/syl/aud.js"></script>
 <script>
 const D=${JSON.stringify(DATA)};

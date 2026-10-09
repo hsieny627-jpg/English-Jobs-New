@@ -180,14 +180,19 @@ module.exports = async function (browser, url) {
       await p.reload(); await p.waitForTimeout(150);
       ok(await p.evaluate(() => MUTE === true), '音效關掉以後，重新整理又開了');
       await p.click('#muteBtn'); ok(await p.evaluate(() => MUTE === false), '音效打不開');
-      // 🔒 老師的任務表：沒開放、還沒到時間、已經截止 ➜ 鎖住；還沒截止 ➜ 寫幾點截止
-      await p.evaluate(() => { const h = 3600e3; TASK = { dark: { on: false }, mole: { on: true, from: Date.now() + h }, lava: { on: true, to: Date.now() - 1000 }, beat: { on: true, to: Date.now() + h } }; gridPaint(); });
+      // 🔒 老師的任務（老師看板〔📌 任務〕派的，2026/10/9）：正在進行的任務裡 ➜ 開＋幾點截止；還沒到 ➜ 幾點開放；截止 ➜ 鎖；有任務正在進行時，沒被指定的 ➜ 鎖
+      await p.evaluate(() => { const h = 3600e3, n = Date.now(); SCID = '40205'; TASK = { id: '40205', off: 0, tasks: [
+        { id: 'a', items: ['g4gm_job-beat'], from: n - h, to: n + h }, { id: 'b', items: ['g4gm_job-mole'], from: n + h, to: n + 2 * h },
+        { id: 'c', items: ['g4gm_job-lava'], from: n - 2 * h, to: n - 1000 }] }; gridPaint(); });
       const lk = await p.evaluate(() => Object.fromEntries([...document.querySelectorAll('.gcard')].map(c => [c.dataset.g, [c.classList.contains('locked'), (c.querySelector('.glock') || {}).textContent || '']])));
-      ok(lk.dark[0] && lk.mole[0] && lk.lava[0] && !lk.beat[0] && !lk.memory[0] && lk.dark[1].includes('還沒開放') && lk.mole[1].includes('開放') && lk.lava[1].includes('截止') && lk.beat[1].includes('截止'), `任務表的鎖不對 ${JSON.stringify(lk)}`);
+      ok(lk.dark[0] && lk.memory[0] && lk.mole[0] && lk.lava[0] && !lk.beat[0] && lk.dark[1].includes('指定別的') && lk.mole[1].includes('開放') && lk.lava[1].includes('截止') && lk.beat[1].includes('截止'), `任務的鎖不對 ${JSON.stringify(lk)}`);
+      await p.evaluate(() => { TASK.tasks = TASK.tasks.slice(1); gridPaint(); });
+      const lk2 = await p.evaluate(() => [...document.querySelectorAll('.gcard')].filter(c => c.classList.contains('locked')).map(c => c.dataset.g).sort().join(','));
+      ok(lk2 === 'lava,mole', `沒有正在進行的任務時，只有任務裡的（還沒到、截止）鎖住，其他要全部開放：${lk2}`);
       await p.evaluate(() => bookPage('lava')); await p.waitForTimeout(100);
       ok(await p.$eval('#startBtn', b => b.disabled && b.textContent.includes('截止')), '截止的遊戲還可以按開始');
       await p.evaluate(() => begin('lava', 'all')); ok(await p.evaluate(() => document.body.dataset.s !== 'play'), '截止的遊戲還是開始了');
-      await p.evaluate(() => { TASK = null; try { localStorage.removeItem('jx_task'); } catch (e) {} gridPaint(); });
+      await p.evaluate(() => { TASK = null; SCID = null; try { localStorage.removeItem('jx_task_40205'); } catch (e) {} gridPaint(); });
       await p.goto(url('jobdex.html#ninja')); await p.waitForTimeout(150);
       ok(await p.evaluate(() => document.body.dataset.s === 'hub'), 'jobdex.html#ninja（舊網址）沒有回到大廳');
       ok(await p.$('a.homeln2[href="index.html"]').then(e => e && e.isVisible()), 'jobdex.html：看不到 🏠 首頁');
@@ -326,14 +331,19 @@ module.exports = async function (browser, url) {
       if (/a=who/.test(u)) return r.fulfill({ contentType: 'application/json', body: '{"roster":false}' });
       return r.fulfill({ contentType: 'application/json', body: '{"boards":false}' });
     });
-    // 任務表（Google 試算表 gviz）：用假的表格，日期兩種寫法都要看得懂；只寫日期的截止＝那一天 23:59
-    await p.route(/docs\.google\.com\/spreadsheets/, r => { const cb = decodeURIComponent(r.request().url()).match(/responseHandler:([\w$]+)/)[1];
-      const row = (id, on, a, b) => ({ c: [{ v: id }, { v: id }, { v: on }, a == null ? null : a, b == null ? null : b] });
-      r.fulfill({ contentType: 'text/javascript', body: cb + '(' + JSON.stringify({ table: { rows: [row('memory', '是'), row('mole', '否'), row('lava', '是', null, { v: 'Date(2020,0,1)', f: '2020/1/1' }), row('dark', '是', { v: 'Date(2099,9,9,8,0,0)' }), row('beat', '是', null, { v: '2099/10/9 23:59', f: '2099/10/9 23:59' })] } }) + ')' }); });
-    await p.goto(url('jobdex.html')); await p.waitForTimeout(800);
-    const tk = await p.evaluate(() => ({ m: lockOf('memory'), o: lockOf('mole'), l: lockOf('lava'), d: lockOf('dark'), b: lockOf('beat'), lt: TASK && TASK.lava && new Date(TASK.lava.to).getHours() }));
-    ok(tk.m === null && tk.o.k === 'off' && tk.l.k === 'end' && tk.lt === 23 && tk.d.k === 'soon' && tk.d.txt.includes('10/9 08:00') && tk.b.k === 'open' && tk.b.txt.includes('10/9 23:59'), `任務表讀不懂 ${JSON.stringify(tk)}`);
-    await p.unroute(/docs\.google\.com\/spreadsheets/); await p.evaluate(() => { TASK = null; try { localStorage.removeItem('jx_task'); } catch (e) {} });
+    // 任務：登入以後問成績表伺服器 a=tasks（假的伺服器）；時間照伺服器的 now
+    {
+      const q = await browser.newPage({ viewport: { width: 1024, height: 768 } }), n = Date.now(), h = 3600e3, asked = [];
+      await q.addInitScript(stub); await q.addInitScript(() => { try { localStorage.setItem('score_last', JSON.stringify('40205')); } catch (e) {} });
+      await q.route(/script\.google\.com/, r => { const u = r.request().url(); if (/a=tasks/.test(u)) { asked.push(u);
+        return r.fulfill({ contentType: 'application/json', body: JSON.stringify({ ok: true, now: n, tasks: [{ id: 'a', name: '回家作業', items: ['g4gm_job-memory'], from: n - h, to: n + h }, { id: 'b', name: 'x', items: ['g4gm_job-dark'], from: n + h, to: n + 2 * h }] }) }); }
+        return r.fulfill({ contentType: 'application/json', body: '{"boards":false}' }); });
+      await q.goto(url('jobdex.html')); await q.waitForTimeout(800);
+      const tk = await q.evaluate(() => ({ m: lockOf('memory'), o: lockOf('mole'), d: lockOf('dark') }));
+      ok(asked.some(u => /id=40205/.test(u)), '登入了卻沒有問伺服器老師的任務（a=tasks）');
+      ok(tk.m && tk.m.k === 'open' && tk.m.txt.includes('截止') && tk.o && tk.o.k === 'off' && tk.d && tk.d.k === 'soon', `伺服器的任務讀不懂 ${JSON.stringify(tk)}`);
+      await q.close();
+    }
     await p.addInitScript(() => { window.__TASK_TEST_OFF = 1; });
     await p.goto(url('jobdex.html')); await p.waitForTimeout(150);
     ok((await p.$eval('#scme', e => e.textContent)).includes('還沒登入'), '登入：大廳沒有顯示「還沒登入」');
