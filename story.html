@@ -542,6 +542,8 @@ d.p.forEach((x,k)=>{seq.push(setTimeout(()=>{
   if(el){document.querySelectorAll('.pc').forEach(n=>n.classList.remove('now'));el.classList.remove('now');void el.offsetWidth;el.classList.add('now')}
   speak(partSay(x),x[4])},450+k*gap))})}
 function draw(){const d=W[i];
+/* 2026-10-17：老師的任務沒有開放這一站 ➜ 鎖住（_score_cards.js） */
+const LK=window.SCJOB&&SCJOB.lockOf(i);if(LK){$('em').classList.remove('hide');$('em').textContent='🔒';$('parts').classList.add('hide');$('card').classList.remove('wm');$('cap').innerHTML='<div class="cur">🔒 '+SCJOB.lockMsg(LK)+'</div>';$('zh').textContent='';$('tap').innerHTML='';$('steps').innerHTML='';return}
 $('steps').innerHTML=[0,1,2,3,4,5].map(k=>'<span class="s'+(k<=st?' on':'')+'"></span>').join('');
 $('dots').innerHTML=W.map((_,k)=>'<span class="dot'+(k===i?' on':'')+'"></span>').join('');
 $('hd').innerHTML='第 <b>'+d.no+'</b> 張／共 '+W.length+'　'+d.rk;
@@ -555,7 +557,8 @@ if(st<2){const p=d.s[st];
 $('em').classList.add('hide');$('parts').classList.remove('hide');$('card').classList.add('wm');
 if(st===2){$('parts').innerHTML=partsHTML(d);$('parts').className='';void $('parts').offsetWidth;$('parts').className='split';
   $('cap').innerHTML=d.w||'';$('zh').textContent='';sayParts(d);$('tap').innerHTML='';return}
-if(st===5){$('em').classList.add('hide');$('parts').classList.add('hide');$('card').classList.add('wm');
+if(st===5){if(window.SCJOB)SCJOB.heard(i,W.length);   /* 2026-10-17：6 步都看完 ＝ 聽完這一張 */
+ $('em').classList.add('hide');$('parts').classList.add('hide');$('card').classList.add('wm');
  const sy=(SYL[d.e]||d.e).split(' ');
  let pos=0;const segs=sy.map(w=>{const parts=w.split('-').map(s=>{const html='<span class="sy">'+colorRange(d.e,pos,pos+s.length)+'</span>';pos+=s.length;return html});pos+=1;return '<span class="sw">'+parts.join('<span class="sd">•</span>')+'</span>'});
  $('cap').innerHTML='<div class="syl" id="syl">'+segs.join('<span style="display:inline-block;width:.4em"></span>')
@@ -747,5 +750,7 @@ function route(){const h=location.hash.slice(1);if(!h)return;let m;
  goWord(0)}
 route();addEventListener('hashchange',route);
 </script>
+<script src="score-url.js"></script>
+<script src="_score_cards.js"></script>
 </body>
 </html>

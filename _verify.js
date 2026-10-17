@@ -10,6 +10,8 @@ const ok = (c, m) => { n++; if (!c) bad(m); };
 
 (async () => {
   const browser = await chromium.launch({ executablePath: process.env.CHROMIUM || undefined });
+  /* 2026-10-17：story.html 也接成績系統（_score_cards.js）➜ 每一頁先擋掉真的 Google（絕對不送到真的成績表）；後面量測自己設的假伺服器（route）會蓋過這一條 */
+  { const np = browser.newPage.bind(browser); browser.newPage = async o => { const pg = await np(o); await pg.route(/script\.google\.com/, r => r.abort()); return pg; }; }
   for (const [w, h, name] of sizes) {
     const p = await browser.newPage({ viewport: { width: w, height: h } });
     const errs = []; p.on('pageerror', e => errs.push(e.message));
